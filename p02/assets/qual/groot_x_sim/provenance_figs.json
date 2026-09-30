@@ -1,0 +1,13 @@
+[
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2503.14734v2/fig_task_v6.png",
+  "paper_url": "https://arxiv.org/abs/2503.14734",
+  "paper": "GR00T N1",
+  "figure": "Figure 7",
+  "caption": "Figure 7: Simulation Tasks. Our simulation experiments use tasks from two open-source benchmarks (RoboCasa (Nasiriany et al., 2024) in the top row and DexMimicGen (Jiang et al., 2024) in the middle row) and a newly developed suite of tabletop manipulation tasks that closely resemble our real-world tasks (bottom row). We provide Omniverse renderings of the tasks above.",
+  "licence": "paper figure reproduced for research comparison",
+  "fetched_on": "2026-09-24",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ }
+]

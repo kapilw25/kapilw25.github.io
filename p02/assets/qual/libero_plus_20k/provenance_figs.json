@@ -1,0 +1,35 @@
+[
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2510.13626v3/case_study_0.png",
+  "paper_url": "https://arxiv.org/abs/2510.13626",
+  "paper": "LIBERO-Plus",
+  "figure": "Figure 17",
+  "caption": "Figure 17: Failure Mode Analysis Across Perturbation Types. Visualization of characteristic failure patterns induced by each perturbation dimension, revealing distinct vulnerability profiles: camera shifts cause viewpoint-dependent localization errors; language modifications lead to semantic misinterpretations; lighting variations introduce shadow artifacts; sensor noise produces feature corruptio",
+  "licence": "paper figure reproduced for research comparison",
+  "fetched_on": "2026-09-24",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ },
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2510.13626v3/dimension-camera.png",
+  "paper_url": "https://arxiv.org/abs/2510.13626",
+  "paper": "LIBERO-Plus",
+  "figure": "Figure 12",
+  "caption": "Figure 12: Rendering results under background texture perturbations, comparing the original image (top-left) with transformed versions. The labels denote the following transformation parameters: hr (horizontal rotation angle), vr (vertical rotation angle), dis (distance pulled away), chr (in-place horizontal rotation angle), and cvr (in-place vertical rotation angle).",
+  "licence": "paper figure reproduced for research comparison",
+  "fetched_on": "2026-09-24",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ },
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2510.13626v3/dimension-object.png",
+  "paper_url": "https://arxiv.org/abs/2510.13626",
+  "paper": "LIBERO-Plus",
+  "figure": "Figure 16",
+  "caption": "Figure 16: Rendering results with object layout perturbations. The top-left image is the original; the others show results with the number of added objects as labeled.",
+  "licence": "paper figure reproduced for research comparison",
+  "fetched_on": "2026-09-24",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ }
+]

@@ -1,0 +1,178 @@
+[
+ {
+  "file": "row_compatibility_17.jpg",
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/chanhee-luke/RoboSpatial-Home/--/7ef1b43b20087ef284e0e9017ef51dd143814c59/--/default/compatibility/17/img/image.jpg?Expires=1790247413&Signature=AoHckGyqAqqB6W24x0N8-Mf1Yfwf1YfFRK5P~LDuKXkSX0VlB~Nue5wzi3VFdo1BTH74~rs8VVB5YNss-76NKBLoHF6syP6lHqVA7i0tpPzCFUBDLyMTwIF3P2KBsmOm46ZRe6KtchnI8c6e-oUm1nktR7M8lHld6wlw9OPXKsfXlUwT~bcyorJ1pkyhJQ4fcwHLVfOLkuwHoQw3wdsTjvxaq-R4rVVZ8p7PEA01kp8kV1-OEbI~FNKIaNVu2wRZVBDNqUAnTGP7xwLd6X3pPjYz2A8~IeW668D4zotVcmpSmv2ndxmhIjj9bykEtWHF9vQOzltkiBmHtmr2gC7ncg__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "dataset": "chanhee-luke/RoboSpatial-Home",
+  "config": "default",
+  "split": "compatibility",
+  "row_index": 17,
+  "question": "Can the cup fit above the counter? Answer yes or no.",
+  "answer": "Yes",
+  "question_type": "compatibility",
+  "licence": "apache-2.0",
+  "fetched_on": "2026-09-24",
+  "image_size_wh": [
+   1920,
+   1440
+  ],
+  "has_depth_image": true,
+  "has_mask": false,
+  "note": "RoboSpatial-Home is the 350-question benchmark; the 1M-image RoboSpatial training set has no public HF repo (generated with github.com/NVlabs/RoboSpatial). File named row_<split>_<idx> because row indices repeat across splits. cached-assets URLs expire after a short time.",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url"
+ },
+ {
+  "file": "row_compatibility_63.jpg",
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/chanhee-luke/RoboSpatial-Home/--/7ef1b43b20087ef284e0e9017ef51dd143814c59/--/default/compatibility/63/img/image.jpg?Expires=1790247515&Signature=kP2i3el7h7iBR91MJYw-FRobKalcvnsaJG7TnVFhq5cRjuAvHrvoqNm90PSA2QiijUdeEZL8jRKc2n9gGTbmRY7z~H55X6jqZhz3nKc-K0NTs7V-p4khBeVfUgx4mdbhhdyX4UxLg0PGEHMUsmiXlNVNWuIMBSG3PX-u8V8TsDGUoAg1JlAg1ukvjrAxU0w9Qq~SsHWVF8x8vGMxF-8ZNwsv9Wc4D81EUOL6trUkYatvx-O4OFWpkj2G7~xIlV9Q1UMIOnWqGnSqViS0rsJBz2MucTzH2nwSe1NoYIFgQsjB7V1tJGGVoK7resW6-Lo~S36rj1VVsDk-Ywhk8NL1sw__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "dataset": "chanhee-luke/RoboSpatial-Home",
+  "config": "default",
+  "split": "compatibility",
+  "row_index": 63,
+  "question": "Can the microwave fit in front of the fridge? Answer yes or no.",
+  "answer": "Yes",
+  "question_type": "compatibility",
+  "licence": "apache-2.0",
+  "fetched_on": "2026-09-24",
+  "image_size_wh": [
+   1440,
+   1920
+  ],
+  "has_depth_image": true,
+  "has_mask": false,
+  "note": "RoboSpatial-Home is the 350-question benchmark; the 1M-image RoboSpatial training set has no public HF repo (generated with github.com/NVlabs/RoboSpatial). File named row_<split>_<idx> because row indices repeat across splits. cached-assets URLs expire after a short time.",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url"
+ },
+ {
+  "file": "row_compatibility_70.jpg",
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/chanhee-luke/RoboSpatial-Home/--/7ef1b43b20087ef284e0e9017ef51dd143814c59/--/default/compatibility/70/img/image.jpg?Expires=1790247322&Signature=j2lfEXShmxsFI0WsYDCJJiAnQiAZ1jNrKeVOdjVQre-eIGdRE8AZMfhh4VpDJc23XCHPASVN2jLvP9u1E9OKazY5rfidqsrMZFtuZ0K8cFiznwYRL0YKO12cuo7VtudNE8aRq6hBsPUW2oifJgMOjko8PFGtWKxf0fICUq9YSmxSol6rqHpf1xcrt4KMNTl7-bIq6up~ERq9R1RpfztTRmI8dXK7TLAfzLssyT02eByrOOVLJ3eK-J1tsksThgqQJd~Jy5MKoY76bXzhNvHuFMOzyvcYQ9DRxK6ALo-HyThQfO-SW9FpDHS79v2k17SMgKBjM9LeKTB0B9fCwinXiA__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "dataset": "chanhee-luke/RoboSpatial-Home",
+  "config": "default",
+  "split": "compatibility",
+  "row_index": 70,
+  "question": "Can the TV fit in front of the media console? Answer yes or no.",
+  "answer": "Yes",
+  "question_type": "compatibility",
+  "licence": "apache-2.0",
+  "fetched_on": "2026-09-24",
+  "image_size_wh": [
+   1440,
+   1920
+  ],
+  "has_depth_image": true,
+  "has_mask": false,
+  "note": "RoboSpatial-Home is the 350-question benchmark; the 1M-image RoboSpatial training set has no public HF repo (generated with github.com/NVlabs/RoboSpatial). File named row_<split>_<idx> because row indices repeat across splits. cached-assets URLs expire after a short time.",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url"
+ },
+ {
+  "file": "row_configuration_0.jpg",
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/chanhee-luke/RoboSpatial-Home/--/7ef1b43b20087ef284e0e9017ef51dd143814c59/--/default/configuration/0/img/image.jpg?Expires=1790247313&Signature=tRiHZwZ3EyNOrK1ZzGSNYCXHjoj1AAN9~oQdH55qdqbnpOzVLHoblk~txN5GY6pBRsjKDUC6wwc~veruPRunlA3C2GqK3HhOJicqoBp1sqNGWkY5tFB2MW6csQLa8zJDhyV8JP-jQi7Gkg5N2xAjTK2mKn2scBnIbHH4WeyIwVsSdCj6zv79ZXDl~ClE-tjsagbgLAkiq7UhNYhNGXvTc12i0IS2cG1CJPCsCklAecpHMN80fQti8EGCsAyz0WOdoC8wYHwBghe9YpvlQXuKCQvQovHtZUNloV6XfHcWzlLORbShTkGDtRgoZD0MGRVWhZUKB1Z9OVHX2heGujL-cw__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "dataset": "chanhee-luke/RoboSpatial-Home",
+  "config": "default",
+  "split": "configuration",
+  "row_index": 0,
+  "question": "Is the picture above the desk? Answer yes or no.",
+  "answer": "Yes",
+  "question_type": "configuration",
+  "licence": "apache-2.0",
+  "fetched_on": "2026-09-24",
+  "image_size_wh": [
+   1440,
+   1920
+  ],
+  "has_depth_image": true,
+  "has_mask": false,
+  "note": "RoboSpatial-Home is the 350-question benchmark; the 1M-image RoboSpatial training set has no public HF repo (generated with github.com/NVlabs/RoboSpatial). File named row_<split>_<idx> because row indices repeat across splits. cached-assets URLs expire after a short time.",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url"
+ },
+ {
+  "file": "row_configuration_41.jpg",
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/chanhee-luke/RoboSpatial-Home/--/7ef1b43b20087ef284e0e9017ef51dd143814c59/--/default/configuration/41/img/image.jpg?Expires=1790247316&Signature=UpZc3pGJtvn7t1nYD5aL72F97NBIFxaiceZ8YB1C7yD2gPehhc2yRn9eCX5DYI-D6AlEyMAF~Xtl0dJiX7zRHMUii1ureT6u-9pXSISD-~VBLMkt9zGHNmz~PGAUOZYX45Nm8K5BeQW4v~RLw33ZWtCfqTa4iIaGXPzUwV20ef98l-OR2DbGIA6oO3IUfyaHMOU36pAeQMf18-ED5b~5En~QKLRZ9~YHmxpNE4WmhQjRVmYlmnW-VffaoIC472JH1rICb5CeRklc~LrGbiR8jzp2c3ljSLugookrKnUku4D9iNR-7mGX-eg0wFM3Yuy3E0Fa9myGH0twMvxuntChLQ__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "dataset": "chanhee-luke/RoboSpatial-Home",
+  "config": "default",
+  "split": "configuration",
+  "row_index": 41,
+  "question": "Is the chair left of the desk? Answer yes or no.",
+  "answer": "No",
+  "question_type": "configuration",
+  "licence": "apache-2.0",
+  "fetched_on": "2026-09-24",
+  "image_size_wh": [
+   1440,
+   1920
+  ],
+  "has_depth_image": true,
+  "has_mask": false,
+  "note": "RoboSpatial-Home is the 350-question benchmark; the 1M-image RoboSpatial training set has no public HF repo (generated with github.com/NVlabs/RoboSpatial). File named row_<split>_<idx> because row indices repeat across splits. cached-assets URLs expire after a short time.",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url"
+ },
+ {
+  "file": "row_configuration_82.jpg",
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/chanhee-luke/RoboSpatial-Home/--/7ef1b43b20087ef284e0e9017ef51dd143814c59/--/default/configuration/82/img/image.jpg?Expires=1790247319&Signature=RqUHma35OA5SZ~P4n4Qw8Nsb4mEAKgAJb801Y1EnZheiO0kbWGfJ6rDzt7jsB8ktcAX1Fp4sIEUHkPTB-FIqVNUvKqxSxESBW~syfgvUxtNoaFRKXVGJVkW6qJ0AkVB2H1GqKreMbnMAoDPaYazHw6~Fa-BFZCg1wH-~nT3adm~EfP5OvZQPCGHcCzdbjH4XbfEgK6k5dH3VTQ2eMLHvmID45EJcBDXvoWBxR~0uzntf7iYnFNChS5BaTulEB4XdoF5GOB5HHo2VriqmCvqLkbn6xE-CT-C~XgDROcwLjJEJcTeGEx42uZj8y6FbcWNZtYAACKx9CMG~bxPYIhZk2g__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "dataset": "chanhee-luke/RoboSpatial-Home",
+  "config": "default",
+  "split": "configuration",
+  "row_index": 82,
+  "question": "Is the cat tower right of the chair? Answer yes or no.",
+  "answer": "Yes",
+  "question_type": "configuration",
+  "licence": "apache-2.0",
+  "fetched_on": "2026-09-24",
+  "image_size_wh": [
+   1440,
+   1920
+  ],
+  "has_depth_image": true,
+  "has_mask": false,
+  "note": "RoboSpatial-Home is the 350-question benchmark; the 1M-image RoboSpatial training set has no public HF repo (generated with github.com/NVlabs/RoboSpatial). File named row_<split>_<idx> because row indices repeat across splits. cached-assets URLs expire after a short time.",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url"
+ },
+ {
+  "file": "row_context_30.jpg",
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/chanhee-luke/RoboSpatial-Home/--/7ef1b43b20087ef284e0e9017ef51dd143814c59/--/default/context/30/img/image.jpg?Expires=1790247413&Signature=V70RU9rbUvzvn3mnI7k0EBuJL5q7uxV1WpteVNUYURYmY6J1F3TwDRBb5KAIV6Lrl0KOE1bMQDDFHNQEVIln0RxmbE9m~rN2iUXw0aX435Cc0PjExjhn-LCD0Fqu-DYoDeQwNz2~NGC6tDvG5dZIhF70s6cTd8ydf41mnrYa9D9jRUlUTa--hTaaoz8jhW6eqrEnnpQNVDgOlGRHxOqtSG7EGjGtSZhGY1sVjCt4o5wTer2L~EnlhEv8HPhG1REwF3jB511YNfBdJv2mcZWhw7Yr0TZFXrs6~5YipQb5Vug1KgUm0ayXg8hMtLRotlcv77w-o2iWAa0jRiio7Cr42w__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "dataset": "chanhee-luke/RoboSpatial-Home",
+  "config": "default",
+  "split": "context",
+  "row_index": 30,
+  "question": "In the image, there is a rug. Pinpoint several points within the vacant space situated to the in front of the rug. Your answer should be formatted as a list of tuples, i.e. [(x1, y1), ...], where each tuple contains the x and y coordinates of a point satisfying the conditions above. The coordinates ",
+  "answer": "[(0.013, 0.596), (0.278, 0.557), (0.323, 0.686), (0.406, 0.928), (0.428, 0.983), (0.811, 0.972), (0.734, 0.865), (0.515,",
+  "question_type": "context",
+  "licence": "apache-2.0",
+  "fetched_on": "2026-09-24",
+  "image_size_wh": [
+   1440,
+   1920
+  ],
+  "has_depth_image": true,
+  "has_mask": true,
+  "note": "RoboSpatial-Home is the 350-question benchmark; the 1M-image RoboSpatial training set has no public HF repo (generated with github.com/NVlabs/RoboSpatial). File named row_<split>_<idx> because row indices repeat across splits. cached-assets URLs expire after a short time.",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url"
+ },
+ {
+  "file": "row_context_61.jpg",
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/chanhee-luke/RoboSpatial-Home/--/7ef1b43b20087ef284e0e9017ef51dd143814c59/--/default/context/61/img/image.jpg?Expires=1790247324&Signature=UdhKRleVci4C7YE0bz8mzrEB-VFVa78Ri20SnSvlvKRYam~93gBrC7fqUDIzj7Tsk3UVRTB2i8T2-BFj4bKG5pkJN--2fftD7hC3-wG5PHhLtAPi9LkGhoe5ZB47tM1QOtWXqE8abNgj6T8DhWKpnRB7p99LQZ8nwt7UcxSTMSEW1pL0D1DWsoxMZzkYivY4rxXS~4~96i2rO92xjLQAx~nMkx3AH4yqby5zZNue4wnF7YKBZG4y1MCHMKeI8XU70QNW85xhMVS76zX8vJ5pWNRCX0dGco38fyeehKfH2ejrwIvlRe9VVGII3z~KOp6op02-JDYAoi7he-vE~xdG~w__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "dataset": "chanhee-luke/RoboSpatial-Home",
+  "config": "default",
+  "split": "context",
+  "row_index": 61,
+  "question": "In the image, there is a curtain. Pinpoint several points within the vacant space situated to the in front of the curtain. Your answer should be formatted as a list of tuples, i.e. [(x1, y1), ...], where each tuple contains the x and y coordinates of a point satisfying the conditions above. The coor",
+  "answer": "[(0.539, 0.746), (0.544, 0.813), (0.508, 0.887), (0.592, 0.884), (0.674, 0.884), (0.826, 0.895), (0.904, 0.896), (0.896,",
+  "question_type": "context",
+  "licence": "apache-2.0",
+  "fetched_on": "2026-09-24",
+  "image_size_wh": [
+   1440,
+   1920
+  ],
+  "has_depth_image": true,
+  "has_mask": true,
+  "note": "RoboSpatial-Home is the 350-question benchmark; the 1M-image RoboSpatial training set has no public HF repo (generated with github.com/NVlabs/RoboSpatial). File named row_<split>_<idx> because row indices repeat across splits. cached-assets URLs expire after a short time.",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url"
+ }
+]

@@ -1,0 +1,33 @@
+[
+ {
+  "file": "fig_1.png",
+  "source_url": "https://media.githubusercontent.com/media/isaac-sim/IsaacLab-Arena/main/docs/images/g1_locomanip_pick_and_place_task_view.png",
+  "paper_url": "https://github.com/isaac-sim/IsaacLab-Arena",
+  "paper": "Isaac Lab-Arena",
+  "figure": "unnumbered",
+  "caption": "Repository documentation image docs/images/g1_locomanip_pick_and_place_task_view.png (Unitree G1 loco-manipulation pick-and-place task view); not referenced from README.md, which carries only shields.io badges. File is stored in Git LFS; fetched through media.githubusercontent.com.",
+  "licence": "Apache-2.0 (IsaacLab-Arena repository LICENSE.md)",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url"
+ },
+ {
+  "file": "fig_2.png",
+  "source_url": "https://media.githubusercontent.com/media/isaac-sim/IsaacLab-Arena/main/docs/images/gr1_open_microwave_task_view.png",
+  "paper_url": "https://github.com/isaac-sim/IsaacLab-Arena",
+  "paper": "Isaac Lab-Arena",
+  "figure": "unnumbered",
+  "caption": "Repository documentation image docs/images/gr1_open_microwave_task_view.png (Fourier GR1 open-microwave task view); not referenced from README.md, which carries only shields.io badges. File is stored in Git LFS; fetched through media.githubusercontent.com.",
+  "licence": "Apache-2.0 (IsaacLab-Arena repository LICENSE.md)",
+  "fetched_on": "2026-09-24"
+ },
+ {
+  "file": "fig_3.png",
+  "source_url": "https://media.githubusercontent.com/media/isaac-sim/IsaacLab-Arena/main/docs/images/franka_kitchen.png",
+  "paper_url": "https://github.com/isaac-sim/IsaacLab-Arena",
+  "paper": "Isaac Lab-Arena",
+  "figure": "unnumbered",
+  "caption": "Repository documentation image docs/images/franka_kitchen.png (Franka arm in an Arena kitchen scene); not referenced from README.md, which carries only shields.io badges. File is stored in Git LFS; fetched through media.githubusercontent.com.",
+  "licence": "Apache-2.0 (IsaacLab-Arena repository LICENSE.md)",
+  "fetched_on": "2026-09-24"
+ }
+]

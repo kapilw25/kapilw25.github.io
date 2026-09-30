@@ -1,0 +1,33 @@
+[
+ {
+  "file": "figure_card_libero-plus.png",
+  "media": "image",
+  "source_url": "https://huggingface.co/datasets/Sylvest/LIBERO-plus/resolve/main/static/images/libero-plus.png",
+  "dataset": "Sylvest/LIBERO-plus",
+  "episode": null,
+  "frame_time_s": null,
+  "camera": null,
+  "instruction": null,
+  "robot": "Franka",
+  "licence": "mit",
+  "gated": false,
+  "fetched_on": "2026-09-24",
+  "note": "Dataset-card teaser figure (3660x1550 PNG, 2,774,457 B, HTTP 200), NOT a trajectory frame. The repo holds only assets.zip (6,395,849,578 B: new objects, textures, scenes for the perturbed benchmark) plus this figure; no mp4, no parquet, so no frame could be extracted. Drop this item if only rows are wanted.",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url"
+ },
+ {
+  "file": null,
+  "media": "annotation-only",
+  "source_url": "https://huggingface.co/api/datasets/Sylvest/libero_plus_rlds/tree/main",
+  "dataset": "Sylvest/libero_plus_rlds",
+  "episode": null,
+  "frame_time_s": null,
+  "camera": null,
+  "instruction": null,
+  "robot": "Franka",
+  "licence": "mit",
+  "gated": false,
+  "fetched_on": "2026-09-24",
+  "note": "Training trajectories (the perturbed set used for the mix-SFT model) are released as a multi-part zip of RLDS/TFRecord: libero_plus_mixdata.zip (11,119,747,860 B), libero_plus_mixdata.z01 (32,212,254,720 B), libero_plus_mixdata.z02 (32,212,254,720 B), 75.5 GB total, plus static/images/libero-plus.png. Not streamable, so no frames. datasets-server /rows for Sylvest/LIBERO-plus returned HTTP 500 and /splits HTTP 501. The trajectory count (20k) is from the paper arXiv 2510.13626 and was not verified from the archive."
+ }
+]

@@ -1,0 +1,26 @@
+[
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2412.07755v3/QualExamplesSATSynth.svg",
+  "paper_url": "https://arxiv.org/abs/2412.07755",
+  "paper": "SAT",
+  "figure": "Figure 8",
+  "caption": "Figure 8: Qualitative examples of our synthetic SAT dynamic data",
+  "licence": "arXiv article, figure reproduced for research comparison; check paper licence",
+  "fetched_on": "2026-09-24",
+  "note": "Local rasterization of fig_2.svg with ImageMagick (magick -density 300), not a file served by arXiv.",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ },
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2412.07755v3/staticSYnth.svg",
+  "paper_url": "https://arxiv.org/abs/2412.07755",
+  "paper": "SAT",
+  "figure": "Figure 9",
+  "caption": "Figure 9: Qualitative examples of our synthetic SAT static data",
+  "licence": "arXiv article, figure reproduced for research comparison; check paper licence",
+  "fetched_on": "2026-09-24",
+  "note": "Local rasterization of fig_3.svg with ImageMagick (magick -density 300), not a file served by arXiv.",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ }
+]

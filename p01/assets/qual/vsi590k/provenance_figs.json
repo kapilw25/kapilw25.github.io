@@ -1,0 +1,26 @@
+[
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2511.04670v1/annotated_real_video_1.png",
+  "paper_url": "https://arxiv.org/abs/2511.04670",
+  "paper": "Cambrian-S",
+  "figure": "Figure 19",
+  "caption": "Figure 19: Examples of VSI-590K (Annotated Real Video).",
+  "licence": "arXiv article, figure reproduced for research comparison; check paper licence",
+  "fetched_on": "2026-09-24",
+  "note": "Image holds the video frames only; the QA text is HTML next to the image: Absolute Direction (Object) Standing by the backpack, looking toward the table, how far counterclockwise in degrees must I turn to see the trash bin? Answer: 334.09 | Absolute Distance Measuring from the closest points of each, how far apart are the chair and the door in meters? Answer: 2.32 | Absolute Distance Considering the chair and the door, which object's longest edge is the shorter? A. Door B. Chair",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ },
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2511.04670v1/procthor.png",
+  "paper_url": "https://arxiv.org/abs/2511.04670",
+  "paper": "Cambrian-S",
+  "figure": "Figure 22",
+  "caption": "Figure 22: Examples of VSI-590K (Annotated Simulated Video).",
+  "licence": "arXiv article, figure reproduced for research comparison; check paper licence",
+  "fetched_on": "2026-09-24",
+  "note": "Image holds the video frames only; the QA text is HTML next to the image: Relative Distance (Object Perspective) If I am standing by the dresser and facing the chair, is the closet to my left, right, or back? An object is to my back if I would have to turn at least 135 degrees in order to face it. A. Left B. Right C. Back",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ }
+]

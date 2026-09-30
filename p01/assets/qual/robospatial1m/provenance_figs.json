@@ -1,0 +1,25 @@
+[
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2411.16537v5/figure2.png",
+  "paper_url": "https://arxiv.org/abs/2411.16537",
+  "paper": "RoboSpatial",
+  "figure": "Figure 2",
+  "caption": "Figure 2: Overview of the RoboSpatial dataset. We automatically generate spatial relationship annotations from existing datasets with 3D point clouds, egocentric images, and 3D bounding box annotations. We create question/answer pairs covering three classes of spatial relationships, three spatial reference frames, and both binary (yes/no) and numeric (e.g. 2D image points) answers. From 1M images ",
+  "licence": "arXiv article, figure reproduced for research comparison; check paper licence",
+  "fetched_on": "2026-09-24",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ },
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2411.16537v5/figures/figure1.png",
+  "paper_url": "https://arxiv.org/abs/2411.16537",
+  "paper": "RoboSpatial",
+  "figure": "Figure 1",
+  "caption": "Figure 1: RoboSpatial dataset facilitates 3D spatial reasoning for robot manipulation. This illustration demonstrates how a model trained on RoboSpatial enables human-aligned spatial reasoning within the correct reference frame, supporting task grounding, planning, and detection for manipulation tasks.",
+  "licence": "arXiv article, figure reproduced for research comparison; check paper licence",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ }
+]

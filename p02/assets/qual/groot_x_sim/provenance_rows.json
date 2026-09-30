@@ -1,0 +1,32 @@
+[
+ {
+  "file": "row_77_110.jpg",
+  "media": "video-frame",
+  "source_url": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim/resolve/main/unitree_g1.LMPnPAppleToPlateDC/videos/chunk-000/observation.images.ego_view/episode_000077.mp4",
+  "dataset": "nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim",
+  "episode": 77,
+  "frame_time_s": 2.196,
+  "camera": "observation.images.ego_view",
+  "instruction": "pick up the apple, walk left, and place the apple on the plate",
+  "robot": "G1",
+  "licence": "cc-by-4.0",
+  "gated": false,
+  "fetched_on": "2026-09-24",
+  "note": "Frame at 20 percent of duration (frame 110 of 549). Task folder unitree_g1.LMPnPAppleToPlateDC, the only G1 folder among 134 in the repo (LeRobot v2.1, 103 episodes, 78,369 frames, 50 fps, 640x480, single camera). meta/embodiment.json: robot_name G1, embodiment_tag unitree_g1_full_body_with_height_nav_cmd_sim. Episode 77 length 549 frames (10.98 s), trajectory_type successful, discarded_trajectory false. Video 1,029,146 B, HTTP 200 via HF xet CDN redirect, frame extracted with ffmpeg -ss then video deleted. Instruction is tasks.jsonl task_index 1 (task_index 0 is an empty string)."
+ },
+ {
+  "file": "row_77_439.jpg",
+  "media": "video-frame",
+  "source_url": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim/resolve/main/unitree_g1.LMPnPAppleToPlateDC/videos/chunk-000/observation.images.ego_view/episode_000077.mp4",
+  "dataset": "nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim",
+  "episode": 77,
+  "frame_time_s": 8.784,
+  "camera": "observation.images.ego_view",
+  "instruction": "pick up the apple, walk left, and place the apple on the plate",
+  "robot": "G1",
+  "licence": "cc-by-4.0",
+  "gated": false,
+  "fetched_on": "2026-09-24",
+  "note": "Frame at 80 percent of duration (frame 439 of 549). Task folder unitree_g1.LMPnPAppleToPlateDC, the only G1 folder among 134 in the repo (LeRobot v2.1, 103 episodes, 78,369 frames, 50 fps, 640x480, single camera). meta/embodiment.json: robot_name G1, embodiment_tag unitree_g1_full_body_with_height_nav_cmd_sim. Episode 77 length 549 frames (10.98 s), trajectory_type successful, discarded_trajectory false. Video 1,029,146 B, HTTP 200 via HF xet CDN redirect, frame extracted with ffmpeg -ss then video deleted. Instruction is tasks.jsonl task_index 1 (task_index 0 is an empty string)."
+ }
+]

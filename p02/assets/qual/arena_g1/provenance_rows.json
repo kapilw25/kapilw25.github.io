@@ -1,0 +1,62 @@
+[
+ {
+  "file": "row_loco_15_176.jpg",
+  "media": "video-frame",
+  "source_url": "https://huggingface.co/datasets/nvidia/Arena-G1-Loco-Manipulation-Task/resolve/main/lerobot/videos/chunk-000/observation.images.ego_view/episode_000015.mp4",
+  "dataset": "nvidia/Arena-G1-Loco-Manipulation-Task",
+  "episode": 15,
+  "frame_time_s": 3.52,
+  "camera": "observation.images.ego_view",
+  "instruction": "Pick up the brown box from the shelf, and place it into the blue bin on the table located at the right of the shelf.",
+  "robot": "G1",
+  "licence": "cc-by-4.0",
+  "gated": false,
+  "fetched_on": "2026-09-24",
+  "note": "Frame at 20 percent (frame 176 of 880). Card: 50 MimicGen demos generated from 5 human teleop demos in the Isaac Lab-Arena G1 loco-manipulation environment; the lerobot/ export (GR00T-LeRobot v2.1, robot_type unitree_g1) lists 100 episodes, 94,936 frames, 50 fps, 640x480, single ego_view camera. Episode 15 length 880 frames (17.6 s), the smallest of 100 mp4s (2,149,317 B, HTTP 200). Repo also ships HDF5: arena_g1_loco_manipulation_dataset_annotated.hdf5 (213,998,386 B), arena_g1_loco_manipulation_dataset_generated_small.hdf5 (230,115,530 B), arena_g1_loco_manipulation_dataset_generated.hdf5 (23,362,617,731 B). Video deleted after extraction."
+ },
+ {
+  "file": "row_loco_15_704.jpg",
+  "media": "video-frame",
+  "source_url": "https://huggingface.co/datasets/nvidia/Arena-G1-Loco-Manipulation-Task/resolve/main/lerobot/videos/chunk-000/observation.images.ego_view/episode_000015.mp4",
+  "dataset": "nvidia/Arena-G1-Loco-Manipulation-Task",
+  "episode": 15,
+  "frame_time_s": 14.08,
+  "camera": "observation.images.ego_view",
+  "instruction": "Pick up the brown box from the shelf, and place it into the blue bin on the table located at the right of the shelf.",
+  "robot": "G1",
+  "licence": "cc-by-4.0",
+  "gated": false,
+  "fetched_on": "2026-09-24",
+  "note": "Frame at 80 percent (frame 704 of 880). Card: 50 MimicGen demos generated from 5 human teleop demos in the Isaac Lab-Arena G1 loco-manipulation environment; the lerobot/ export (GR00T-LeRobot v2.1, robot_type unitree_g1) lists 100 episodes, 94,936 frames, 50 fps, 640x480, single ego_view camera. Episode 15 length 880 frames (17.6 s), the smallest of 100 mp4s (2,149,317 B, HTTP 200). Repo also ships HDF5: arena_g1_loco_manipulation_dataset_annotated.hdf5 (213,998,386 B), arena_g1_loco_manipulation_dataset_generated_small.hdf5 (230,115,530 B), arena_g1_loco_manipulation_dataset_generated.hdf5 (23,362,617,731 B). Video deleted after extraction."
+ },
+ {
+  "file": "row_static_97_23.jpg",
+  "media": "video-frame",
+  "source_url": "https://huggingface.co/datasets/nvidia/Arena-G1-Static-PickNPlace-Task/resolve/main/lerobot/videos/chunk-000/observation.images.ego_view/episode_000097.mp4",
+  "dataset": "nvidia/Arena-G1-Static-PickNPlace-Task",
+  "episode": 97,
+  "frame_time_s": 0.452,
+  "camera": "observation.images.ego_view",
+  "instruction": "Pick up the apple from the shelf and place it onto the plate on the same shelf next to it.",
+  "robot": "G1",
+  "licence": "cc-by-4.0",
+  "gated": false,
+  "fetched_on": "2026-09-24",
+  "note": "Frame at 20 percent (frame 23 of 113). Card: 200 human XR-teleop demos in Isaac Lab-Arena (G1 static apple pick-and-place); the lerobot/ export (GR00T-LeRobot v2.1, robot_type unitree_g1) lists 251 episodes, 35,066 frames, 50 fps, 640x480, single ego_view camera, 208 mp4s in chunk-000. Episode 97 length 113 frames (2.26 s), the smallest mp4 (213,540 B, HTTP 200), so it shows only a short clip of the task. Repo also ships arena_g1_static_apple_dataset_recorded_200_demos.hdf5 (10,074,757,576 B). Video deleted after extraction."
+ },
+ {
+  "file": "row_static_97_90.jpg",
+  "media": "video-frame",
+  "source_url": "https://huggingface.co/datasets/nvidia/Arena-G1-Static-PickNPlace-Task/resolve/main/lerobot/videos/chunk-000/observation.images.ego_view/episode_000097.mp4",
+  "dataset": "nvidia/Arena-G1-Static-PickNPlace-Task",
+  "episode": 97,
+  "frame_time_s": 1.808,
+  "camera": "observation.images.ego_view",
+  "instruction": "Pick up the apple from the shelf and place it onto the plate on the same shelf next to it.",
+  "robot": "G1",
+  "licence": "cc-by-4.0",
+  "gated": false,
+  "fetched_on": "2026-09-24",
+  "note": "Frame at 80 percent (frame 90 of 113). Card: 200 human XR-teleop demos in Isaac Lab-Arena (G1 static apple pick-and-place); the lerobot/ export (GR00T-LeRobot v2.1, robot_type unitree_g1) lists 251 episodes, 35,066 frames, 50 fps, 640x480, single ego_view camera, 208 mp4s in chunk-000. Episode 97 length 113 frames (2.26 s), the smallest mp4 (213,540 B, HTTP 200), so it shows only a short clip of the task. Repo also ships arena_g1_static_apple_dataset_recorded_200_demos.hdf5 (10,074,757,576 B). Video deleted after extraction."
+ }
+]

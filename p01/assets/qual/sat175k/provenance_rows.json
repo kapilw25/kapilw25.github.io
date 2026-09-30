@@ -1,0 +1,225 @@
+[
+ {
+  "file": "row_0.jpg",
+  "files": [
+   "row_0.jpg"
+  ],
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/0/images/image-1d100e9.jpg?Expires=1790247300&Signature=HIMnlt4oSJgJRlVg1GpTUVEiCZ2OXUa97SlyhxQOPWTircOtgZZAFIZcYdGfXOqcq9pE7bptznFgBXR-ERlsPyp~rLW98ruYQ7J14mbjUWM6HUxmGjntD~WyyJuemkPd50vzz6Znn8vwFvOXVZfLsrbJdlp0CgYE1WDtCkqbYOTXgsVfJd-ig0d3Dc96DkqsfcZGm41SFdKaXi-upNWavQaCdNsgCQoB0Z~bmMUb3vgyqdsQ6av3HiPY96YElhItvHLQjFiAbhiXlXC7~Tsk-zhFO3~aVwmlAl-Ot65S01yAocRU5Bt25J~lNB4LyFahsBT8TLM88J~KiARWIsxCLw__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "source_urls": [
+   "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/0/images/image-1d100e9.jpg?Expires=1790247300&Signature=HIMnlt4oSJgJRlVg1GpTUVEiCZ2OXUa97SlyhxQOPWTircOtgZZAFIZcYdGfXOqcq9pE7bptznFgBXR-ERlsPyp~rLW98ruYQ7J14mbjUWM6HUxmGjntD~WyyJuemkPd50vzz6Znn8vwFvOXVZfLsrbJdlp0CgYE1WDtCkqbYOTXgsVfJd-ig0d3Dc96DkqsfcZGm41SFdKaXi-upNWavQaCdNsgCQoB0Z~bmMUb3vgyqdsQ6av3HiPY96YElhItvHLQjFiAbhiXlXC7~Tsk-zhFO3~aVwmlAl-Ot65S01yAocRU5Bt25J~lNB4LyFahsBT8TLM88J~KiARWIsxCLw__&Key-Pair-Id=K3C0L9WB6U5DUC"
+  ],
+  "dataset": "array/SAT-v2",
+  "config": "default",
+  "split": "train",
+  "row_index": 0,
+  "question": "How many Chairs are visible in the scene?",
+  "answer": "3",
+  "answer_choices": [
+   "3",
+   "0",
+   "6",
+   "4",
+   "5"
+  ],
+  "question_type": "other",
+  "question_kind_inferred": "count",
+  "licence": null,
+  "fetched_on": "2026-09-24",
+  "note": "array/SAT rows API returns HTTP 500 (TooBigRowGroupsError); array/SAT-v2 is the same dataset re-uploaded for current datasets versions per the array/SAT card. cached-assets URLs expire after a short time.",
+  "licence_note": "array/SAT-v2 card and croissant carry no licence field; the original array/SAT card (same data) declares license: mit."
+ },
+ {
+  "file": "row_40006.jpg",
+  "files": [
+   "row_40006.jpg"
+  ],
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/40006/images/image-1d100e9.jpg?Expires=1790247301&Signature=qHldpcIp0YV8-9LButK6TixpYvqL85e9Y8gmd48I0GwxTPHV-CoZJ2Yssfv4PdtCByetdnVuMhDFo9hBgu~iWnHHU6XiAQblfSh3rT9WPbfI50gce6ssf59tBJSjeEd~fTTbeSiB~~xibCdxoUkQ4gH460M9pbyN2ZLD2OclGrGpONbM9CFIXq17txCMk0o3PwbJ9fmKTlsy-N8IZMF0-YU0QiV2-5uuk0QzEbY5sIIofWv4kffBgF3nssOJmGtgjrle88tyiHgsrMXmY9XmtvUJU8VDoe1PqMT735m~rubEBimzmI-Lz49-dRexYZ2GRlJxR896bsPQr7lI8tAnVw__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "source_urls": [
+   "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/40006/images/image-1d100e9.jpg?Expires=1790247301&Signature=qHldpcIp0YV8-9LButK6TixpYvqL85e9Y8gmd48I0GwxTPHV-CoZJ2Yssfv4PdtCByetdnVuMhDFo9hBgu~iWnHHU6XiAQblfSh3rT9WPbfI50gce6ssf59tBJSjeEd~fTTbeSiB~~xibCdxoUkQ4gH460M9pbyN2ZLD2OclGrGpONbM9CFIXq17txCMk0o3PwbJ9fmKTlsy-N8IZMF0-YU0QiV2-5uuk0QzEbY5sIIofWv4kffBgF3nssOJmGtgjrle88tyiHgsrMXmY9XmtvUJU8VDoe1PqMT735m~rubEBimzmI-Lz49-dRexYZ2GRlJxR896bsPQr7lI8tAnVw__&Key-Pair-Id=K3C0L9WB6U5DUC"
+  ],
+  "dataset": "array/SAT-v2",
+  "config": "default",
+  "split": "train",
+  "row_index": 40006,
+  "question": "Which object is closer to the camera taking this photo, black circular chair with four legs (highlighted by a red box) or blue armchair with wooden legs (highlighted by a blue box)?",
+  "answer": "blue armchair with wooden legs (highlighted by a blue box)",
+  "answer_choices": [
+   "blue armchair with wooden legs (highlighted by a blue box)",
+   "black circular chair with four legs (highlighted by a red box)"
+  ],
+  "question_type": "other",
+  "question_kind_inferred": "depth",
+  "licence": null,
+  "fetched_on": "2026-09-24",
+  "note": "array/SAT rows API returns HTTP 500 (TooBigRowGroupsError); array/SAT-v2 is the same dataset re-uploaded for current datasets versions per the array/SAT card. cached-assets URLs expire after a short time.",
+  "licence_note": "array/SAT-v2 card and croissant carry no licence field; the original array/SAT card (same data) declares license: mit."
+ },
+ {
+  "file": "row_80001.jpg",
+  "files": [
+   "row_80001.jpg"
+  ],
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/80001/images/image-1d100e9.jpg?Expires=1790247302&Signature=hIrbJGI7YJc3ZWqqR296BEmxnrQViBShQzcZGS0O7UgkV74qMqwG4i-vX~gvFHDIx7S~RfjokK6mYFgxFp8eLmc-4ZGYghAclrP1a~vsAMtKeOkr~hYYkGhQ2FX0AuA05wnZs1Z~iuokFML1cfkZ09q17FV2TocohDaTSCPAFZMEFsaEAVT-xIPE9v6sG85xFYmXVTe0yxdUPMJWTRkrpT92kEbAE~AnFwM1NPT2pXprZOq7wfHJXOwXjX7h5KQmqKrcC5dwNPd-d7LIxegeykpjAm4k~8axqfWOuC1Am2i3GTe1qhxBPE~~GfVNpukqvIn5gUMmob6~MNG36bek~A__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "source_urls": [
+   "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/80001/images/image-1d100e9.jpg?Expires=1790247302&Signature=hIrbJGI7YJc3ZWqqR296BEmxnrQViBShQzcZGS0O7UgkV74qMqwG4i-vX~gvFHDIx7S~RfjokK6mYFgxFp8eLmc-4ZGYghAclrP1a~vsAMtKeOkr~hYYkGhQ2FX0AuA05wnZs1Z~iuokFML1cfkZ09q17FV2TocohDaTSCPAFZMEFsaEAVT-xIPE9v6sG85xFYmXVTe0yxdUPMJWTRkrpT92kEbAE~AnFwM1NPT2pXprZOq7wfHJXOwXjX7h5KQmqKrcC5dwNPd-d7LIxegeykpjAm4k~8axqfWOuC1Am2i3GTe1qhxBPE~~GfVNpukqvIn5gUMmob6~MNG36bek~A__&Key-Pair-Id=K3C0L9WB6U5DUC"
+  ],
+  "dataset": "array/SAT-v2",
+  "config": "default",
+  "split": "train",
+  "row_index": 80001,
+  "question": "Considering the relative positions, is white color chair (marked A) to the left or right of white color chair (marked C)?",
+  "answer": "left",
+  "answer_choices": [
+   "left",
+   "right"
+  ],
+  "question_type": "other",
+  "question_kind_inferred": "relation_lr",
+  "licence": null,
+  "fetched_on": "2026-09-24",
+  "note": "array/SAT rows API returns HTTP 500 (TooBigRowGroupsError); array/SAT-v2 is the same dataset re-uploaded for current datasets versions per the array/SAT card. cached-assets URLs expire after a short time.",
+  "licence_note": "array/SAT-v2 card and croissant carry no licence field; the original array/SAT card (same data) declares license: mit."
+ },
+ {
+  "file": "row_120008.jpg",
+  "files": [
+   "row_120008.jpg"
+  ],
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/120008/images/image-1d100e9.jpg?Expires=1790247303&Signature=WHMlkOxJA9S1OUZb-Uh5PClZyfQADL-Z4VlMX2gq7oQFGQB1vfp0IeJzJyTBtYQTQYL1fe8WMAaCj9nC0eHtEjbY-8cfG62PI6gIVjQaG01AgomxFglY1neGHBP8tkGt0OB187BTqAEgRaUATFWwY8lj-k~MrXcmUBHIXYdGwlzqg~Kd5Qg6aFgvDNSS8bcNy9jH3arIOsX5a7Q22u3i2dDywasBfqvdm7skZhK00lmJKwWE-irOQjEpXAzBG9JobdQN0bJ9n9TqlE7~vg9gKWg76dOC-aIvnw56A-4w8DuJ9yutHnzwgujnHG62M0-snjpOlUgTiqscvIIWV5z3tQ__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "source_urls": [
+   "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/120008/images/image-1d100e9.jpg?Expires=1790247303&Signature=WHMlkOxJA9S1OUZb-Uh5PClZyfQADL-Z4VlMX2gq7oQFGQB1vfp0IeJzJyTBtYQTQYL1fe8WMAaCj9nC0eHtEjbY-8cfG62PI6gIVjQaG01AgomxFglY1neGHBP8tkGt0OB187BTqAEgRaUATFWwY8lj-k~MrXcmUBHIXYdGwlzqg~Kd5Qg6aFgvDNSS8bcNy9jH3arIOsX5a7Q22u3i2dDywasBfqvdm7skZhK00lmJKwWE-irOQjEpXAzBG9JobdQN0bJ9n9TqlE7~vg9gKWg76dOC-aIvnw56A-4w8DuJ9yutHnzwgujnHG62M0-snjpOlUgTiqscvIIWV5z3tQ__&Key-Pair-Id=K3C0L9WB6U5DUC"
+  ],
+  "dataset": "array/SAT-v2",
+  "config": "default",
+  "split": "train",
+  "row_index": 120008,
+  "question": "Consider the 3D positions of the objects in the scene and not just the 2D positions in the image. Is the centerpoint of  twisted base floor lamp with white flared shade at a higher height than dark wooden bed frame with slats?",
+  "answer": "no",
+  "answer_choices": [
+   "no",
+   "yes"
+  ],
+  "question_type": "other",
+  "question_kind_inferred": "relation_3d",
+  "licence": null,
+  "fetched_on": "2026-09-24",
+  "note": "array/SAT rows API returns HTTP 500 (TooBigRowGroupsError); array/SAT-v2 is the same dataset re-uploaded for current datasets versions per the array/SAT card. cached-assets URLs expire after a short time.",
+  "licence_note": "array/SAT-v2 card and croissant carry no licence field; the original array/SAT card (same data) declares license: mit."
+ },
+ {
+  "file": "row_160007.jpg",
+  "files": [
+   "row_160007.jpg"
+  ],
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/160007/images/image-1d100e9.jpg?Expires=1790247307&Signature=ZRuDGdLcGDwVoz0F~CxtGfCmDZ--jrMkDoMKshiRVtiBuiVekf51yIVMoQqg6XjvISlcKCrlyHatPkb62KW8TcvQkTWejYmBjLyUc6tMQy7Ssii3J-bo7AtemBfjFldMCbK3qoN-QBQmkM14sXbtIok5to3si8FIhcAjuYD2R0C8EQfFJboE6sGfzWh0m0Vnky7OW~fvF5esTWs5m1RyqUGiH41-FV1wqruxh2KFxft-Vjn7h3M1qMUm6U02Qx7p2qqG63NflWIdY8Tp2OUX8jURbdokSzzCUmBeLBgXm~NdgSr4Rdl65ahhJnqm51n84qrTLsPnt~4ncoYkJ9ihmg__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "source_urls": [
+   "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/160007/images/image-1d100e9.jpg?Expires=1790247307&Signature=ZRuDGdLcGDwVoz0F~CxtGfCmDZ--jrMkDoMKshiRVtiBuiVekf51yIVMoQqg6XjvISlcKCrlyHatPkb62KW8TcvQkTWejYmBjLyUc6tMQy7Ssii3J-bo7AtemBfjFldMCbK3qoN-QBQmkM14sXbtIok5to3si8FIhcAjuYD2R0C8EQfFJboE6sGfzWh0m0Vnky7OW~fvF5esTWs5m1RyqUGiH41-FV1wqruxh2KFxft-Vjn7h3M1qMUm6U02Qx7p2qqG63NflWIdY8Tp2OUX8jURbdokSzzCUmBeLBgXm~NdgSr4Rdl65ahhJnqm51n84qrTLsPnt~4ncoYkJ9ihmg__&Key-Pair-Id=K3C0L9WB6U5DUC"
+  ],
+  "dataset": "array/SAT-v2",
+  "config": "default",
+  "split": "train",
+  "row_index": 160007,
+  "question": "If I turn left by 40 degrees, will I be facing away from beige armchair with rounded arms (near the mark 6 in the image)?",
+  "answer": "yes",
+  "answer_choices": [
+   "yes",
+   "no"
+  ],
+  "question_type": "action_consequence",
+  "question_kind_inferred": "action_consequence",
+  "licence": null,
+  "fetched_on": "2026-09-24",
+  "note": "array/SAT rows API returns HTTP 500 (TooBigRowGroupsError); array/SAT-v2 is the same dataset re-uploaded for current datasets versions per the array/SAT card. cached-assets URLs expire after a short time.",
+  "licence_note": "array/SAT-v2 card and croissant carry no licence field; the original array/SAT card (same data) declares license: mit."
+ },
+ {
+  "file": "row_160009.jpg",
+  "files": [
+   "row_160009.jpg"
+  ],
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/160009/images/image-1d100e9.jpg?Expires=1790247306&Signature=p6J27gZXmFsbueGPaVR56lk9oLpOpoAwPag-lvd3g1yeMaIXHhvaLkel-iLxiUQAgRAuPz~6bmMJ-GbGy2MtUXC0uq0S7Pr2MIQ8kKwL3NcrEZAw1038HIiKagGJ6ziVT6xPgri5gzgfuKpVB-lXe4WGn62xjU7x4JUr~tlZz7h4e1iv6mPQrhqQ2qONJgSb9ilhwceA~vBb3pnoUZyRxuR-WZmn7XHpopWBOhjMFexWxZ2zCgdI9DFzTPjFvn~y5jwNi5uYi17lo09MfzTl3c5Gc70d5ftlbLqz9s2-9lndC9k~ySRA-8tkYEdvyQf8oYKCMJfWI~rkA9rvmk4eVw__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "source_urls": [
+   "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/160009/images/image-1d100e9.jpg?Expires=1790247306&Signature=p6J27gZXmFsbueGPaVR56lk9oLpOpoAwPag-lvd3g1yeMaIXHhvaLkel-iLxiUQAgRAuPz~6bmMJ-GbGy2MtUXC0uq0S7Pr2MIQ8kKwL3NcrEZAw1038HIiKagGJ6ziVT6xPgri5gzgfuKpVB-lXe4WGn62xjU7x4JUr~tlZz7h4e1iv6mPQrhqQ2qONJgSb9ilhwceA~vBb3pnoUZyRxuR-WZmn7XHpopWBOhjMFexWxZ2zCgdI9DFzTPjFvn~y5jwNi5uYi17lo09MfzTl3c5Gc70d5ftlbLqz9s2-9lndC9k~ySRA-8tkYEdvyQf8oYKCMJfWI~rkA9rvmk4eVw__&Key-Pair-Id=K3C0L9WB6U5DUC"
+  ],
+  "dataset": "array/SAT-v2",
+  "config": "default",
+  "split": "train",
+  "row_index": 160009,
+  "question": "I need to go to black octagon armchair with green cushion (near the mark 7 in the image). Which direction should I turn to face the object?",
+  "answer": "left by 26 degrees",
+  "answer_choices": [
+   "left by 26 degrees",
+   "right by 26 degrees"
+  ],
+  "question_type": "goal_aim",
+  "question_kind_inferred": "goal_aim",
+  "licence": null,
+  "fetched_on": "2026-09-24",
+  "note": "array/SAT rows API returns HTTP 500 (TooBigRowGroupsError); array/SAT-v2 is the same dataset re-uploaded for current datasets versions per the array/SAT card. cached-assets URLs expire after a short time.",
+  "licence_note": "array/SAT-v2 card and croissant carry no licence field; the original array/SAT card (same data) declares license: mit."
+ },
+ {
+  "file": "row_160013.jpg",
+  "files": [
+   "row_160013.jpg",
+   "row_160013_b.jpg"
+  ],
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/160013/images/image-1d100e9.jpg?Expires=1790247304&Signature=t4cuIjrq4~QkQeDddXD9wijeHEfixoqarGkfuI4xBfH2lMvQ~LhMjqMocJNVk1KLstZVop04rnt5Yrs6JezwJDDXoo53z~smqdnigLdKS0UUTD8tdWbORxOuhIr81wrFKutVyPGyCFYokX8qP6LHwTth1w302oyNJJvIkVOGM154Iuz25af3HEhZZ7Rp9BUaG73BiX7Q-Xyv0VdoZi4rV5wuigAEO-0zoTz4Wl8KGX2gfeM5yCV1b7xaVHL0W4k9jqDPyxn8n1fmTDDO-PHr7LCkWaqTt9DZIBwkXxDY1m71Qa-67t89uc4booUpAmPPrNMYPvT4D~g7~R0dT4IwWw__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "source_urls": [
+   "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/160013/images/image-1d100e9.jpg?Expires=1790247304&Signature=t4cuIjrq4~QkQeDddXD9wijeHEfixoqarGkfuI4xBfH2lMvQ~LhMjqMocJNVk1KLstZVop04rnt5Yrs6JezwJDDXoo53z~smqdnigLdKS0UUTD8tdWbORxOuhIr81wrFKutVyPGyCFYokX8qP6LHwTth1w302oyNJJvIkVOGM154Iuz25af3HEhZZ7Rp9BUaG73BiX7Q-Xyv0VdoZi4rV5wuigAEO-0zoTz4Wl8KGX2gfeM5yCV1b7xaVHL0W4k9jqDPyxn8n1fmTDDO-PHr7LCkWaqTt9DZIBwkXxDY1m71Qa-67t89uc4booUpAmPPrNMYPvT4D~g7~R0dT4IwWw__&Key-Pair-Id=K3C0L9WB6U5DUC",
+   "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/160013/images/image-1d300ea.jpg?Expires=1790247304&Signature=oWaHM-iWratn7iQyPquhC9H~NgpHAwRDTYfANp1~TLohImdbYxqVUnbdQa1vOGwgFmjyNS70WFfZtH8oRIwEA9mw0Dcy0C0rSHBOvsW~iW56FVyw79MMiAN9Cr3AZokXkPPfJkDY9Izj1H~oCvT9vw8U0DfZQ9Sl1mgQbNZaifxQbRzKA-3XXVhZDI0eFon7XjZRx-4jRo2SizELMshfviCRvz3C3bARMoIvLpb4~9rTa0E~6wMvgiT41G8~3VMI-w2if9NqgLQK3AqI8hLrzUFOcj3u~izY4xfBXJgnKgtFjEgznuJ93KI~Yo6GFWVXonKBoWuNMe1UIppK0IlShA__&Key-Pair-Id=K3C0L9WB6U5DUC"
+  ],
+  "dataset": "array/SAT-v2",
+  "config": "default",
+  "split": "train",
+  "row_index": 160013,
+  "question": "The first image is from the beginning of the video and the second image is from the end. How did the camera rotate from the first image to the second image?",
+  "answer": "rotated right and moved forward",
+  "answer_choices": [
+   "rotated right and moved forward",
+   "rotated left and moved forward"
+  ],
+  "question_type": "action_sequence",
+  "question_kind_inferred": "action_sequence",
+  "licence": null,
+  "fetched_on": "2026-09-24",
+  "note": "array/SAT rows API returns HTTP 500 (TooBigRowGroupsError); array/SAT-v2 is the same dataset re-uploaded for current datasets versions per the array/SAT card. cached-assets URLs expire after a short time.",
+  "licence_note": "array/SAT-v2 card and croissant carry no licence field; the original array/SAT card (same data) declares license: mit."
+ },
+ {
+  "file": "row_160021.jpg",
+  "files": [
+   "row_160021.jpg",
+   "row_160021_b.jpg"
+  ],
+  "media": "image",
+  "source_url": "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/160021/images/image-1d100e9.jpg?Expires=1790247305&Signature=Tq2B~vN8fBGt1~Cs12wxtScgDqCamk4HIsj~IdgPQy5Bzzq11iMDTx8oP94v4zyDMaTkcgZSIN6sJ1wyE9ajHGCw1SbS7w8ktlV1dyEm5d3JvyuIKpD6hP7wr0bEqvZ8~VZqNoVuTPHs9vANYBmUwHYPkQ6nmCi135Tg4BL~jHJvD3OoFiUXrrmFx~X-CAPTZ5npDFIdkHx-fxqNX-h6KOdtj3ACRCJntsxXwa3uLZl1buQu51ktyyUXtNM5G1BhQ~TsGEQAspNKPupiEiCjHujbxPfpRxtSnCGA5DkWqnVfrFUJiInMWmxNqzV9Yt-6Zfl32HNDmaZAzAdjOA3MRw__&Key-Pair-Id=K3C0L9WB6U5DUC",
+  "source_urls": [
+   "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/160021/images/image-1d100e9.jpg?Expires=1790247305&Signature=Tq2B~vN8fBGt1~Cs12wxtScgDqCamk4HIsj~IdgPQy5Bzzq11iMDTx8oP94v4zyDMaTkcgZSIN6sJ1wyE9ajHGCw1SbS7w8ktlV1dyEm5d3JvyuIKpD6hP7wr0bEqvZ8~VZqNoVuTPHs9vANYBmUwHYPkQ6nmCi135Tg4BL~jHJvD3OoFiUXrrmFx~X-CAPTZ5npDFIdkHx-fxqNX-h6KOdtj3ACRCJntsxXwa3uLZl1buQu51ktyyUXtNM5G1BhQ~TsGEQAspNKPupiEiCjHujbxPfpRxtSnCGA5DkWqnVfrFUJiInMWmxNqzV9Yt-6Zfl32HNDmaZAzAdjOA3MRw__&Key-Pair-Id=K3C0L9WB6U5DUC",
+   "https://datasets-server.huggingface.co/cached-assets/array/SAT-v2/--/77d83da806d0a31f837be7b36d0dfbda230d8864/--/default/train/160021/images/image-1d300ea.jpg?Expires=1790247305&Signature=ofWl~JXjQzpHOGu516wd9-kbMJabuuQv8FSq1u1-3~PUiWAwuZZwNmQq5N6DffR02kMhMdVCqJ81yeqrJZgRyJ43o5Qq~QpAxuxSNhAwkUiu1cS7b5S5GQTKktITGjJuGIR~WW5njUqsYl1FSGqiAACFOHpojgMEMEJe2Pn2Ccjkc3xJ-3WkAm-I47huLc6F7wAycwM5w91blwjBY6afDMzgJRmULecEhTQYNXs0pP4ZjuT98Znkr0OPpVUw-jqJHyjCCr7kN1fTX6dj7hvIoZ~Pf01VnlCFBbY8lyYrjH0wSGEEwHXClwmnk24hPVshPWYjM9rCKuj8fHNAMmL6BQ__&Key-Pair-Id=K3C0L9WB6U5DUC"
+  ],
+  "dataset": "array/SAT-v2",
+  "config": "default",
+  "split": "train",
+  "row_index": 160021,
+  "question": "Were any of the objects in the initial frame that you can still see in the second frame moved from their original positions?",
+  "answer": "no objects moved",
+  "answer_choices": [
+   "no objects moved",
+   "table was moved right and towards the camera in the first frame"
+  ],
+  "question_type": "obj_movement",
+  "question_kind_inferred": "obj_movement",
+  "licence": null,
+  "fetched_on": "2026-09-24",
+  "note": "array/SAT rows API returns HTTP 500 (TooBigRowGroupsError); array/SAT-v2 is the same dataset re-uploaded for current datasets versions per the array/SAT card. cached-assets URLs expire after a short time.",
+  "licence_note": "array/SAT-v2 card and croissant carry no licence field; the original array/SAT card (same data) declares license: mit."
+ }
+]

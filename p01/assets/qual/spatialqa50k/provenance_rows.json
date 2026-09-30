@@ -1,0 +1,148 @@
+[
+ {
+  "media": "annotation-only",
+  "source_url": "https://huggingface.co/datasets/RussRobin/SpatialQA/resolve/main/SpatialQA.json",
+  "dataset": "RussRobin/SpatialQA",
+  "config": "SpatialQA.json head",
+  "split": "train",
+  "row_index": 1,
+  "question": "<image 1>\n<image 2>\nCould you elaborate on the depth measurement of point (0.71, 0.44)? Estimate depth from the depth map directly.",
+  "answer": "Point (0.71, 0.44) reflects a depth of 5440.",
+  "question_type": "visual_genome",
+  "licence": "cc-by-4.0",
+  "fetched_on": "2026-09-24",
+  "image_paths": [
+   "visual_genome/2389886.jpg",
+   "visual_genome_d/2389886.png"
+  ],
+  "note": "image hosted in BoyaWu10/Bunny-v1_0-data (low and middle level sources), not in this repo"
+ },
+ {
+  "media": "annotation-only",
+  "source_url": "https://huggingface.co/datasets/RussRobin/SpatialQA/resolve/main/SpatialQA.json",
+  "dataset": "RussRobin/SpatialQA",
+  "config": "SpatialQA.json head",
+  "split": "train",
+  "row_index": 7,
+  "question": "<image 1>\n<image 2>\nPlease provide me with the depth assessment of point (0.43, 0.66)? Estimate depth from the depth map directly.",
+  "answer": "Point (0.43, 0.66) reflects a depth measurement of 9897.",
+  "question_type": "visual_genome",
+  "licence": "cc-by-4.0",
+  "fetched_on": "2026-09-24",
+  "image_paths": [
+   "visual_genome/2368518.jpg",
+   "visual_genome_d/2368518.png"
+  ],
+  "note": "image hosted in BoyaWu10/Bunny-v1_0-data (low and middle level sources), not in this repo"
+ },
+ {
+  "file": "row_211.png",
+  "media": "image",
+  "source_url": "https://huggingface.co/datasets/RussRobin/SpatialQA/resolve/main/nyudepthv2.zip member nyudepthv2/1433.png",
+  "dataset": "RussRobin/SpatialQA",
+  "config": "SpatialQA.json head",
+  "split": "train",
+  "row_index": 211,
+  "question": "<image 1>\n<image 2>\nWhat can you tell me about the furniture in this image?",
+  "answer": "The image shows a dining room with a large rectangular dining table in the center, surrounded by eight chairs. There is ",
+  "question_type": "nyudepthv2",
+  "licence": "cc-by-4.0",
+  "fetched_on": "2026-09-24",
+  "image_paths": [
+   "nyudepthv2/1433.png",
+   "nyudepthv2_d/1433.png"
+  ],
+  "depth_file": "row_211_depth.png"
+ },
+ {
+  "file": "row_304.png",
+  "media": "image",
+  "source_url": "https://huggingface.co/datasets/RussRobin/SpatialQA/resolve/main/nyudepthv2.zip member nyudepthv2/1068.png",
+  "dataset": "RussRobin/SpatialQA",
+  "config": "SpatialQA.json head",
+  "split": "train",
+  "row_index": 304,
+  "question": "<image 1>\n<image 2>\nWhat is on top of the bookshelf?",
+  "answer": "There are various items on top of the bookshelf, including a stack of colorful folders, a decorative box, a toy, and som",
+  "question_type": "nyudepthv2",
+  "licence": "cc-by-4.0",
+  "fetched_on": "2026-09-24",
+  "image_paths": [
+   "nyudepthv2/68.png",
+   "nyudepthv2_d/68.png"
+  ],
+  "depth_file": "row_304_depth.png"
+ },
+ {
+  "file": "row_359.jpg",
+  "media": "image",
+  "source_url": "https://huggingface.co/datasets/RussRobin/SpatialQA/resolve/main/2d3ds.zip member 2d3ds/5a6c2f6709a2494db20b708b0e933432_i2_5.jpg",
+  "dataset": "RussRobin/SpatialQA",
+  "config": "SpatialQA.json head",
+  "split": "train",
+  "row_index": 359,
+  "question": "<image 1>\n<image 2>\nHow many compartments does the sink have?",
+  "answer": "The sink has two compartments.",
+  "question_type": "2d3ds",
+  "licence": "cc-by-4.0",
+  "fetched_on": "2026-09-24",
+  "image_paths": [
+   "2d3ds/5a6c2f6709a2494db20b708b0e933432_i2_5.jpg",
+   "2d3ds_d/5a6c2f6709a2494db20b708b0e933432_i2_5.png"
+  ]
+ },
+ {
+  "file": "row_619.jpg",
+  "media": "image",
+  "source_url": "https://huggingface.co/datasets/RussRobin/SpatialQA/resolve/main/2d3ds.zip member 2d3ds/17ee032c9ed84d60a5c0719cbd36177c_i0_2.jpg",
+  "dataset": "RussRobin/SpatialQA",
+  "config": "SpatialQA.json head",
+  "split": "train",
+  "row_index": 619,
+  "question": "<image 1>\n<image 2>\nWhich object is larger in size, the hook or the hinge?",
+  "answer": "The hinge is larger in size than the hook.",
+  "question_type": "2d3ds",
+  "licence": "cc-by-4.0",
+  "fetched_on": "2026-09-24",
+  "image_paths": [
+   "2d3ds/17ee032c9ed84d60a5c0719cbd36177c_i0_2.jpg",
+   "2d3ds_d/17ee032c9ed84d60a5c0719cbd36177c_i0_2.png"
+  ]
+ },
+ {
+  "file": "row_646.jpg",
+  "media": "image",
+  "source_url": "https://huggingface.co/datasets/RussRobin/SpatialQA/resolve/main/2d3ds.zip member 2d3ds/5cd33e528cb846d190946808f4a1aefd_i0_0.jpg",
+  "dataset": "RussRobin/SpatialQA",
+  "config": "SpatialQA.json head",
+  "split": "train",
+  "row_index": 646,
+  "question": "<image 1>\n<image 2>\nWhat is the spatial relationship between the fire alarm and the window?",
+  "answer": "The fire alarm is to the right of the window.",
+  "question_type": "2d3ds",
+  "licence": "cc-by-4.0",
+  "fetched_on": "2026-09-24",
+  "image_paths": [
+   "2d3ds/5cd33e528cb846d190946808f4a1aefd_i0_0.jpg",
+   "2d3ds_d/5cd33e528cb846d190946808f4a1aefd_i0_0.png"
+  ]
+ },
+ {
+  "file": "row_841.jpg",
+  "media": "image",
+  "source_url": "https://huggingface.co/datasets/RussRobin/SpatialQA/resolve/main/2d3ds.zip member 2d3ds/7a42df17b40c4c15bfd6301823b6a476_i2_4.jpg",
+  "dataset": "RussRobin/SpatialQA",
+  "config": "SpatialQA.json head",
+  "split": "train",
+  "row_index": 841,
+  "question": "<image 1>\n<image 2>\nHow many chairs are at the table?",
+  "answer": "There are two chairs at the table.",
+  "question_type": "2d3ds",
+  "licence": "cc-by-4.0",
+  "fetched_on": "2026-09-24",
+  "image_paths": [
+   "2d3ds/7a42df17b40c4c15bfd6301823b6a476_i2_4.jpg",
+   "2d3ds_d/7a42df17b40c4c15bfd6301823b6a476_i2_4.png"
+  ]
+ }
+]

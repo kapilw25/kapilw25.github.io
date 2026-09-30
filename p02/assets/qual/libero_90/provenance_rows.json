@@ -1,0 +1,62 @@
+[
+ {
+  "file": "row_0_32.jpg",
+  "media": "video-frame",
+  "source_url": "https://huggingface.co/datasets/IPEC-COMMUNITY/libero_90_no_noops_lerobot/resolve/main/videos/chunk-000/observation.images.image/episode_000000.mp4",
+  "dataset": "IPEC-COMMUNITY/libero_90_no_noops_lerobot",
+  "episode": 0,
+  "frame_time_s": 1.61,
+  "camera": "observation.images.image",
+  "instruction": "pick up the book and place it in the right compartment of the caddy",
+  "robot": "Franka",
+  "licence": "apache-2.0",
+  "gated": false,
+  "fetched_on": "2026-09-24",
+  "note": "Frame at 20 percent of duration (frame 32 of 161), third-person agentview camera. Video 491,798 B, HTTP 200. LeRobot v2.1 per-episode export of the LIBERO-90 suite (info.json: robot_type franka, 3921 episodes, 569,249 frames, 20 fps, cameras observation.images.image and observation.images.wrist_image at 256x256, AV1 codec), identical episode and frame counts to the libero_90 suite of nvidia/LIBERO_LeRobot_v3, whose smallest video shard (file-009.mp4, 40,925,233 B) exceeds the 30 MB cap, which is why this mirror was used. Episode 0 length 161 frames (8.05 s); instruction is tasks.jsonl task_index 0 and episodes.jsonl episode 0, verbatim. Card licence apache-2.0 (the LIBERO benchmark itself is MIT on GitHub). Video deleted after extraction."
+ },
+ {
+  "file": "row_0_129.jpg",
+  "media": "video-frame",
+  "source_url": "https://huggingface.co/datasets/IPEC-COMMUNITY/libero_90_no_noops_lerobot/resolve/main/videos/chunk-000/observation.images.image/episode_000000.mp4",
+  "dataset": "IPEC-COMMUNITY/libero_90_no_noops_lerobot",
+  "episode": 0,
+  "frame_time_s": 6.44,
+  "camera": "observation.images.image",
+  "instruction": "pick up the book and place it in the right compartment of the caddy",
+  "robot": "Franka",
+  "licence": "apache-2.0",
+  "gated": false,
+  "fetched_on": "2026-09-24",
+  "note": "Frame at 80 percent of duration (frame 129 of 161), third-person agentview camera. Video 491,798 B, HTTP 200. LeRobot v2.1 per-episode export of the LIBERO-90 suite (info.json: robot_type franka, 3921 episodes, 569,249 frames, 20 fps, cameras observation.images.image and observation.images.wrist_image at 256x256, AV1 codec), identical episode and frame counts to the libero_90 suite of nvidia/LIBERO_LeRobot_v3, whose smallest video shard (file-009.mp4, 40,925,233 B) exceeds the 30 MB cap, which is why this mirror was used. Episode 0 length 161 frames (8.05 s); instruction is tasks.jsonl task_index 0 and episodes.jsonl episode 0, verbatim. Card licence apache-2.0 (the LIBERO benchmark itself is MIT on GitHub). Video deleted after extraction."
+ },
+ {
+  "file": "row_0_32_wrist.jpg",
+  "media": "video-frame",
+  "source_url": "https://huggingface.co/datasets/IPEC-COMMUNITY/libero_90_no_noops_lerobot/resolve/main/videos/chunk-000/observation.images.wrist_image/episode_000000.mp4",
+  "dataset": "IPEC-COMMUNITY/libero_90_no_noops_lerobot",
+  "episode": 0,
+  "frame_time_s": 1.61,
+  "camera": "observation.images.wrist_image",
+  "instruction": "pick up the book and place it in the right compartment of the caddy",
+  "robot": "Franka",
+  "licence": "apache-2.0",
+  "gated": false,
+  "fetched_on": "2026-09-24",
+  "note": "Frame at 20 percent of duration (frame 32 of 161), wrist camera of the same episode. Video 244,794 B, HTTP 200. LeRobot v2.1 per-episode export of the LIBERO-90 suite (info.json: robot_type franka, 3921 episodes, 569,249 frames, 20 fps, cameras observation.images.image and observation.images.wrist_image at 256x256, AV1 codec), identical episode and frame counts to the libero_90 suite of nvidia/LIBERO_LeRobot_v3, whose smallest video shard (file-009.mp4, 40,925,233 B) exceeds the 30 MB cap, which is why this mirror was used. Episode 0 length 161 frames (8.05 s); instruction is tasks.jsonl task_index 0 and episodes.jsonl episode 0, verbatim. Card licence apache-2.0 (the LIBERO benchmark itself is MIT on GitHub). Video deleted after extraction."
+ },
+ {
+  "file": "row_0_129_wrist.jpg",
+  "media": "video-frame",
+  "source_url": "https://huggingface.co/datasets/IPEC-COMMUNITY/libero_90_no_noops_lerobot/resolve/main/videos/chunk-000/observation.images.wrist_image/episode_000000.mp4",
+  "dataset": "IPEC-COMMUNITY/libero_90_no_noops_lerobot",
+  "episode": 0,
+  "frame_time_s": 6.44,
+  "camera": "observation.images.wrist_image",
+  "instruction": "pick up the book and place it in the right compartment of the caddy",
+  "robot": "Franka",
+  "licence": "apache-2.0",
+  "gated": false,
+  "fetched_on": "2026-09-24",
+  "note": "Frame at 80 percent of duration (frame 129 of 161), wrist camera of the same episode. Video 244,794 B, HTTP 200. LeRobot v2.1 per-episode export of the LIBERO-90 suite (info.json: robot_type franka, 3921 episodes, 569,249 frames, 20 fps, cameras observation.images.image and observation.images.wrist_image at 256x256, AV1 codec), identical episode and frame counts to the libero_90 suite of nvidia/LIBERO_LeRobot_v3, whose smallest video shard (file-009.mp4, 40,925,233 B) exceeds the 30 MB cap, which is why this mirror was used. Episode 0 length 161 frames (8.05 s); instruction is tasks.jsonl task_index 0 and episodes.jsonl episode 0, verbatim. Card licence apache-2.0 (the LIBERO benchmark itself is MIT on GitHub). Video deleted after extraction."
+ }
+]

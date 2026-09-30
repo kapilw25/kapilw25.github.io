@@ -1,0 +1,117 @@
+<style>
+.rr{display:grid;gap:1rem;margin:.4rem 0 1rem}
+.rr .card{display:grid;grid-template-columns:11rem minmax(0,1fr) minmax(0,1fr);gap:.8rem;align-items:stretch;background:var(--panel);border:1px solid var(--line);border-radius:.7rem;padding:.8rem}
+.rr .name{font-weight:700;font-size:.98rem;line-height:1.3}.rr .name small{display:block;font-weight:400;color:var(--muted);font-size:.78rem;margin-top:.3rem}
+.rr .pane{border-radius:.55rem;padding:.5rem .6rem;border:1.5px solid}
+.rr .bad{border-color:#ef4444;background:rgba(239,68,68,.06)}.rr .good{border-color:#10b981;background:rgba(16,185,129,.06)}
+.rr .pane b{font-size:.8rem}.rr .pane p{margin:.25rem 0 0;font-size:.8rem;color:var(--muted)}
+.rr svg{width:100%;height:auto;max-height:170px;display:block;margin-top:.3rem}
+.rr svg text{fill:var(--text);font:11px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.rr svg .m{fill:var(--muted)}.rr svg .ax{stroke:var(--line);stroke-width:1}
+.rr .r{fill:#ef4444}.rr .g{fill:#10b981}.rr .gr{fill:#94a3b8}.rr .y{fill:#f59e0b}.rr .b{fill:#38bdf8}
+.rr .note{font-size:.76rem;color:var(--muted)}
+@media (max-width:900px){.rr .card{grid-template-columns:1fr}}
+</style>
+<p class="note">Each row: ❌ what a reviewer sees today, ✅ what the plan now produces. Bar heights are illustrative until the score table has numbers; chance levels and CI widths are real arithmetic.</p>
+<div class="rr">
+
+<div class="card">
+ <div class="name">🧩 Gain not tied to the mechanism<small>OURS changes 6 things at once</small></div>
+ <div class="pane bad"><b>❌ one bar, six causes</b>
+  <svg viewBox="0 0 260 120"><line class="ax" x1="20" y1="100" x2="250" y2="100"/>
+   <rect class="gr" x="40" y="70" width="50" height="30"/><text x="42" y="115" class="m">rival</text><text x="52" y="64">40</text>
+   <rect class="r" x="150" y="30" width="50" height="70"/><text x="150" y="115" class="m">OURS</text><text x="162" y="24">60</text>
+   <text x="163" y="70" style="fill:#fff;font-weight:700">? ? ?</text>
+   <text x="20" y="14" class="m">+20 from camera? twins? reward? people?</text></svg>
+  <p>A reviewer cannot tell which lever earned the +20.</p></div>
+ <div class="pane good"><b>✅ switch one lever off at a time</b>
+  <svg viewBox="0 0 260 120"><line class="ax" x1="10" y1="100" x2="255" y2="100"/>
+   <rect class="g" x="14" y="30" width="26" height="70"/><text x="12" y="114" class="m">full</text><text x="17" y="25">60</text>
+   <rect class="b" x="48" y="58" width="26" height="42"/><text x="44" y="114" class="m">−cam</text><text x="51" y="53">48</text>
+   <rect class="b" x="82" y="44" width="26" height="56"/><text x="77" y="114" class="m">−twin</text><text x="85" y="39">54</text>
+   <rect class="b" x="116" y="40" width="26" height="60"/><text x="110" y="114" class="m">−grade</text><text x="119" y="35">56</text>
+   <rect class="b" x="150" y="36" width="26" height="64"/><text x="147" y="114" class="m">−neg</text><text x="153" y="31">58</text>
+   <rect class="b" x="184" y="48" width="26" height="52"/><text x="178" y="114" class="m">−multi</text><text x="187" y="43">52</text>
+   <rect class="b" x="218" y="52" width="26" height="48"/><text x="213" y="114" class="m">−ppl</text><text x="221" y="47">50</text></svg>
+  <p>The biggest drop names the lever (here: camera, −12). OURS stays one fixed config.</p></div>
+</div>
+
+<div class="card">
+ <div class="name">🔒 Test set shaped the training data<small>the loop and the camera prior looked at tests</small></div>
+ <div class="pane bad"><b>❌ the exam leaks into the homework</b>
+  <svg viewBox="0 0 260 110">
+   <rect x="10" y="40" width="70" height="34" rx="6" style="fill:rgba(239,68,68,.25)"/><text x="18" y="61">5 TESTS</text>
+   <rect x="170" y="40" width="80" height="34" rx="6" style="fill:rgba(148,163,184,.25)"/><text x="178" y="61">generator</text>
+   <path d="M80 50 C120 20,140 20,170 50" style="fill:none;stroke:#ef4444;stroke-width:2.5"/><polygon class="r" points="170,50 160,44 162,54"/>
+   <text x="92" y="22" style="fill:#ef4444">scores steer it</text>
+   <path d="M80 66 C120 96,140 96,170 66" style="fill:none;stroke:#ef4444;stroke-width:2.5"/><polygon class="r" points="170,66 160,62 162,72"/>
+   <text x="84" y="104" style="fill:#ef4444">camera prior fit on VANTAGE-Bench</text></svg>
+  <p>Wins on the 5 tests would be partly memorized.</p></div>
+ <div class="pane good"><b>✅ tests sealed, dev drives the loop</b>
+  <svg viewBox="0 0 260 110">
+   <rect x="10" y="12" width="70" height="30" rx="6" style="fill:rgba(56,189,248,.25)"/><text x="14" y="31">4 dev + sim</text>
+   <rect x="170" y="12" width="80" height="30" rx="6" style="fill:rgba(148,163,184,.25)"/><text x="178" y="31">generator</text>
+   <line x1="80" y1="27" x2="168" y2="27" style="stroke:#10b981;stroke-width:2.5"/><polygon class="g" points="170,27 160,22 160,32"/>
+   <text x="92" y="22" class="m">steers it</text>
+   <rect x="10" y="66" width="70" height="30" rx="6" style="fill:rgba(16,185,129,.2)"/><text x="16" y="85">🔒 5 TESTS</text>
+   <text x="88" y="82">scored once</text><text x="88" y="96" class="m">+ overlap check</text>
+   <text x="170" y="56" class="m">camera prior:</text><text x="170" y="68" class="m">Warehouse-500K</text><text x="170" y="80" class="m">+ mount specs</text></svg>
+  <p>No test score or test image ever reaches the generator.</p></div>
+</div>
+
+<div class="card">
+ <div class="name">🎲 One seed, one backbone<small>8 arms × 1 seed × one 3B model</small></div>
+ <div class="pane bad"><b>❌ a 4-point win inside the noise</b>
+  <svg viewBox="0 0 260 120"><line class="ax" x1="20" y1="100" x2="250" y2="100"/>
+   <rect class="gr" x="60" y="52" width="50" height="48"/><text x="64" y="115" class="m">rival 48</text>
+   <rect class="r" x="150" y="44" width="50" height="56"/><text x="152" y="115" class="m">OURS 52</text>
+   <line x1="85" y1="34" x2="85" y2="70" style="stroke:var(--text);stroke-width:1.5"/><line x1="78" y1="34" x2="92" y2="34" style="stroke:var(--text)"/><line x1="78" y1="70" x2="92" y2="70" style="stroke:var(--text)"/>
+   <line x1="175" y1="26" x2="175" y2="62" style="stroke:var(--text);stroke-width:1.5"/><line x1="168" y1="26" x2="182" y2="26" style="stroke:var(--text)"/><line x1="168" y1="62" x2="182" y2="62" style="stroke:var(--text)"/>
+   <rect x="60" y="34" width="140" height="28" style="fill:rgba(239,68,68,.12)"/><text x="100" y="18" style="fill:#ef4444">error bars overlap</text></svg>
+  <p>±3 points from 1,000 items alone, more from seeds: a 4-point gap proves nothing.</p></div>
+ <div class="pane good"><b>✅ 3 seeds + a second backbone</b>
+  <svg viewBox="0 0 260 120"><line class="ax" x1="20" y1="100" x2="130" y2="100"/>
+   <circle cx="50" cy="60" r="4" class="gr"/><circle cx="56" cy="64" r="4" class="gr"/><circle cx="62" cy="58" r="4" class="gr"/><text x="38" y="115" class="m">rival</text>
+   <circle cx="98" cy="36" r="4" class="g"/><circle cx="104" cy="32" r="4" class="g"/><circle cx="110" cy="38" r="4" class="g"/><text x="90" y="115" class="m">OURS</text>
+   <text x="30" y="18" class="m">3 seeds each</text>
+   <text x="148" y="40">3B rank: 1 2 3 4</text><text x="148" y="60">7B rank: 1 2 4 3</text><text x="148" y="84" style="fill:#10b981;font-weight:700">Spearman ρ = 0.8</text><text x="148" y="100" class="m">ranks hold</text></svg>
+  <p>Report seed spread beside the item CI; claim only margins that survive both.</p></div>
+</div>
+
+<div class="card">
+ <div class="name">🙈 Metric blind to the picture<small>chance: 25% on 4-way MCQ, 5.6% on 18 direction bins</small></div>
+ <div class="pane bad"><b>❌ the question alone almost answers it</b>
+  <svg viewBox="0 0 260 120"><line class="ax" x1="20" y1="100" x2="250" y2="100"/>
+   <line x1="20" y1="75" x2="250" y2="75" style="stroke:#94a3b8;stroke-dasharray:4 3"/><text x="200" y="71" class="m">chance 25</text>
+   <rect class="r" x="50" y="45" width="55" height="55"/><text x="46" y="115" class="m">with image 55</text>
+   <rect class="r" x="150" y="49" width="55" height="51" style="opacity:.6"/><text x="142" y="115" class="m">no image 51</text>
+   <text x="80" y="30" style="fill:#ef4444">the picture adds only 4 points</text></svg>
+  <p>The model is guessing from word habits, not seeing.</p></div>
+ <div class="pane good"><b>✅ blind and shuffled rows for every arm</b>
+  <svg viewBox="0 0 260 120"><line class="ax" x1="20" y1="100" x2="250" y2="100"/>
+   <line x1="20" y1="75" x2="250" y2="75" style="stroke:#94a3b8;stroke-dasharray:4 3"/><text x="200" y="71" class="m">chance 25</text>
+   <rect class="g" x="30" y="45" width="50" height="55"/><text x="24" y="115" class="m">image 55</text>
+   <rect class="gr" x="105" y="73" width="50" height="27"/><text x="100" y="115" class="m">no image 27</text>
+   <rect class="gr" x="180" y="72" width="50" height="28"/><text x="172" y="115" class="m">shuffled 28</text>
+   <text x="44" y="30" style="fill:#10b981">the picture adds 28 points</text></svg>
+  <p>Twin pairs cap a picture-blind model at 25% on SpatialGym-Bench.</p></div>
+</div>
+
+<div class="card">
+ <div class="name">💡 Novelty asserted, not measured<small>"rivals are eye level" was taken from papers</small></div>
+ <div class="pane bad"><b>❌ a sentence, no measurement</b>
+  <svg viewBox="0 0 260 110">
+   <text x="14" y="30">"rivals shoot at eye level"</text><text x="14" y="50">"no model can memorize it"</text><text x="14" y="70">"RL-native rival: untrained"</text>
+   <text x="14" y="98" style="fill:#ef4444">3 claims, 0 numbers</text></svg>
+  <p>Reviewers discount claims the paper never measures.</p></div>
+ <div class="pane good"><b>✅ camera height, measured for every set</b>
+  <svg viewBox="0 0 260 120"><line class="ax" x1="20" y1="96" x2="250" y2="96"/>
+   <rect class="gr" x="30" y="50" width="16" height="46"/><rect class="gr" x="48" y="30" width="16" height="66"/><rect class="gr" x="66" y="62" width="16" height="34"/>
+   <text x="24" y="110" class="m">rivals 4 to 6 ft</text>
+   <rect class="g" x="150" y="62" width="16" height="34"/><rect class="g" x="168" y="44" width="16" height="52"/><rect class="g" x="186" y="52" width="16" height="44"/><rect class="g" x="204" y="68" width="16" height="28"/>
+   <text x="150" y="110" class="m">OURS 8 to 20 ft</text>
+   <text x="24" y="16" class="m">+ SpaceR-151k trained as the 7th column</text><text x="24" y="28" class="m">+ seen vs held-out gap, chance lines</text></svg>
+  <p>One histogram replaces the sentence; SpaceR-151k faces OURS under the same recipe.</p></div>
+</div>
+
+</div>

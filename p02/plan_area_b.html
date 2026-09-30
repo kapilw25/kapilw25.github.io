@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan B: humanoid warehouse, benchmark plus dataset</title><script>(function(){var t=null;try{t=localStorage.getItem('planpage:theme')}catch(e){}if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)t='light';if(t==='light')document.documentElement.setAttribute('data-theme','light');})();</script><style>:root{--bg:#0b1220;--panel:#111a2e;--line:#26324d;--text:#e6edf7;--muted:#9fb0c8;--acc:#38bdf8;--plan:#f59e0b;--ok:#34d399;
+  --code:#0f172a;--pre-text:#dbe4f3;--link:#93c5fd;--sel-text:#0b1220;--chip:#1e293b;--drawer:#0f172a;--row-alt:rgba(255,255,255,.02);--img-bg:#000;--shadow:rgba(0,0,0,.6)}
+:root[data-theme="light"]{--bg:#f6f8fb;--panel:#ffffff;--line:#d7deea;--text:#0f172a;--muted:#55627a;--acc:#0284c7;--plan:#d97706;--ok:#059669;
+  --code:#eef2f7;--pre-text:#1e293b;--link:#1d4ed8;--sel-text:#ffffff;--chip:#e2e8f0;--drawer:#ffffff;--row-alt:rgba(15,23,42,.03);--img-bg:#e5e7eb;--shadow:rgba(15,23,42,.18)}
+html{color-scheme:dark}:root[data-theme="light"]{color-scheme:light}
+html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1500px;margin:0 auto;padding:1rem 1.2rem 3rem}
+header{position:relative;padding-right:6.6rem}
+header h1{font-size:1.25rem;margin:.2rem 0 .4rem}
+header .pre ul{margin:.3rem 0 .2rem;padding-left:1.15rem}header .pre li{margin:.2rem 0;color:var(--text)}
+.tools{position:absolute;right:0;top:.1rem;display:flex;gap:.4rem}
+.bell,.theme{position:relative;font:inherit;font-size:1.25rem;line-height:1;background:var(--panel);border:1px solid var(--line);border-radius:.6rem;padding:.4rem .55rem;cursor:pointer;color:var(--text)}
+.bell:hover,.theme:hover{border-color:#64748b}.bell[aria-expanded=true]{background:var(--acc);border-color:var(--acc)}
+.badge{position:absolute;top:-.4rem;right:-.4rem;min-width:1.15rem;height:1.15rem;padding:0 .3rem;border-radius:.6rem;background:#ef4444;color:#fff;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.badge[hidden]{display:none}
+.drawer{position:absolute;right:0;top:2.6rem;z-index:20;width:min(30rem,92vw);max-height:70vh;overflow:auto;background:var(--drawer);border:1px solid var(--line);border-radius:.7rem;box-shadow:0 14px 40px var(--shadow);font-size:.86rem}
+.drawer[hidden]{display:none}
+.dhead{display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--drawer)}
+.dhead .muted{color:var(--muted);font-size:.78rem;flex:1}
+.mark{font:inherit;font-size:.74rem;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:.4rem;padding:.15rem .5rem;cursor:pointer}.mark:hover{color:var(--text)}
+.dlist{list-style:none;margin:0;padding:.2rem 0}
+.dlist li{display:grid;grid-template-columns:5.6rem 1fr;gap:.5rem;padding:.55rem .8rem;border-bottom:1px solid rgba(38,50,77,.6);align-items:start}
+.dlist li .dot{width:.5rem;height:.5rem;border-radius:50%;background:var(--acc);margin-top:.4rem;visibility:hidden}
+.dlist li.unread .dot{visibility:visible}.dlist li.unread{background:rgba(56,189,248,.06)}
+.dlist li .when{color:var(--muted);font-size:.74rem;font-variant-numeric:tabular-nums;margin-top:.1rem}
+.dlist li[data-date=open] .when{color:var(--plan);font-weight:700}
+header .pre{color:var(--muted);font-size:.9rem}header .pre p{margin:.3rem 0}
+header .pre blockquote{margin:.5rem 0;padding:.5rem .8rem;border-left:3px solid var(--ok);background:var(--panel);color:var(--text);border-radius:.4rem}
+.navs{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-bottom:.3rem}
+nav.tabs{display:flex;flex-wrap:wrap;gap:.35rem;padding:.5rem 0 .2rem}
+nav.tabs.lvl1 button{font-size:.95rem;padding:.45rem .9rem;font-weight:600}
+nav.tabs.lvl2{padding-left:.6rem;border-left:2px solid var(--line);margin-left:.2rem}
+nav.tabs.lvl3{padding-left:1.4rem;border-left:2px dashed var(--line);margin-left:.2rem}
+nav.tabs.lvl3 button{font-size:.8rem;padding:.25rem .55rem}
+nav.tabs[data-parent]{display:none}nav.tabs[data-parent].active{display:flex}
+nav.tabs button{font:inherit;font-size:.86rem;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:.5rem;padding:.35rem .7rem;cursor:pointer}
+nav.tabs button:hover{color:var(--text)}nav.tabs button[aria-selected=true]{color:var(--sel-text);background:var(--acc);border-color:var(--acc);font-weight:600}
+.panel{display:none;padding-top:1rem}.panel.active{display:block}
+.panel h2{font-size:1.15rem;margin:.2rem 0 .8rem}.panel h3{font-size:1.02rem;margin:1.2rem 0 .5rem}
+pre{background:var(--code);border:1px solid var(--line);border-radius:.6rem;padding:.8rem 1rem;overflow:auto;font:12.5px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--pre-text)}
+code{font:.92em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--code);padding:.05rem .3rem;border-radius:.3rem}
+.tablewrap{overflow:auto;margin:.6rem 0}
+table{border-collapse:collapse;font-size:.88rem;min-width:100%}
+th,td{border:1px solid var(--line);padding:.4rem .55rem;vertical-align:top;text-align:left}
+th{background:var(--panel);position:sticky;top:0}
+tbody tr:nth-child(even){background:var(--row-alt)}
+blockquote{margin:.6rem 0;padding:.5rem .8rem;border-left:3px solid var(--ok);background:var(--panel);border-radius:.4rem}
+.lede,.note{color:var(--muted);font-size:.9rem}
+.rival{margin:1.2rem 0 1.6rem}.rival h3 small{display:block;color:var(--muted);font-weight:400;font-size:.82rem;margin-top:.15rem}
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.7rem}
+figure.q{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:.6rem;overflow:hidden;display:flex;flex-direction:column}
+figure.q img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--img-bg)}
+figure.q.figure img{object-fit:contain;background:var(--code)}
+figure.q figcaption{padding:.45rem .55rem;font-size:.78rem;line-height:1.35}
+figure.q .prov{color:var(--muted);font-size:.72rem;margin-top:.3rem}
+figure.q .tag{display:inline-block;font-size:.68rem;padding:0 .35rem;border-radius:.3rem;background:var(--chip);color:var(--muted)}
+figure.q > div{position:relative}
+figure.q .pair{display:grid;grid-template-columns:1fr 1fr}figure.q .pair img{aspect-ratio:1/1}
+figure.q .dtag{position:absolute;left:.35rem;top:.35rem;font-size:.62rem;background:rgba(15,23,42,.85);color:#e6edf7;border-radius:.3rem;padding:0 .3rem}
+.nomedia{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.8rem;background:var(--code);text-align:center;padding:.5rem}
+.empty{grid-column:1/-1;color:var(--muted);font-size:.88rem;padding:.6rem;border:1px dashed var(--line);border-radius:.6rem}
+.ours figure.q.blank{border:1.5px dashed var(--plan);background:transparent}
+.ours .ph{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;position:relative;background:repeating-linear-gradient(45deg,rgba(245,158,11,.06) 0 10px,transparent 10px 20px)}
+.ours .ico{font-size:2.4rem}.ours .planned{position:absolute;right:.4rem;top:.4rem;font-size:.66rem;background:var(--plan);color:#fff;border-radius:.4rem;padding:0 .35rem;font-weight:700}
+footer{color:var(--muted);font-size:.78rem;margin-top:2rem;border-top:1px solid var(--line);padding-top:.6rem}
+
+td.home-col,th.home-col{border-left:4px double var(--muted);background:rgba(148,163,184,.10);color:var(--muted)}
+td.home-col.ours-home{background:rgba(148,163,184,.22);font-style:italic}
+</style></head>
+<body><div class="wrap">
+<header><div class="tools"><button class="theme" id="theme" aria-label="switch between dark and light" title="dark or light">🌙</button><button class="bell" id="bell" aria-label="decisions log" aria-expanded="false">🔔<span class="badge" id="badge" hidden></span></button></div>
+<div class="drawer" id="drawer" hidden><div class="dhead"><b>🔔 Decisions log</b><span class="muted" id="dcount"></span></div>
+<ol class="dlist"><li data-date="open"><span class="when">open</span><div>🏷️ Name of the benchmark and dataset still to be chosen.</div></li><li data-date="open"><span class="when">open</span><div>🎛️ Final factor list (12 to 15) and the v0 subset (6 factors, 20 tasks) to be fixed.</div></li><li data-date="2026-09-24"><span class="when">2026-09-24</span><div>🧑‍⚖️ Subjective secondary score: a frozen closed-model rubric judge (Gemini Robotics-ER or GPT-4o, 0 to 5 task progress), validated once on about 300 human-labelled clips; predicates and subtask progress stay the headline.</div></li><li data-date="2026-09-24"><span class="when">2026-09-24</span><div>🧾 Sources added: RoboWorld [S14] and FailBench [S15]; rival scoring facts in rl_env_subjective_rewards.md (lab notes, private).</div></li><li data-date="2026-09-24"><span class="when">2026-09-24</span><div>🗂️ Page built by the shared builder with a qualitative grid of verified samples from the six rival sets.</div></li><li data-date="2026-09-21"><span class="when">2026-09-21</span><div>🤖 Embodiment: Unitree G1 humanoid in SimReady warehouses.</div></li><li data-date="2026-09-21"><span class="when">2026-09-21</span><div>🚫 Real-world check: none in v0, stated as a limitation; a RoboArena partner is the v1 option.</div></li><li data-date="2026-09-21"><span class="when">2026-09-21</span><div>🧠 Base policy for every column: GR00T N1.x through the Arena client.</div></li><li data-date="2026-09-21"><span class="when">2026-09-21</span><div>🌙 Improvement loop: nightly agent loop on the dev split with an owner-edited <code>program.md</code>.</div></li><li data-date="2026-09-21"><span class="when">2026-09-21</span><div>🔁 Benchmark-plus-dataset project (option C) replaces the narrowed two-dimension LIBERO-PRO plan, which stays as a Franka external check (Plan 01 (lab notes, private) records both).</div></li></ol></div>
+<h1>Plan B: a humanoid that walks and carries in a warehouse, tested where every tabletop benchmark stops</h1><div class="pre"><ul>
+<li>🎥 <strong>The gap.</strong> Every 2024 to 2026 generalization test is a tabletop Franka; nobody ships a test plus a training set for a humanoid that walks and manipulates in an industrial scene.</li>
+<li>📉 <strong>The stakes.</strong> Policies at 97 to 98 percent on LIBERO fall to 0.0 on LIBERO-PRO and to 28 percent on RoboLab; the standard suites no longer separate methods.</li>
+<li>🏭 <strong>The move.</strong> One Isaac Lab-Arena generator puts a Unitree G1 in SimReady warehouses: pick, walk, place chains under 12 to 15 factors with held-out levels and compositions, typed twins, labelled failures, per-step progress, exposed as an RL environment with a frozen rubric judge as the secondary score.</li>
+<li>🎯 <strong>The bet, pre-registered.</strong> GR00T N1.x co-trained on each of six rival sets against OURS under one recipe; the home-game win counts only on held-out levels and compositions, backed by external Franka checks we do not own. A hypothesis until the score table has numbers.</li>
+</ul>
+</div></header>
+<div class="navs"><nav class="tabs lvl1" role="tablist"><button role="tab" data-node="qualitative" data-leaf="qualitative" aria-selected="false">🔍 Qualitative</button><button role="tab" data-node="landscape" data-leaf="landscape" aria-selected="false">🗺️ Landscape</button><button role="tab" data-node="build-list" data-leaf="build-list" aria-selected="false">🧱 Build list</button><button role="tab" data-node="pipeline" data-leaf="pipeline" aria-selected="false">🏭 Pipeline</button><button role="tab" data-node="reverse-eng" data-leaf="reverse-eng" aria-selected="false">🔁 Reverse eng.</button><button role="tab" data-node="recipe" data-leaf="recipe" aria-selected="false">🧾 Recipe</button><button role="tab" data-node="risks" data-leaf="risks" aria-selected="false">⛔ Risks</button><button role="tab" data-node="first-steps" data-leaf="first-steps" aria-selected="false">🗺️ First steps</button><button role="tab" data-node="sources" data-leaf="sources" aria-selected="false">📚 Sources</button></nav></div>
+<section class="panel" id="tab-qualitative" role="tabpanel">
+  <p class="lede">What each rival training set actually looks like, from verified samples only: 🗃️ frames pulled from the repos' own LeRobot videos or viewer rows and 📄 example figures from the arXiv HTML of each paper or the project README, each with its source. Nothing here is generated or described from memory; a dataset with no verified sample says so. Fetched 2026-09-30.</p>
+  
+  <section class="rival">
+    <h3>🥊 GR00T-X-Embodiment-Sim (NVIDIA) <small>🟦 RoboCasa kitchens and Isaac scenes; GR1 tabletop plus 102 G1 loco-manipulation trajectories · about 240k GR1 demos plus G1 set · <a href="https://arxiv.org/abs/2503.14734" target="_blank" rel="noopener">paper</a> · <a href="https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim" target="_blank" rel="noopener">card</a></small></h3>
+    <p class="note">🗃️ two frames from one G1 loco-manipulation episode (pick up the apple, walk left, place it) in the LeRobot repo's own mp4; the GR00T N1 paper's simulation-tasks figure shows the GR1 tabletop part</p>
+    <div class="qgrid">
+      <figure class="q row">
+        <div class=""><a href="assets/qual/groot_x_sim/row_77_110.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/groot_x_sim/row_77_110.jpg" alt=""></a></div>
+        <figcaption><span class="tag">G1</span> pick up the apple, walk left, and place the apple on the plate
+          <div class="prov">🗃️ dataset row · nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim episode 77 t=2.196s observation.images.ego_view · <a href="https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim/resolve/main/unitree_g1.LMPnPAppleToPlateDC/videos/chunk-000/observation.images.ego_view/episode_000077.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q row">
+        <div class=""><a href="assets/qual/groot_x_sim/row_77_439.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/groot_x_sim/row_77_439.jpg" alt=""></a></div>
+        <figcaption><span class="tag">G1</span> pick up the apple, walk left, and place the apple on the plate
+          <div class="prov">🗃️ dataset row · nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim episode 77 t=8.784s observation.images.ego_view · <a href="https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim/resolve/main/unitree_g1.LMPnPAppleToPlateDC/videos/chunk-000/observation.images.ego_view/episode_000077.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure></div>
+  </section>
+
+  <section class="rival">
+    <h3>🥊 Arena G1 sets (NVIDIA) <small>🟦 Isaac Lab-Arena, Unitree G1, two tasks · 50 and 200 demos · <a href="https://github.com/isaac-sim/IsaacLab-Arena" target="_blank" rel="noopener">paper</a> · <a href="https://huggingface.co/nvidia" target="_blank" rel="noopener">card</a></small></h3>
+    <p class="note">🗃️ frames from both public Arena G1 sets (loco-manipulation box to bin, static apple to plate); the README carries only badges, so the task renders come from the repository's docs images (Git LFS)</p>
+    <div class="qgrid">
+      <figure class="q row">
+        <div class=""><a href="assets/qual/arena_g1/row_loco_15_176.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/arena_g1/row_loco_15_176.jpg" alt=""></a></div>
+        <figcaption><span class="tag">G1</span> Pick up the brown box from the shelf, and place it into the blue bin on the table located at the right of the shelf.
+          <div class="prov">🗃️ dataset row · nvidia/Arena-G1-Loco-Manipulation-Task episode 15 t=3.52s observation.images.ego_view · <a href="https://huggingface.co/datasets/nvidia/Arena-G1-Loco-Manipulation-Task/resolve/main/lerobot/videos/chunk-000/observation.images.ego_view/episode_000015.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q row">
+        <div class=""><a href="assets/qual/arena_g1/row_loco_15_704.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/arena_g1/row_loco_15_704.jpg" alt=""></a></div>
+        <figcaption><span class="tag">G1</span> Pick up the brown box from the shelf, and place it into the blue bin on the table located at the right of the shelf.
+          <div class="prov">🗃️ dataset row · nvidia/Arena-G1-Loco-Manipulation-Task episode 15 t=14.08s observation.images.ego_view · <a href="https://huggingface.co/datasets/nvidia/Arena-G1-Loco-Manipulation-Task/resolve/main/lerobot/videos/chunk-000/observation.images.ego_view/episode_000015.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q row">
+        <div class=""><a href="assets/qual/arena_g1/row_static_97_23.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/arena_g1/row_static_97_23.jpg" alt=""></a></div>
+        <figcaption><span class="tag">G1</span> Pick up the apple from the shelf and place it onto the plate on the same shelf next to it.
+          <div class="prov">🗃️ dataset row · nvidia/Arena-G1-Static-PickNPlace-Task episode 97 t=0.452s observation.images.ego_view · <a href="https://huggingface.co/datasets/nvidia/Arena-G1-Static-PickNPlace-Task/resolve/main/lerobot/videos/chunk-000/observation.images.ego_view/episode_000097.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q row">
+        <div class=""><a href="assets/qual/arena_g1/row_static_97_90.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/arena_g1/row_static_97_90.jpg" alt=""></a></div>
+        <figcaption><span class="tag">G1</span> Pick up the apple from the shelf and place it onto the plate on the same shelf next to it.
+          <div class="prov">🗃️ dataset row · nvidia/Arena-G1-Static-PickNPlace-Task episode 97 t=1.808s observation.images.ego_view · <a href="https://huggingface.co/datasets/nvidia/Arena-G1-Static-PickNPlace-Task/resolve/main/lerobot/videos/chunk-000/observation.images.ego_view/episode_000097.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q figure">
+        <div class=""><a href="assets/qual/arena_g1/fig_1.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/arena_g1/fig_1.png" alt=""></a></div>
+        <figcaption>Repository documentation image docs/images/g1_locomanip_pick_and_place_task_view.png (Unitree G1 loco-manipulation pick-and-place task view); not referenced from README.md, which carries only shields.io badges. File is s
+          <div class="prov">📄 paper figure · Isaac Lab-Arena unnumbered · <a href="https://github.com/isaac-sim/IsaacLab-Arena" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q figure">
+        <div class=""><a href="assets/qual/arena_g1/fig_2.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/arena_g1/fig_2.png" alt=""></a></div>
+        <figcaption>Repository documentation image docs/images/gr1_open_microwave_task_view.png (Fourier GR1 open-microwave task view); not referenced from README.md, which carries only shields.io badges. File is stored in Git LFS; fetched 
+          <div class="prov">📄 paper figure · Isaac Lab-Arena unnumbered · <a href="https://github.com/isaac-sim/IsaacLab-Arena" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q figure">
+        <div class=""><a href="assets/qual/arena_g1/fig_3.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/arena_g1/fig_3.png" alt=""></a></div>
+        <figcaption>Repository documentation image docs/images/franka_kitchen.png (Franka arm in an Arena kitchen scene); not referenced from README.md, which carries only shields.io badges. File is stored in Git LFS; fetched through media.
+          <div class="prov">📄 paper figure · Isaac Lab-Arena unnumbered · <a href="https://github.com/isaac-sim/IsaacLab-Arena" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure></div>
+  </section>
+
+  <section class="rival">
+    <h3>🥊 LIBERO-Plus-20K <small>🟦 robosuite Franka tabletop, 7 perturbation dimensions · 20k perturbed trajectories · <a href="https://arxiv.org/abs/2510.13626" target="_blank" rel="noopener">paper</a></small></h3>
+    <p class="note">🖼️ the released trajectories are RLDS and HDF5 files with no video, so the dataset-card teaser and the paper's perturbation renders stand in; no single-episode frame is shown</p>
+    <div class="qgrid">
+      <figure class="q figure">
+        <div class=""><a href="assets/qual/libero_plus_20k/figure_card_libero-plus.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/libero_plus_20k/figure_card_libero-plus.png" alt=""></a></div>
+        <figcaption>Dataset-card teaser figure (3660x1550 PNG, 2,774,457 B, HTTP 200), NOT a trajectory frame. The repo holds only assets.zip (6,395,849,578 B: new objects, textures, scenes for the perturbed benchmark) plus this figure; no 
+          <div class="prov">🖼️ card or README figure · Sylvest/LIBERO-plus card or page figure · <a href="https://huggingface.co/datasets/Sylvest/LIBERO-plus/resolve/main/static/images/libero-plus.png" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure></div>
+  </section>
+
+  <section class="rival">
+    <h3>🥊 RoboCasa <small>🟦 120 kitchen layouts, 2,500 objects, mobile Franka · human demos plus MimicGen expansion · <a href="https://arxiv.org/abs/2406.02523" target="_blank" rel="noopener">paper</a> · <a href="https://robocasa.ai" target="_blank" rel="noopener">card</a></small></h3>
+    <p class="note">🗃️ frames from a third-party LeRobot re-export of the official demos (infope/robocasa) plus the project-page showcase clip; the GitHub README header and paper figures show scene variety; NVIDIA's RoboCasa-Cosmos-Policy mirror is text-only here</p>
+    <div class="qgrid">
+      <figure class="q row">
+        <div class=""><a href="assets/qual/robocasa/row_0_46.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/robocasa/row_0_46.jpg" alt=""></a></div>
+        <figcaption><span class="tag">PandaOmron</span> Pick the cereal from the counter and place it in the cabinet.
+          <div class="prov">🗃️ dataset row · infope/robocasa episode 0 t=2.32s observation.images.robot0_agentview_left · <a href="https://huggingface.co/datasets/infope/robocasa/resolve/main/pretrain_atomic/PickPlaceCounterToCabinet/lerobot/videos/chunk-000/observation.images.robot0_agentview_left/episode_000000.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q row">
+        <div class=""><a href="assets/qual/robocasa/row_0_186.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/robocasa/row_0_186.jpg" alt=""></a></div>
+        <figcaption><span class="tag">PandaOmron</span> Pick the cereal from the counter and place it in the cabinet.
+          <div class="prov">🗃️ dataset row · infope/robocasa episode 0 t=9.28s observation.images.robot0_agentview_left · <a href="https://huggingface.co/datasets/infope/robocasa/resolve/main/pretrain_atomic/PickPlaceCounterToCabinet/lerobot/videos/chunk-000/observation.images.robot0_agentview_left/episode_000000.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q figure">
+        <div class=""><a href="assets/qual/robocasa/projectpage_pnp_36.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/robocasa/projectpage_pnp_36.jpg" alt=""></a></div>
+        <figcaption>Frame at 20 percent (frame 36 of 181) of the project-page showcase clip under the Pick and Place basic-skill heading (1920x1080, 30 fps, 6.03 s, 613,427 B, HTTP 200, video deleted). A rendered demo, not a training row; r
+          <div class="prov">🖼️ card or README figure · https://robocasa.ai card or page figure · <a href="https://robocasa.ai/assets/videos/basic_skills/pnp.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q figure">
+        <div class=""><a href="assets/qual/robocasa/projectpage_pnp_145.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/robocasa/projectpage_pnp_145.jpg" alt=""></a></div>
+        <figcaption>Frame at 80 percent (frame 145 of 181) of the same project-page clip; see the 20 percent entry.
+          <div class="prov">🖼️ card or README figure · https://robocasa.ai card or page figure · <a href="https://robocasa.ai/assets/videos/basic_skills/pnp.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q figure">
+        <div class=""><a href="assets/qual/robocasa/figure_github_readme.webp" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/robocasa/figure_github_readme.webp" alt=""></a></div>
+        <figcaption>Header figure of the robocasa GitHub README (5973x3183 WEBP, 3,439,390 B, HTTP 200). A figure, not a frame.
+          <div class="prov">🖼️ card or README figure · https://github.com/robocasa/robocasa card or page figure · <a href="https://raw.githubusercontent.com/robocasa/robocasa/main/docs/images/readme.webp" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure></div>
+  </section>
+
+  <section class="rival">
+    <h3>🥊 LIBERO-90 <small>🟦 robosuite Franka, fixed scenes, one camera · 4,500 human demos · <a href="https://arxiv.org/abs/2306.03310" target="_blank" rel="noopener">paper</a></small></h3>
+    <p class="note">🗃️ frames (agent view and wrist camera) from a LeRobot-format mirror of LIBERO; the paper figures show the task suites</p>
+    <div class="qgrid">
+      <figure class="q row">
+        <div class=""><a href="assets/qual/libero_90/row_0_32.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/libero_90/row_0_32.jpg" alt=""></a></div>
+        <figcaption><span class="tag">Franka</span> pick up the book and place it in the right compartment of the caddy
+          <div class="prov">🗃️ dataset row · IPEC-COMMUNITY/libero_90_no_noops_lerobot episode 0 t=1.61s observation.images.image · <a href="https://huggingface.co/datasets/IPEC-COMMUNITY/libero_90_no_noops_lerobot/resolve/main/videos/chunk-000/observation.images.image/episode_000000.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q row">
+        <div class=""><a href="assets/qual/libero_90/row_0_129.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/libero_90/row_0_129.jpg" alt=""></a></div>
+        <figcaption><span class="tag">Franka</span> pick up the book and place it in the right compartment of the caddy
+          <div class="prov">🗃️ dataset row · IPEC-COMMUNITY/libero_90_no_noops_lerobot episode 0 t=6.44s observation.images.image · <a href="https://huggingface.co/datasets/IPEC-COMMUNITY/libero_90_no_noops_lerobot/resolve/main/videos/chunk-000/observation.images.image/episode_000000.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q row">
+        <div class=""><a href="assets/qual/libero_90/row_0_32_wrist.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/libero_90/row_0_32_wrist.jpg" alt=""></a></div>
+        <figcaption><span class="tag">Franka</span> pick up the book and place it in the right compartment of the caddy
+          <div class="prov">🗃️ dataset row · IPEC-COMMUNITY/libero_90_no_noops_lerobot episode 0 t=1.61s observation.images.wrist_image · <a href="https://huggingface.co/datasets/IPEC-COMMUNITY/libero_90_no_noops_lerobot/resolve/main/videos/chunk-000/observation.images.wrist_image/episode_000000.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure>
+      <figure class="q row">
+        <div class=""><a href="assets/qual/libero_90/row_0_129_wrist.jpg" target="_blank" rel="noopener"><img loading="lazy" src="assets/qual/libero_90/row_0_129_wrist.jpg" alt=""></a></div>
+        <figcaption><span class="tag">Franka</span> pick up the book and place it in the right compartment of the caddy
+          <div class="prov">🗃️ dataset row · IPEC-COMMUNITY/libero_90_no_noops_lerobot episode 0 t=6.44s observation.images.wrist_image · <a href="https://huggingface.co/datasets/IPEC-COMMUNITY/libero_90_no_noops_lerobot/resolve/main/videos/chunk-000/observation.images.wrist_image/episode_000000.mp4" target="_blank" rel="noopener">source</a></div>
+        </figcaption>
+      </figure></div>
+  </section>
+
+  <section class="rival">
+    <h3>🥊 MimicGen released sets <small>🟦 robosuite and other sims, Franka and more · generated demos across tasks · <a href="https://arxiv.org/abs/2310.17596" target="_blank" rel="noopener">paper</a> · <a href="https://huggingface.co/datasets/amandlek/mimicgen_datasets" target="_blank" rel="noopener">card</a></small></h3>
+    <p class="note">🧾 the released sets are HDF5 only (robomimic structure): source 120 human demos, core 26k generated, object 2k, robot 16k across Franka, IIWA, Sawyer, UR5e, large_interpolation; no frames can be pulled without downloading the archives, so paper figures stand in</p>
+    <div class="qgrid"><div class="empty">⏳ no verified samples fetched yet</div></div>
+  </section>
+  
+  <section class="rival ours">
+    <h3>🏁 OURS <small>🟦 Isaac Lab-Arena, Unitree G1 in SimReady warehouses · planned, nothing rendered yet</small></h3>
+    <div class="qgrid">
+      <figure class="q blank">
+        <div class="ph"><span class="ico">🚶</span><span class="planned">planned</span></div>
+        <figcaption><b>pick, walk, place chain</b> G1 lifts a tote from a shelf, walks an aisle past moving workers, places it on a cart; three atomic skills chained</figcaption>
+      </figure>
+      <figure class="q blank">
+        <div class="ph"><span class="ico">🎛️</span><span class="planned">planned</span></div>
+        <figcaption><b>factor levels</b> the same task under changed object colour, scale, mass, layout, distractors, camera, lighting, floor; 12 to 15 factors with held-out levels</figcaption>
+      </figure>
+      <figure class="q blank">
+        <div class="ph"><span class="ico">🧩</span><span class="planned">planned</span></div>
+        <figcaption><b>held-out composition</b> skill orders never generated for training, for example place then walk then pick</figcaption>
+      </figure>
+      <figure class="q blank">
+        <div class="ph"><span class="ico">🔁</span><span class="planned">planned</span></div>
+        <figcaption><b>typed twin</b> the same episode with ONE factor changed, replay-verified; the delta is the label</figcaption>
+      </figure>
+      <figure class="q blank">
+        <div class="ph"><span class="ico">❌</span><span class="planned">planned</span></div>
+        <figcaption><b>failure and recovery episode</b> a dropped tote and the recovery; failures labelled, not filtered out</figcaption>
+      </figure>
+      <figure class="q blank">
+        <div class="ph"><span class="ico">📈</span><span class="planned">planned</span></div>
+        <figcaption><b>per-step progress</b> subtask predicates (grasp, lift, transport, place) fire along the trajectory; dense-reward track</figcaption>
+      </figure>
+      <figure class="q blank">
+        <div class="ph"><span class="ico">🧑‍⚖️</span><span class="planned">planned</span></div>
+        <figcaption><b>rubric judge score</b> a frozen closed-model judge grades 0 to 5 task progress per episode, validated once on about 300 human-labelled clips</figcaption>
+      </figure>
+      <figure class="q blank">
+        <div class="ph"><span class="ico">🎮</span><span class="planned">planned</span></div>
+        <figcaption><b>RL environment</b> success predicates and progress exposed as rewards through the Arena client; GR00T N1.x is the base for every column</figcaption>
+      </figure>
+    </div>
+    <p class="note">🧪 Test split, frozen before training: held-out factor levels and held-out task compositions; the five external checks (LIBERO-PRO open dims, RoboLab-120, REALM factors) stay outside the generator (see the <a href="#tab-build-list">Build list</a> tab).</p>
+  </section>
+  <p class="note">Provenance files: <code>assets/qual/&lt;rival&gt;/provenance_rows.json</code>, <code>provenance_figs.json</code>; reports: <code>ROWS_REPORT.md</code>, <code>FIGS_REPORT.md</code> in the same folder. Images are reproduced for research comparison; each dataset keeps its own licence.</p></section>
+<section class="panel" id="tab-landscape" role="tabpanel"><h2>🗺️ Why a new test is still open (the 2024 to 2026 landscape)</h2><table>
+<thead>
+<tr>
+<th>🏷️ benchmark</th>
+<th>🤖 sim, robot</th>
+<th>🎛️ what it varies</th>
+<th>📦 training data shipped</th>
+<th>🌍 real check</th>
+<th>🔗 arXiv</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🏟️ THE COLOSSEUM</td>
+<td>RLBench, Franka</td>
+<td>20 tasks x 14 axes: colour,<br>texture, size, lighting,<br>distractors, camera; 75% drop<br>when combined</td>
+<td>❌</td>
+<td>❌</td>
+<td><a href="https://arxiv.org/abs/2402.08191">2402.08191</a></td>
+</tr>
+<tr>
+<td>🧱 GemBench</td>
+<td>RLBench, Franka</td>
+<td>16 train / 44 held-out task<br>compositions from 7 primitives</td>
+<td>✅ 16 train tasks</td>
+<td>❌</td>
+<td><a href="https://arxiv.org/abs/2410.01345">2410.01345</a></td>
+</tr>
+<tr>
+<td>🧪 VLABench</td>
+<td>MuJoCo, Franka</td>
+<td>100 tasks, 2,000 assets, tool<br>use, long horizon</td>
+<td>🟡</td>
+<td>❌</td>
+<td><a href="https://arxiv.org/abs/2412.18194">2412.18194</a></td>
+</tr>
+<tr>
+<td>🧠 GenManip</td>
+<td>Isaac Sim, Franka</td>
+<td>LLM scene graphs, 10k assets,<br>200 curated scenarios;<br>end-to-end policies fail on<br>unseen objects and<br>instructions</td>
+<td>🟡 generator</td>
+<td>❌</td>
+<td><a href="https://arxiv.org/abs/2506.10966">2506.10966</a></td>
+</tr>
+<tr>
+<td>➕ LIBERO-Plus</td>
+<td>robosuite, Franka</td>
+<td>7 perturbation dims, 10,030<br>tasks</td>
+<td>✅ 20k trajectories</td>
+<td>❌</td>
+<td><a href="https://arxiv.org/abs/2510.13626">2510.13626</a></td>
+</tr>
+<tr>
+<td>🔒 LIBERO-PRO</td>
+<td>robosuite, Franka</td>
+<td>attributes, placements,<br>instructions, task redesign;<br>90% to 0.0%</td>
+<td>❌</td>
+<td>❌</td>
+<td><a href="https://arxiv.org/abs/2510.03827">2510.03827</a></td>
+</tr>
+<tr>
+<td>🪜 LIBERO-X</td>
+<td>robosuite, Franka</td>
+<td>progressive difficulty over<br>spatial, object, instruction</td>
+<td>✅ teleop set</td>
+<td>❌</td>
+<td><a href="https://arxiv.org/abs/2602.06556">2602.06556</a></td>
+</tr>
+<tr>
+<td>🪞 REALM</td>
+<td>Isaac Sim, DROID Franka</td>
+<td>15 factors, 7 skills, 3,500<br>objects</td>
+<td>❌ (policies trained on DROID)</td>
+<td>✅ 800 real-sim pairs, p &lt;<br>0.001</td>
+<td><a href="https://arxiv.org/abs/2512.19562">2512.19562</a></td>
+</tr>
+<tr>
+<td>🔬 RoboLab</td>
+<td>Isaac Lab-Arena, Franka +<br>Robotiq</td>
+<td>120 pick-and-place tasks,<br>visual, procedural,<br>relational; camera, pose,<br>lighting; pi-0.5 at 28%</td>
+<td>❌</td>
+<td>✅ Spearman 1.0 with RoboArena</td>
+<td><a href="https://arxiv.org/abs/2604.09860">2604.09860</a></td>
+</tr>
+<tr>
+<td>🤝 RoboTwin 2.0</td>
+<td>SAPIEN, bimanual</td>
+<td>50 tasks, 5 randomization<br>axes, 100k demos</td>
+<td>✅</td>
+<td>✅</td>
+<td><a href="https://arxiv.org/abs/2506.18088">2506.18088</a></td>
+</tr>
+<tr>
+<td>🌐 RoboVerse</td>
+<td>many sims, many robots</td>
+<td>unified platform, migrated<br>data, IL and RL benchmarks</td>
+<td>✅</td>
+<td>🟡</td>
+<td><a href="https://arxiv.org/abs/2504.18904">2504.18904</a></td>
+</tr>
+<tr>
+<td>🧾 Benchmark audit</td>
+<td>LIBERO, CALVIN, SimplerEnv</td>
+<td>shortcut solvability, 19.8% of<br>LIBERO gains significant,<br>data-source dependence</td>
+<td>n/a</td>
+<td>n/a</td>
+<td><a href="https://arxiv.org/abs/2606.04233">2606.04233</a></td>
+</tr>
+</tbody></table>
+<p>Legend: ✅ yes / 🟡 partly / ❌ no. Also in the field: Colosseum V2 <a href="https://arxiv.org/abs/2605.27759">2605.27759</a>, RoboDojo sim-and-real <a href="https://arxiv.org/abs/2607.04434">2607.04434</a>, DuoBench bimanual <a href="https://arxiv.org/abs/2606.11901">2606.11901</a>, LIBERO-Occ <a href="https://arxiv.org/abs/2606.10862">2606.10862</a>, LIBERO-Para <a href="https://arxiv.org/abs/2603.28301">2603.28301</a>, AXIS data engine <a href="https://arxiv.org/abs/2607.21588">2607.21588</a>.</p>
+<p>Reading the table: tabletop Franka generalization is crowded, two entries already validate against real robots, and one ships 20k perturbed demos. Nobody ships a generalization test plus a training set for a humanoid that walks and manipulates in industrial scenes. Isaac Lab-Arena already provides the pieces: a Unitree G1 and a Franka, atomic skills (pick, walk, place) chained into long tasks, subtask predicates, sensitivity analysis, thousands of parallel environments, and policy clients for GR00T, pi-0.5 and DreamZero, but no leaderboard and no perturbation benchmark [S1]. NVIDIA&#39;s own Arena G1 sets hold 50 and 200 demos and the GR00T-X set holds 102 G1 loco-manipulation trajectories (notes_01.md (lab notes, private), T1 tier). That is the open slot: the same warehouse and smart-space story as Area A, on a humanoid.</p>
+</section>
+<section class="panel" id="tab-build-list" role="tabpanel"><h2>🧱 What to build</h2><table>
+<thead>
+<tr>
+<th>#</th>
+<th>🧩 piece</th>
+<th>🛠️ what it is</th>
+<th>🔗 builds on</th>
+<th>🏆 why it beats the field</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1️⃣</td>
+<td>test spec</td>
+<td>tasks = pick, walk, place chains in<br>SimReady warehouses; 12 to 15<br>factors (object colour, texture,<br>scale, mass, layout, distractors,<br>camera, lighting, floor, moving<br>people, instruction, robot start);<br>held-out factor levels and held-out<br>task compositions</td>
+<td>COLOSSEUM axes, GemBench<br>compositions, REALM factors, Arena<br>chaining [S1][S2][S3][S4]</td>
+<td>first humanoid loco-manipulation<br>generalization test; compositions<br>never generated in training</td>
+</tr>
+<tr>
+<td>2️⃣</td>
+<td>environments and assets</td>
+<td>Arena env configs on<br>PhysicalAI-SimReady-Warehouse-01,<br>DigitalCousin objects, digital<br>humans as moving agents, camera rigs</td>
+<td>notes_01.md TA tier, Isaac Sim<br>Replicator Agent</td>
+<td>industrial scenes, not tabletops;<br>shared assets with Area A</td>
+</tr>
+<tr>
+<td>3️⃣</td>
+<td>task generator</td>
+<td>skill chaining plus LLM-written<br>scene graphs, kept only if a planner<br>or seed demo executes them</td>
+<td>GenManip ToSG, RoboTwin 2.0 code<br>generation [S5][S6]</td>
+<td>growable, verified by execution</td>
+</tr>
+<tr>
+<td>4️⃣</td>
+<td>data generator</td>
+<td>10 seed demos per task, Isaac Lab<br>Mimic expansion, typed twins per<br>factor with replay verification,<br>failure and recovery episodes,<br>per-step progress from predicates</td>
+<td>MimicGen, Isaac Lab Mimic, RaC,<br>RESample [S7][S8][S9]</td>
+<td>the only humanoid set with twins,<br>failures and progress labels</td>
+</tr>
+<tr>
+<td>5️⃣</td>
+<td>verifier and reward interface</td>
+<td>success predicates, subtask<br>progress, executability, twin<br>consistency, exposed as an RL<br>environment; plus a frozen VLM<br>rubric judge (0 to 5 progress),<br>validated once on about 300<br>human-labelled clips</td>
+<td>Arena predicates, SimpleVLA-RL 0/1<br>reward, RoboWorld rubric judge,<br>FailBench [S1][S10][S14][S15]</td>
+<td>RL track, dense-reward track and<br>the first validated subjective<br>score on one sim test</td>
+</tr>
+<tr>
+<td>6️⃣</td>
+<td>baselines</td>
+<td>GR00T N1.x, pi-0.5, DreamZero<br>through Arena clients; the rival<br>sets co-trained; seeds-only and<br>generator ablations</td>
+<td>Arena policy packages, RoboLab<br>protocol [S1][S3]</td>
+<td>same recipe for every column</td>
+</tr>
+<tr>
+<td>7️⃣</td>
+<td>statistical protocol</td>
+<td>per-episode outcomes, at least 50<br>episodes per task, bootstrap CIs,<br>paired tests, a no-language probe, a<br>resampled-pose check, train-test<br>proximity report</td>
+<td>the benchmark audit [S11]</td>
+<td>answers the four failure modes the<br>audit found in LIBERO, CALVIN and<br>SimplerEnv</td>
+</tr>
+<tr>
+<td>8️⃣</td>
+<td>external checks</td>
+<td>LIBERO-PRO open dims and RoboLab-120<br>for a Franka variant; REALM factors;<br>RoboArena for a real check if a<br>partner exists</td>
+<td>[S3][S4][S12]</td>
+<td>proves the data helps on tests we do<br>not own</td>
+</tr>
+<tr>
+<td>9️⃣</td>
+<td>release</td>
+<td>LeRobot v3, Croissant and RAI<br>metadata, licence, datasheet, eval<br>harness, leaderboard</td>
+<td>NeurIPS E and D requirements (Plan<br>01 (lab notes, private))</td>
+<td>reviewable</td>
+</tr>
+<tr>
+<td>🔟</td>
+<td>improvement loop</td>
+<td><code>program.md</code> + <code>gen_config.yaml</code> +<br>dev split, as in Plan 02 (lab notes, private)</td>
+<td>autoresearch [S13]</td>
+<td>the generator improves against dev<br>failures, never the test</td>
+</tr>
+</tbody></table>
+<p>Legend: 🧩 component / 🛠️ definition / 🏆 differentiator. Order is build order; 1, 2 and 7 need no GPU.</p>
+</section>
+<section class="panel" id="tab-pipeline" role="tabpanel"><h2>🏭 Pipeline: benchmark and dataset from one generator, with held-out splits</h2><pre><code> ASSETS (SimReady warehouse, DigitalCousin objects,      TASK GENERATOR                       FACTOR SPACE (12 to 15 axes)
+ digital humans)                                         +------------------------------+     +------------------------------+
+ +------------------------------+                        | atomic skills: pick, walk,   |     | object colour, texture, scale, |
+ | USD scenes, object library,  |-----------------------&gt;| place; chains; LLM scene     |----&gt;| mass; layout; distractors;     |
+ | camera rigs, agent scripts   |                        | graphs; executability check  |     | camera; lighting; floor; people|
+ +------------------------------+                        +------------------------------+     | in motion; instruction; start  |
+                                                                                              +---------------+--------------+
+                                                                                                              |
+                    +--------------------------- SPLIT BY LEVEL AND BY COMPOSITION -----------------------------+
+                    |                                                                                          |
+                    v                                                                                          v
+   TRAIN side (OURS dataset)                                                              TEST side (the benchmark)
+   +------------------------------------------+                                          +------------------------------------+
+   | 10 seed demos per task (teleop in Arena) |                                          | held-out factor levels (never       |
+   | Isaac Lab Mimic expansion                |                                          |   rendered for training)            |
+   | typed twins per factor, replay-verified  |                                          | held-out task compositions          |
+   | failed + recovery episodes               |                                          | 50+ episodes per task, fixed seeds  |
+   | per-step progress from predicates        |                                          | per-episode logs, CIs, paired tests |
+   | LeRobot v3 + Croissant                   |                                          | no-language probe, pose resample    |
+   +---------------------+--------------------+                                          +------------------+-----------------+
+                         |                                                                                  |
+                         v                                                                                  v
+        recipe R1 for every column (OURS + rivals + ablations):                          leaderboard: success, graded progress,
+        copy demos, then grade own rollouts with the success predicate                    per-factor drop, composition score
+        R2 track: dense progress reward (OURS only, reported separately)                  external checks: LIBERO-PRO open dims,
+                                                                                          RoboLab-120, REALM; RoboArena if real
+</code></pre>
+</section>
+<section class="panel" id="tab-reverse-eng" role="tabpanel"><h2>🔁 Reverse engineering: how each rival could beat OURS on the new test, and the wall</h2><p>Base policy for co-training must handle several bodies (GR00T N1.x or pi-0.5), so every rival set is a transfer source: rival demos plus the same 10 humanoid seed demos per task, then R1.</p>
+<table>
+<thead>
+<tr>
+<th>🏷️ rival</th>
+<th>🎯 best shot on our humanoid test</th>
+<th>⚠️ wall</th>
+<th>🔍 external Franka checks</th>
+<th>🎮 RL track</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🥊 GR00T-X-Embodiment-Sim</td>
+<td>240k GR1 tabletop plus 102 G1<br>loco-manipulation trajectories: the<br>only humanoid data at scale;<br>cross-body transfer of grasp skills</td>
+<td>RoboCasa kitchens, no<br>walking-while-carrying chains in<br>warehouses, no factor variation, no<br>failures</td>
+<td>Franka kitchen subset only</td>
+<td>❌ no progress, no failures</td>
+</tr>
+<tr>
+<td>🥊 Arena G1 sets (NVIDIA)</td>
+<td>same body, same framework, 250 demos</td>
+<td>250 demos, two tasks, no<br>perturbations</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>🥊 LIBERO-Plus-20K</td>
+<td>perturbation coverage on 7 dims may<br>transfer robustness through the<br>shared vision tower</td>
+<td>Franka tabletop, no locomotion, no<br>held-out compositions</td>
+<td>✅ strongest on LIBERO-family tests</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>🥊 RoboCasa</td>
+<td>120 kitchen layouts, 2,500 objects</td>
+<td>mobile Franka, kitchens, no factor<br>levels matched to ours</td>
+<td>🟡</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>🥊 LIBERO-90</td>
+<td>4,500 human demos, many compositions<br>in fixed scenes</td>
+<td>Franka, one camera, one lighting</td>
+<td>🟡</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>🥊 MimicGen released sets</td>
+<td>pose diversity</td>
+<td>Franka, other tasks</td>
+<td>🟡</td>
+<td>❌</td>
+</tr>
+</tbody></table>
+<p>Legend: ✅ strong / 🟡 partial / ❌ none. Honest reading: on the humanoid test OURS wins by construction, and the paper must say so; the held-out levels and compositions, the no-language probe and the external checks are what make that win informative rather than circular. The one rival that can move the test through transfer is GR00T-X, so it stays in the table as the strongest column.</p>
+</section>
+<section class="panel" id="tab-recipe" role="tabpanel"><h2>🧾 Recipe and skeleton</h2><p>R1 for every column: copy demos, then grade own rollouts with the success predicate [0/1 reward, as in SimpleVLA-RL [S10]]; same 10 seeds per task, same steps, same rollout budget. R2 track for OURS only: per-step progress as a dense reward, reported in its own row. Base policy: GR00T N1.x through the Arena client (owner decision), so Franka rival data co-trains with the G1 seeds through its multi-body action heads.</p>
+<!-- md-tables: max_cols=9 max_row=450 -->
+<table>
+<thead>
+<tr>
+<th>group</th>
+<th>test row</th>
+<th>🏁 OURS</th>
+<th>🥊 GR00T-X</th>
+<th>🥊 Arena G1</th>
+<th>🥊 LIBERO-Plus-20K</th>
+<th>🥊 RoboCasa</th>
+<th>🥊 LIBERO-90</th>
+<th>🥊 MimicGen</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Our test, held-out levels</td>
+<td>per-factor success and graded progress (12 to 15<br>rows in the paper)</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Our test, held-out compositions</td>
+<td>success, composition score</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Audit probes</td>
+<td>no-language probe; pose-resample drop</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>External checks (Franka variant)</td>
+<td>LIBERO-PRO attributes and redesign; RoboLab-120</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>RL track</td>
+<td>R2 dense progress vs R1 0/1</td>
+<td>n/a</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Controls</td>
+<td>seeds only; Mimic only; no twins; no failures</td>
+<td>n/a</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>References, not trained here</td>
+<td>REALM and RoboLab published pi-0.5, pi-0-FAST,<br>GR00T numbers</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>Legend: 🏁 OURS / 🥊 rival. Bold the best per row among trained arms once numbers land.</p>
+</section>
+<section class="panel" id="tab-risks" role="tabpanel"><h2>⛔ Risks and limits</h2><table>
+<thead>
+<tr>
+<th>🏷️ risk</th>
+<th>📉 what it costs</th>
+<th>🛡️ answer in the plan</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>home-game critique</td>
+<td>reviewers discount a win on our own test</td>
+<td>held-out levels and compositions never generated for training; audit probes; external checks; ablations that separate generator from novelty</td>
+</tr>
+<tr>
+<td>no real robot</td>
+<td>REALM and RoboLab both validated against real runs</td>
+<td>owner decision for v0: sim only, stated as a limitation; audit probes, held-out levels and the Franka external checks carry the argument; a RoboArena partner is the v1 option</td>
+</tr>
+<tr>
+<td>GR1 instead of G1</td>
+<td>GR00T-X&#39;s 240k GR1 tabletop demos become a near home-game rival</td>
+<td>pick G1, where public data is 352 trajectories in total</td>
+</tr>
+<tr>
+<td>humanoid contact fidelity</td>
+<td>walking-while-carrying is where simulators are weakest</td>
+<td>report per-skill results; keep a Franka variant for external checks</td>
+</tr>
+<tr>
+<td>judge bias</td>
+<td>a VLM judge is fooled by viewpoint and contact; the best of 13 judges reaches 0.77 balanced accuracy on FailBench [S15]</td>
+<td>judge frozen after one validation on held-out human-labelled clips; agreement reported; predicates stay the headline, the judge is secondary</td>
+</tr>
+<tr>
+<td>GPU cost</td>
+<td>Isaac Sim needs RTX-class GPUs; Arena evaluation is parallel but rendering is not free</td>
+<td>budget on the cluster; CPU-only stages first (spec, assets, protocol)</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>benchmark, dataset, harness, leaderboard, metadata</td>
+<td>build order 1 to 10 above; a v0 with 6 factors and 20 tasks is a paper</td>
+</tr>
+</tbody></table>
+<p>Legend: 📉 cost / 🛡️ mitigation. Superseded fallback: the two-dimension LIBERO-PRO plan (object attributes, task redesign) stays valid as a Franka-only external check inside this project.</p>
+</section>
+<section class="panel" id="tab-first-steps" role="tabpanel"><h2>🗺️ First five steps, cheapest first</h2><ol>
+<li>Write the test spec: factors, levels, held-out rule, task list, episode counts, statistics; owner file <code>d01/literature/area_b_test_spec.md</code> (to be created, no GPU).</li>
+<li>Stand up Isaac Lab-Arena with the SimReady warehouse and one G1 pick-walk-place chain; record 10 seed demos; script <code>d01/generate/arena_seed_demos.py</code> (to be created, one RTX GPU).</li>
+<li>Mimic expansion plus twins for two factors (object colour, camera) with replay verification; script <code>d01/generate/twins.py</code> (to be created).</li>
+<li>Evaluate GR00T N1.x zero-shot and after R1 on the v0 test; confirm the test is failed by current policies, otherwise change the factors before building more.</li>
+<li>Add rivals as co-training columns, then the loop from Plan 02 on a dev split of our own factors.</li>
+</ol>
+</section>
+<section class="panel" id="tab-sources" role="tabpanel"><h2>📚 Sources</h2><ul>
+<li>[S1] Isaac Lab-Arena, <a href="https://github.com/isaac-sim/IsaacLab-Arena">github.com/isaac-sim/IsaacLab-Arena</a>: G1 and Franka, atomic skill chaining, subtask predicates, sensitivity analysis, parallel evaluation, GR00T, pi-0.5 and DreamZero clients, no leaderboard.</li>
+<li>[S2] THE COLOSSEUM, arXiv <a href="https://arxiv.org/abs/2402.08191">2402.08191</a>: 20 tasks, 14 axes; distractors, colour and lighting hurt most; 75% drop combined.</li>
+<li>[S3] RoboLab, arXiv <a href="https://arxiv.org/abs/2604.09860">2604.09860</a>: Isaac Lab-Arena, 120 tasks, subtask predicates, graded score, pi-0.5 at 28%, Spearman 1.0 with RoboArena.</li>
+<li>[S4] REALM, arXiv <a href="https://arxiv.org/abs/2512.19562">2512.19562</a>: Isaac Sim, DROID, 15 factors, 7 skills, 3,500 objects, 800 real-sim pairs.</li>
+<li>[S5] GenManip, arXiv <a href="https://arxiv.org/abs/2506.10966">2506.10966</a>. [S6] RoboTwin 2.0, arXiv <a href="https://arxiv.org/abs/2506.18088">2506.18088</a>.</li>
+<li>[S7] MimicGen, arXiv <a href="https://arxiv.org/abs/2310.17596">2310.17596</a>. [S8] RaC, arXiv <a href="https://arxiv.org/abs/2509.07953">2509.07953</a>. [S9] RESample, arXiv <a href="https://arxiv.org/abs/2510.17640">2510.17640</a>.</li>
+<li>[S10] SimpleVLA-RL, arXiv <a href="https://arxiv.org/abs/2509.09674">2509.09674</a>.</li>
+<li>[S11] What Are We Actually Benchmarking in Robot Manipulation?, arXiv <a href="https://arxiv.org/abs/2606.04233">2606.04233</a>: a 90M no-language probe matches LIBERO state of the art; 19.8% of reported LIBERO gains significant; CALVIN pose resampling drops 4.17 to 3.14; 120 scripted demos near the test reach 94.8% on SimplerEnv.</li>
+<li>[S12] RoboArena, arXiv <a href="https://arxiv.org/abs/2506.18123">2506.18123</a>; LIBERO-PRO, arXiv <a href="https://arxiv.org/abs/2510.03827">2510.03827</a>.</li>
+<li>[S13] karpathy/autoresearch, <a href="https://github.com/karpathy/autoresearch">github.com/karpathy/autoresearch</a>.</li>
+<li>[S14] RoboWorld, arXiv <a href="https://arxiv.org/abs/2607.01060">2607.01060</a>: GPT-4o 0 to 5 progress rubric on world-model rollouts, Pearson 0.989 and Spearman 0.970 against the RoboArena leaderboard.</li>
+<li>[S15] FailBench, arXiv <a href="https://arxiv.org/abs/2609.03611">2609.03611</a>: 13 VLM success judges over 2,197 attempts, best 0.77 mean balanced accuracy, near chance on contact-rich assembly. Judge landscape and scoring survey: rl_env_subjective_rewards.md (lab notes, private).</li>
+<li>GemBench <a href="https://arxiv.org/abs/2410.01345">2410.01345</a>, VLABench <a href="https://arxiv.org/abs/2412.18194">2412.18194</a>, LIBERO-Plus <a href="https://arxiv.org/abs/2510.13626">2510.13626</a>, LIBERO-X <a href="https://arxiv.org/abs/2602.06556">2602.06556</a>, RoboVerse <a href="https://arxiv.org/abs/2504.18904">2504.18904</a>, GR00T N1 <a href="https://arxiv.org/abs/2503.14734">2503.14734</a>.</li>
+</ul>
+</section>
+<footer>Built 2026-09-30 from <span class="private-link" title="in the private lab repo">../plans/plan_area_b_humanoid_warehouse.md</span> by <code>shared/docs_builder/build_plan_page.mjs</code> with <code>page_config.json</code>. Rebuild after editing the plan.</footer>
+</div><script>const TREE=[{"id":"qualitative","parent":null,"leaf":true},{"id":"landscape","parent":null,"leaf":true},{"id":"build-list","parent":null,"leaf":true},{"id":"pipeline","parent":null,"leaf":true},{"id":"reverse-eng","parent":null,"leaf":true},{"id":"recipe","parent":null,"leaf":true},{"id":"risks","parent":null,"leaf":true},{"id":"first-steps","parent":null,"leaf":true},{"id":"sources","parent":null,"leaf":true}];const LOG_DATES=["2026-09-24","2026-09-24","2026-09-24","2026-09-21","2026-09-21","2026-09-21","2026-09-21","2026-09-21","open","open"];
+const byId=Object.fromEntries(TREE.map(n=>[n.id,n]));
+const buttons=[...document.querySelectorAll('nav.tabs button')];
+const bars=[...document.querySelectorAll('nav.tabs[data-parent]')];
+const panels=[...document.querySelectorAll('.panel')];
+const leaves=TREE.filter(n=>n.leaf).map(n=>n.id);
+function chain(id){const out=[];let n=byId[id];while(n){out.unshift(n.id);n=n.parent?byId[n.parent]:null;}return out;}
+function activate(leafId,push){
+  if(!byId[leafId]||!byId[leafId].leaf) leafId=leaves[0];
+  const path=chain(leafId);
+  buttons.forEach(b=>b.setAttribute('aria-selected',path.includes(b.dataset.node)));
+  bars.forEach(b=>b.classList.toggle('active',path.includes(b.dataset.parent)));
+  panels.forEach(p=>p.classList.toggle('active',p.id==='tab-'+leafId));
+  if(push)history.replaceState(null,'','#tab-'+leafId);
+}
+buttons.forEach(b=>b.addEventListener('click',()=>activate(b.dataset.leaf,true)));
+document.addEventListener('keydown',e=>{if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;if(e.target.closest('input,textarea'))return;
+  const cur=(location.hash.startsWith('#tab-')?location.hash.slice(5):leaves[0]);const i=Math.max(0,leaves.indexOf(cur));
+  activate(leaves[(i+(e.key==='ArrowRight'?1:leaves.length-1))%leaves.length],true);});
+document.querySelectorAll('.panel table').forEach(t=>{const w=document.createElement('div');w.className='tablewrap';t.parentNode.insertBefore(w,t);w.appendChild(t);});
+document.querySelectorAll('.panel a[href^="http"]').forEach(a=>{a.target='_blank';a.rel='noopener';});
+document.querySelectorAll('a[href^="#tab-"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();activate(a.getAttribute('href').slice(5),true);window.scrollTo(0,0);}));
+window.addEventListener('hashchange',()=>activate(location.hash.replace('#tab-',''),false));
+activate(location.hash.startsWith('#tab-')?location.hash.slice(5):leaves[0],false);
+
+// ---- decisions log drawer: the badge always shows the total number of entries (no browser storage)
+(function(){
+  const bell=document.getElementById('bell'); if(!bell) return;
+  const drawer=document.getElementById('drawer'), badge=document.getElementById('badge'), count=document.getElementById('dcount'), items=[...drawer.querySelectorAll('li')];
+  badge.textContent=items.length>99?'99+':String(items.length); badge.hidden=items.length===0; count.textContent=items.length+' entries, newest first';
+  function toggle(open){drawer.hidden=!open;bell.setAttribute('aria-expanded',String(open));}
+  bell.addEventListener('click',e=>{e.stopPropagation();toggle(drawer.hidden);});
+  drawer.addEventListener('click',e=>e.stopPropagation());
+  document.addEventListener('click',()=>toggle(false));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')toggle(false);});
+})();
+
+// ---- theme switch: dark by default, light if the OS asks or the viewer chose it; the choice stays in this browser
+(function(){
+  const btn=document.getElementById('theme'); if(!btn) return;
+  const root=document.documentElement;
+  const paint=()=>{btn.textContent=root.getAttribute('data-theme')==='light'?'☀️':'🌙';};
+  btn.addEventListener('click',e=>{e.stopPropagation();const light=root.getAttribute('data-theme')!=='light';
+    if(light)root.setAttribute('data-theme','light');else root.removeAttribute('data-theme');
+    try{localStorage.setItem('planpage:theme',light?'light':'dark')}catch(err){} paint();});
+  paint();
+})();
+
+// ---- a column headed SpatialGym-Bench is our home test: divider, grey tint; the OURS row's cell greyed further
+document.querySelectorAll('.panel table').forEach(tb=>{
+  const ths=[...tb.querySelectorAll('thead th')]; const k=ths.findIndex((th,i)=>i>0&&/SpatialGym-Bench/.test(th.textContent)); if(k<0) return;
+  ths[k].classList.add('home-col');
+  tb.querySelectorAll('tbody tr').forEach(tr=>{const td=tr.children[k]; if(!td) return; td.classList.add('home-col'); if(/\(ours\)/i.test(tr.children[0].textContent)) td.classList.add('ours-home');});
+});
+</script></body></html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research Pages</title>
+<style>
+:root{--bg:#f7f7f5;--panel:#fff;--ink:#1d2327;--muted:#5f6b73;--line:#dde2e5;--accent:#2563eb}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;--line:#2c3338;--accent:#7aa7ff}}
+:root[data-theme="dark"]{--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;--line:#2c3338;--accent:#7aa7ff}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:28px 16px}
+h1{font-size:24px;margin:0 0 6px}
+p.sub{color:var(--muted);margin:0 0 20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:0 0 12px}
+.card h2{font-size:17px;margin:0 0 4px}
+.card p{margin:0 0 8px;color:var(--muted)}
+.card a{color:var(--accent);text-decoration:none;margin-right:14px}
+.card a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<main>
+<h1>Research Pages</h1>
+<p class="sub">Plans, scores and surveys for each paper. The code, data and checkpoints stay private until submission.</p>
+<div class="card"><h2>P01 &middot; SpatialGym-100K on SpatialGym-Bench (Plan A)</h2><p>Area A: spatial and physical VQA from simulator-generated data (fixed cameras, warehouses, smart spaces)</p><a href="/p01/plan_area_a.html">SpatialGym-100K on SpatialGym-Bench (Plan A)</a><a href="/p01/rejection_risk_visual.html">rejection_risk_visual</a></div>
+<div class="card"><h2>P02 &middot; Plan B: humanoid warehouse, benchmark plus dataset</h2><p>Area B: humanoid loco-manipulation generalization benchmark plus RL-ready dataset in simulated warehouses</p><a href="/p02/plan_area_b.html">Plan B: humanoid warehouse, benchmark plus dataset</a></div>
+<div class="card"><h2>P03 &middot; Spatial Benchmark Survey</h2><p>SpatialGym-Bench as an agent benchmark: an agent starts at a fixed camera view in a simulated warehouse (Isaac Sim 6.0, SimReady assets), may walk, turn and look up to 10 times on a grid, then answers. Every step it takes (tool outputs, depths, positions, what it believes after each move) is graded against exact simulator state at evaluation time, and twin scenes with one 3D change are scored as pairs.</p><a href="/p03/index.html">Spatial Benchmark Survey</a></div>
+</main>
+</body>
+</html>

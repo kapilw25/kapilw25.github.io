@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spatial Benchmark Survey</title>
+<meta name="description" content="39 spatial-reasoning benchmarks compared on inputs, size, categories, ground truth, step grading and twin pairs.">
+<style>
+:root{--bg:#f7f7f5;--panel:#ffffff;--ink:#1d2327;--muted:#5f6b73;--line:#dde2e5;--head:#eef1f3;--accent:#2563eb;
+--ok-bg:#e3f5e9;--ok:#1a7f3c;--mid-bg:#fdf1d8;--mid:#946200;--no-bg:#eef0f2;--no:#5f6b73;--ours-bg:#e2ecff;--ours:#1d4ed8;
+--sect:#f0f3f6;--hl:#fff7c2;--on-accent:#ffffff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;
+--line:#2c3338;--head:#20262a;--accent:#7aa7ff;--ok-bg:#153322;--ok:#6fd49a;--mid-bg:#3a2d10;--mid:#f0c060;--no-bg:#262c31;
+--no:#9aa5ad;--ours-bg:#1b2b4d;--ours:#9dbcff;--sect:#1d2327;--hl:#4a4212;--on-accent:#0b1220}}
+:root[data-theme="dark"]{--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;--line:#2c3338;--head:#20262a;--accent:#7aa7ff;
+--ok-bg:#153322;--ok:#6fd49a;--mid-bg:#3a2d10;--mid:#f0c060;--no-bg:#262c31;--no:#9aa5ad;--ours-bg:#1b2b4d;--ours:#9dbcff;
+--sect:#1d2327;--hl:#4a4212;--on-accent:#0b1220}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header,.controls,.foot{max-width:1400px;margin:0 auto;padding:0 16px}
+header{padding-top:20px}
+h1{font-size:22px;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 12px;max-width:900px}
+.stats{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.stat b{font-size:16px}
+.controls{display:flex;flex-direction:column;gap:10px;margin-bottom:10px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:4px 10px;cursor:pointer;font:inherit}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.chip small{opacity:.8}
+input[type=search],input.f{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:5px 8px}
+input[type=search]{min-width:220px;flex:1 1 220px;max-width:420px}
+button.plain{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:5px 10px;cursor:pointer}
+details.cols{position:relative}
+details.cols summary{list-style:none;cursor:pointer;border:1px solid var(--line);border-radius:6px;padding:5px 10px;background:var(--panel)}
+details.cols .menu{position:absolute;z-index:5;margin-top:4px;background:var(--panel);border:1px solid var(--line);border-radius:8px;
+padding:8px 12px;display:grid;grid-template-columns:repeat(2,minmax(150px,1fr));gap:4px 16px;box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.count{color:var(--muted)}
+.wrap{overflow:auto;max-height:78vh;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+table{border-collapse:separate;border-spacing:0;min-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}
+thead th{position:sticky;background:var(--head);z-index:2}
+thead tr.h th{top:0;white-space:nowrap}
+thead tr.flt th{top:var(--h1,32px);padding:4px 6px}
+th button.sort{all:unset;cursor:pointer;font-weight:600}
+th button.sort::after{content:" \2195";color:var(--muted);font-weight:400}
+th button.sort[data-dir="asc"]::after{content:" \2191";color:var(--accent)}
+th button.sort[data-dir="desc"]::after{content:" \2193";color:var(--accent)}
+input.f{width:100%;min-width:70px;padding:3px 6px;font-size:12px}
+td.name{font-weight:600;white-space:nowrap;position:sticky;left:0;z-index:1;background:var(--panel);box-shadow:1px 0 0 var(--line)}
+thead th.namecol{left:0;z-index:3;box-shadow:1px 0 0 var(--line)}
+tr.ours td.name{background:var(--ours-bg)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.best{font-weight:700}
+tr.sect td{background:var(--sect);font-weight:700}
+tr.sect td span.lab{position:sticky;left:8px}
+tr.ours td{background:var(--ours-bg)}
+td.links{min-width:118px}
+.links a{display:inline-block;margin:0 4px 2px 0;padding:0 6px;border:1px solid var(--line);border-radius:4px;color:var(--accent);
+text-decoration:none;font-size:12px}
+.links a:hover{border-color:var(--accent)}
+.b{display:inline-block;border-radius:4px;padding:0 6px;font-size:12px;font-weight:600;white-space:nowrap}
+.b.yes{background:var(--ok-bg);color:var(--ok)}.b.partly{background:var(--mid-bg);color:var(--mid)}.b.no{background:var(--no-bg);color:var(--no)}
+.t.no{background:var(--ok-bg);color:var(--ok)}.t.partly{background:var(--mid-bg);color:var(--mid)}.t.ours{background:var(--ours-bg);color:var(--ours)}
+.t.na{background:var(--no-bg);color:var(--no)}
+.note{color:var(--muted);font-size:12px}
+.tag{font-size:11px;border:1px solid var(--accent);color:var(--accent);border-radius:4px;padding:0 4px;margin-left:4px}
+mark{background:var(--hl);color:inherit;padding:0}
+.foot{color:var(--muted);font-size:12px;padding-top:12px;padding-bottom:28px}
+.foot p{margin:4px 0;max-width:1000px}
+.empty{padding:24px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+<h1>Spatial Benchmark Survey</h1>
+<p class="sub">39 spatial-reasoning benchmarks and methods side by side: what the model sees, how many questions and
+categories, where the answers come from, whether the agent moves, whether intermediate steps are graded, and whether
+paired (twin) items are scored together. The SpatialClaw columns are that paper's Table 3 scores on a shared
+Gemma 4-31B backbone.</p>
+<div class="stats" id="stats"></div>
+</header>
+<div class="controls">
+<div class="row" id="chips" role="group" aria-label="Sections"></div>
+<div class="row">
+<input type="search" id="q" placeholder="Search every column" aria-label="Search every column">
+<label><input type="checkbox" id="bygroup" checked> group by section</label>
+<details class="cols"><summary>Columns</summary><div class="menu" id="colmenu"></div></details>
+<button class="plain" id="reset" type="button">Reset</button>
+<span class="count" id="count" aria-live="polite"></span>
+</div>
+</div>
+<div class="wrap"><table id="t"><thead></thead><tbody></tbody></table></div>
+<div class="foot">
+<p><b>How to filter.</b> Click section chips to show or hide a section; type in the box under any header to filter that
+column (numeric columns also take &gt;1000, &lt;500 or 1000-3000); click a header to sort; the address bar keeps the view,
+so a filtered table can be shared as a link.</p>
+<p><b>Legend.</b> Moves: the model can move a camera or act before answering. Steps: intermediate steps are graded against
+ground truth. Twins: matched items are scored as a group. Threat: how close the benchmark comes to the two claims of
+SpatialGym-Bench, (a) every step graded against exact simulator state at evaluation time and (b) twin scenes with one 3D
+change scored as pairs. A dash in a score column means the method cannot take that input (VADAR: single images only).</p>
+<p><b>Sources.</b> Every row comes from a full read of the paper; every link was checked (HTTP 200) on 2026-09-30.
+Counts are the benchmark's test items as stated in its paper; a second number in brackets is the released or corrected
+set. Built 2026-09-30.</p>
+</div>
+<script id="data" type="application/json">{"updated": "2026-09-30", "rows": [{"group": "Single-image spatial", "name": "ERQA", "table1": false, "arxiv": "2503.20020", "page": "", "code": "https://github.com/embodiedreasoning/ERQA", "data": "", "venue": "preprint (Gemini Robotics report)", "input": "1 image (28% several)", "x": "400", "x_num": 400, "yz": "flat: 8", "skills": "spatial relations, trajectory, pointing, multi-view, state", "truth": "real robot photos; hand-labelled", "moves": "no", "steps": "no", "twins": "no", "vadar": 33.3, "pyspatial": 50.8, "spacetools": 52.0, "spatialclaw": 61.3, "threat": "no", "threat_note": "real photos, final answer only"}, {"group": "Single-image spatial", "name": "Omni3D-Bench", "table1": false, "arxiv": "2502.06787", "page": "https://glab-caltech.github.io/vadar/", "code": "https://github.com/damianomarsili/VADAR", "data": "https://huggingface.co/datasets/dmarsili/Omni3D-Bench", "venue": "CVPR 2025", "input": "1 image", "x": "500", "x_num": 500, "yz": "flat (4 answer types)", "skills": "3D size, depth, distance, counting, what-if scale", "truth": "real (Omni3D); answers hand-computed from 3D boxes", "moves": "no", "steps": "no", "twins": "no", "vadar": 44.6, "pyspatial": 50.6, "spacetools": 50.7, "spatialclaw": 54.3, "threat": "partly", "threat_note": "(a): a perfect-tool swap checks the program's logic, not the values it computes"}, {"group": "Single-image spatial", "name": "OmniSpatial", "table1": true, "arxiv": "2506.03135", "page": "https://qizekun.github.io/omnispatial/", "code": "https://github.com/qizekun/OmniSpatial", "data": "https://huggingface.co/datasets/qizekun/OmniSpatial", "venue": "ICLR 2026", "input": "1 image", "x": "1,533", "x_num": 1533, "yz": "4 / 10 / 50", "skills": "motion, perspective, mental rotation, route, geometry", "truth": "real web and exam items; 6 annotators", "moves": "no", "steps": "no", "twins": "no", "vadar": 42.4, "pyspatial": 58.0, "spacetools": 60.4, "spatialclaw": 63.6, "threat": "no", "threat_note": "real photos, human labels, final answer only"}, {"group": "Single-image spatial", "name": "SPBench (SpatialLadder)", "table1": false, "arxiv": "2510.08531", "page": "https://zju-real.github.io/SpatialLadder/", "code": "https://github.com/ZJU-REAL/SpatialLadder", "data": "https://huggingface.co/datasets/hongxingli/SPBench", "venue": "ICLR 2026", "input": "1 image (SI) / several views (MV)", "x": "1,009 + 319", "x_num": 1328, "yz": "flat: 4 + 5", "skills": "distance, size, direction, counting", "truth": "real ScanNet; answers from 3D labels", "moves": "no", "steps": "no", "twins": "no", "vadar": 41.6, "pyspatial": 53.5, "spacetools": 45.1, "spatialclaw": 68.4, "threat": "partly", "threat_note": "(a): sensor-grade 3D truth recoverable via ScanNet, never used to grade steps"}, {"group": "Single-image spatial", "name": "SpatialBench", "table1": false, "arxiv": "2511.21471", "page": "", "code": "https://github.com/XPR2004/SpatialBench", "data": "https://huggingface.co/datasets/XPR2004/SpatialBench", "venue": "preprint (cited by SpatialClaw as SPBench, not run)", "input": "first-person video + LiDAR", "x": "3,193", "x_num": 3193, "yz": "5 levels / 15", "skills": "counting, size, distance, direction, order, planning", "truth": "real; LiDAR point clouds + checked model drafts", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "no", "threat_note": "point clouds not released; final answer only"}, {"group": "Multi-view spatial", "name": "MindCube", "table1": false, "arxiv": "2506.21458", "page": "https://mind-cube.github.io/", "code": "https://github.com/mll-lab-nu/MindCube", "data": "https://huggingface.co/datasets/MLL-Lab/MindCube", "venue": "ICLR 2026", "input": "2-4 views", "x": "21,154 (tiny 1,050)", "x_num": 21154, "yz": "3 settings, 12 labels", "skills": "cognitive map, perspective, what-if moves, occlusion", "truth": "real photos; human labels, template answers", "moves": "no", "steps": "partly", "twins": "partly", "vadar": null, "pyspatial": 67.1, "spacetools": 52.9, "spatialclaw": 72.8, "threat": "partly", "threat_note": "(a) the model's map is graded against a coarse human-label grid in a method study; (b) colour or count pairs in an appendix"}, {"group": "Multi-view spatial", "name": "MMSI-Bench", "table1": true, "arxiv": "2505.23764", "page": "https://runsenxu.com/projects/MMSI_Bench", "code": "https://github.com/OpenRobotLab/MMSI-Bench", "data": "https://huggingface.co/datasets/RunsenXu/MMSI-Bench", "venue": "ICLR 2026", "input": "2-10 images", "x": "1,000", "x_num": 1000, "yz": "4 / 11", "skills": "camera-object relations, measuring, motion, multi-step", "truth": "real; written by 6 researchers", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": 33.2, "spacetools": 33.1, "spatialclaw": 51.3, "threat": "no", "threat_note": "reasoning check is a text judge, used for diagnosis only"}, {"group": "Multi-view spatial", "name": "SPAR-Bench", "table1": false, "arxiv": "2503.22976", "page": "https://logosroboticsgroup.github.io/SPAR/", "code": "https://github.com/LogosRoboticsGroup/SPAR", "data": "https://huggingface.co/datasets/jasonzhango/SPAR-Bench", "venue": "NeurIPS 2025 Datasets & Benchmarks", "input": "1-5 views", "x": "7,207", "x_num": 7207, "yz": "3 levels / 20", "skills": "depth, distance, view change, camera pose, imagination", "truth": "real scans; answers from 3D truth, hand-checked", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": 51.7, "spacetools": 53.9, "spatialclaw": 63.3, "threat": "partly", "threat_note": "(a): ships depth and poses per item, so steps could be graded; it grades the final answer"}, {"group": "Video and 4D spatial", "name": "MMSI-Video-Bench", "table1": false, "arxiv": "2512.10863", "page": "https://rbler1234.github.io/MMSI-VIdeo-Bench.github.io/", "code": "https://github.com/InternRobotics/MMSI-Video-Bench", "data": "https://huggingface.co/datasets/rbler/MMSI-Video-Bench", "venue": "preprint", "input": "video, 50 frames", "x": "1,106", "x_num": 1106, "yz": "5 / 13", "skills": "relations, counting, camera and object motion, planning", "truth": "real; written by 11 researchers", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": 28.7, "spacetools": 36.6, "spatialclaw": 41.6, "threat": "no", "threat_note": "real video, final answer only"}, {"group": "Video and 4D spatial", "name": "OSI-Bench", "table1": false, "arxiv": "2512.19683", "page": "https://mingrui-wu.github.io/openbench/", "code": "https://github.com/mingrui-wu/OSI-Bench", "data": "https://huggingface.co/datasets/HarmlessSR07/OSI-Bench", "venue": "CVPR 2026", "input": "outdoor video, 32 frames", "x": "8,736", "x_num": 8736, "yz": "3 tiers / 9", "skills": "distance, direction, ego-motion, speed, counting", "truth": "real; stereo + LiDAR + GPS; side test on 20 Blender scenes", "moves": "no", "steps": "no", "twins": "partly", "vadar": null, "pyspatial": 32.0, "spacetools": 30.2, "spatialclaw": 41.9, "threat": "partly", "threat_note": "(b): Blender normal vs abnormal sets compared only as set averages"}, {"group": "Video and 4D spatial", "name": "PAI-Bench (understanding)", "table1": false, "arxiv": "2512.01989", "page": "", "code": "https://github.com/SHI-Labs/physical-ai-bench", "data": "https://huggingface.co/datasets/shi-labs/physical-ai-bench-understanding", "venue": "CVPR 2026 (oral)", "input": "video, 16 frames", "x": "1,214 (80 spatial)", "x_num": 1214, "yz": "2 / 9", "skills": "spatial relations, time, physics, affordance", "truth": "real; hand-written", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": 46.0, "spacetools": 65.1, "spatialclaw": 68.1, "threat": "no", "threat_note": "real video, final answer only"}, {"group": "Video and 4D spatial", "name": "VSI-Bench-Debiased (VSI-Bench-U)", "table1": false, "arxiv": "2511.04655", "page": "https://vision-x-nyu.github.io/test-set-training/", "code": "https://github.com/vision-x-nyu/test-set-training", "data": "https://huggingface.co/datasets/nyu-visionx/VSI-Bench", "venue": "COLM 2026", "input": "video", "x": "2,119 (release 2,362)", "x_num": 2119, "yz": "4 / 8", "skills": "counting, size, distance, direction, route, order", "truth": "real scans; templates from 3D labels", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": 44.4, "spacetools": 33.6, "spatialclaw": 48.5, "threat": "no", "threat_note": "items pruned, not paired; final answer only"}, {"group": "Video and 4D spatial", "name": "VSTI-Bench", "table1": false, "arxiv": "2505.20279", "page": "https://vlm-3r.github.io/", "code": "https://github.com/VITA-Group/VLM-3R", "data": "https://huggingface.co/datasets/Journey9ni/vstibench", "venue": "CVPR 2026", "input": "video", "x": "6,042 (5,736 after a label fix)", "x_num": 6042, "yz": "3 / 5", "skills": "camera displacement and motion, camera-object distance", "truth": "real scans; auto from poses and boxes, no human check", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": 55.0, "spacetools": 56.0, "spatialclaw": 67.6, "threat": "no", "threat_note": "final answer only; a 2026-07-13 label fix dropped 306 items"}, {"group": "Video and 4D spatial", "name": "DSI-Bench", "table1": false, "arxiv": "2510.18873", "page": "https://dsibench.github.io/", "code": "https://github.com/SpatialVision/dsibench", "data": "https://huggingface.co/datasets/Viglong/DSI-Bench", "venue": "preprint (ICLR 2026 submission withdrawn)", "input": "video, 3 s", "x": "~1,700 x 4 flips", "x_num": 1769, "yz": "3 / 6", "skills": "camera motion, object motion, distance, orientation", "truth": "mostly real + 6% rendered (UE5)", "moves": "no", "steps": "no", "twins": "yes", "vadar": null, "pyspatial": 43.7, "spacetools": 43.0, "spatialclaw": 62.9, "threat": "partly", "threat_note": "(b): 4 mirrored or reversed copies scored as a group, a 2D change, not a 3D one"}, {"group": "General spatial", "name": "BLINK", "table1": false, "arxiv": "2404.12390", "page": "https://zeyofu.github.io/blink/", "code": "https://github.com/zeyofu/BLINK_Benchmark", "data": "https://huggingface.co/datasets/BLINK-Benchmark/BLINK", "venue": "ECCV 2024", "input": "1+ images", "x": "3,807 (572 spatial)", "x_num": 3807, "yz": "flat: 14", "skills": "relative depth, relations, camera motion, correspondence", "truth": "real (+ SDXL fakes); labels from source datasets", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": 60.3, "spacetools": 58.2, "spatialclaw": 73.4, "threat": "no", "threat_note": "real photos, final answer only"}, {"group": "General spatial", "name": "SpatialTree", "table1": false, "arxiv": "2512.20617", "page": "https://spatialtree.github.io/", "code": "https://github.com/ByteDance-Seed/SpatialTree", "data": "https://huggingface.co/datasets/LongfeiLi/SpatialTree-Bench", "venue": "CVPR 2026 (highlight)", "input": "image + video", "x": "not in text (release 6,300)", "x_num": 6300, "yz": "4 levels / 11 / 27", "skills": "distance, orientation, perspective, map, planning", "truth": "mixed; expert-model labels", "moves": "no", "steps": "partly", "twins": "no", "vadar": null, "pyspatial": 53.9, "spacetools": 52.7, "spatialclaw": 60.7, "threat": "partly", "threat_note": "(a): L4 scores each action step against a trajectory rebuilt from video; L4 not released"}, {"group": "General spatial", "name": "ViewSpatial-Bench", "table1": true, "arxiv": "2505.21500", "page": "https://zju-real.github.io/ViewSpatial-Page/", "code": "https://github.com/ZJU-REAL/ViewSpatial-Bench", "data": "https://huggingface.co/datasets/lidingm/ViewSpatial-Bench", "venue": "unconfirmed (repo says ECCV 2026)", "input": "1 image", "x": "5,712", "x_num": 5712, "yz": "2 views / 5", "skills": "perspective taking, direction, orientation", "truth": "real ScanNet + COCO; 3D and model labels", "moves": "no", "steps": "no", "twins": "partly", "vadar": null, "pyspatial": 49.9, "spacetools": 52.1, "spatialclaw": 60.2, "threat": "partly", "threat_note": "(b): the same image asked from camera and person view, scored one by one"}, {"group": "General video", "name": "CVBench", "table1": false, "arxiv": "2508.19542", "page": "", "code": "https://github.com/Hokhim2/CVBench", "data": "https://huggingface.co/datasets/Dongyh35/CVBench", "venue": "preprint", "input": "2-4 videos", "x": "1,000 (42 spatial)", "x_num": 1000, "yz": "3 / 15", "skills": "cross-video navigation, matching, order", "truth": "real; GPT-4o drafts, 2 human passes", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": 67.7, "spacetools": 46.8, "spatialclaw": 72.2, "threat": "no", "threat_note": "real video, final answer only"}, {"group": "General video", "name": "PerceptionComp", "table1": false, "arxiv": "2603.26653", "page": "https://perceptioncomp.github.io/", "code": "https://github.com/hrinnnn/PerceptionComp", "data": "https://huggingface.co/datasets/hrinnnn/PerceptionComp", "venue": "ECCV 2026", "input": "video, 2-10 min", "x": "1,114", "x_num": 1114, "yz": "7 video types, 6 skills", "skills": "spatial layout, correspondence, time", "truth": "real; hand-written", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": 37.1, "spacetools": 38.6, "spatialclaw": 44.0, "threat": "no", "threat_note": "real video, final answer only"}, {"group": "General video", "name": "Video-MME", "table1": false, "arxiv": "2405.21075", "page": "https://video-mme.github.io/", "code": "https://github.com/MME-Benchmarks/Video-MME", "data": "https://huggingface.co/datasets/lmms-lab/Video-MME", "venue": "CVPR 2025", "input": "video, up to 1 h", "x": "2,700 (110 spatial)", "x_num": 2700, "yz": "6 / 12 tasks", "skills": "spatial perception and reasoning, time, counting", "truth": "real; hand-written", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": 50.3, "spacetools": 74.6, "spatialclaw": 77.0, "threat": "no", "threat_note": "real video, final answer only"}, {"group": "General video", "name": "Video-MME-v2", "table1": false, "arxiv": "2604.05015", "page": "https://video-mme-v2.netlify.app/", "code": "https://github.com/MME-Benchmarks/Video-MME-v2", "data": "https://huggingface.co/datasets/MME-Benchmarks/Video-MME-v2", "venue": "preprint (technical report)", "input": "video, ~10 min", "x": "3,200 (800 groups)", "x_num": 3200, "yz": "3 levels / 33", "skills": "3D spatial (1 leaf), time, causal", "truth": "real; hand-written", "moves": "no", "steps": "partly", "twins": "yes", "vadar": null, "pyspatial": 23.0, "spacetools": 37.4, "spatialclaw": 44.4, "threat": "partly", "threat_note": "(a) human-written milestone chains scored to the first error; (b) 4 linked questions per video scored as a group"}, {"group": "Conference model benchmarks", "name": "SpatialRGPT-Bench", "table1": false, "arxiv": "2406.01584", "page": "https://www.anjiecheng.me/SpatialRGPT", "code": "https://github.com/AnjieCheng/SpatialRGPT", "data": "https://huggingface.co/datasets/a8cheng/SpatialRGPT-Bench", "venue": "NeurIPS 2024", "input": "1 image + region masks or boxes", "x": "1,406", "x_num": 1406, "yz": "2 / 12", "skills": "relative direction, metric distance, size, left/right, front/behind", "truth": "mixed: real (nuScenes, KITTI, SUN RGB-D, ARKitScenes) + Hypersim renders; from 3D cuboids; GPT-4 judges answers", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "no", "threat_note": "mostly real images, final answer only"}, {"group": "Conference model benchmarks", "name": "SpatialEval", "table1": false, "arxiv": "2406.14852", "page": "https://spatialeval.github.io/", "code": "https://github.com/jiayuww/SpatialEval", "data": "https://huggingface.co/datasets/MilaWang/SpatialEval", "venue": "NeurIPS 2024", "input": "1 image and/or text (2D maps, mazes, grids; real photos)", "x": "not in text (card: 4,635 per format)", "x_num": 4635, "yz": "flat: 4 tasks x 3 input formats", "skills": "relations, navigation, position, counting", "truth": "mixed: 2D procedural generator (exact) + real photos", "moves": "no", "steps": "no", "twins": "partly", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "partly", "threat_note": "(b): every item comes as text, image and both, compared only as averages; 2D"}, {"group": "Conference model benchmarks", "name": "MMPerspective", "table1": false, "arxiv": "2505.20426", "page": "https://yunlong10.github.io/MMPerspective/", "code": "https://github.com/yunlong10/MMPerspective", "data": "https://huggingface.co/datasets/yunlong10/MMPerspective", "venue": "NeurIPS 2025 Datasets & Benchmarks", "input": "1 image (image pairs for one task)", "x": "5,083", "x_num": 5083, "yz": "3 / 10", "skills": "vanishing points, horizon, perspective type, line relations, lens distortion, view angle", "truth": "mostly real + Blender renders; hand labels", "moves": "no", "steps": "no", "twins": "partly", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "partly", "threat_note": "(b): crop, flip and mask variants of one image scored as a group; 2D edits, not a 3D change"}, {"group": "Conference model benchmarks", "name": "Anywhere3D-Bench", "table1": false, "arxiv": "2506.04897", "page": "https://anywhere-3d.github.io/", "code": "https://github.com/anywhere-3d/Anywhere3D", "data": "https://huggingface.co/datasets/txwang98/Anywhere3D_v2", "venue": "NeurIPS 2025 Datasets & Benchmarks", "input": "3D scan (point cloud or mesh)", "x": "2,886", "x_num": 2886, "yz": "4 levels / 12", "skills": "3D grounding, free-space placement, distance, size, part localization", "truth": "real scans; GPT-4o drafts expressions, humans draw boxes", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "no", "threat_note": "real scans, one predicted box per expression"}, {"group": "Conference model benchmarks", "name": "Situat3DChange", "table1": false, "arxiv": "2510.11509", "page": "", "code": "https://github.com/RuipingL/Situat3DChange", "data": "https://huggingface.co/datasets/lrp123/Situat3DChange", "venue": "NeurIPS 2025 Datasets & Benchmarks", "input": "before/after point-cloud pair + situation text", "x": "121K QA total (test: 14,714 QA)", "x_num": 14714, "yz": "3 tasks / 9 QA types", "skills": "change detection, egocentric distance, direction, displacement, rearrangement", "truth": "real 3RScan rescans; human change notes expanded by GPT-4", "moves": "no", "steps": "no", "twins": "partly", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "partly", "threat_note": "(b): real before/after scans with objects moved, but given as one input, not scored as a pair"}, {"group": "Conference model benchmarks", "name": "HouseLayout3D", "table1": false, "arxiv": "2512.02450", "page": "https://houselayout3d.github.io", "code": "https://github.com/HouseLayout3D/houselayout3d", "data": "https://huggingface.co/datasets/houselayout3d/HouseLayout3D", "venue": "NeurIPS 2025 Datasets & Benchmarks", "input": "3D mesh + RGB-D frames + camera poses", "x": "16 buildings (317 rooms)", "x_num": 16, "yz": "flat: 6 element classes", "skills": "layout, multi-floor structure, rooms, stairs, doors, windows", "truth": "real Matterport3D scans; hand-drawn CAD", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "no", "threat_note": "real scans, one final layout scored"}, {"group": "Conference model benchmarks", "name": "ReVSI", "table1": false, "arxiv": "2604.24300", "page": "https://3dlg-hcvc.github.io/revsi/", "code": "https://github.com/3dlg-hcvc/revsi", "data": "https://huggingface.co/datasets/3dlg-hcvc/ReVSI", "venue": "ICML 2026", "input": "video (16, 32, 64 or all frames)", "x": "not in text (card: 6,808 all-frame)", "x_num": 6808, "yz": "2 formats / 7 tasks", "skills": "counting, distance, size, direction, route", "truth": "real scans; boxes re-annotated by hand; every item human-verified", "moves": "no", "steps": "no", "twins": "partly", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "partly", "threat_note": "(b): evidence-removed and frame-budget variants scored as separate sets, not pairs"}, {"group": "Conference model benchmarks", "name": "STRIDE-QA", "table1": false, "arxiv": "2508.10427", "page": "https://turingmotors.github.io/stride-qa/", "code": "https://github.com/turingmotors/STRIDE-QA-Dataset", "data": "https://huggingface.co/datasets/turing-motors/STRIDE-QA-Bench", "venue": "AAAI 2026 (oral)", "input": "4 front-camera frames + masks", "x": "5,317 (bench)", "x_num": 5317, "yz": "3 / 6 scenarios x 4 quantities", "skills": "ego distance, heading, velocity, forecasting, relative position", "truth": "real driving; auto sensor labels (LiDAR boxes, tracking)", "moves": "no", "steps": "partly", "twins": "no", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "partly", "threat_note": "(a): state at 4 timesteps graded, all 4 must be right, but against auto sensor labels and with no actions"}, {"group": "Conference model benchmarks", "name": "VIR-Bench", "table1": false, "arxiv": "2509.19002", "page": "", "code": "https://github.com/nlp-waseda/VIR-Bench", "data": "", "venue": "AAAI 2026", "input": "long travel videos", "x": "200 videos (3,689 places)", "x_num": 200, "yz": "2 tasks / 5 types", "skills": "geolocation, place hierarchy, visit order", "truth": "real YouTube vlogs; 10 annotators + Places API", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "no", "threat_note": "real videos, one final graph scored"}, {"group": "Conference model benchmarks", "name": "SSI-Bench", "table1": false, "arxiv": "2602.07864", "page": "https://ssi-bench.github.io", "code": "https://github.com/ccyydd/SSI-Bench", "data": "https://huggingface.co/datasets/cyang203912/SSI-Bench", "venue": "ICML 2026 (partly verified)", "input": "1 image (2 images for 202 items)", "x": "1,000", "x_num": 1000, "yz": "2 / 10", "skills": "height and angle ranking, length, distance, area, graph hops", "truth": "real photos; hand-ranked", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "no", "threat_note": "real photos, final ranking only"}, {"group": "Agent benchmarks", "name": "SpatialAct", "table1": false, "arxiv": "2605.31148", "page": "https://tianhui-liu.github.io/projects/SpatialAct/", "code": "https://github.com/tsinghua-fib-lab/SpatialAct", "data": "https://huggingface.co/datasets/Tianhui-Liu/SpatialAct", "venue": "preprint", "input": "2 rendered views (top-down + isometric), re-rendered each turn", "x": "4,355", "x_num": 4355, "yz": "3 levels / 7 tasks / 22", "skills": "relations, orientation, mental rotation, layout repair", "truth": "sim: re-renders every edit; injected errors counted before and after", "moves": "yes", "steps": "partly", "twins": "no", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "partly", "threat_note": "(a): the scene's error count is re-checked every turn, not what the agent computes or believes"}, {"group": "Agent benchmarks", "name": "SceneActBench", "table1": false, "arxiv": "2607.22393", "page": "https://feinaldo2.github.io/sceneactbench-project-page/", "code": "https://github.com/Feinaldo2/SceneActBench", "data": "https://huggingface.co/datasets/FEInaldo/SceneActBench", "venue": "preprint", "input": "reference views or video, 3D assets, renders the agent makes", "x": "520", "x_num": 520, "yz": "flat: 5", "skills": "spatial grounding, egocentric reasoning, kinematics, shape imagination", "truth": "sim: headless Blender; final scene vs exact 3D truth", "moves": "yes", "steps": "partly", "twins": "partly", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "partly", "threat_note": "(a) checkpoints re-scored in an appendix; (b) input pairs (1 vs ~11 views) change the input, not a 3D factor"}, {"group": "Agent benchmarks", "name": "ESI-Bench", "table1": false, "arxiv": "2605.18746", "page": "https://esi-bench.github.io/", "code": "https://github.com/ESI-Bench/ESI-Bench", "data": "https://huggingface.co/datasets/ESI-Bench/esi-bench", "venue": "preprint", "input": "egocentric image each step + history", "x": "3,081", "x_num": 3081, "yz": "10 / 29", "skills": "occlusion, counting, size and distance, reflection, cognitive mapping, stability", "truth": "sim: OmniGibson / BEHAVIOR-1K scene graph; 3 annotators check each item", "moves": "yes", "steps": "no", "twins": "no", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "partly", "threat_note": "whole-pipeline perfect-tool swap already done; final answer only, so (a) and (b) stay open"}, {"group": "Agent benchmarks", "name": "SpatialWorld", "table1": false, "arxiv": "2606.09669", "page": "https://spatial-world.github.io/", "code": "https://github.com/Hongcheng-Gao/SpatialWorld", "data": "https://huggingface.co/datasets/HongchengGao/SpatialWorld", "venue": "preprint", "input": "egocentric RGB screenshot each step", "x": "760", "x_num": 760, "yz": "5 scenarios x 3 modes", "skills": "exploration, grounding, route planning, state tracking", "truth": "sim: AI2-THOR, ProcTHOR, VirtualHome, CARLA and others; end-state verifier", "moves": "yes", "steps": "no", "twins": "no", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "no", "threat_note": "end state checked only"}, {"group": "Agent benchmarks", "name": "VisGym", "table1": false, "arxiv": "2601.16973", "page": "https://visgym.github.io/", "code": "https://github.com/visgym/VIsGym", "data": "https://huggingface.co/datasets/VisGym/inference-dataset", "venue": "preprint", "input": "real or synthetic image each step + text feedback", "x": "17 environments", "x_num": 17, "yz": "flat: 17", "skills": "mental rotation, mazes, reassembly, counting, pick and place", "truth": "sim: Gymnasium environments (MuJoCo for Fetch); success at stop", "moves": "yes", "steps": "no", "twins": "no", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "no", "threat_note": "success at stop; its text-grid state swap is an oracle already done"}, {"group": "Agent benchmarks", "name": "MineAnyBuild", "table1": false, "arxiv": "2505.20148", "page": "https://mineanybuild.github.io/", "code": "https://github.com/MineAnyBuild/MineAnyBuild", "data": "https://huggingface.co/datasets/SaDil/MineAnyBuild", "venue": "NeurIPS 2025 Datasets & Benchmarks", "input": "text instruction + reference images", "x": "4,000 (tables add to 4,616)", "x_num": 4000, "yz": "5 tasks / 22 building types", "skills": "spatial planning, coordinate transforms, mental rotation, commonsense", "truth": "sim: Minecraft runs the plan; GPT-4.1 critic scores it", "moves": "no", "steps": "no", "twins": "no", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "no", "threat_note": "one-shot plan graded mostly by an AI critic"}, {"group": "Related methods", "name": "Pigeon", "table1": false, "arxiv": "2606.02459", "page": "", "code": "https://github.com/dw-dengwei/active-spatial-reasoning", "data": "", "venue": "ICML 2026", "input": "MindCube's 4 or fewer fixed images, picked one at a time", "x": "trains on 10,000; tested on 1,050", "x_num": 1050, "yz": "-", "skills": "cognitive map, perspective", "truth": "real photos; MindCube's annotated 10x10 map", "moves": "no", "steps": "partly", "twins": "no", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "partly", "threat_note": "(a): map and self-checked step assertions are RL training rewards only, on a coarse grid over real photos"}, {"group": "Related methods", "name": "SpatialClaw", "table1": false, "arxiv": "2606.13673", "page": "https://spatialclaw.github.io/", "code": "https://github.com/NVlabs/SpatialClaw", "data": "", "venue": "NeurIPS 2026 (authors' announcement)", "input": "images or video; persistent Python kernel with perception tools", "x": "evaluated on 20 benchmarks", "x_num": null, "yz": "-", "skills": "code as actions: masks, depth, 3D reconstruction, geometry", "truth": "none of its own; scored by each benchmark", "moves": "no", "steps": "no", "twins": "no", "vadar": 40.5, "pyspatial": 47.8, "spacetools": 48.7, "spatialclaw": 59.9, "threat": "na", "threat_note": "the agent we would test; its score cells are 20-benchmark averages (VADAR: 4 single-image tests only)"}, {"group": "OURS (plan)", "name": "SpatialGym-Bench", "table1": false, "arxiv": "", "page": "", "code": "", "data": "", "venue": "planned (CVPR 2027, tentative)", "input": "fixed camera view, then up to 10 moves on a grid (walk 0.5 m, turn 30 deg, look)", "x": "~3,000 (1,500 twin pairs)", "x_num": 3000, "yz": "3 levels / 8 / ~24", "skills": "measures (depth, distance, size, count), relations (left/right, front/behind, direction, camera vs person view), multi-step (cross-camera matching, events, routes)", "truth": "sim: Isaac Sim 6.0 exact state (SimReady warehouses); checkers write every answer", "moves": "yes", "steps": "yes", "twins": "yes", "vadar": null, "pyspatial": null, "spacetools": null, "spatialclaw": null, "threat": "ours", "threat_note": "every step's tool outputs, depths, poses and beliefs graded against exact state at evaluation time; twins with one 3D change scored as pairs"}]}</script>
+<script>
+(function(){
+"use strict";
+var D=JSON.parse(document.getElementById("data").textContent), ROWS=D.rows;
+var COLS=[
+ {k:"group",l:"Section",hide:true},
+ {k:"name",l:"Benchmark"},
+ {k:"links",l:"Links",nosort:true},
+ {k:"venue",l:"Venue"},
+ {k:"input",l:"Input"},
+ {k:"x",l:"X items",num:"x_num"},
+ {k:"yz",l:"Y cat / Z sub"},
+ {k:"skills",l:"Spatial skills"},
+ {k:"truth",l:"Truth: sim or real"},
+ {k:"moves",l:"Moves"},
+ {k:"steps",l:"Steps graded"},
+ {k:"twins",l:"Twins"},
+ {k:"vadar",l:"VADAR",num:"vadar"},
+ {k:"pyspatial",l:"pySpatial",num:"pyspatial"},
+ {k:"spacetools",l:"SpaceTools",num:"spacetools"},
+ {k:"spatialclaw",l:"SpatialClaw",num:"spatialclaw"},
+ {k:"threat",l:"Threat to our claims"}
+];
+var GROUPS=[]; ROWS.forEach(function(r){ if(GROUPS.indexOf(r.group)<0) GROUPS.push(r.group); });
+var S={groups:GROUPS.slice(), q:"", f:{}, sort:null, dir:"asc", bygroup:true,
+       hidden:COLS.filter(function(c){return c.hide;}).map(function(c){return c.k;})};
+var DEFAULT=JSON.stringify(S);
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function text(r,k){
+  if(k==="links") return [r.arxiv?"arxiv":"",r.page?"page":"",r.code?"code":"",r.data?"data":""].join(" ");
+  if(k==="threat") return (r.threat==="ours"?"ours":r.threat==="no"?"no threat":r.threat)+" "+(r.threat_note||"");
+  if(k==="name") return r.name+(r.table1?" table 1 test":"");
+  var v=r[k]; return v==null?"":String(v);
+}
+function numOf(r,c){ var v=r[c.num]; return (v==null||v==="")?null:Number(v); }
+function matchNum(v,f){
+  var m; f=f.replace(/,/g,"").trim(); if(v==null) return false;
+  if((m=f.match(/^>=?\s*(-?[\d.]+)$/))) return f[1]==="="?v>=+m[1]:v>+m[1];
+  if((m=f.match(/^<=?\s*(-?[\d.]+)$/))) return f[1]==="="?v<=+m[1]:v<+m[1];
+  if((m=f.match(/^(-?[\d.]+)\s*-\s*(-?[\d.]+)$/))) return v>=+m[1]&&v<=+m[2];
+  return null;
+}
+function keep(r){
+  if(S.groups.indexOf(r.group)<0) return false;
+  var q=S.q.trim().toLowerCase();
+  if(q && !COLS.some(function(c){ return text(r,c.k).toLowerCase().indexOf(q)>=0; })) return false;
+  for(var k in S.f){ var f=S.f[k]; if(!f) continue; var c=COLS.filter(function(x){return x.k===k;})[0];
+    if(c&&c.num){ var n=matchNum(numOf(r,c),f); if(n!==null){ if(!n) return false; continue; } }
+    if(text(r,k).toLowerCase().indexOf(f.toLowerCase())<0) return false; }
+  return true;
+}
+function hl(s){ var q=S.q.trim(); s=esc(s); if(!q) return s;
+  var i=s.toLowerCase().indexOf(esc(q).toLowerCase()); if(i<0) return s;
+  return s.slice(0,i)+"<mark>"+s.slice(i,i+esc(q).length)+"</mark>"+s.slice(i+esc(q).length); }
+function badge(v){ var c=v==="yes"?"yes":v==="partly"?"partly":"no"; return '<span class="b '+c+'">'+esc(v)+'</span>'; }
+function cell(r,c,best){
+  var k=c.k;
+  if(k==="name") return '<td class="name">'+hl(r.name)+(r.table1?'<span class="tag" title="one of our Table 1 tests">Table 1</span>':"")+"</td>";
+  if(k==="links"){ var a=[]; if(r.arxiv) a.push('<a href="https://arxiv.org/abs/'+esc(r.arxiv)+'" target="_blank" rel="noopener">arXiv</a>');
+    if(r.page) a.push('<a href="'+esc(r.page)+'" target="_blank" rel="noopener">page</a>');
+    if(r.code) a.push('<a href="'+esc(r.code)+'" target="_blank" rel="noopener">code</a>');
+    if(r.data) a.push('<a href="'+esc(r.data)+'" target="_blank" rel="noopener">data</a>');
+    return '<td class="links">'+(a.join("")||'<span class="note">none yet</span>')+"</td>"; }
+  if(k==="moves"||k==="steps"||k==="twins") return "<td>"+badge(r[k])+"</td>";
+  if(c.num&&k!=="x"){ var v=r[k]; return '<td class="num'+(v!=null&&v===best?" best":"")+'">'+(v==null?"&ndash;":v.toFixed(1))+"</td>"; }
+  if(k==="threat"){ var t=r.threat, cls=t==="ours"?"ours":t==="no"?"no":t==="partly"?"partly":"na";
+    var lab=t==="ours"?"ours":t==="no"?"no threat":t==="partly"?"partly":"n/a";
+    return '<td><span class="b t '+cls+'">'+lab+'</span> <span class="note">'+hl(r.threat_note||"")+"</span></td>"; }
+  return "<td>"+hl(text(r,k))+"</td>";
+}
+var thead=document.querySelector("#t thead"), tbody=document.querySelector("#t tbody");
+function visibleCols(){ return COLS.filter(function(c){ return S.hidden.indexOf(c.k)<0; }); }
+function renderHead(){
+  var vc=visibleCols(), h='<tr class="h">', f='<tr class="flt">';
+  vc.forEach(function(c){
+    h+="<th"+(c.k==="name"?' class="namecol"':"")+">"+(c.nosort?esc(c.l):'<button class="sort" data-k="'+c.k+'"'+(S.sort===c.k?' data-dir="'+S.dir+'"':"")+">"+esc(c.l)+"</button>")+"</th>";
+    f+='<th'+(c.k==="name"?' class="namecol"':"")+'><input class="f" data-k="'+c.k+'" value="'+esc(S.f[c.k]||"")+'" placeholder="'+(c.num?"&gt;, &lt;, a-b":"filter")+'" aria-label="Filter '+esc(c.l)+'"></th>';
+  });
+  thead.innerHTML=h+"</tr>"+f+"</tr>";
+  var h1=thead.querySelector("tr.h"); if(h1) document.getElementById("t").style.setProperty("--h1",h1.getBoundingClientRect().height+"px");
+}
+function sorted(list){
+  if(!S.sort) return list;
+  var c=COLS.filter(function(x){return x.k===S.sort;})[0], d=S.dir==="asc"?1:-1;
+  return list.slice().sort(function(a,b){
+    if(c.num){ var x=numOf(a,c), y=numOf(b,c); if(x==null&&y==null) return 0; if(x==null) return 1; if(y==null) return -1; return (x-y)*d; }
+    return text(a,c.k).localeCompare(text(b,c.k))*d; });
+}
+function renderBody(){
+  var vc=visibleCols(), list=sorted(ROWS.filter(keep)), html="";
+  function rowHtml(r){ var vals=["vadar","pyspatial","spacetools","spatialclaw"].map(function(k){return r[k];}).filter(function(v){return v!=null;});
+    var mx=vals.length?Math.max.apply(null,vals):null;
+    return '<tr class="'+(r.threat==="ours"?"ours":"")+'">'+vc.map(function(c){return cell(r,c,mx);}).join("")+"</tr>"; }
+  if(S.bygroup&&!S.sort){
+    GROUPS.forEach(function(g){ var part=list.filter(function(r){return r.group===g;}); if(!part.length) return;
+      html+='<tr class="sect"><td colspan="'+vc.length+'"><span class="lab">'+esc(g)+' <span class="note">('+part.length+")</span></span></td></tr>";
+      part.forEach(function(r){ html+=rowHtml(r); }); });
+  } else list.forEach(function(r){ html+=rowHtml(r); });
+  tbody.innerHTML=html||'<tr><td class="empty" colspan="'+vc.length+'">No row matches. Clear a filter or press Reset.</td></tr>';
+  document.getElementById("count").textContent="Showing "+list.length+" of "+ROWS.length;
+}
+function renderChips(){
+  var el=document.getElementById("chips"), h='<button class="chip" data-g="*" aria-pressed="'+(S.groups.length===GROUPS.length)+'">All</button>';
+  GROUPS.forEach(function(g){ var n=ROWS.filter(function(r){return r.group===g;}).length;
+    h+='<button class="chip" data-g="'+esc(g)+'" aria-pressed="'+(S.groups.indexOf(g)>=0)+'">'+esc(g)+" <small>"+n+"</small></button>"; });
+  el.innerHTML=h;
+}
+function renderCols(){
+  document.getElementById("colmenu").innerHTML=COLS.map(function(c){
+    return '<label><input type="checkbox" data-c="'+c.k+'"'+(S.hidden.indexOf(c.k)<0?" checked":"")+"> "+esc(c.l)+"</label>"; }).join("");
+}
+function renderStats(){
+  var b=ROWS.filter(function(r){return r.threat!=="ours";});
+  var mv=b.filter(function(r){return r.moves==="yes";}).length, st=b.filter(function(r){return r.steps!=="no";}).length,
+      tw=b.filter(function(r){return r.twins!=="no";}).length, sim=b.filter(function(r){return /^sim/i.test(r.truth);}).length;
+  document.getElementById("stats").innerHTML=[[b.length,"benchmarks and methods"],[mv,"let the agent move"],[st,"grade steps (at least partly)"],
+    [tw,"pair or group items"],[sim,"run in a simulator"]].map(function(s){return '<div class="stat"><b>'+s[0]+"</b> "+s[1]+"</div>";}).join("");
+}
+function save(){ var o={}; var d=JSON.parse(DEFAULT);
+  if(S.groups.length!==GROUPS.length) o.g=S.groups.join("|"); if(S.q) o.q=S.q; if(S.sort){o.s=S.sort;o.d=S.dir;}
+  if(!S.bygroup) o.flat="1"; if(JSON.stringify(S.hidden)!==JSON.stringify(d.hidden)) o.h=S.hidden.join("|");
+  for(var k in S.f) if(S.f[k]) o["f."+k]=S.f[k];
+  var s=new URLSearchParams(o).toString(); history.replaceState(null,"",s?"#"+s:location.pathname+location.search); }
+function load(){ var p=new URLSearchParams(location.hash.slice(1));
+  if(p.get("g")) S.groups=p.get("g").split("|").filter(function(g){return GROUPS.indexOf(g)>=0;});
+  if(p.get("q")) S.q=p.get("q"); if(p.get("s")){S.sort=p.get("s");S.dir=p.get("d")==="desc"?"desc":"asc";}
+  if(p.get("flat")) S.bygroup=false; if(p.get("h")!=null) S.hidden=p.get("h").split("|").filter(Boolean);
+  p.forEach(function(v,k){ if(k.indexOf("f.")===0) S.f[k.slice(2)]=v; }); }
+function all(){ renderChips(); renderCols(); renderHead(); renderBody();
+  document.getElementById("q").value=S.q; document.getElementById("bygroup").checked=S.bygroup; save(); }
+document.getElementById("chips").addEventListener("click",function(e){ var b=e.target.closest("button.chip"); if(!b) return;
+  var g=b.getAttribute("data-g");
+  if(g==="*") S.groups=S.groups.length===GROUPS.length?[]:GROUPS.slice();
+  else { var i=S.groups.indexOf(g); if(i>=0) S.groups.splice(i,1); else S.groups.push(g); }
+  renderChips(); renderBody(); save(); });
+document.getElementById("q").addEventListener("input",function(e){ S.q=e.target.value; renderBody(); save(); });
+document.getElementById("bygroup").addEventListener("change",function(e){ S.bygroup=e.target.checked; renderBody(); save(); });
+document.getElementById("colmenu").addEventListener("change",function(e){ var k=e.target.getAttribute("data-c"); var i=S.hidden.indexOf(k);
+  if(e.target.checked&&i>=0) S.hidden.splice(i,1); else if(!e.target.checked&&i<0) S.hidden.push(k); renderHead(); renderBody(); save(); });
+thead.addEventListener("click",function(e){ var b=e.target.closest("button.sort"); if(!b) return; var k=b.getAttribute("data-k");
+  if(S.sort===k){ if(S.dir==="asc") S.dir="desc"; else { S.sort=null; S.dir="asc"; } } else { S.sort=k; S.dir="asc"; }
+  renderHead(); renderBody(); save(); });
+thead.addEventListener("input",function(e){ if(!e.target.classList.contains("f")) return; S.f[e.target.getAttribute("data-k")]=e.target.value;
+  renderBody(); save(); });
+document.getElementById("reset").addEventListener("click",function(){ S=JSON.parse(DEFAULT); all(); });
+load(); renderStats(); all();
+})();
+</script>
+</body>
+</html>

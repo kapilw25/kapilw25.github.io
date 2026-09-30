@@ -1,0 +1,38 @@
+[
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2310.17596v1/pull_fig_v2.png",
+  "paper_url": "https://arxiv.org/abs/2310.17596",
+  "paper": "MimicGen",
+  "figure": "Figure 1",
+  "caption": "Figure 1: MimicGen Overview. We introduce a data generation system that can produce large diverse datasets from a small number of human demonstrations by re-purposing the demonstrations to make them applicable in new settings. We apply MimicGen to generate data across diverse scene configurations, objects, and robot hardware.",
+  "licence": "paper figure reproduced for research comparison",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ },
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2310.17596v1/robots_fig.png",
+  "paper_url": "https://arxiv.org/abs/2310.17596",
+  "paper": "MimicGen",
+  "figure": "Figure F.1",
+  "caption": "Figure F.1: Robots used in Robot Transfer Experiment. The figure shows the robot arms used for data generation. Source datasets were collected on the Panda arm (blue border) and used to generate data for the Sawyer, IIWA, and UR5e arms (orange border).",
+  "licence": "paper figure reproduced for research comparison",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ },
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2310.17596v1/subtask_fig2.png",
+  "paper_url": "https://arxiv.org/abs/2310.17596",
+  "paper": "MimicGen",
+  "figure": "Figure K.2",
+  "caption": "Figure K.2: Object-Centric Subtasks for Selected Tasks This figure shows the end of each object-centric subtask (and the reference object) for a subset of the tasks in the main text. MimicGen assumes that this subtask structure is known for each task; however, specifying this subtask structure is generally easy and intuitive for a human.",
+  "licence": "paper figure reproduced for research comparison",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ }
+]

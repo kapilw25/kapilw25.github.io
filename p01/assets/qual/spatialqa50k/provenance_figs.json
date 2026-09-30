@@ -1,0 +1,38 @@
+[
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2406.13642v7/figure_2.png",
+  "paper_url": "https://arxiv.org/abs/2406.13642",
+  "paper": "SpatialBot",
+  "figure": "Figure 2",
+  "caption": "Figure 2: The proposed SpatialQA dataset consists of basic, middle, and high-level VQAs in general VLM tasks, aiming to (a) help VLMs understand depth images, (b) let VLMs learn to align RGB and depth images, (c) enable VLMs to do high-level tasks better by understanding both RGB and depth images, as depth images provide clear boundary information and spatial relationships.",
+  "licence": "arXiv article, figure reproduced for research comparison; check paper licence",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ },
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2406.13642v7/spatialqa_samples_depth.png",
+  "paper_url": "https://arxiv.org/abs/2406.13642",
+  "paper": "SpatialBot",
+  "figure": "Figure 9",
+  "caption": "Figure 9: Sample data of depthmap understanding in SpatialQA.",
+  "licence": "arXiv article, figure reproduced for research comparison; check paper licence",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ },
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2406.13642v7/spatialqa_samples_spatial.png",
+  "paper_url": "https://arxiv.org/abs/2406.13642",
+  "paper": "SpatialBot",
+  "figure": "Figure 10",
+  "caption": "Figure 10: Sample data of spatial understanding in SpatialQA.",
+  "licence": "arXiv article, figure reproduced for research comparison; check paper licence",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ }
+]

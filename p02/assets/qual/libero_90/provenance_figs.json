@@ -1,0 +1,36 @@
+[
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2306.03310v2/libero_fig1.png",
+  "paper_url": "https://arxiv.org/abs/2306.03310",
+  "paper": "LIBERO",
+  "figure": "Figure 1",
+  "caption": "Figure 1: Top: LIBERO has four procedurally-generated task suites: LIBERO-Spatial, LIBERO-Object, and LIBERO-Goal have 10 tasks each and require transferring knowledge about spatial relationships, objects, and task goals; LIBERO-100 has 100 tasks and requires the transfer of entangled knowledge. Bottom: we investigate five key research topics in LLDM on LIBERO.",
+  "licence": "paper figure reproduced for research comparison",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ },
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2306.03310v2/figures/libero_100.png",
+  "paper_url": "https://arxiv.org/abs/2306.03310",
+  "paper": "LIBERO",
+  "figure": "Figure 11",
+  "caption": "Figure 11: LIBERO-100",
+  "licence": "paper figure reproduced for research comparison",
+  "fetched_on": "2026-09-24",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ },
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2306.03310v2/figures/libero_spatial.png",
+  "paper_url": "https://arxiv.org/abs/2306.03310",
+  "paper": "LIBERO",
+  "figure": "Figure 8",
+  "caption": "Figure 8: LIBERO-Spatial",
+  "licence": "paper figure reproduced for research comparison",
+  "fetched_on": "2026-09-24",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ }
+]

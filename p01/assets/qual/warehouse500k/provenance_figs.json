@@ -1,0 +1,25 @@
+[
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2508.13564v1/fig_warehouse_spatial_intelligence.png",
+  "paper_url": "https://arxiv.org/abs/2508.13564",
+  "paper": "9th AI City Challenge (Track 3, PhysicalAI-Spatial-Intelligence-Warehouse)",
+  "figure": "Figure 3",
+  "caption": "Figure 3: Example images from the Physical AI Spatial Intelligence Warehouse dataset. Tasks included distance, counting, multiple-choice grounding, and spatial relation reasoning. Each example shows the RGB frame, depth map, annotated regions, the corresponding question, and sample answers. The distribution of question types demonstrated the diversity of reasoning skills required across tasks.",
+  "licence": "arXiv article, figure reproduced for research comparison; check paper licence",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ },
+ {
+  "file": "card_fig_4_types.png",
+  "source_url": "https://cdn-uploads.huggingface.co/production/uploads/6769a8b58d83c97167755934/TsyI8lNG3iUqAPzTvBhTt.png",
+  "paper_url": "https://huggingface.co/datasets/nvidia/PhysicalAI-Spatial-Intelligence-Warehouse",
+  "paper": "dataset card",
+  "figure": "card figure",
+  "caption": "Four question categories of the PhysicalAI Spatial Intelligence Warehouse set with example questions and answers (public image embedded in the dataset card README).",
+  "licence": "cc-by-4.0 (dataset card)",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24"
+ }
+]

@@ -1,0 +1,26 @@
+[
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2406.02523v1/robots_in_kitchen.png",
+  "paper_url": "https://arxiv.org/abs/2406.02523",
+  "paper": "RoboCasa",
+  "figure": "Fig. 1",
+  "caption": "Fig. 1: Overview of RoboCasa. RoboCasa is a simulation framework for training generalist robot agents. Four pillars underlie RoboCasa: (1) Diverse assets, including 120 kitchen scenes and 2,500+ 3D objects, created with the aid of generative AI tools; (2) Cross-embodiment support for mobile manipulators and humanoid robots; (3) Diverse tasks created with the guidance of large language models; (4) ",
+  "licence": "paper figure reproduced for research comparison",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ },
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2406.02523v1/kitchen_layouts.png",
+  "paper_url": "https://arxiv.org/abs/2406.02523",
+  "paper": "RoboCasa",
+  "figure": "Fig. 2",
+  "caption": "Fig. 2: Kitchen Floor Plans. We consult home planning and architecture magazines and compile a list of common kitchen floor plans. Our floor plans take on a variety of shapes and sizes, from basic designs (e.g., one wall) to high-end ones (e.g., U-shaped w/ island).",
+  "licence": "paper figure reproduced for research comparison",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ }
+]

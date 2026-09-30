@@ -1,0 +1,14 @@
+[
+ {
+  "file": null,
+  "source_url": "https://arxiv.org/html/2406.01584v3/dataset_samples.png",
+  "paper_url": "https://arxiv.org/abs/2406.01584",
+  "paper": "SpatialRGPT",
+  "figure": "Figure 2",
+  "caption": "Figure 2: Example data entries from our Open Spatial Dataset. The first row contains template-based QAs, and the second row shows LLM-based entries.",
+  "licence": "arXiv article, figure reproduced for research comparison; check paper licence",
+  "fetched_on": "2026-09-24",
+  "local_processing": "resized to fit 1600 px on 2026-09-24; source bytes at source_url",
+  "stripped": "removed from the public release: no permissive licence recorded; see source_url"
+ }
+]
