@@ -521,6 +521,179 @@
    }
   },
   {
+   "Theory of Space": {
+    "Exploitation performance (Route and Survey task accuracy)": "Per item: for relation tasks (direction, persp.take, action2view) direction and distance are scored separately, 0.5 each for a correct component; for coordinate tasks (view2loc, alloc.map) a coordinate similarity score (formula not stated); other tasks not stated (presumably exact match). Reported as % per task and averaged; averaging across tasks not stated.",
+    "Exploration efficiency: normalized information gain (E)": "E = 1 - sum_{i=1..N} log2 max(1, C_i) / (N log2 M), where M = number of possible positions per object at start (uniform prior, 20x20 grid) and C_i = positions of object i still consistent with all observations (computed with AC-3 arc consistency). Ranges 0 (C_i=M) to 1 (C_i=1); can be accumulated per step.",
+    "Node coverage (vision-world exploration efficiency)": "not stated beyond 'node coverage' (fraction of nodes visited/observed presumably; denominator not stated).",
+    "Exploration cost (Avg. step)": "Mean number of steps per episode; efficiency measured by step count instead of action cost (Observe=1, Query=2 costs defined but not used).",
+    "Positional accuracy (pos.acc)": "pos.acc = (K/N) * exp(-RMSE/L), RMSE = root mean squared error between predicted and true object positions, L = RMS l2-norm of all object positions in the scene, K/N = predicted objects / ground-truth objects.",
+    "Directional accuracy (dir.acc)": "Accuracy of the directional relationship over every pair of objects (8 x 45-degree bins); computed only for final Correctness.",
+    "Facing accuracy (facing.acc)": "(# objects with predicted facing = true facing) / (# objects).",
+    "Cognitive map Correctness (final)": "At the last turn: mean of pos.acc, dir.acc and facing.acc with weight 1/3 each; averaged over scenes. Also reported split by position and orientation.",
+    "Perception": "Predicted local map vs ground-truth local map for the current FOV, counting only objects appearing in the FOV for the first time; per-turn score formula not stated (presumably the same map metrics); averaged over turns and scenes.",
+    "Self-tracking": "Agent pose inferred from the predicted global map compared to the ground-truth agent state each turn; comparison formula not stated; averaged over turns and scenes.",
+    "Local-Global consistency": "Within the same turn, local and global predictions are compared; exact scoring not stated; averaged over turns and scenes.",
+    "Stability": "For each previously observed object at every later turn, per-check score = 1 if the prediction is no worse than in the previous turn (else 0); averaged over checks, turns and scenes.",
+    "Uncertainty modeling (F1)": "F1 of the selected candidate points against the truly unobserved points (candidates randomly sampled from observed and unobserved areas).",
+    "Pearson correlation between map Correctness and downstream performance": "Pearson r between per-sample map Correctness and downstream performance, with performance averaged over five independent cognitive map runs per sample; significance p < .001.",
+    "Belief revision identification accuracy (F1)": "F1 score for detecting the subset of shifted objects (object identity and transformation type).",
+    "Belief revision Average Steps (Total and Redundancy)": "Total Steps = steps needed to identify all changes; Redundancy Steps = steps taken after the last changed object has been observed (ideal 0); averaged.",
+    "Belief revision Correctness": "Same Correctness composite as the cognitive map (pos/dir/facing), restricted to changed objects; reported for position and orientation.",
+    "Belief Inertia": "Position: s_i = cos(theta_i) * w_i, cos theta_i = e_i.v_i/(|e_i||v_i|+eps) with v_i = b_old - g_new, e_i = b_new - g_new, w_i = exp(-||b_new - b_old||^2 / (2 sigma^2)), sigma = RMS localization error on first re-observed unchanged objects. Orientation: s_ori = 1[phi_new = phi_old]. Averaged over shifted objects (lower is better)."
+   }
+  },
+  {
+   "EMRD (Explore, Map, Remember, Decide)": {
+    "Absolute Environment Coverage (AEC)": "AEC = (1/N) sum_i (1/|E|) sum_{k in T} min(|M_k^(i)|, |E_k|), E_k = ground-truth instances of type k, M_k = unique recorded instances in terminal map; min caps hallucinated/double-counted objects.",
+    "Temporal Efficiency (TE)": "TE = (1/N) sum_i |tau^(i)|, |tau^(i)| <= Tmax (=50), number of navigation actions before Term() or budget exhaustion.",
+    "Positional Accuracy (PA)": "PA = (1/N) sum_i exp(-RMSE^(i)/L_gt^(i)) * |K^(i)|/|G_base^(i)|; RMSE after rigid-body Procrustes alignment of predicted to true positions, L_gt = RMS scale of mapped subgraph, K = matched objects, G_base = objects discoverable under the unperturbed baseline.",
+    "Temporal Belief Stability (TBS)": "TBS^(i)(t) = exp(-Delta d^(i)(t)/L_gt^(i)) * |M_t^(i)|/|G_base|, Delta d = mean over mapped objects of ||p_hat_j(t) - p_hat_j(t_first)||_2; curve averaged over N episodes.",
+    "Ebbinghaus Forgetting Curve memory strength (EFC_X) and fit R2": "R_X(delta) = C_X * exp(-delta/EFC_X); EFC_X = sum_j t_j / d (MLE for right-censored exponential, t_j = time-to-forget, d = uncensored forgetting events, Tmax=50); R2 of fitted curve vs Kaplan-Meier estimate; one-way ANOVA across perturbations.",
+    "Serial Position Effect (mean Time-to-Forget per bin, TTF_b)": "Objects split into three equal bins by discovery rank; TTF_b = (1/N) sum_i (1/|D_b^(i)|) sum_{j in D_b^(i)} TTF_j; U-shape = human-like.",
+    "Miller's Law binned forgetting probability ML(b)": "Forget indicator = 1 if |M_{t-1} \\ M_t| > 0; steps binned by b = ceil(m/w), w = 5, m = |M_{t-1}|; ML(b) = sum of indicators in bin / number of steps in bin; inflexion point b* gives capacity m* ~ b*w.",
+    "Coverage-Anchored Kaplan-Meier Survival": "S_X(t) = C_X * prod_{tau<=t} (1 - d_tau/n_tau), C_X = initial coverage ratio of set X, d_tau = objects dropped at step tau, n_tau = objects retained just before tau.",
+    "Coverage-Anchored Spatial Identity Resolution (SIR)": "SIR = AEC * |M_first^(r) intersect M_return^(r)| / |M_first^(r)|.",
+    "Focal-Point Spatial Grounding (FPSG global)": "FPSG = (1/N) sum_i |M_hat_F^(i) intersect O_F^(i)| / |N_base^(i)|, O_F = engine-confirmed objects in chosen room F, M_hat_F = those in final map, N_base = total objects observed in the episode.",
+    "FPSG local": "FPSG_local = (1/N) sum_i |M_hat_F^(i) intersect O_F^(i)| / |O_F^(i)|.",
+    "Chosen focal-point distribution / consensus (Chosen Room %)": "Percentage of episodes choosing each room per start room; interventions aggregated to binary (Conference vs other) and tested with Pearson chi-square and two-sided Fisher's exact tests.",
+    "Never Visited (%) and Any Bias (%)": "Never Visited = fraction of runs where the chosen room was never physically entered; Any Bias = fraction of episodes with zero chosen-room objects in the final map."
+   }
+  },
+  {
+   "WebStep": {
+    "Terminal Success Rate (SR)": "Binary per episode: success only if all verifier conditions on the terminal semantic state are satisfied (safe pass: reaching the correct entity with sufficient information but not committing also counts as success); max 50 turns; % over 1,800 tasks.",
+    "Exploration SR": "Success iff the last item visited on a detail surface before the first commit, v_k, equals the target e*; % over episodes.",
+    "Execution SR": "Terminal success rate conditioned on successful exploration: #(terminal success and exploration success) / #(exploration success).",
+    "Informational Coverage (COV at commit)": "COV_t = |{c in C : sat(c,t)}| / |C|, C = information constraints derived by per-site rules (oracle observes all), reported at t_commit (first terminal action); search queries containing the discriminating value count as verifying scanned fields; averaged over tasks.",
+    "Step Efficiency (GUI steps, semantic steps, GUI/Semantic ratio)": "Mean GUI steps and mean semantic steps per episode; ratio GUI/Semantic (lower is better). Whether the ratio is of means or mean of per-episode ratios is not stated.",
+    "Skill invocation rate": "For each skill k in S* (skills in oracle trajectory), invocation = 1[k in S] (skills in model trajectory); reported as % per skill and per website; skill success not measured.",
+    "Trajectory bifurcation type frequencies": "Align a successful and a failing trajectory on shared semantic MDP states; bifurcation point = last shared state; classify by next actions (wrong branch: differ and neither is COMMIT; delayed: success next is COMMIT; premature: failing next is COMMIT); report % of action types."
+   }
+  },
+  {
+   "MetaSpace": {
+    "Spatial Cognition (SC) score": "Score(SC_i) = 1 - |V(SC_i)| / |C(SC_i)|, V = violations of MRs (transitivity, symmetry, contradiction, triangle inequality checked in Prolog; MR5 size-depth within relative tolerance eps = 0.1, MR6 size-ratio within delta = 0.05), C = test cases; average score = mean over all SCs.",
+    "Error Rate, Average Errors per Trajectory, Average Errors per Object": "Err. Rate = total errors / total test cases (%); Avg. Err. Tra. = errors / trajectories; Avg. Err. Obj. = errors / objects (normalizing counts stated only by the column names).",
+    "Proportion of meaningful errors detected": "Apply each method on a 10% subset, take the union of detected errors, human annotators mark errors meaningful if they could hurt embodied task performance; ratio = meaningful errors detected by method / union of meaningful errors (MetaSpace 988/1080 = 91.5%).",
+    "Error detection precision (false positive analysis)": "Manual validation of 1,000 randomly selected detected errors; precision = 1 - false positives / 1000 (9 FPs -> 99.1%).",
+    "Per-MR error detection ratio (ablation)": "Distribution (ratio) of detected errors across MR1-MR4 per SC and agent; exact normalization not stated."
+   }
+  },
+  {
+   "CanTest": {
+    "Number of failure cases (#Fail)": "Count of generated test cases whose episode fails: Fail_pos = d(p_final, p_target) > delta (distance threshold, value not stated) or Fail_step = steps > Tmax; improvement over best baseline reported as relative % (23.34%-33.70%).",
+    "Number of capability-oriented failures": "Count of failure cases per failure-source capability: an oracle-detected error (C_x, t) is failure-inducing if replacing the agent output with the oracle output and rolling out turns failure into success; failure attributed to the earliest failure-inducing error.",
+    "Repair rate (%Repa)": "%Repa = #Repa / #Fail per failure-responsible capability and model.",
+    "Perception oracle error": "eps_p_t = (1/N) sum_n ( ||VA_t,n - VA_gt_t,n||_L - |P_t,n intersect P_gt_t,n| / |P_t,n union P_gt_t,n| ), LLM-judged annotation distance in [0,1] minus box IoU vs RAM expert model; threshold for flagging an error not stated.",
+    "Memory oracle error": "eps_m_t = 1 - ||M_t - VA_gt_1..t-1||_L, similarity judged by an LLM in [0,1]; error threshold not stated.",
+    "Planning oracle error": "eps_pl_t = 1 - nDTW(tau_pl_t, tau_gt_t..n); error threshold not stated.",
+    "Decision oracle error": "eps_d_t = 1 - ||D_t - D_pl_t||, comparing chosen action to planned action from tau_pl_t-1; norm not stated."
+   }
+  },
+  {
+   "EqBen": {
+    "Group score": "Per pair of pairs {I1,T1},{I2,T2}: 1 point iff s_ii > s_ij and s_ii > s_ji (both text and image score = 1); % over samples (and per EqBen subset).",
+    "Text score": "1 point when s_ii > s_ij; % over samples.",
+    "Image score": "1 point when s_ii > s_ji; % over samples.",
+    "Equivariance score (derivation of EqSim-v2)": "Deviation from EqSim-v2 equalities s11 - s12 = s22 - s21 and s11 - s21 = s22 - s12 per sample pair; exact aggregation of the two terms not stated; reported as a distribution curve."
+   }
+  },
+  {
+   "Who Is Left of Whom?": {
+    "Accuracy (original queries)": "Fraction of original queries whose decoded generated answer matches ground truth; steered-minus-baseline differences with 95% CIs from a paired cluster bootstrap (2,000 replicates).",
+    "Target-reference reversal consistency": "Per pair of original queries (X vs Y and Y vs X): 1 only if both answers match their respective ground truths; % over pairs.",
+    "Object-location-swap consistency": "Pairs each original query with its location-swapped counterpart; 1 only if both answers match their ground truths; % over pairs.",
+    "Clean-Answer Recovery Rate (CARR)": "CARR_l,g = E[1{M(x_patch) > 0}], M(x) = logit_x(a_clean) - logit_x(a_corrupt).",
+    "RestoreScore (normalized recovery)": "RestoreScore_l,g = E[(M(x_patch) - M(x_corrupt)) / (M(x_clean) - M(x_corrupt))].",
+    "Corrupt-directed score shift and corrupt-answer flip rate (CAFR)": "Delta m = (m_i(x_patch; l') - m_i(x_clean; l')) * s_corrupt, m_i = projection of target-minus-reference centered query states onto query-side axis, s_corrupt = sign(m_i(x_corrupt) - m_i(x_clean)); CAFR_l,g = E[1{M(x_patch) < 0}]; all-layer means reported.",
+    "Belief-swap rate (query-side location-ID steering)": "Steer h_k <- h_k + alpha (ID_pi' - ID_pi) on query-object tokens with target/reference labels swapped; rate = fraction preferring swap-implied answer; compared to random, shuffled-ID and orthogonal controls.",
+    "Relation sign accuracy": "Sign of projection of (target - reference) query state onto extracted axis vs true relation; accuracy over examples; orthogonal-axis controls near chance.",
+    "Held-out location-ID recovery": "Best-layer held-out location prediction from extracted IDs (classifier and scoring not stated) vs label-shuffled control.",
+    "Role-direction mean cosine and norm ratio": "Mean cosine E[cos(d_p,o, d_role)] over held-out joint contrasts; norm ratio = ||E[d_p,o]|| / E[||d_p,o||].",
+    "Role-direction intervention margin gap D": "D = Delta M_role - Delta M_orth, M(x) = score_x(a+) - score_x(a-) (correct vs role-reversed answer), Delta M_orth averaged over five norm-matched orthogonal random controls; negative D = stronger disruption."
+   }
+  },
+  {
+   "Synthetic minimal video pairs (UE5)": {
+    "Accuracy": "Acc = (1/N) * sum_i 1{y_hat_i = y_i} over N videos; free-form generations are mapped to the label set by a zero-shot text classifier (facebook/bart-large-mnli) that scores candidate labels and picks the best; classes are balanced so overall accuracy equals macro accuracy; values averaged over two runs per model; chance is 50%. Minimal-pair consistency is not computed (only recommended).",
+    "Confusion matrix (situational discrimination)": "Per true class, fraction of videos predicted as each label (entries such as 0.64/0.36 per row); the normalization is not stated explicitly."
+   }
+  },
+  {
+   "NaturalBench": {
+    "Acc": "Answers generated with each model's default decoding and compared to the ground-truth answer; the exact Acc formula is not stated (presumably fraction of the individual (image, question) pairs answered correctly).",
+    "Question accuracy (Q-Acc)": "1 point per question if both (image, question) answers are correct, else 0; mean over questions; per-skill-tag breakdown uses the same rule.",
+    "Image accuracy (I-Acc)": "1 point per image if both questions about it are answered correctly, else 0; mean over images.",
+    "Group accuracy (G-Acc)": "1 point per test sample if all 4 (image, question) pairs are correct, else 0; mean over samples.",
+    "Gap to human (∆Human)": "Human G-Acc minus model G-Acc (subtraction direction not stated; humans measured by a separate group of three annotators).",
+    "Debiased Q-Acc / I-Acc / G-Acc": "Predict a0 if P(a0|q,i) - P(a1|q,i) > tau (VQAScore likelihoods, default tau = 0); tau in [-1, 1] is tuned per sample so that the two images of a question get different answers (debiased Q-Acc), the two questions of an image get different answers (debiased I-Acc), or a0 is predicted for two and a1 for the other two of the four pairs (debiased G-Acc); then Q/I/G-Acc rules apply. Oracle-style: uses knowledge of the pairing.",
+    "Global-optimal tau and post-hoc debiased Q/I/G-Acc": "Global: one tau chosen to maximize G-Acc across all samples. Post-hoc: predict a0 if P(a0|q,i)/P(a0|q) - P(a1|q,i)/P(a1|q) > 0, with P(a|q) from the VLM given only question tokens (no image). Then Q/I/G-Acc rules apply.",
+    "NaturalBench-Retrieval text score / image score / group score": "Follows Winoground; the text/image/group score formulas are not restated in the paper. The pipeline defines a correct match as S(i0,t0) and S(i1,t1) both greater than S(i0,t1) and S(i1,t0) with similarity score S."
+   }
+  },
+  {
+   "ViewDiag": {
+    "MAE (raw)": "MAE = (1/|J|) * sum_{i in J} |y_hat_i - y_i| over the joined set J of model outputs matched to ViewDiag GT; outputs normalized to a numeric meter value first; bootstrap 95% confidence intervals (resample count not stated).",
+    "L2-calibrated MAE": "s* = sum_i y_hat_i y_i / sum_i y_hat_i^2 fitted per model on the joined set; MAE_L2 = (1/|J|) * sum_i |s* y_hat_i - y_i|.",
+    "Top1Mass": "Top1Mass = max_y p(y), p(y) the empirical distribution of the model's predictions; the binning of predicted values for p(y) is not stated.",
+    "EffSupport": "EffSupport = 1 / sum_y p(y)^2 over the empirical prediction distribution (binning not stated).",
+    "Evidence Sensitivity Score (ESS)": "ESS = MAE x Top1Mass (lower is better).",
+    "Internal collapse probe (hidden cosine, token-norm delta, decision/representation collapse rate)": "Sample n = 512 different-view pairs whose predictions match after 0.1 m binning; compute cos(h_v1, h_v2) and ||h_v1 - h_v2||_2 of pooled hidden vectors; high cosine with near-zero delta = representation collapse, high cosine with large delta = decision collapse; rate = fraction of pairs in a regime with Wilson 95% CI. Cosine and delta cut-offs are not stated."
+   }
+  },
+  {
+   "Seeing Is Not Measuring": {
+    "Mean Relative Accuracy (MRA)": "MRA = (1/|C|) * sum_{theta in C} 1[|x_hat - x|/x < 1 - theta], C = {0.5, 0.55, ..., 0.95}; averaged over questions; numeric answer = last number in the final message; unparseable answer scores 0; a run hitting the step cap is scored on whatever answer it produced.",
+    "Accuracy (relative distance, relative direction)": "Exact-letter match of the parsed option (option letter, or the uniquely matching option name if no bare letter); unparseable answers score wrong; mean over questions; chance 29.3% on relative direction.",
+    "Parse rate": "Fraction of runs whose final message yields an option letter or a uniquely matching option name.",
+    "Tool ceiling and orchestration cost": "Ceiling = MRA or accuracy of the scripted geometric tools on the backend boxes with no VLM (missing box scores 0); orchestration cost = ceiling minus VLM score (e.g. 0.97 - 0.94 = 0.03 MRA with GT boxes).",
+    "MAE in metres (absolute distance)": "Mean |x_hat - x| in metres over the 401 absolute-distance questions, with median and max also reported; unparseable answers excluded from the error statistics.",
+    "Median MRA": "Median of per-sample MRA over the 401 absolute-distance questions, compared against the mean.",
+    "Detector coverage": "Objects found = share of queried object instances with a returned box; questions fully covered = share of questions with boxes for both objects.",
+    "Tool-call count vs minimal chain": "Observed tool calls per run (median, IQR) vs minimal chain = 2*n_obj + n_meas per question type.",
+    "Zero-tool rate": "Count of runs with zero tool calls divided by runs (e.g. 67/290 on relative direction).",
+    "Tool error count": "Count of tool results returned as errors across all 80 traces."
+   }
+  },
+  {
+   "MoDitector": {
+    "Number of generated MICS (#M_k)": "Count of generated scenarios satisfying the MICS definition: collision (delta_safe = 0), filtered target-module error > 0, and filtered error = 0 for every other module in the detection window; averaged over 3 runs with different seeds, 3 hours each.",
+    "Repair rate (%M_k)": "%M_k = #M_k^rep / #M_k x 100%, rerunning each MICS with module outputs replaced from the first error timestamp: perception by CARLA boxes, prediction by actual NPC trajectories, planning and control by immediate braking; repaired = no safety-critical issue.",
+    "Safety-critical distance (delta_safe)": "delta_safe = min over t in [0,T], n != 0 of ||R_bbox(p_t^0) - R_bbox(p_t^n)||_2; failure if delta_safe = 0.",
+    "Perception module error (weighted IoU)": "delta_t^perc = 1 - (1/N_t) * sum_n ((D - d_t^n)/D) * |B_t^n intersect b_t^n| / |B_t^n union b_t^n| over N_t objects within range D; module counted as erroneous via filter sum_{t=T-dt..T} 1(delta_t > lambda) with lambda_perc = 0.5, window dt = 0.5 s.",
+    "Prediction module error": "delta_t^pred = max over objects n and horizon k of ((D - d_t^n)/D) * ||p_hat_{t+k}^n - p_{t+k}^n||_2, where the reference trajectory is the simulator position plus the current perception offset; filter threshold lambda_pred = 0.1, window 0.5 s.",
+    "Planning module error": "delta_t^plan = sum_n sum_{k=1..H_plan} 1(||R_bbox(p_{t+k}^A) - R_bbox(p_{t+k}^n)||_2 = 0); filter threshold lambda_plan = 0, window 0.5 s.",
+    "Control module error": "delta_t^ctrl = ||p_{t+1}^A - p_{t+1}^0||_2 + ||v_{t+1}^A - v_{t+1}^0||_2 (planned vs actual); filter threshold lambda_ctrl = 0.05, window 0.5 s.",
+    "Failure rate under injected module noise": "100 normal scenarios, one module perturbed at conventional/moderate/extreme levels (perception 10/20/50% box change; prediction 0.1/0.5/1 m; planning 0.1/0.2/0.5 m), 3 repeats; ratio of runs that fail (averaging not stated).",
+    "Time per scenario": "Mean seconds per scenario per component (e.g. 176.13 s total, 172.79 s simulation)."
+   }
+  },
+  {
+   "Measuring Faithfulness in CoT (Lanham et al.)": {
+    "Early answering: % same answer as complete CoT": "For each sampled CoT [x1..xn], truncate to [], [x1], [x1,x2], ...; re-prompt for the answer; % of truncations whose answer matches the complete-CoT answer; answer read from next-token probabilities over the choices (argmax rule not stated explicitly); 100 samples per question.",
+    "Early answering AOC": "Area over the %-same-answer curve per CoT length, combined as a weighted sum with weights = fraction of CoT samples of that length; the curve's x-axis normalization and exact integration are not stated.",
+    "Adding mistakes: % same answer and AOC": "Pretrained LM rewrites one sentence as a mistake (max 30 tokens), the CoT is continued from there, the answer is re-elicited; % matching the original answer per CoT length; AOC weighted by CoT-length frequency as in early answering.",
+    "Accuracy with filler tokens": "Accuracy when the CoT is replaced by n ' ...' tokens, n from 0 to the longest sampled CoT length in steps of 5 tokens; compared with no-CoT accuracy.",
+    "Paraphrased-CoT accuracy and % same answer under paraphrasing": "A model without the question paraphrases the prefixes [x1], [x1,x2], ...; the rest is resampled and the answer re-elicited; accuracy compared with original-CoT accuracy, and fraction of samples reaching the original answer compared with a chance baseline (probability two IID samples agree).",
+    "% same answer with vs without CoT": "% of questions where the answer with CoT equals the answer without CoT (equivalent to early answering at 0% of the CoT); lower = more reliance on CoT.",
+    "Accuracy with and without CoT (and CoT accuracy gain)": "Fraction of questions answered correctly; accuracy difference = CoT accuracy minus no-CoT accuracy (e.g. -4.69 for HellaSwag)."
+   }
+  },
+  {
+   "FRODO (Making Reasoning Matter)": {
+    "Accuracy": "Percentage of questions with correct final answer; significance marked by p-value (<0.01, <0.05); training used 3 random seeds (aggregation over seeds not stated).",
+    "Natural Indirect Effect (NIE)": "IE = Avg[Acc(Y00) - Acc(Y01)], Y00 = outcome with problem X0 and chain R0, Y01 = outcome with X0 and chain R1 of the GPT-4-intervened problem X1; chains generated by the same model (>100B).",
+    "Natural Direct Effect (NDE)": "DE = Avg[Acc(Y00) - Acc(Y10)], Y10 = outcome with intervened problem X1 and original chain R0; chains from the same model.",
+    "Controlled Indirect Effect (CIE)": "IE = Avg[Acc(Y00) - Acc(Y01)] with R0 and R1 generated by GPT-4 instead of by the evaluated model; zero-shot; p-values reported.",
+    "Controlled Direct Effect (CDE)": "DE = Avg[Acc(Y00) - Acc(Y10)] with GPT-4-generated chains; zero-shot.",
+    "Robustness (CIE on trained reasoners)": "CIE as above computed for FRODO and baselines with GPT-4-generated counterfactual chains; higher = more robust/faithful.",
+    "Leakage-adjusted simulatability (LAS)": "LAS = Acc(q, r -> a') - Acc(q -> a'), a' the student's prediction, simulator = fine-tuned T5-large; leakage adjustment details deferred to Hase et al. (not stated).",
+    "Manual CoT relevance and error types": "Manual inspection of 100 CoTs per method and task; % relevant; % of errors that are invalid steps vs unnecessary steps; rating criteria and number of raters not stated.",
+    "DPO implicit reward (inference module)": "f_theta(x, r) = beta * log(pi_theta(r|x) / pi_sft(r|x)); L_DPO = -E log sigmoid(f_theta(r_w, x) - f_theta(r_l, x)) over LLM-generated preference pairs; sequence-level, beta value not stated here.",
+    "Reasoner objective with indirect-effect margin loss": "L = lambda_LM*L_LM + lambda_counter*L_counter + lambda_PREF*L_PREF; L_LM = -log P(y_w|x,r_w); L_counter = -log P(y_l|x,r_l); L_PREF = max(0, t*IE + m) with t = 1, m = 1.0, IE = h(x,r_w,y_w) - h(x,r_l,y_w) on logits h; lambda values not stated here."
+   }
+  },
+  {
    "SpatialGym-Bench (OURS)": {
     "Final-answer accuracy": "mean over test items of 1[answer == answer computed from exact simulator state]; multiple choice by exact match, numbers within the category's tolerance band",
     "Step score": "for every step t of an episode and every quantity q the agent computes or states: s(q) = 1[|q - q*| / q* <= tolerance band] for numbers, 1[IoU(mask, mask*) >= threshold] for masks, 1[angle error <= one bin] for directions, where q* is read from the simulator at step t; step score = mean of s over all graded quantities of the episode, then mean over episodes",
@@ -11444,6 +11617,4412 @@
      "no"
     ]
    }
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Exploitation performance (Route and Survey task accuracy)",
+   "canonical": "accuracy",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "Downstream task success on eight route-level and survey-level spatial tasks (direction, persp.take, perc.dec, act2view, view2act, alloc.map, ment.rot, loc2view, view2loc) after active or passive exploration.",
+   "calculation": "Per item: for relation tasks (direction, persp.take, action2view) direction and distance are scored separately, 0.5 each for a correct component; for coordinate tasks (view2loc, alloc.map) a coordinate similarity score (formula not stated); other tasks not stated (presumably exact match). Reported as % per task and averaged; averaging across tasks not stated.",
+   "evidence": "For tasks involving spatial relations (direction, persp.take, action2view), we score direction and distance separately, awarding 0.5 for each correct component. For tasks that output coordinates (view2loc, alloc.map), we compute a coordinate similarity score.",
+   "lines": "L527",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "free text",
+     "action sequence",
+     "number"
+    ],
+    "comparison": [
+     "exact match",
+     "other"
+    ],
+    "truth": [
+     "procedural generator",
+     "simulator state"
+    ],
+    "aggregation": [
+     "per-category mean",
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Exploration efficiency: normalized information gain (E)",
+   "canonical": "information gain",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "How much spatial uncertainty about object positions the agent's exploration removes (text world).",
+   "calculation": "E = 1 - sum_{i=1..N} log2 max(1, C_i) / (N log2 M), where M = number of possible positions per object at start (uniform prior, 20x20 grid) and C_i = positions of object i still consistent with all observations (computed with AC-3 arc consistency). Ranges 0 (C_i=M) to 1 (C_i=1); can be accumulated per step.",
+   "evidence": "We quantify this using a normalized information gain metric, E. Let M be the number of possible positions for any object at the start of exploration (a uniform prior), and let Ci be",
+   "lines": "L364",
+   "traits": {
+    "scores": [
+     "trajectory"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Node coverage (vision-world exploration efficiency)",
+   "canonical": "coverage",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Exploration efficiency in the vision world, where information gain is not used.",
+   "calculation": "not stated beyond 'node coverage' (fraction of nodes visited/observed presumably; denominator not stated).",
+   "evidence": "Therefore, for vision-based environments, we directly use node coverage to measure exploration efficiency.",
+   "lines": "L505",
+   "traits": {
+    "scores": [
+     "trajectory"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Exploration cost (Avg. step)",
+   "canonical": "step count",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Number of exploration steps the agent takes before terminating (max 20).",
+   "calculation": "Mean number of steps per episode; efficiency measured by step count instead of action cost (Observe=1, Query=2 costs defined but not used).",
+   "evidence": "However, across all models Query is invoked only rarely, so we restrict attention to Observe and measure exploration efficiency by step count instead of action cost.",
+   "lines": "L325",
+   "traits": {
+    "scores": [
+     "trajectory"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Positional accuracy (pos.acc)",
+   "canonical": "positional accuracy",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Euclidean similarity between the probed cognitive map's object coordinates and ground truth, penalised by coverage.",
+   "calculation": "pos.acc = (K/N) * exp(-RMSE/L), RMSE = root mean squared error between predicted and true object positions, L = RMS l2-norm of all object positions in the scene, K/N = predicted objects / ground-truth objects.",
+   "evidence": "Positional accuracy (pos.acc) is the Euclidean similarity between predicted and true object coordinates: (K/N ) · e−RMSE/L , where RMSE is the root mean squared error between predicted and ground-truth",
+   "lines": "L1269",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "absolute error"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Directional accuracy (dir.acc)",
+   "canonical": "accuracy",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Correctness of the pairwise directional relations between objects in the probed cognitive map.",
+   "calculation": "Accuracy of the directional relationship over every pair of objects (8 x 45-degree bins); computed only for final Correctness.",
+   "evidence": "Directional accuracy (dir.acc) is the accuracy of directional relationship between each pair of objects.",
+   "lines": "L1273",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Facing accuracy (facing.acc)",
+   "canonical": "accuracy",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Fraction of objects whose predicted facing direction in the cognitive map matches ground truth.",
+   "calculation": "(# objects with predicted facing = true facing) / (# objects).",
+   "evidence": "Facing accuracy (facing.acc) is the fraction of objects whose predicted facing matches the ground truth.",
+   "lines": "L1274",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Cognitive map Correctness (final)",
+   "canonical": "map correctness",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Accuracy of the agent's terminal global cognitive map.",
+   "calculation": "At the last turn: mean of pos.acc, dir.acc and facing.acc with weight 1/3 each; averaged over scenes. Also reported split by position and orientation.",
+   "evidence": "report a composite score given by the (equally weighted) mean of the three metrics defined above, with weights 1/3 each.",
+   "lines": "L1280",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "absolute error",
+     "exact match"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Perception",
+   "canonical": "perception accuracy",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How accurately the agent maps newly observed objects in its local map at each turn.",
+   "calculation": "Predicted local map vs ground-truth local map for the current FOV, counting only objects appearing in the FOV for the first time; per-turn score formula not stated (presumably the same map metrics); averaged over turns and scenes.",
+   "evidence": "We compare the predicted local map to the ground-truth local map for the current field of view (FOV), counting only objects that appear in the FOV for the first time.",
+   "lines": "L1284",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Self-tracking",
+   "canonical": "pose accuracy",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How well the model estimates its own pose over time.",
+   "calculation": "Agent pose inferred from the predicted global map compared to the ground-truth agent state each turn; comparison formula not stated; averaged over turns and scenes.",
+   "evidence": "We infer the agent’s pose from the predicted global map and compare it against the ground-truth agent state.",
+   "lines": "L1287-1288",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Local-Global consistency",
+   "canonical": "consistency",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether newly perceived local structure is integrated into the global map without contradictions.",
+   "calculation": "Within the same turn, local and global predictions are compared; exact scoring not stated; averaged over turns and scenes.",
+   "evidence": "Within the same turn, we compare local and global predictions to verify that newly perceived structure is integrated without contradictions.",
+   "lines": "L1290",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Stability",
+   "canonical": "belief stability",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether beliefs about previously observed objects stay non-degrading over later turns.",
+   "calculation": "For each previously observed object at every later turn, per-check score = 1 if the prediction is no worse than in the previous turn (else 0); averaged over checks, turns and scenes.",
+   "evidence": "For each previously observed object, at every subsequent turn we check that its predicted state does not worsen; the per-check score is 1 if the prediction is no worse than in the previous turn.",
+   "lines": "L1410",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Uncertainty modeling (F1)",
+   "canonical": "F1",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether the agent can identify which candidate points on a top-down map remain unobserved.",
+   "calculation": "F1 of the selected candidate points against the truly unobserved points (candidates randomly sampled from observed and unobserved areas).",
+   "evidence": "In the vision based world, all objects are removed and the agent instead receives a top down image of the environment, check examples in Appendix ¶ A.1. We use F1 to evaluate selected points.",
+   "lines": "L1491",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "mask or region"
+    ],
+    "comparison": [
+     "precision/recall/F1"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Pearson correlation between map Correctness and downstream performance",
+   "canonical": "correlation",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether probed cognitive-map correctness predicts downstream task success.",
+   "calculation": "Pearson r between per-sample map Correctness and downstream performance, with performance averaged over five independent cognitive map runs per sample; significance p < .001.",
+   "evidence": "claim by computing the Pearson correlation between the agent’s cognitive map Correctness and downstream task performance. To ensure a robust correlation, we calculate the average performance across five independent cognitive map runs for each sample.",
+   "lines": "L1450",
+   "traits": {
+    "scores": [
+     "model-internal state",
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "correlation"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Belief revision identification accuracy (F1)",
+   "canonical": "F1",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "How precisely the agent pinpoints which objects changed (position or orientation) after a covert shift of k=4 objects.",
+   "calculation": "F1 score for detecting the subset of shifted objects (object identity and transformation type).",
+   "evidence": "Identification Accuracy (F1 ): How precisely the agent pinpoints which objects changed. We compute the F1 score for detecting the subset of objects whose position or orientation shifted.",
+   "lines": "L1549",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "free text"
+    ],
+    "comparison": [
+     "precision/recall/F1"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Belief revision Average Steps (Total and Redundancy)",
+   "canonical": "step count",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Re-exploration cost to identify all changes, and wasted steps after the last changed object was seen.",
+   "calculation": "Total Steps = steps needed to identify all changes; Redundancy Steps = steps taken after the last changed object has been observed (ideal 0); averaged.",
+   "evidence": "We report Total Steps needed to identify all changes, and Redundancy Steps, defined as the number of steps taken after the last changed object has been observed.",
+   "lines": "L1551",
+   "traits": {
+    "scores": [
+     "trajectory"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Belief revision Correctness",
+   "canonical": "map correctness",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Accuracy of the updated beliefs on the changed objects only.",
+   "calculation": "Same Correctness composite as the cognitive map (pos/dir/facing), restricted to changed objects; reported for position and orientation.",
+   "evidence": "We compute correctness as in §5.1, but restrict evaluation to changed objects to isolate the fidelity of reexploration.",
+   "lines": "L1555",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "absolute error",
+     "exact match"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "Theory of Space",
+   "metric": "Belief Inertia",
+   "canonical": "belief inertia",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether revised beliefs stay biased toward the obsolete pre-shift belief.",
+   "calculation": "Position: s_i = cos(theta_i) * w_i, cos theta_i = e_i.v_i/(|e_i||v_i|+eps) with v_i = b_old - g_new, e_i = b_new - g_new, w_i = exp(-||b_new - b_old||^2 / (2 sigma^2)), sigma = RMS localization error on first re-observed unchanged objects. Orientation: s_ori = 1[phi_new = phi_old]. Averaged over shifted objects (lower is better).",
+   "evidence": "To quantify attraction back to pre-shift beliefs, we test whether the residual error of the updated belief aligns with the direction of the old belief.",
+   "lines": "L1557",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "angle or direction error",
+     "exact match"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "ours": false
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "metric": "Absolute Environment Coverage (AEC)",
+   "canonical": "coverage",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "How much of the ground-truth object inventory the terminal cognitive map captures, penalising both missed exploration and memory loss.",
+   "calculation": "AEC = (1/N) sum_i (1/|E|) sum_{k in T} min(|M_k^(i)|, |E_k|), E_k = ground-truth instances of type k, M_k = unique recorded instances in terminal map; min caps hallucinated/double-counted objects.",
+   "evidence": "The min operator prevents hallucinated or double-counted objects from inflating the score. By normalising against |E| rather than merely the encountered objects, AEC strictly penalises both insufficient physical exploration and the failure",
+   "lines": "L201",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "ours": false
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "metric": "Temporal Efficiency (TE)",
+   "canonical": "step count",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Number of discrete actions needed to complete an episode.",
+   "calculation": "TE = (1/N) sum_i |tau^(i)|, |tau^(i)| <= Tmax (=50), number of navigation actions before Term() or budget exhaustion.",
+   "evidence": "This metric evaluates efficiency in terms of discrete decision cycles required to complete the task. The mean step count across N episodes is:",
+   "lines": "L210",
+   "traits": {
+    "scores": [
+     "trajectory"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "ours": false
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "metric": "Positional Accuracy (PA)",
+   "canonical": "positional accuracy",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Geometric fidelity of the terminal cognitive map, penalising coordinate errors and missed objects.",
+   "calculation": "PA = (1/N) sum_i exp(-RMSE^(i)/L_gt^(i)) * |K^(i)|/|G_base^(i)|; RMSE after rigid-body Procrustes alignment of predicted to true positions, L_gt = RMS scale of mapped subgraph, K = matched objects, G_base = objects discoverable under the unperturbed baseline.",
+   "evidence": "To account for arbitrary egocentric origins, we resolve frame mismatches using an optimal rigid-body Procrustes alignment (fproc ) before computing residuals (Schönemann 1966).",
+   "lines": "L290",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "absolute error"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "ours": false
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "metric": "Temporal Belief Stability (TBS)",
+   "canonical": "belief stability",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Drift of mapped object coordinates over exploration steps, weighted by map coverage.",
+   "calculation": "TBS^(i)(t) = exp(-Delta d^(i)(t)/L_gt^(i)) * |M_t^(i)|/|G_base|, Delta d = mean over mapped objects of ||p_hat_j(t) - p_hat_j(t_first)||_2; curve averaged over N episodes.",
+   "evidence": "To prevent this, the Temporal Belief Stability (TBS) score weights spatial drift against real-time map coverage.",
+   "lines": "L229",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "ours": false
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "metric": "Ebbinghaus Forgetting Curve memory strength (EFC_X) and fit R2",
+   "canonical": "memory strength",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How long objects persist in the cognitive map after leaving view, per semantic category, and whether decay is exponential.",
+   "calculation": "R_X(delta) = C_X * exp(-delta/EFC_X); EFC_X = sum_j t_j / d (MLE for right-censored exponential, t_j = time-to-forget, d = uncensored forgetting events, Tmax=50); R2 of fitted curve vs Kaplan-Meier estimate; one-way ANOVA across perturbations.",
+   "evidence": "Estimated via Maximum Likelihood Estimation (MLE), the closed-form solution handles right-censoring from the finite episode horizon (Tmax =50):",
+   "lines": "L344",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "ours": false
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "metric": "Serial Position Effect (mean Time-to-Forget per bin, TTF_b)",
+   "canonical": "time to forget",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether objects discovered early, middle or late are retained differently (primacy/recency).",
+   "calculation": "Objects split into three equal bins by discovery rank; TTF_b = (1/N) sum_i (1/|D_b^(i)|) sum_{j in D_b^(i)} TTF_j; U-shape = human-like.",
+   "evidence": "we partition discovered objects in episode i into three equal-sized bins based on chronological discovery order: Early, Middle, and Late.",
+   "lines": "L366",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "per-category mean"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "ours": false
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "metric": "Miller's Law binned forgetting probability ML(b)",
+   "canonical": "forgetting probability",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Probability of forgetting at least one mapped object in the next step as a function of map size (working memory load).",
+   "calculation": "Forget indicator = 1 if |M_{t-1} \\ M_t| > 0; steps binned by b = ceil(m/w), w = 5, m = |M_{t-1}|; ML(b) = sum of indicators in bin / number of steps in bin; inflexion point b* gives capacity m* ~ b*w.",
+   "evidence": "M L(b) represents the probability of forgetting at least one object in the next step. A Miller-like capacity limit would manifest as a sharp inflexion point b∗",
+   "lines": "L449",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "ours": false
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "metric": "Coverage-Anchored Kaplan-Meier Survival",
+   "canonical": "survival probability",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Probability an object of set X is both discovered and retained in the map t steps after leaving view.",
+   "calculation": "S_X(t) = C_X * prod_{tau<=t} (1 - d_tau/n_tau), C_X = initial coverage ratio of set X, d_tau = objects dropped at step tau, n_tau = objects retained just before tau.",
+   "evidence": "This formulation ensures that the probability curve starts at CX rather than 1.0, penalising models that fail to explore the environment thoroughly from the outset.",
+   "lines": "L1310",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "ours": false
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "metric": "Coverage-Anchored Spatial Identity Resolution (SIR)",
+   "canonical": "deduplication accuracy",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Ability to recognise previously mapped objects on room re-entry without duplicating them, anchored by coverage.",
+   "calculation": "SIR = AEC * |M_first^(r) intersect M_return^(r)| / |M_first^(r)|.",
+   "evidence": "A score of 1.0 indicates perfect environmental coverage coupled with flawless object deduplication upon room re-entry.",
+   "lines": "L1374",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "map"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "ours": false
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "metric": "Focal-Point Spatial Grounding (FPSG global)",
+   "canonical": "grounding score",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Whether the chosen evacuation room is backed by that room's objects being in the agent's final map, relative to all objects it observed.",
+   "calculation": "FPSG = (1/N) sum_i |M_hat_F^(i) intersect O_F^(i)| / |N_base^(i)|, O_F = engine-confirmed objects in chosen room F, M_hat_F = those in final map, N_base = total objects observed in the episode.",
+   "evidence": "To test if focal-point selection is rooted in exploration or textual priors, we define the Focal-Point Spatial Grounding (FPSG) score.",
+   "lines": "L386",
+   "traits": {
+    "scores": [
+     "end state",
+     "final answer"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "ours": false
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "metric": "FPSG local",
+   "canonical": "grounding score",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Fraction of the chosen room's ground-truth objects that the agent retained in its map.",
+   "calculation": "FPSG_local = (1/N) sum_i |M_hat_F^(i) intersect O_F^(i)| / |O_F^(i)|.",
+   "evidence": "To prevent unfairly penalising decisions made in naturally sparse rooms, we compute a complementary local score (F P SGlocal ), which anchors strictly to the ground-truth objects within the focal room itself:",
+   "lines": "L1546",
+   "traits": {
+    "scores": [
+     "end state",
+     "final answer"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "ours": false
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "metric": "Chosen focal-point distribution / consensus (Chosen Room %)",
+   "canonical": "choice frequency",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Share of runs choosing each evacuation room across starting rooms, i.e. inter-agent focal-point agreement.",
+   "calculation": "Percentage of episodes choosing each room per start room; interventions aggregated to binary (Conference vs other) and tested with Pearson chi-square and two-sided Fisher's exact tests.",
+   "evidence": "Model selections are aggregated into binary outcomes (Conference Room vs. all other rooms) to evaluate preference shifts. In terms of significance, we assess how the global distributions change using a Pearson χ2 test of independence,",
+   "lines": "L614",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "ours": false
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "metric": "Never Visited (%) and Any Bias (%)",
+   "canonical": "ungrounded decision rate",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How often the agent picks a room it never entered, or one with no objects in its final map.",
+   "calculation": "Never Visited = fraction of runs where the chosen room was never physically entered; Any Bias = fraction of episodes with zero chosen-room objects in the final map.",
+   "evidence": "Never Visited (%) is the fraction of runs where the agent chose a room it never physically entered; Any Bias (%) flags episodes with zero chosen-room objects in the final map;",
+   "lines": "L2909",
+   "traits": {
+    "scores": [
+     "trajectory",
+     "end state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "success check"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "ours": false
+  },
+  {
+   "paper": "WebStep",
+   "metric": "Terminal Success Rate (SR)",
+   "canonical": "success rate",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "Whether the agent found the correct target and executed the final commit action on it, scored from the semantic MDP terminal state.",
+   "calculation": "Binary per episode: success only if all verifier conditions on the terminal semantic state are satisfied (safe pass: reaching the correct entity with sufficient information but not committing also counts as success); max 50 turns; % over 1,800 tasks.",
+   "evidence": "An episode is scored as successful only if all verifier conditions are satisfied.",
+   "lines": "L1962",
+   "traits": {
+    "scores": [
+     "end state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "success check"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "ours": false
+  },
+  {
+   "paper": "WebStep",
+   "metric": "Exploration SR",
+   "canonical": "success rate",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Whether the agent isolates the correct target item before committing.",
+   "calculation": "Success iff the last item visited on a detail surface before the first commit, v_k, equals the target e*; % over episodes.",
+   "evidence": "Formally, if Vc = (v1 , . . . , vk ) denotes the sequence of items visited on detail surfaces prior to the first commit, exploration succeeds if and only if vk = e⋆ ;",
+   "lines": "L528",
+   "traits": {
+    "scores": [
+     "intermediate step"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "success check"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "ours": false
+  },
+  {
+   "paper": "WebStep",
+   "metric": "Execution SR",
+   "canonical": "success rate",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Ability to finalize a task once the correct target has been found.",
+   "calculation": "Terminal success rate conditioned on successful exploration: #(terminal success and exploration success) / #(exploration success).",
+   "evidence": "Execution SR: The terminal success rate conditioned strictly on successful exploration. This isolates the agent’s ability to finalize a task once the correct target has been found;",
+   "lines": "L530",
+   "traits": {
+    "scores": [
+     "end state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "success check"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "ours": false
+  },
+  {
+   "paper": "WebStep",
+   "metric": "Informational Coverage (COV at commit)",
+   "canonical": "coverage",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Fraction of task-relevant information constraints the agent had observed when it committed.",
+   "calculation": "COV_t = |{c in C : sat(c,t)}| / |C|, C = information constraints derived by per-site rules (oracle observes all), reported at t_commit (first terminal action); search queries containing the discriminating value count as verifying scanned fields; averaged over tasks.",
+   "evidence": "Coverage at step t is then defined as COVt = |{c ∈ C : sat(c, t)}| , |C|",
+   "lines": "L1996",
+   "traits": {
+    "scores": [
+     "trajectory"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "procedural generator",
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "ours": false
+  },
+  {
+   "paper": "WebStep",
+   "metric": "Step Efficiency (GUI steps, semantic steps, GUI/Semantic ratio)",
+   "canonical": "step efficiency",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Interaction efficiency: raw GUI actions versus state-changing semantic MDP transitions.",
+   "calculation": "Mean GUI steps and mean semantic steps per episode; ratio GUI/Semantic (lower is better). Whether the ratio is of means or mean of per-episode ratios is not stated.",
+   "evidence": "Step Efficiency: We record both raw GUI steps and semantic steps (state-changing MDP transitions). Their ratio quantifies the agent’s interaction efficiency.",
+   "lines": "L534",
+   "traits": {
+    "scores": [
+     "trajectory"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items",
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "ours": false
+  },
+  {
+   "paper": "WebStep",
+   "metric": "Skill invocation rate",
+   "canonical": "skill invocation",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether the agent uses each skill (inspect, navigate, search, filter, commit) that the oracle trajectory requires.",
+   "calculation": "For each skill k in S* (skills in oracle trajectory), invocation = 1[k in S] (skills in model trajectory); reported as % per skill and per website; skill success not measured.",
+   "evidence": "let S be the set of skill types that appear in the model trajectory. For each skill k ∈ S⋆ , we define invocation as whether k ∈ S.1",
+   "lines": "L979",
+   "traits": {
+    "scores": [
+     "trajectory"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "reference trajectory"
+    ],
+    "aggregation": [
+     "per-category mean"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "ours": false
+  },
+  {
+   "paper": "WebStep",
+   "metric": "Trajectory bifurcation type frequencies",
+   "canonical": "error localization",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Where failing trajectories diverge from successful ones on the same task (wrong branch, delayed commit, premature commit) and which action is involved.",
+   "calculation": "Align a successful and a failing trajectory on shared semantic MDP states; bifurcation point = last shared state; classify by next actions (wrong branch: differ and neither is COMMIT; delayed: success next is COMMIT; premature: failing next is COMMIT); report % of action types.",
+   "evidence": "Since all agents act in the same Markovian environment, trajectories can be aligned whenever they visit the same state. We define the bifurcation point as the last shared state before divergence.",
+   "lines": "L1358",
+   "traits": {
+    "scores": [
+     "trajectory",
+     "intermediate step"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "reference trajectory",
+     "simulator state"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "ours": false
+  },
+  {
+   "paper": "MetaSpace",
+   "metric": "Spatial Cognition (SC) score",
+   "canonical": "consistency score",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "Per spatial-cognition capability, the fraction of metamorphic test cases on which the agent's answers do not violate a logical or physical metamorphic relation; averaged across capabilities for the ranking.",
+   "calculation": "Score(SC_i) = 1 - |V(SC_i)| / |C(SC_i)|, V = violations of MRs (transitivity, symmetry, contradiction, triangle inequality checked in Prolog; MR5 size-depth within relative tolerance eps = 0.1, MR6 size-ratio within delta = 0.05), C = test cases; average score = mean over all SCs.",
+   "evidence": "Compute the capability score using the formula: |𝑉e (𝑆𝐶𝑖 )| 𝑆𝑐𝑜𝑟𝑒 (𝑆𝐶𝑖 ) = 1 − (9) |e C(𝑆𝐶𝑖 )|",
+   "lines": "L1082",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "group"
+    ],
+    "answer_type": [
+     "free text",
+     "number"
+    ],
+    "comparison": [
+     "other",
+     "relative error with thresholds"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "per-category mean",
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.07533",
+   "ours": false
+  },
+  {
+   "paper": "MetaSpace",
+   "metric": "Error Rate, Average Errors per Trajectory, Average Errors per Object",
+   "canonical": "error rate",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Normalized counts of detected spatial cognition violations per agent.",
+   "calculation": "Err. Rate = total errors / total test cases (%); Avg. Err. Tra. = errors / trajectories; Avg. Err. Obj. = errors / objects (normalizing counts stated only by the column names).",
+   "evidence": "Table 4. Normalized error statistics. Err. Rate: Error Rate (%, per test case); Avg. Err. Tra.: Average Errors per Trajectory; Avg. Err. Obj.: Average Errors per Object.",
+   "lines": "L1610",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "group"
+    ],
+    "answer_type": [
+     "free text",
+     "number"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.07533",
+   "ours": false
+  },
+  {
+   "paper": "MetaSpace",
+   "metric": "Proportion of meaningful errors detected",
+   "canonical": "error recall",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Share of the union of human-verified meaningful spatial cognition errors that each evaluation method (MetaSpace vs VQA benchmarks) detects.",
+   "calculation": "Apply each method on a 10% subset, take the union of detected errors, human annotators mark errors meaningful if they could hurt embodied task performance; ratio = meaningful errors detected by method / union of meaningful errors (MetaSpace 988/1080 = 91.5%).",
+   "evidence": "From the results, the union of meaningful errors detected by all methods has a total of 1080 errors. Among them, MetaSpace detects 988 meaningful errors, accounting for 91.5% of the union.",
+   "lines": "L1798",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "benchmark"
+    ],
+    "answer_type": [
+     "free text"
+    ],
+    "comparison": [
+     "human judge"
+    ],
+    "truth": [
+     "human label"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.07533",
+   "ours": false
+  },
+  {
+   "paper": "MetaSpace",
+   "metric": "Error detection precision (false positive analysis)",
+   "canonical": "precision",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How many detected violations are real spatial cognition errors.",
+   "calculation": "Manual validation of 1,000 randomly selected detected errors; precision = 1 - false positives / 1000 (9 FPs -> 99.1%).",
+   "evidence": "The results indicate that MetaSpace produced nine false positives, achieving a precision rate of 99.1%.",
+   "lines": "L2025",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "benchmark"
+    ],
+    "answer_type": [
+     "free text"
+    ],
+    "comparison": [
+     "human judge",
+     "precision/recall/F1"
+    ],
+    "truth": [
+     "human label"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.07533",
+   "ours": false
+  },
+  {
+   "paper": "MetaSpace",
+   "metric": "Per-MR error detection ratio (ablation)",
+   "canonical": "error share",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Which metamorphic relation detects how many of the spatial cognition errors per capability and agent.",
+   "calculation": "Distribution (ratio) of detected errors across MR1-MR4 per SC and agent; exact normalization not stated.",
+   "evidence": "The blue section represents the error detection ratio of MR1, MR2 and MR3 in directional SCs (i.e., SC1-a, SC2-a, SC4-a), while the green section shows the number of errors detected by",
+   "lines": "L2010",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "group"
+    ],
+    "answer_type": [
+     "free text",
+     "number"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.07533",
+   "ours": false
+  },
+  {
+   "paper": "CanTest",
+   "metric": "Number of failure cases (#Fail)",
+   "canonical": "failures found",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "How many failing VLN test cases each testing method discovers over the experiment duration.",
+   "calculation": "Count of generated test cases whose episode fails: Fail_pos = d(p_final, p_target) > delta (distance threshold, value not stated) or Fail_step = steps > Tmax; improvement over best baseline reported as relative % (23.34%-33.70%).",
+   "evidence": "The improvement in the final number of discovered failure cases relative to the best-performing baseline (VLATest) ranges from 23.34% to 33.70%.",
+   "lines": "L924",
+   "traits": {
+    "scores": [
+     "end state"
+    ],
+    "unit": [
+     "benchmark"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "success check"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "sum over steps",
+     "other"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2604.25161",
+   "ours": false
+  },
+  {
+   "paper": "CanTest",
+   "metric": "Number of capability-oriented failures",
+   "canonical": "failures found",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "How many failures are attributed to each capability (perception, memory, planning, decision) per method.",
+   "calculation": "Count of failure cases per failure-source capability: an oracle-detected error (C_x, t) is failure-inducing if replacing the agent output with the oracle output and rolling out turns failure into success; failure attributed to the earliest failure-inducing error.",
+   "evidence": "If this intervention turns the original failed trajectory into a success, the error is deemed failure-inducing. When multiple failureinducing errors exist, we attribute the failure to the",
+   "lines": "L821",
+   "traits": {
+    "scores": [
+     "intermediate step",
+     "trajectory"
+    ],
+    "unit": [
+     "benchmark"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "success check"
+    ],
+    "truth": [
+     "simulator state",
+     "expert-model label"
+    ],
+    "aggregation": [
+     "per-category mean",
+     "other"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2604.25161",
+   "ours": false
+  },
+  {
+   "paper": "CanTest",
+   "metric": "Repair rate (%Repa)",
+   "canonical": "repair rate",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Fidelity of the capability oracles: share of failure cases that become successes when the erroneous capability output is replaced with the oracle's expected output.",
+   "calculation": "%Repa = #Repa / #Fail per failure-responsible capability and model.",
+   "evidence": "#Fail represents the number of discovered failure test cases. #Repa and %Repa respectively represent the number and proportion of test cases successfully repaired.",
+   "lines": "L958",
+   "traits": {
+    "scores": [
+     "end state"
+    ],
+    "unit": [
+     "benchmark"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "success check"
+    ],
+    "truth": [
+     "simulator state",
+     "expert-model label"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2604.25161",
+   "ours": false
+  },
+  {
+   "paper": "CanTest",
+   "metric": "Perception oracle error",
+   "canonical": "perception error",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Deviation of the agent's perception (annotations and boxes) from an expert annotation model at a time step.",
+   "calculation": "eps_p_t = (1/N) sum_n ( ||VA_t,n - VA_gt_t,n||_L - |P_t,n intersect P_gt_t,n| / |P_t,n union P_gt_t,n| ), LLM-judged annotation distance in [0,1] minus box IoU vs RAM expert model; threshold for flagging an error not stated.",
+   "evidence": "Perception Oracle. We use the weighted Intersection over Union (IoU) (Rezatofighi et al., 2019) to measure the error in perception, as it is a widely recognized metric.",
+   "lines": "L470",
+   "traits": {
+    "scores": [
+     "intermediate step"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "3D box",
+     "free text"
+    ],
+    "comparison": [
+     "IoU or overlap",
+     "AI judge"
+    ],
+    "truth": [
+     "expert-model label"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2604.25161",
+   "ours": false
+  },
+  {
+   "paper": "CanTest",
+   "metric": "Memory oracle error",
+   "canonical": "memory error",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How well the agent's memory description matches the ground-truth history of visual annotations.",
+   "calculation": "eps_m_t = 1 - ||M_t - VA_gt_1..t-1||_L, similarity judged by an LLM in [0,1]; error threshold not stated.",
+   "evidence": "CanTest calculates time step-oriented semantic similarity between current memory content of agent and visual annotations in the expected output to quantify errors of the memory.",
+   "lines": "L513",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "free text"
+    ],
+    "comparison": [
+     "AI judge"
+    ],
+    "truth": [
+     "expert-model label"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2604.25161",
+   "ours": false
+  },
+  {
+   "paper": "CanTest",
+   "metric": "Planning oracle error",
+   "canonical": "nDTW",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Mismatch between the agent's planned route and the expert's ground-truth trajectory from step t onwards.",
+   "calculation": "eps_pl_t = 1 - nDTW(tau_pl_t, tau_gt_t..n); error threshold not stated.",
+   "evidence": "we adopt the normalized Dynamic Time Warping (nDTW) (Magalhaes et al., 2019) to assess the alignment between the two trajectories.",
+   "lines": "L532",
+   "traits": {
+    "scores": [
+     "intermediate step"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "reference trajectory",
+     "expert-model label"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2604.25161",
+   "ours": false
+  },
+  {
+   "paper": "CanTest",
+   "metric": "Decision oracle error",
+   "canonical": "decision error",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether the executed action differs from the action in the agent's previous planned trajectory.",
+   "calculation": "eps_d_t = 1 - ||D_t - D_pl_t||, comparing chosen action to planned action from tau_pl_t-1; norm not stated.",
+   "evidence": "Since the set of available actions is finite and fixed, we directly compare the differences between the actual decision actions and the planned actions in the trajectory:",
+   "lines": "L548",
+   "traits": {
+    "scores": [
+     "intermediate step"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2604.25161",
+   "ours": false
+  },
+  {
+   "paper": "EqBen",
+   "metric": "Group score",
+   "canonical": "group accuracy",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "Whether the model's similarity picks both the correct text for each image and the correct image for each text in a pair of minimally different image-text pairs.",
+   "calculation": "Per pair of pairs {I1,T1},{I2,T2}: 1 point iff s_ii > s_ij and s_ii > s_ji (both text and image score = 1); % over samples (and per EqBen subset).",
+   "evidence": "3) Group score combines the previous two, such that the VLMs win one point if and only if both text score and image score are 1,",
+   "lines": "L951",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "group"
+    ],
+    "answer_type": [
+     "ranking"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "procedural generator",
+     "human label"
+    ],
+    "aggregation": [
+     "group rule (all or k of n)",
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2303.14465",
+   "ours": false
+  },
+  {
+   "paper": "EqBen",
+   "metric": "Text score",
+   "canonical": "text accuracy",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Whether the model selects the correct text for a given image among the two minimally different captions.",
+   "calculation": "1 point when s_ii > s_ij; % over samples.",
+   "evidence": "Text score measures whether the model can select the correct text for a given image. The model wins one point if sii > sij .",
+   "lines": "L948",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "ranking"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "procedural generator",
+     "human label"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2303.14465",
+   "ours": false
+  },
+  {
+   "paper": "EqBen",
+   "metric": "Image score",
+   "canonical": "image accuracy",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Whether the model selects the correct image for a given text among the two minimally different images.",
+   "calculation": "1 point when s_ii > s_ji; % over samples.",
+   "evidence": "2) Image score evaluates if VLMs can select the correct image for a given text and the model wins one point when sii > sji .",
+   "lines": "L949",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "ranking"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "procedural generator",
+     "human label"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2303.14465",
+   "ours": false
+  },
+  {
+   "paper": "EqBen",
+   "metric": "Equivariance score (derivation of EqSim-v2)",
+   "canonical": "equivariance score",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How far the model's similarity changes deviate from equivariance (same semantic change should give the same similarity change); plotted as a distribution, smaller is better.",
+   "calculation": "Deviation from EqSim-v2 equalities s11 - s12 = s22 - s21 and s11 - s21 = s22 - s12 per sample pair; exact aggregation of the two terms not stated; reported as a distribution curve.",
+   "evidence": "Given the similarity scores s calculated by a VLM, we can define the equivariance score as the derivation of E Q S IMv2 (headline of Figure 6) to measure the degree of equivariance (the smaller, the better).",
+   "lines": "L1554",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "group"
+    ],
+    "answer_type": [
+     "number"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2303.14465",
+   "ours": false
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "metric": "Accuracy (original queries)",
+   "canonical": "accuracy",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "Instance-level correctness of left/right/above/below answers on original queries (Synthetic, What'sUp, COCO-/GQA-Spatial).",
+   "calculation": "Fraction of original queries whose decoded generated answer matches ground truth; steered-minus-baseline differences with 95% CIs from a paired cluster bootstrap (2,000 replicates).",
+   "evidence": "Accuracy is evaluated on original queries, and each paired-consistency score requires both answers to match their respective ground truths.",
+   "lines": "L293",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "procedural generator",
+     "human label"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "ours": false
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "metric": "Target-reference reversal consistency",
+   "canonical": "pair consistency",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Whether the model answers both a query and its role-reversed version (target and reference swapped) correctly.",
+   "calculation": "Per pair of original queries (X vs Y and Y vs X): 1 only if both answers match their respective ground truths; % over pairs.",
+   "evidence": "reversal consistency uses pairs of original queries; location-swap consistency pairs each original query with its swapped counterpart.",
+   "lines": "L2304",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "procedural generator",
+     "human label"
+    ],
+    "aggregation": [
+     "group rule (all or k of n)",
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "ours": false
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "metric": "Object-location-swap consistency",
+   "canonical": "pair consistency",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Whether the model answers both an original query and the same query on a scene with the two objects' positions swapped correctly.",
+   "calculation": "Pairs each original query with its location-swapped counterpart; 1 only if both answers match their ground truths; % over pairs.",
+   "evidence": "First, through paired object-location-swap and target/reference-reversal consistency tests across the three input settings, we show that high instance-level accuracy does not guarantee relational consistency.",
+   "lines": "L232",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "procedural generator",
+     "human label"
+    ],
+    "aggregation": [
+     "group rule (all or k of n)",
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "ours": false
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "metric": "Clean-Answer Recovery Rate (CARR)",
+   "canonical": "recovery rate",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Fraction of examples where patching clean activations of a token group at a layer into the corrupted run restores preference for the clean answer.",
+   "calculation": "CARR_l,g = E[1{M(x_patch) > 0}], M(x) = logit_x(a_clean) - logit_x(a_corrupt).",
+   "evidence": "We compute the fraction of examples for which the patchedh run restores the preference i for the clean answer with Clean-Answer Recovery",
+   "lines": "L671",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "procedural generator"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "ours": false
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "metric": "RestoreScore (normalized recovery)",
+   "canonical": "restore score",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Continuous fraction of the clean-corrupt logit-margin gap recovered by activation patching.",
+   "calculation": "RestoreScore_l,g = E[(M(x_patch) - M(x_corrupt)) / (M(x_clean) - M(x_corrupt))].",
+   "evidence": "Appendix C, which measures the fraction of the clean–corrupt margin gap recovered by patching.",
+   "lines": "L714",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "procedural generator"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "ours": false
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "metric": "Corrupt-directed score shift and corrupt-answer flip rate (CAFR)",
+   "canonical": "flip rate",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How much patching corrupted source states into a clean run shifts query-side location information toward the corrupt layout, and how often the answer flips.",
+   "calculation": "Delta m = (m_i(x_patch; l') - m_i(x_clean; l')) * s_corrupt, m_i = projection of target-minus-reference centered query states onto query-side axis, s_corrupt = sign(m_i(x_corrupt) - m_i(x_clean)); CAFR_l,g = E[1{M(x_patch) < 0}]; all-layer means reported.",
+   "evidence": "Cells report all-layer mean corrupt-directed score shifts and corrupt-answer flip rates after patching corrupt-run source states into the clean run (∆m→corr / flip %).",
+   "lines": "L724",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "procedural generator"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "ours": false
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "metric": "Belief-swap rate (query-side location-ID steering)",
+   "canonical": "flip rate",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Fraction of examples whose answer preference changes to the swap-implied answer after adding the query-side location-ID difference.",
+   "calculation": "Steer h_k <- h_k + alpha (ID_pi' - ID_pi) on query-object tokens with target/reference labels swapped; rate = fraction preferring swap-implied answer; compared to random, shuffled-ID and orthogonal controls.",
+   "evidence": "We quantify steering by the fraction of examples whose preference changes to the swap-implied answer.",
+   "lines": "L956",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "procedural generator"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "ours": false
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "metric": "Relation sign accuracy",
+   "canonical": "probe accuracy",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether projecting the difference of two query-object states onto the extracted spatial axis predicts their relative direction.",
+   "calculation": "Sign of projection of (target - reference) query state onto extracted axis vs true relation; accuracy over examples; orthogonal-axis controls near chance.",
+   "evidence": "we project the difference between the two query-object states onto the extracted query-side spatial axis and evaluate whether the projection sign predicts their relative direction.",
+   "lines": "L2990",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "procedural generator"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "ours": false
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "metric": "Held-out location-ID recovery",
+   "canonical": "probe accuracy",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether extracted source- and query-side location IDs predict held-out object locations better than label-shuffled controls.",
+   "calculation": "Best-layer held-out location prediction from extracted IDs (classifier and scoring not stated) vs label-shuffled control.",
+   "evidence": "IDs (g = src and g = qry, labeled “source object” and “query object” in the figure) yield high best-layer recovery across LLaVA-1.6, InternVL3.5 and Pixtral-12B, while label-shuffled controls remain substantially lower.",
+   "lines": "L2978",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "procedural generator"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "ours": false
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "metric": "Role-direction mean cosine and norm ratio",
+   "canonical": "direction alignment",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether held-out target/reference role contrasts share a stable direction with the estimated role direction.",
+   "calculation": "Mean cosine E[cos(d_p,o, d_role)] over held-out joint contrasts; norm ratio = ||E[d_p,o]|| / E[||d_p,o||].",
+   "evidence": "averaging preserves a large fraction of their mean individual norm. Both metrics remain high across models and conditions in Figure 6,",
+   "lines": "L1355",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "procedural generator"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "ours": false
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "metric": "Role-direction intervention margin gap D",
+   "canonical": "margin change",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How much steering along the joint role direction disrupts the correct-vs-role-reversed answer margin relative to orthogonal random controls.",
+   "calculation": "D = Delta M_role - Delta M_orth, M(x) = score_x(a+) - score_x(a-) (correct vs role-reversed answer), Delta M_orth averaged over five norm-matched orthogonal random controls; negative D = stronger disruption.",
+   "evidence": "We measure the intervention-induced change ∆M in the candidate-answer margin M (x) = scorex (a+ ) − scorex (a− ), where a+ and a− are the correct and",
+   "lines": "L1502",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "procedural generator"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "ours": false
+  },
+  {
+   "paper": "Synthetic minimal video pairs (UE5)",
+   "metric": "Accuracy",
+   "canonical": "accuracy",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "Fraction of rendered videos whose binary label (situational discrimination, role binding, following) the VLM gets right, reported overall and per viewpoint (left, middle, right, HDRI, zoom) and per prompt or color-cue variant.",
+   "calculation": "Acc = (1/N) * sum_i 1{y_hat_i = y_i} over N videos; free-form generations are mapped to the label set by a zero-shot text classifier (facebook/bart-large-mnli) that scores candidate labels and picks the best; classes are balanced so overall accuracy equals macro accuracy; values averaged over two runs per model; chance is 50%. Minimal-pair consistency is not computed (only recommended).",
+   "evidence": "Accuracy is reported as the fraction of correctly classified videos. Since classes are balanced, overall and macro accuracy coincide:",
+   "lines": "L221",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "video"
+    ],
+    "answer_type": [
+     "free text"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "procedural generator"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2601.15780",
+   "ours": false
+  },
+  {
+   "paper": "Synthetic minimal video pairs (UE5)",
+   "metric": "Confusion matrix (situational discrimination)",
+   "canonical": "confusion matrix",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Per-class breakdown of predicted vs true label (anomaly/fighting vs dancing) showing over-flagging or over-predicting benign motion per model.",
+   "calculation": "Per true class, fraction of videos predicted as each label (entries such as 0.64/0.36 per row); the normalization is not stated explicitly.",
+   "evidence": "Figure 3: Situational discrimination (fighting vs. dancing/idle). Confusion matrices by model indicate reliable separation under controlled appearance and backgrounds.",
+   "lines": "L303",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "video"
+    ],
+    "answer_type": [
+     "free text"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "procedural generator"
+    ],
+    "aggregation": [
+     "per-category mean"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2601.15780",
+   "ours": false
+  },
+  {
+   "paper": "NaturalBench",
+   "metric": "Acc",
+   "canonical": "accuracy",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Plain per-question correctness of a VLM's answer on each (image, question) pair against the ground-truth answer.",
+   "calculation": "Answers generated with each model's default decoding and compared to the ground-truth answer; the exact Acc formula is not stated (presumably fraction of the individual (image, question) pairs answered correctly).",
+   "evidence": "When reporting performance, we generate answers using each model’s default decoding strategy and compare them to the ground-truth answers.",
+   "lines": "L303",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "yes/no",
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2410.14669",
+   "ours": false
+  },
+  {
+   "paper": "NaturalBench",
+   "metric": "Question accuracy (Q-Acc)",
+   "canonical": "question accuracy",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Whether the model answers a question correctly for both of its paired images (sensitivity to the image); also reported per skill tag (Tables 9-10).",
+   "calculation": "1 point per question if both (image, question) answers are correct, else 0; mean over questions; per-skill-tag breakdown uses the same rule.",
+   "evidence": "We define the “question accuracy” (Q-Acc) metric to award a point only if a model correctly answers a question for both images.",
+   "lines": "L298-299",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "yes/no",
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label"
+    ],
+    "aggregation": [
+     "group rule (all or k of n)"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2410.14669",
+   "ours": false
+  },
+  {
+   "paper": "NaturalBench",
+   "metric": "Image accuracy (I-Acc)",
+   "canonical": "image accuracy",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Whether the model answers both questions correctly for a given image.",
+   "calculation": "1 point per image if both questions about it are answered correctly, else 0; mean over images.",
+   "evidence": "Similarly, the “image accuracy” (I-Acc) metric awards a point when a model correctly answers both questions for an image.",
+   "lines": "L299-300",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "yes/no",
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label"
+    ],
+    "aggregation": [
+     "group rule (all or k of n)"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2410.14669",
+   "ours": false
+  },
+  {
+   "paper": "NaturalBench",
+   "metric": "Group accuracy (G-Acc)",
+   "canonical": "group accuracy",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "Whether the model answers all four (image, question) pairs of a 2-image x 2-question sample correctly; also reported on subsets, Chinese/Hindi splits and ablations.",
+   "calculation": "1 point per test sample if all 4 (image, question) pairs are correct, else 0; mean over samples.",
+   "evidence": "Lastly, the “group accuracy” (G-Acc) metric awards one point when a model correctly answers all four (image, question) pairs in a test sample.",
+   "lines": "L300-302",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "group"
+    ],
+    "answer_type": [
+     "yes/no",
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label"
+    ],
+    "aggregation": [
+     "group rule (all or k of n)"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2410.14669",
+   "ours": false
+  },
+  {
+   "paper": "NaturalBench",
+   "metric": "Gap to human (∆Human)",
+   "canonical": "human gap",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How far each model's G-Acc is below average human G-Acc.",
+   "calculation": "Human G-Acc minus model G-Acc (subtraction direction not stated; humans measured by a separate group of three annotators).",
+   "evidence": "All models significantly lag behind human performance, with the performance gap (in G-Acc) between humans and models highlighted in red.",
+   "lines": "L326",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "benchmark"
+    ],
+    "answer_type": [
+     "yes/no",
+     "multiple choice"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "human label"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2410.14669",
+   "ours": false
+  },
+  {
+   "paper": "NaturalBench",
+   "metric": "Debiased Q-Acc / I-Acc / G-Acc",
+   "canonical": "debiased group accuracy",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How well a VLM ranks the correct answers above incorrect ones once its answer bias (e.g. toward 'Yes' or 'B') is removed with a per-sample threshold.",
+   "calculation": "Predict a0 if P(a0|q,i) - P(a1|q,i) > tau (VQAScore likelihoods, default tau = 0); tau in [-1, 1] is tuned per sample so that the two images of a question get different answers (debiased Q-Acc), the two questions of an image get different answers (debiased I-Acc), or a0 is predicted for two and a1 for the other two of the four pairs (debiased G-Acc); then Q/I/G-Acc rules apply. Oracle-style: uses knowledge of the pairing.",
+   "evidence": "we compute a debiased Q-Acc by adjusting the prediction threshold (as described in Section 5) to ensure the model predict different answers for the two images of the same question.",
+   "lines": "L847",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "group"
+    ],
+    "answer_type": [
+     "yes/no",
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label"
+    ],
+    "aggregation": [
+     "group rule (all or k of n)"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2410.14669",
+   "ours": false
+  },
+  {
+   "paper": "NaturalBench",
+   "metric": "Global-optimal tau and post-hoc debiased Q/I/G-Acc",
+   "canonical": "debiased group accuracy",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Q/I/G-Acc under debiasing methods that do not need the image-question pairing (single global threshold, or dividing out the question-only prior).",
+   "calculation": "Global: one tau chosen to maximize G-Acc across all samples. Post-hoc: predict a0 if P(a0|q,i)/P(a0|q) - P(a1|q,i)/P(a1|q) > 0, with P(a|q) from the VLM given only question tokens (no image). Then Q/I/G-Acc rules apply.",
+   "evidence": "Alternatively, we can perform global-level debiasing by searching for a single τ that maximizes G-Acc across all samples.",
+   "lines": "L2651",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "group"
+    ],
+    "answer_type": [
+     "yes/no",
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label"
+    ],
+    "aggregation": [
+     "group rule (all or k of n)"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2410.14669",
+   "ours": false
+  },
+  {
+   "paper": "NaturalBench",
+   "metric": "NaturalBench-Retrieval text score / image score / group score",
+   "canonical": "Winoground text/image/group score",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Image-text retrieval ability of CLIP/SigLIP models on 1,200 human-verified paired (image, caption) samples.",
+   "calculation": "Follows Winoground; the text/image/group score formulas are not restated in the paper. The pipeline defines a correct match as S(i0,t0) and S(i1,t1) both greater than S(i0,t1) and S(i1,t0) with similarity score S.",
+   "evidence": "We follow Winoground [73] to report text score, image score, and group score, with higher numbers indicating better performance for all metrics.",
+   "lines": "L1990",
+   "traits": {
+    "scores": [
+     "pair or group"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "ranking"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "human label"
+    ],
+    "aggregation": [
+     "group rule (all or k of n)"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2410.14669",
+   "ours": false
+  },
+  {
+   "paper": "ViewDiag",
+   "metric": "MAE (raw)",
+   "canonical": "MAE",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "Mean absolute error in metres between predicted and ground-truth distance between two queried regions, full set and per dataset (Hypersim, ScanNet, KITTI360), with bootstrap 95% CI.",
+   "calculation": "MAE = (1/|J|) * sum_{i in J} |y_hat_i - y_i| over the joined set J of model outputs matched to ViewDiag GT; outputs normalized to a numeric meter value first; bootstrap 95% confidence intervals (resample count not stated).",
+   "evidence": "Metrics. We report MAE (raw), L2-calibrated MAE, bootstrap confidence intervals, and distribution-collapse statistics (Top1Mass and EffSupport) as defined in Section 5.",
+   "lines": "L434",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "number"
+    ],
+    "comparison": [
+     "absolute error"
+    ],
+    "truth": [
+     "3D scan or sensor",
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.02742",
+   "ours": false
+  },
+  {
+   "paper": "ViewDiag",
+   "metric": "L2-calibrated MAE",
+   "canonical": "scale-calibrated MAE",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "MAE after removing a single global scale bias per model (consistent over- or underestimation).",
+   "calculation": "s* = sum_i y_hat_i y_i / sum_i y_hat_i^2 fitted per model on the joined set; MAE_L2 = (1/|J|) * sum_i |s* y_hat_i - y_i|.",
+   "evidence": "This isolates global scale bias (e.g., consistent over/underestimation) so we can compare models on accuracy after a single scalar correction, while still reporting raw MAE to avoid overstating calibration gains.",
+   "lines": "L316",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "number"
+    ],
+    "comparison": [
+     "absolute error"
+    ],
+    "truth": [
+     "3D scan or sensor",
+     "simulator state"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.02742",
+   "ours": false
+  },
+  {
+   "paper": "ViewDiag",
+   "metric": "Top1Mass",
+   "canonical": "top-1 mass",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "How concentrated a model's predicted distances are on a single value (output collapse), independent of correctness.",
+   "calculation": "Top1Mass = max_y p(y), p(y) the empirical distribution of the model's predictions; the binning of predicted values for p(y) is not stated.",
+   "evidence": "We measure prediction concentration using top-1 mass and effective support. Let p(y) denote the empirical prediction distribution.",
+   "lines": "L325",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "benchmark"
+    ],
+    "answer_type": [
+     "number"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.02742",
+   "ours": false
+  },
+  {
+   "paper": "ViewDiag",
+   "metric": "EffSupport",
+   "canonical": "effective support",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Effective number of distinct predicted values; low values indicate a collapsed, prior-dominated output distribution.",
+   "calculation": "EffSupport = 1 / sum_y p(y)^2 over the empirical prediction distribution (binning not stated).",
+   "evidence": "High top-1 mass and low effective support indicate a collapsed output distribution, consistent with prior-dominated predictions that respond weakly to evidence.",
+   "lines": "L334",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "benchmark"
+    ],
+    "answer_type": [
+     "number"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.02742",
+   "ours": false
+  },
+  {
+   "paper": "ViewDiag",
+   "metric": "Evidence Sensitivity Score (ESS)",
+   "canonical": "ESS",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Heuristic combining error and output concentration; high when a model is both wrong and collapsed.",
+   "calculation": "ESS = MAE x Top1Mass (lower is better).",
+   "evidence": "We adopt a simple multiplicative proxy combining prediction error and output concentration. Although heuristic, this score highlights regimes where both error and collapse are simultaneously high.",
+   "lines": "L382",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "benchmark"
+    ],
+    "answer_type": [
+     "number"
+    ],
+    "comparison": [
+     "absolute error",
+     "other"
+    ],
+    "truth": [
+     "3D scan or sensor",
+     "simulator state"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.02742",
+   "ours": false
+  },
+  {
+   "paper": "ViewDiag",
+   "metric": "Internal collapse probe (hidden cosine, token-norm delta, decision/representation collapse rate)",
+   "canonical": "hidden-state collapse rate",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether different views that yield the same predicted distance have different hidden states (decision collapse) or near-identical ones (representation collapse).",
+   "calculation": "Sample n = 512 different-view pairs whose predictions match after 0.1 m binning; compute cos(h_v1, h_v2) and ||h_v1 - h_v2||_2 of pooled hidden vectors; high cosine with near-zero delta = representation collapse, high cosine with large delta = decision collapse; rate = fraction of pairs in a regime with Wilson 95% CI. Cosine and delta cut-offs are not stated.",
+   "evidence": "High cosine with near-zero delta indicates a nearly invariant representation, while high cosine with large deltas indicates decision collapse.",
+   "lines": "L413",
+   "traits": {
+    "scores": [
+     "model-internal state"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "number"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.02742",
+   "ours": false
+  },
+  {
+   "paper": "Seeing Is Not Measuring",
+   "metric": "Mean Relative Accuracy (MRA)",
+   "canonical": "MRA",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "Relative closeness of numeric answers (absolute distance, object size) to ground truth on ReVSI-Bench ARKitScenes.",
+   "calculation": "MRA = (1/|C|) * sum_{theta in C} 1[|x_hat - x|/x < 1 - theta], C = {0.5, 0.55, ..., 0.95}; averaged over questions; numeric answer = last number in the final message; unparseable answer scores 0; a run hitting the step cap is scored on whatever answer it produced.",
+   "evidence": "over the confidence thresholds C = {0.5, 0.55, . . . , 0.95}; classification tasks (relative distance, direction) use exactletter accuracy.",
+   "lines": "L129",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "number"
+    ],
+    "comparison": [
+     "relative error with thresholds"
+    ],
+    "truth": [
+     "3D scan or sensor"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.29073",
+   "ours": false
+  },
+  {
+   "paper": "Seeing Is Not Measuring",
+   "metric": "Accuracy (relative distance, relative direction)",
+   "canonical": "accuracy",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "Share of multiple-choice relative-distance and relative-direction questions answered with the correct option; direction also by subtype (3-way, 4-way, backward).",
+   "calculation": "Exact-letter match of the parsed option (option letter, or the uniquely matching option name if no bare letter); unparseable answers score wrong; mean over questions; chance 29.3% on relative direction.",
+   "evidence": "Distance and size are scored by MRA, the two relative tasks by accuracy.",
+   "lines": "L398",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "3D scan or sensor"
+    ],
+    "aggregation": [
+     "mean over items",
+     "per-category mean"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.29073",
+   "ours": false
+  },
+  {
+   "paper": "Seeing Is Not Measuring",
+   "metric": "Parse rate",
+   "canonical": "parse rate",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Share of runs that emit a usable answer option, separating formatting failures from reasoning failures.",
+   "calculation": "Fraction of runs whose final message yields an option letter or a uniquely matching option name.",
+   "evidence": "“Parse” is the share of runs emitting a usable option letter (Sec. A); unparseable answers score wrong.",
+   "lines": "L436-438",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.29073",
+   "ours": false
+  },
+  {
+   "paper": "Seeing Is Not Measuring",
+   "metric": "Tool ceiling and orchestration cost",
+   "canonical": "tool ceiling gap",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "What the perception backend allows when the geometric tools run directly on the boxes without the VLM, and how much the VLM's orchestration loses against it.",
+   "calculation": "Ceiling = MRA or accuracy of the scripted geometric tools on the backend boxes with no VLM (missing box scores 0); orchestration cost = ceiling minus VLM score (e.g. 0.97 - 0.94 = 0.03 MRA with GT boxes).",
+   "evidence": "“Ceiling” runs the geometric tools directly on the boxes, without a VLM, so it measures what the perception backend allows before any orchestration.",
+   "lines": "L418-419",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "benchmark"
+    ],
+    "answer_type": [
+     "number",
+     "multiple choice"
+    ],
+    "comparison": [
+     "relative error with thresholds",
+     "exact match"
+    ],
+    "truth": [
+     "3D scan or sensor"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.29073",
+   "ours": false
+  },
+  {
+   "paper": "Seeing Is Not Measuring",
+   "metric": "MAE in metres (absolute distance)",
+   "canonical": "MAE",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Metric error of absolute-distance answers, corroborating the MRA ranking and exposing heavy tails (e.g. depth blow-ups).",
+   "calculation": "Mean |x_hat - x| in metres over the 401 absolute-distance questions, with median and max also reported; unparseable answers excluded from the error statistics.",
+   "evidence": "Figure A4. The same pipelines in metric error, which corroborates the MRA ranking.",
+   "lines": "L1074",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "number"
+    ],
+    "comparison": [
+     "absolute error"
+    ],
+    "truth": [
+     "3D scan or sensor"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.29073",
+   "ours": false
+  },
+  {
+   "paper": "Seeing Is Not Measuring",
+   "metric": "Median MRA",
+   "canonical": "median MRA",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Tail sensitivity of MRA: the gap between mean and median per-sample MRA per pipeline.",
+   "calculation": "Median of per-sample MRA over the 401 absolute-distance questions, compared against the mean.",
+   "evidence": "Figure A3. Mean vs. median MRA across every absolute-distance pipeline (401 questions); the gap between the bars measures tail sensitivity.",
+   "lines": "L1057",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "number"
+    ],
+    "comparison": [
+     "relative error with thresholds"
+    ],
+    "truth": [
+     "3D scan or sensor"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.29073",
+   "ours": false
+  },
+  {
+   "paper": "Seeing Is Not Measuring",
+   "metric": "Detector coverage",
+   "canonical": "coverage",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How often a detector backend returns a box for the queried objects, so the tool chain can run end to end.",
+   "calculation": "Objects found = share of queried object instances with a returned box; questions fully covered = share of questions with boxes for both objects.",
+   "evidence": "Objects found: the backend returns a box for the queried name. Questions fully covered: boxes exist for both objects, i.e. the tool chain can run end-to-end.",
+   "lines": "L649",
+   "traits": {
+    "scores": [
+     "intermediate step"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "3D box"
+    ],
+    "comparison": [
+     "success check"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.29073",
+   "ours": false
+  },
+  {
+   "paper": "Seeing Is Not Measuring",
+   "metric": "Tool-call count vs minimal chain",
+   "canonical": "tool-call overhead",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Orchestration efficiency: observed number of tool calls per question against the minimal correct chain.",
+   "calculation": "Observed tool calls per run (median, IQR) vs minimal chain = 2*n_obj + n_meas per question type.",
+   "evidence": "Figure A7. Minimal correct chain vs. observed tool-call count per question type (GT backend). Stars mark the minimal chain",
+   "lines": "L1102",
+   "traits": {
+    "scores": [
+     "trajectory"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.29073",
+   "ours": false
+  },
+  {
+   "paper": "Seeing Is Not Measuring",
+   "metric": "Zero-tool rate",
+   "canonical": "zero-tool rate",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Tool-use discipline: share of runs that call no tool and answer from the frames alone.",
+   "calculation": "Count of runs with zero tool calls divided by runs (e.g. 67/290 on relative direction).",
+   "evidence": "Every task carries a band of runs that call no tool and answer from the frames: 2.6–5.6% on the numeric and relative-distance tasks, but 23% (67/290) on relative direction.",
+   "lines": "L1124",
+   "traits": {
+    "scores": [
+     "trajectory"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.29073",
+   "ours": false
+  },
+  {
+   "paper": "Seeing Is Not Measuring",
+   "metric": "Tool error count",
+   "canonical": "tool error count",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How often tool calls return errors (looping on missing steps) in the staged tool-feedback ablation.",
+   "calculation": "Count of tool results returned as errors across all 80 traces.",
+   "evidence": "Errors counts tool results returned as errors across all 80 traces; Zero-tool counts runs that answered without calling a single tool.",
+   "lines": "L1246",
+   "traits": {
+    "scores": [
+     "trajectory"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.29073",
+   "ours": false
+  },
+  {
+   "paper": "MoDitector",
+   "metric": "Number of generated MICS (#M_k)",
+   "canonical": "failure count",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "Number of module-induced critical scenarios (a collision in which only the target module has errors) found per module and driving scenario within a 3-hour budget.",
+   "calculation": "Count of generated scenarios satisfying the MICS definition: collision (delta_safe = 0), filtered target-module error > 0, and filtered error = 0 for every other module in the detection window; averaged over 3 runs with different seeds, 3 hours each.",
+   "evidence": "Metrics. To evaluate the effectiveness of MoDitector, we utilize the metric #M 𝑘 , which quantifies the number of generated MICS for the user-specific module M 𝑘 .",
+   "lines": "L1084",
+   "traits": {
+    "scores": [
+     "trajectory",
+     "end state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "success check"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2502.08504",
+   "ours": false
+  },
+  {
+   "paper": "MoDitector",
+   "metric": "Repair rate (%M_k)",
+   "canonical": "repair rate",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Fidelity of the module-specific oracle: share of detected MICS that no longer fail once the blamed module's outputs are replaced by ground truth.",
+   "calculation": "%M_k = #M_k^rep / #M_k x 100%, rerunning each MICS with module outputs replaced from the first error timestamp: perception by CARLA boxes, prediction by actual NPC trajectories, planning and control by immediate braking; repaired = no safety-critical issue.",
+   "evidence": "Specifically, we rerun and repair the detected MICS by replacing the outputs of M 𝑘 with the ground truth. Subsequently, we count the number of MICS that have been repaired and no longer present any safety-critical issues.",
+   "lines": "L1093",
+   "traits": {
+    "scores": [
+     "end state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "success check"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2502.08504",
+   "ours": false
+  },
+  {
+   "paper": "MoDitector",
+   "metric": "Safety-critical distance (delta_safe)",
+   "canonical": "minimum distance to collision",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Closest approach between the ego vehicle and any other object over the scenario; zero means a collision (system failure).",
+   "calculation": "delta_safe = min over t in [0,T], n != 0 of ||R_bbox(p_t^0) - R_bbox(p_t^n)||_2; failure if delta_safe = 0.",
+   "evidence": "We check if the scenario contains ADS failures by detecting collisions. Specifically, we first calculate the minimum distance between the ego vehicle and other objects:",
+   "lines": "L543",
+   "traits": {
+    "scores": [
+     "trajectory"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "success check"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2502.08504",
+   "ours": false
+  },
+  {
+   "paper": "MoDitector",
+   "metric": "Perception module error (weighted IoU)",
+   "canonical": "weighted IoU error",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Per-timestep detection error of the perception module, weighting objects closer to the ego vehicle more.",
+   "calculation": "delta_t^perc = 1 - (1/N_t) * sum_n ((D - d_t^n)/D) * |B_t^n intersect b_t^n| / |B_t^n union b_t^n| over N_t objects within range D; module counted as erroneous via filter sum_{t=T-dt..T} 1(delta_t > lambda) with lambda_perc = 0.5, window dt = 0.5 s.",
+   "evidence": "We adopt a weighted Intersection over Union (IoU) [19] to measure the errors in the perception module M perc , which is a widely recognized metric in object detection.",
+   "lines": "L558",
+   "traits": {
+    "scores": [
+     "intermediate step"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "3D box"
+    ],
+    "comparison": [
+     "IoU or overlap"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "sum over steps"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2502.08504",
+   "ours": false
+  },
+  {
+   "paper": "MoDitector",
+   "metric": "Prediction module error",
+   "canonical": "trajectory prediction error",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Worst-case distance-weighted error of predicted object trajectories against perception-biased ground-truth trajectories.",
+   "calculation": "delta_t^pred = max over objects n and horizon k of ((D - d_t^n)/D) * ||p_hat_{t+k}^n - p_{t+k}^n||_2, where the reference trajectory is the simulator position plus the current perception offset; filter threshold lambda_pred = 0.1, window 0.5 s.",
+   "evidence": "Consequently, we can measure the error of the Prediction module by comparing the predicted trajectories with the perception-biased trajectories.",
+   "lines": "L612",
+   "traits": {
+    "scores": [
+     "intermediate step"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "absolute error"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "sum over steps"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2502.08504",
+   "ours": false
+  },
+  {
+   "paper": "MoDitector",
+   "metric": "Planning module error",
+   "canonical": "planned-collision count",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether the planned ego trajectory collides with objects as predicted by the upstream modules.",
+   "calculation": "delta_t^plan = sum_n sum_{k=1..H_plan} 1(||R_bbox(p_{t+k}^A) - R_bbox(p_{t+k}^n)||_2 = 0); filter threshold lambda_plan = 0, window 0.5 s.",
+   "evidence": "we measure errors in the Planning module by assessing if the planned trajectories collide with objects detected by the upstream modules.",
+   "lines": "L633",
+   "traits": {
+    "scores": [
+     "intermediate step"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "code or plan"
+    ],
+    "comparison": [
+     "success check"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "sum over steps"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2502.08504",
+   "ours": false
+  },
+  {
+   "paper": "MoDitector",
+   "metric": "Control module error",
+   "canonical": "tracking error",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "How far the vehicle's actual next position and velocity deviate from what the planner commanded.",
+   "calculation": "delta_t^ctrl = ||p_{t+1}^A - p_{t+1}^0||_2 + ||v_{t+1}^A - v_{t+1}^0||_2 (planned vs actual); filter threshold lambda_ctrl = 0.05, window 0.5 s.",
+   "evidence": "Thus, we evaluate the Control module by comparing the actual movement of the vehicle with the planned movement from the Planning module.",
+   "lines": "L663",
+   "traits": {
+    "scores": [
+     "intermediate step"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "absolute error"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "sum over steps"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2502.08504",
+   "ours": false
+  },
+  {
+   "paper": "MoDitector",
+   "metric": "Failure rate under injected module noise",
+   "canonical": "failure rate",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Share of normal scenarios that turn into system failures when random noise is injected into one module's output (motivating study).",
+   "calculation": "100 normal scenarios, one module perturbed at conventional/moderate/extreme levels (perception 10/20/50% box change; prediction 0.1/0.5/1 m; planning 0.1/0.2/0.5 m), 3 repeats; ratio of runs that fail (averaging not stated).",
+   "evidence": "With conventional-level perturbations to module outputs, only a few running failures occurred; even with moderate-level perturbations, the failure rate reached only up to 17%.",
+   "lines": "L432",
+   "traits": {
+    "scores": [
+     "end state"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "success check"
+    ],
+    "truth": [
+     "simulator state"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2502.08504",
+   "ours": false
+  },
+  {
+   "paper": "MoDitector",
+   "metric": "Time per scenario",
+   "canonical": "time cost",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Average processing time per scenario, split into seed selection, mutation, feedback and simulation.",
+   "calculation": "Mean seconds per scenario per component (e.g. 176.13 s total, 172.79 s simulation).",
+   "evidence": "MoDitector takes 176.13 seconds to process a scenario, with 172.79 seconds (98.1%) spent running the scenario in the simulator.",
+   "lines": "L1468",
+   "traits": {
+    "scores": [
+     "trajectory"
+    ],
+    "unit": [
+     "episode"
+    ],
+    "answer_type": [
+     "action sequence"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2502.08504",
+   "ours": false
+  },
+  {
+   "paper": "Measuring Faithfulness in CoT (Lanham et al.)",
+   "metric": "Early answering: % same answer as complete CoT",
+   "canonical": "answer agreement under truncation",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "How often the model gives the same final answer when its CoT is truncated after each step, per CoT length (post-hoc reasoning).",
+   "calculation": "For each sampled CoT [x1..xn], truncate to [], [x1], [x1,x2], ...; re-prompt for the answer; % of truncations whose answer matches the complete-CoT answer; answer read from next-token probabilities over the choices (argmax rule not stated explicitly); 100 samples per question.",
+   "evidence": "Having collected answers after each truncation of the CoT, we measure how often the model comes to the same conclusion as it did with the complete CoT.",
+   "lines": "L451",
+   "traits": {
+    "scores": [
+     "final answer",
+     "intermediate step"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2307.13702",
+   "ours": false
+  },
+  {
+   "paper": "Measuring Faithfulness in CoT (Lanham et al.)",
+   "metric": "Early answering AOC",
+   "canonical": "area over curve",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "Single per-task score of how much the answer depends on the CoT (higher = less post-hoc, more faithful); tasks are ranked by it.",
+   "calculation": "Area over the %-same-answer curve per CoT length, combined as a weighted sum with weights = fraction of CoT samples of that length; the curve's x-axis normalization and exact integration are not stated.",
+   "evidence": "AOC values are calculated as a weighted sum, where the AOC for each CoT length is weighted by the fraction of CoT samples having that length.",
+   "lines": "L464",
+   "traits": {
+    "scores": [
+     "final answer",
+     "intermediate step"
+    ],
+    "unit": [
+     "benchmark"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "weighted over levels"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2307.13702",
+   "ours": false
+  },
+  {
+   "paper": "Measuring Faithfulness in CoT (Lanham et al.)",
+   "metric": "Adding mistakes: % same answer and AOC",
+   "canonical": "answer agreement under corruption",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "How often the final answer is unchanged after an LLM-inserted mistake in one CoT step and resampling the rest (low = CoT is used).",
+   "calculation": "Pretrained LM rewrites one sentence as a mistake (max 30 tokens), the CoT is continued from there, the answer is re-elicited; % matching the original answer per CoT length; AOC weighted by CoT-length frequency as in early answering.",
+   "evidence": "Similarly to the early answering experiment (§2.3), we measure how often the final answer changes after the mistake has been added and the remaining CoT has been sampled.",
+   "lines": "L468",
+   "traits": {
+    "scores": [
+     "final answer",
+     "intermediate step"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "weighted over levels"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2307.13702",
+   "ours": false
+  },
+  {
+   "paper": "Measuring Faithfulness in CoT (Lanham et al.)",
+   "metric": "Accuracy with filler tokens",
+   "canonical": "accuracy",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether uninformative extra tokens in place of the CoT raise accuracy (test-time compute hypothesis).",
+   "calculation": "Accuracy when the CoT is replaced by n ' ...' tokens, n from 0 to the longest sampled CoT length in steps of 5 tokens; compared with no-CoT accuracy.",
+   "evidence": "In this experiment, we replace the CoT with a number of “ ...” tokens (“filler tokens”), each consisting of a space followed by three periods.",
+   "lines": "L756",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2307.13702",
+   "ours": false
+  },
+  {
+   "paper": "Measuring Faithfulness in CoT (Lanham et al.)",
+   "metric": "Paraphrased-CoT accuracy and % same answer under paraphrasing",
+   "canonical": "accuracy under paraphrase",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Whether rewording the CoT (removing phrasing-encoded information) changes accuracy or the chosen answer.",
+   "calculation": "A model without the question paraphrases the prefixes [x1], [x1,x2], ...; the rest is resampled and the answer re-elicited; accuracy compared with original-CoT accuracy, and fraction of samples reaching the original answer compared with a chance baseline (probability two IID samples agree).",
+   "evidence": "Fig. 9 shows the fraction of reasoning samples that arrive at the same answer as the original CoT as a greater amount of the reasoning sample is paraphrased.",
+   "lines": "L1461",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label",
+     "none"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2307.13702",
+   "ours": false
+  },
+  {
+   "paper": "Measuring Faithfulness in CoT (Lanham et al.)",
+   "metric": "% same answer with vs without CoT",
+   "canonical": "answer agreement with vs without CoT",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "How much the model relies on its CoT, used to compare faithfulness across model sizes (13B to 175B) and on synthetic addition tasks.",
+   "calculation": "% of questions where the answer with CoT equals the answer without CoT (equivalent to early answering at 0% of the CoT); lower = more reliance on CoT.",
+   "evidence": "To explore this hypothesis, we show what percentage of the time the answer changes with vs. without CoT, a metric that intuitively captures how much the model relies on the CoT to predict answers.",
+   "lines": "L899",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice",
+     "number"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2307.13702",
+   "ours": false
+  },
+  {
+   "paper": "Measuring Faithfulness in CoT (Lanham et al.)",
+   "metric": "Accuracy with and without CoT (and CoT accuracy gain)",
+   "canonical": "accuracy",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Task accuracy under standard CoT and without CoT, and the difference, per task and model size.",
+   "calculation": "Fraction of questions answered correctly; accuracy difference = CoT accuracy minus no-CoT accuracy (e.g. -4.69 for HellaSwag).",
+   "evidence": "Fig. 10 shows the accuracy with and without CoT for the tasks and models used in §3.1.",
+   "lines": "L1406",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2307.13702",
+   "ours": false
+  },
+  {
+   "paper": "FRODO (Making Reasoning Matter)",
+   "metric": "Accuracy",
+   "canonical": "accuracy",
+   "role": "evaluation",
+   "headline": true,
+   "measures": "Task accuracy of small LMs (770M-7B) on StrategyQA, QuaRel, OpenBookQA, QASC, plus out-of-distribution transfer and GSM8K.",
+   "calculation": "Percentage of questions with correct final answer; significance marked by p-value (<0.01, <0.05); training used 3 random seeds (aggregation over seeds not stated).",
+   "evidence": "The base models are T5-large (770M), T5-3B (3B), LLaMa-2-7B and Mistral-7B . We report accuracy (%).",
+   "lines": "L974",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "yes/no",
+     "multiple choice",
+     "number"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2402.13950",
+   "ours": false
+  },
+  {
+   "paper": "FRODO (Making Reasoning Matter)",
+   "metric": "Natural Indirect Effect (NIE)",
+   "canonical": "indirect effect",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "How much a large model's answer changes when its own reasoning chain is swapped for the chain of an intervened problem (does the model use its CoT); also by number of reasoning steps.",
+   "calculation": "IE = Avg[Acc(Y00) - Acc(Y01)], Y00 = outcome with problem X0 and chain R0, Y01 = outcome with X0 and chain R1 of the GPT-4-intervened problem X1; chains generated by the same model (>100B).",
+   "evidence": "We use the following formula to calculate the scores: IE = Avg[Acc(Y00 ) − Acc(Y01 )], and DE = Avg[Acc(Y00 ) − Acc(Y10 )]",
+   "lines": "L451",
+   "traits": {
+    "scores": [
+     "final answer",
+     "intermediate step"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "yes/no",
+     "number"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label",
+     "expert-model label"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2402.13950",
+   "ours": false
+  },
+  {
+   "paper": "FRODO (Making Reasoning Matter)",
+   "metric": "Natural Direct Effect (NDE)",
+   "canonical": "direct effect",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "How much the answer changes when the problem is intervened but the model's own reasoning chain is held fixed.",
+   "calculation": "DE = Avg[Acc(Y00) - Acc(Y10)], Y10 = outcome with intervened problem X1 and original chain R0; chains from the same model.",
+   "evidence": "Table 2: Causal Effects of generated CoT and reasoning problems on the outputs, with both Natural Indirect Effect (NIE) and Natural Direct Effect (NDE).",
+   "lines": "L506",
+   "traits": {
+    "scores": [
+     "final answer",
+     "intermediate step"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "yes/no",
+     "number"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label",
+     "expert-model label"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2402.13950",
+   "ours": false
+  },
+  {
+   "paper": "FRODO (Making Reasoning Matter)",
+   "metric": "Controlled Indirect Effect (CIE)",
+   "canonical": "indirect effect",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "For models under 20B, how much the answer changes when a GPT-4 reasoning chain for the intervened problem replaces the original chain; also reported as the robustness score of FRODO vs baselines.",
+   "calculation": "IE = Avg[Acc(Y00) - Acc(Y01)] with R0 and R1 generated by GPT-4 instead of by the evaluated model; zero-shot; p-values reported.",
+   "evidence": "Controlled Indirect Effect (CIE): for models with <20B parameters, we evaluate the causal effect by providing reasoning chains generated by GPT-4.",
+   "lines": "L459",
+   "traits": {
+    "scores": [
+     "final answer",
+     "intermediate step"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "yes/no",
+     "number"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label",
+     "expert-model label"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2402.13950",
+   "ours": false
+  },
+  {
+   "paper": "FRODO (Making Reasoning Matter)",
+   "metric": "Controlled Direct Effect (CDE)",
+   "canonical": "direct effect",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "For models under 20B, how much the answer changes when the problem is intervened while a GPT-4 reasoning chain is held fixed.",
+   "calculation": "DE = Avg[Acc(Y00) - Acc(Y10)] with GPT-4-generated chains; zero-shot.",
+   "evidence": "Table 3: Causal Effects of CoT. The reported results are zero-shot performance. CIE: Controlled Indirect Effect, CDE: Controlled Direct Effect.",
+   "lines": "L804",
+   "traits": {
+    "scores": [
+     "final answer",
+     "intermediate step"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "yes/no",
+     "number"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "human label",
+     "expert-model label"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2402.13950",
+   "ours": false
+  },
+  {
+   "paper": "FRODO (Making Reasoning Matter)",
+   "metric": "Robustness (CIE on trained reasoners)",
+   "canonical": "indirect effect",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "How reliably a fine-tuned small reasoner changes its answer when given a controlled counterfactual reasoning chain.",
+   "calculation": "CIE as above computed for FRODO and baselines with GPT-4-generated counterfactual chains; higher = more robust/faithful.",
+   "evidence": "In Table 5, we report the controlled indirect effect that indicates how robustly models are able to change their answers when provided with controlled (generated by GPT-4) counterfactual reasoning chains.",
+   "lines": "L1084",
+   "traits": {
+    "scores": [
+     "final answer",
+     "intermediate step"
+    ],
+    "unit": [
+     "pair"
+    ],
+    "answer_type": [
+     "yes/no",
+     "multiple choice"
+    ],
+    "comparison": [
+     "exact match"
+    ],
+    "truth": [
+     "expert-model label"
+    ],
+    "aggregation": [
+     "mean over items"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2402.13950",
+   "ours": false
+  },
+  {
+   "paper": "FRODO (Making Reasoning Matter)",
+   "metric": "Leakage-adjusted simulatability (LAS)",
+   "canonical": "LAS",
+   "role": "evaluation",
+   "headline": false,
+   "measures": "Faithfulness of generated rationales: how much the rationale helps a simulator predict the student model's answer.",
+   "calculation": "LAS = Acc(q, r -> a') - Acc(q -> a'), a' the student's prediction, simulator = fine-tuned T5-large; leakage adjustment details deferred to Hase et al. (not stated).",
+   "evidence": "we use LAS (Hase et al., 2020) to measure how well the rationales help a simulator to predict a student’s predictions a’, namely Acc(qr –> a’) - Acc(q –> a’).",
+   "lines": "L510",
+   "traits": {
+    "scores": [
+     "output artifact"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "free text"
+    ],
+    "comparison": [
+     "AI judge"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2402.13950",
+   "ours": false
+  },
+  {
+   "paper": "FRODO (Making Reasoning Matter)",
+   "metric": "Manual CoT relevance and error types",
+   "canonical": "human-rated relevance",
+   "role": "diagnostic",
+   "headline": false,
+   "measures": "Share of 100 generated CoTs judged relevant, and the split of errors into invalid vs unnecessary reasoning steps (SFT vs DPO).",
+   "calculation": "Manual inspection of 100 CoTs per method and task; % relevant; % of errors that are invalid steps vs unnecessary steps; rating criteria and number of raters not stated.",
+   "evidence": "we manually analyze the relevance of the 100 CoT generated by SFT and DPO. We observed that SFT generates 74% and 54% relevant CoT",
+   "lines": "L1098",
+   "traits": {
+    "scores": [
+     "intermediate step"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "free text"
+    ],
+    "comparison": [
+     "human judge"
+    ],
+    "truth": [
+     "none"
+    ],
+    "aggregation": [
+     "ratio"
+    ],
+    "partial_credit": [
+     "no"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2402.13950",
+   "ours": false
+  },
+  {
+   "paper": "FRODO (Making Reasoning Matter)",
+   "metric": "DPO implicit reward (inference module)",
+   "canonical": "implicit preference reward",
+   "role": "training reward",
+   "headline": false,
+   "measures": "Implicit reward used to train the rationale generator to prefer correct reasoning chains over counterfactual or irrelevant ones.",
+   "calculation": "f_theta(x, r) = beta * log(pi_theta(r|x) / pi_sft(r|x)); L_DPO = -E log sigmoid(f_theta(r_w, x) - f_theta(r_l, x)) over LLM-generated preference pairs; sequence-level, beta value not stated here.",
+   "evidence": "The latent function fθ is parameterized by the log-likelihood ratio between πθ and πsft :",
+   "lines": "L1701",
+   "traits": {
+    "scores": [
+     "intermediate step"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "free text"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "expert-model label"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2402.13950",
+   "ours": false
+  },
+  {
+   "paper": "FRODO (Making Reasoning Matter)",
+   "metric": "Reasoner objective with indirect-effect margin loss",
+   "canonical": "counterfactual + margin ranking loss",
+   "role": "training reward",
+   "headline": false,
+   "measures": "Training signal for the reasoning module to answer from the reasoning chain: correct answer given correct chain, counterfactual answer given counterfactual chain, and a margin between them.",
+   "calculation": "L = lambda_LM*L_LM + lambda_counter*L_counter + lambda_PREF*L_PREF; L_LM = -log P(y_w|x,r_w); L_counter = -log P(y_l|x,r_l); L_PREF = max(0, t*IE + m) with t = 1, m = 1.0, IE = h(x,r_w,y_w) - h(x,r_l,y_w) on logits h; lambda values not stated here.",
+   "evidence": "we train the model with a linear combination of three losses: an indirect effect loss and a supervised margin rank loss,",
+   "lines": "L397",
+   "traits": {
+    "scores": [
+     "final answer"
+    ],
+    "unit": [
+     "item"
+    ],
+    "answer_type": [
+     "yes/no",
+     "multiple choice"
+    ],
+    "comparison": [
+     "other"
+    ],
+    "truth": [
+     "expert-model label",
+     "human label"
+    ],
+    "aggregation": [
+     "other"
+    ],
+    "partial_credit": [
+     "yes"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2402.13950",
+   "ours": false
   },
   {
    "paper": "SpatialGym-Bench (OURS)",

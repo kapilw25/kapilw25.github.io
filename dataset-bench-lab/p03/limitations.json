@@ -1,0 +1,3388 @@
+{
+ "updated": "2026-09-30",
+ "limitations": [
+  {
+   "paper": "OmniSpatial",
+   "quote": "Although OmniSpatial includes some image clips with dynamic information from HOI4D (Liu et al., 2022), the complexity of the operational tasks still lags behind that of long videos",
+   "line": "L3994",
+   "section": "limitations section",
+   "summary": "dynamic tasks are simpler than long-video tasks; few dynamic clips",
+   "traits": {
+    "kind": [
+     "task coverage",
+     "modality coverage"
+    ],
+    "part": [
+     "tasks",
+     "data"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Single-image spatial",
+   "arxiv": "2506.03135",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "OmniSpatial",
+   "quote": "The ultimate goal of spatial reasoning is to empower robots, and future work also involves robot execution tasks",
+   "line": "L4004",
+   "section": "limitations section",
+   "summary": "no robot execution tasks yet; left to future work",
+   "traits": {
+    "kind": [
+     "embodiment or action space",
+     "static not interactive"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Single-image spatial",
+   "arxiv": "2506.03135",
+   "strength": "scope or future work",
+   "judge_note": "future-work idea (robot execution), not framed as a weakness",
+   "our_status": "shared",
+   "our_reason": "walk 0.5 m, turn 30 degrees and look only; no picking up in v1"
+  },
+  {
+   "paper": "OmniSpatial",
+   "quote": "We observe that reasoning-centric models that strongly obey formatting directives (e.g., Gemini-2.5flash) cannot be reliably scored with regex extraction, because their compulsory chain-of-thought interferes with the required output template.",
+   "line": "L3108",
+   "section": "appendix",
+   "summary": "regex answer extraction cannot reliably score reasoning-centric models",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge",
+     "answer format"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Single-image spatial",
+   "arxiv": "2506.03135",
+   "strength": "scope or future work",
+   "judge_note": "observation motivating their choice of scoring method per model type, not framed as a benchmark weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "CVBench",
+   "quote": "While CVBench represents a substantial advancement in evaluating video-based multimodal reasoning, certain limitations related to task complexity and scope indicate important directions for future research.",
+   "line": "L1355",
+   "section": "conclusion",
+   "summary": "limited task complexity and scope",
+   "traits": {
+    "kind": [
+     "task coverage"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "General video",
+   "arxiv": "2508.19542",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "CVBench",
+   "quote": "Additionally, expanding the benchmark to incorporate more diverse real-world scenarios, including extreme conditions and domain-specific applications, will further advance the field of video pattern recognition.",
+   "line": "L1358",
+   "section": "future work",
+   "summary": "lacks extreme-condition and domain-specific real-world scenarios",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "General video",
+   "arxiv": "2508.19542",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "PerceptionComp",
+   "quote": "PerceptionComp focuses on complex, perception-centric reasoning in long videos, but it does not cover every type of video reasoning task.",
+   "line": "L1730",
+   "section": "limitations section",
+   "summary": "does not cover every type of video reasoning task",
+   "traits": {
+    "kind": [
+     "task coverage"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "General video",
+   "arxiv": "2603.26653",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "PerceptionComp",
+   "quote": "The current dataset is limited to daily-life recordings and excludes high-stakes domains such as medical or surveillance settings.",
+   "line": "L1731",
+   "section": "limitations section",
+   "summary": "only daily-life videos; no medical or surveillance domains",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "General video",
+   "arxiv": "2603.26653",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "PerceptionComp",
+   "quote": "We use videos only from sources whose usage is compatible with academic benchmarking, and we do not release content beyond what is permitted by the original source terms.",
+   "line": "L1732",
+   "section": "limitations section",
+   "summary": "video release restricted by original source terms",
+   "traits": {
+    "kind": [
+     "reproducibility or release"
+    ],
+    "part": [
+     "release",
+     "data"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "General video",
+   "arxiv": "2603.26653",
+   "strength": "scope or future work",
+   "judge_note": "framed as ethics/licensing compliance, not as a benchmark weakness",
+   "our_status": "shared",
+   "our_reason": "Release planned; API agents are not deterministic, one run per setting gives no spread, and asset licences may limit redistribution."
+  },
+  {
+   "paper": "PerceptionComp",
+   "quote": "we caution against relying solely on absolute accuracy. We recommend interpreting results through comparative performance trends across models",
+   "line": "L1738",
+   "section": "limitations section",
+   "summary": "absolute accuracy alone is unreliable; compare trends across models",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "General video",
+   "arxiv": "2603.26653",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "PerceptionComp",
+   "quote": "future systems may still exploit unforeseen biases or rely on heuristics rather than robust spatio-temporal modeling.",
+   "line": "L1739",
+   "section": "limitations section",
+   "summary": "future models may exploit unforeseen biases or heuristics",
+   "traits": {
+    "kind": [
+     "contamination or shortcuts"
+    ],
+    "part": [
+     "data",
+     "evaluation"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "General video",
+   "arxiv": "2603.26653",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: private test seed, answer-flipping twins, and a text-only prune copied from VSI-Bench-Debiased, which brings its size-versus-bias trade-off. A released generator can be trained toward."
+  },
+  {
+   "paper": "Video-MME-v2",
+   "quote": "Due to API limitations, Gemini models are tested by extracting and compressing video frames to 60M, while GPT-5 is tested with an input of 50 frames.",
+   "line": "L120",
+   "section": "other",
+   "summary": "API limits force different frame inputs for Gemini and GPT-5",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation",
+     "models tested"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "General video",
+   "arxiv": "2604.05015",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "MindCube",
+   "quote": "The datasets used, while diverse, may not fully represent the vast range of global environments, potentially introducing geographic or cultural biases into the model’s spatial understanding.",
+   "line": "L1391",
+   "section": "other",
+   "summary": "Source scenes may not represent global environments; geographic or cultural bias possible.",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Multi-view spatial",
+   "arxiv": "2506.21458",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "MMSI-Bench",
+   "quote": "This approach may limit scalability because it requires substantial human effort, which we acknowledge as a potential limitation of MMSI-Bench.",
+   "line": "L1868",
+   "section": "limitations section",
+   "summary": "Manual QA annotation needs heavy human effort, limiting benchmark scalability.",
+   "traits": {
+    "kind": [
+     "scale or size"
+    ],
+    "part": [
+     "data",
+     "labels"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Multi-view spatial",
+   "arxiv": "2505.23764",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. The fixed test is about 3,000 items; warehouses only."
+  },
+  {
+   "paper": "MMSI-Bench",
+   "quote": "When performance begins to saturate, a larger benchmark may indeed be necessary, but reaching that point will likely require new research breakthroughs or more human annotation effort.",
+   "line": "L1873",
+   "section": "limitations section",
+   "summary": "1,000 samples may become too small once model performance saturates.",
+   "traits": {
+    "kind": [
+     "scale or size"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Multi-view spatial",
+   "arxiv": "2505.23764",
+   "strength": "scope or future work",
+   "judge_note": "authors argue 1,000 is sufficient now; hypothetical future saturation",
+   "our_status": "addressed",
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. The fixed test is about 3,000 items; warehouses only."
+  },
+  {
+   "paper": "MMSI-Bench",
+   "quote": "our questions are designed to be human-answerable; thus, we do not include questions about camera attributes (parameters).",
+   "line": "L304",
+   "section": "other",
+   "summary": "No questions about camera attributes or parameters are included.",
+   "traits": {
+    "kind": [
+     "task coverage"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Multi-view spatial",
+   "arxiv": "2505.23764",
+   "strength": "scope or future work",
+   "judge_note": "intended design choice (human-answerable questions), scope limit not framed as weakness",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "SPAR-Bench",
+   "quote": "While our tasks span diverse spatial challenges, they are primarily static QA-based and do not yet capture continuous spatial reasoning required in embodied or interactive settings.",
+   "line": "L1591",
+   "section": "conclusion",
+   "summary": "Tasks are static QA; no continuous embodied or interactive spatial reasoning.",
+   "traits": {
+    "kind": [
+     "static not interactive"
+    ],
+    "part": [
+     "tasks",
+     "environment"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Multi-view spatial",
+   "arxiv": "2503.22976",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: the agent walks 0.5 m and turns 30 degrees, up to 10 moves, before answering. Scenes stay still; no manipulation. Theory of Space, EmbodiedEval and others also move."
+  },
+  {
+   "paper": "SPAR-Bench",
+   "quote": "Our study is largely static and image-centric: QA benchmarks with single/multi-view RGB do not capture continuous, interactive reasoning for embodied or long-horizon video.",
+   "line": "L1598",
+   "section": "limitations section",
+   "summary": "Image-centric RGB QA misses interactive embodied and long-horizon video reasoning.",
+   "traits": {
+    "kind": [
+     "static not interactive",
+     "modality coverage"
+    ],
+    "part": [
+     "tasks",
+     "data"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Multi-view spatial",
+   "arxiv": "2503.22976",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: the agent walks 0.5 m and turns 30 degrees, up to 10 moves, before answering. Scenes stay still; no manipulation. Theory of Space, EmbodiedEval and others also move."
+  },
+  {
+   "paper": "SPAR-Bench",
+   "quote": "Without metric 3D, monocular reconstruction suffers scale ambiguity, so metric tasks need extra cues (e.g., known sizes, stereo) or ordinal/normalized targets.",
+   "line": "L1599",
+   "section": "limitations section",
+   "summary": "Without metric 3D, monocular inputs make metric tasks scale-ambiguous.",
+   "traits": {
+    "kind": [
+     "other",
+     "answer format"
+    ],
+    "part": [
+     "tasks",
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Multi-view spatial",
+   "arxiv": "2503.22976",
+   "strength": "stated weakness",
+   "our_status": "not addressed",
+   "our_reason": "not comparable"
+  },
+  {
+   "paper": "SPAR-Bench",
+   "quote": "Our data pipeline also relies on 3D ground truth—depth, intrinsics, and poses—which may be unavailable in some domains.",
+   "line": "L1601",
+   "section": "limitations section",
+   "summary": "Data pipeline needs 3D ground truth, unavailable in some domains.",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Multi-view spatial",
+   "arxiv": "2503.22976",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "BLINK",
+   "quote": "Blink makes use of data from existing image datasets, and does not cover all the visual perception abilities in the wild.",
+   "line": "L2545",
+   "section": "limitations section",
+   "summary": "Built from existing image datasets; does not cover all in-the-wild perception abilities.",
+   "traits": {
+    "kind": [
+     "task coverage"
+    ],
+    "part": [
+     "data",
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "General spatial",
+   "arxiv": "2404.12390",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "BLINK",
+   "quote": "The experiments suggest that visual prompting can have a big impact on multimodal LLM performance, and improving visual prompts or improving model robustness to prompt variation is a promising direction for future research",
+   "line": "L1481",
+   "section": "other",
+   "summary": "Scores are sensitive to visual prompt design such as circle size and color.",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "General spatial",
+   "arxiv": "2404.12390",
+   "strength": "scope or future work",
+   "judge_note": "prompt-sensitivity finding framed as future direction for models, not as benchmark weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "BLINK",
+   "quote": "the only exception is the IQ test score provided by two coauthors tested upon 100 sampled data, 50 for each, since it is hard to control or represent as average human performance.",
+   "line": "L1899",
+   "section": "appendix",
+   "summary": "IQ test human baseline uses only 100 samples by two coauthors.",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "General spatial",
+   "arxiv": "2404.12390",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "ViewSpatial-Bench",
+   "quote": "This necessitated manual labeling, which introduces both scaling constraints and potential annotator biases.",
+   "line": "L1222",
+   "section": "limitations section",
+   "summary": "Person-perspective task needed manual labels, limiting scale and adding annotator bias.",
+   "traits": {
+    "kind": [
+     "label quality",
+     "scale or size"
+    ],
+    "part": [
+     "labels"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "General spatial",
+   "arxiv": "2505.21500",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: labels computed from exact simulator state, as SAT, Spatial457 and SPRITE already do. Whether the answer is visible in the render still needs a check."
+  },
+  {
+   "paper": "ViewSpatial-Bench",
+   "quote": "Our Camera-perspective Relative Direction tasks utilize exclusively indoor environments from ScanNet [24], potentially limiting generalizability to outdoor settings.",
+   "line": "L1227",
+   "section": "limitations section",
+   "summary": "Camera-perspective tasks use only indoor ScanNet scenes; outdoor generalization limited.",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "General spatial",
+   "arxiv": "2505.21500",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "ViewSpatial-Bench",
+   "quote": "ViewSpatial-Bench evaluates only static spatial orientation comprehension without addressing dynamic spatial reasoning scenarios where objects or observers move through environments.",
+   "line": "L1234",
+   "section": "limitations section",
+   "summary": "Evaluates only static orientation; no dynamic scenarios with moving objects or observers.",
+   "traits": {
+    "kind": [
+     "static not interactive",
+     "task coverage"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "General spatial",
+   "arxiv": "2505.21500",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: the agent walks 0.5 m and turns 30 degrees, up to 10 moves, before answering. Scenes stay still; no manipulation. Theory of Space, EmbodiedEval and others also move."
+  },
+  {
+   "paper": "ViewSpatial-Bench",
+   "quote": "Extending our benchmark to incorporate temporal sequences and motion-based spatial reasoning would provide a more comprehensive evaluation framework for embodied AI systems.",
+   "line": "L1237",
+   "section": "future work",
+   "summary": "Future work: add temporal sequences and motion-based spatial reasoning.",
+   "traits": {
+    "kind": [
+     "static not interactive",
+     "modality coverage"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "General spatial",
+   "arxiv": "2505.21500",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: the agent walks 0.5 m and turns 30 degrees, up to 10 moves, before answering. Scenes stay still; no manipulation. Theory of Space, EmbodiedEval and others also move."
+  },
+  {
+   "paper": "MMSI-Video-Bench",
+   "quote": "Due to (i) the limited number of images allowed per request by some proprietary APIs, and (ii) outof-memory issues when running large open-source models on long videos, we establish two evaluation tracks:",
+   "line": "L515",
+   "section": "other",
+   "summary": "API image caps and memory force a 50-frame track (a second track keeps all annotated frames)",
+   "traits": {
+    "kind": [
+     "compute or cost",
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Video and 4D spatial",
+   "arxiv": "2512.10863",
+   "strength": "scope or future work",
+   "judge_note": "they add a second Sufficient-Coverage track with all annotation frames, so summary 'not full frames' is wrong; rationale for protocol, not a weakness",
+   "our_status": "shared",
+   "our_reason": "up to 10 moves and several tool calls per question make agent runs costly"
+  },
+  {
+   "paper": "OSI-Bench",
+   "quote": "as our LiDAR data primarily captures the front-facing surfaces of objects, we do not provide estimations of their full 3D dimensions (width, height, depth) in the current version of the benchmark.",
+   "line": "L1884",
+   "section": "appendix",
+   "summary": "No full 3D object size labels; LiDAR sees only front surfaces",
+   "traits": {
+    "kind": [
+     "task coverage",
+     "label quality"
+    ],
+    "part": [
+     "labels",
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Video and 4D spatial",
+   "arxiv": "2512.19683",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "OSI-Bench",
+   "quote": "A second exception is Grok-5, which was limited to 8 frames due to the constraints of the API we used.",
+   "line": "L2412",
+   "section": "appendix",
+   "summary": "Grok-5 evaluated with only 8 frames because of API limits",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge",
+     "model coverage"
+    ],
+    "part": [
+     "evaluation",
+     "models tested"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Video and 4D spatial",
+   "arxiv": "2512.19683",
+   "strength": "scope or future work",
+   "judge_note": "protocol caveat for one model's input frames; kind is eval protocol, not model coverage",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "VSI-Bench-Debiased (VSI-Bench-U)",
+   "quote": "The budget 𝐵 controls the trade-off between bias reduction and dataset size/coverage",
+   "line": "L834",
+   "section": "other",
+   "summary": "Pruning biased questions shrinks dataset size and coverage",
+   "traits": {
+    "kind": [
+     "scale or size",
+     "contamination or shortcuts"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Video and 4D spatial",
+   "arxiv": "2511.04655",
+   "strength": "scope or future work",
+   "judge_note": "method parameter trade-off description, not stated as a limitation",
+   "our_status": "addressed",
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. The fixed test is about 3,000 items; warehouses only."
+  },
+  {
+   "paper": "VSI-Bench-Debiased (VSI-Bench-U)",
+   "quote": "We focus on pruning in this work and leave exploration of reparative strategies to future work.",
+   "line": "L848",
+   "section": "other",
+   "summary": "Only pruning used; rewriting or rebalancing questions left to future work",
+   "traits": {
+    "kind": [
+     "contamination or shortcuts"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Video and 4D spatial",
+   "arxiv": "2511.04655",
+   "strength": "scope or future work",
+   "judge_note": "scope choice of debiasing method, deferred to future work",
+   "our_status": "shared",
+   "our_reason": "Planned: private test seed, answer-flipping twins, and a text-only prune copied from VSI-Bench-Debiased, which brings its size-versus-bias trade-off. A released generator can be trained toward."
+  },
+  {
+   "paper": "VSTI-Bench",
+   "quote": "As a foundational step, our current datasets prioritize static indoor scenes, leaving the exploration of dynamic and extreme environments for future work.",
+   "line": "L1290",
+   "section": "conclusion",
+   "summary": "Only static indoor scenes; dynamic and extreme environments left to future work",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "data",
+     "environment"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Video and 4D spatial",
+   "arxiv": "2505.20279",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "VSTI-Bench",
+   "quote": "Note that this benchmark currently focuses on static 3D scenes, where all depicted motion is from camera movement.",
+   "line": "L2043",
+   "section": "appendix",
+   "summary": "No object motion; all motion comes from the camera",
+   "traits": {
+    "kind": [
+     "domain or scene coverage",
+     "task coverage"
+    ],
+    "part": [
+     "data",
+     "tasks"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Video and 4D spatial",
+   "arxiv": "2505.20279",
+   "strength": "scope or future work",
+   "judge_note": "scope note ('currently focuses'), not framed as weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "SpatialRGPT-Bench",
+   "quote": "One limitation of our work is the use of Axis-Aligned Bounding Boxes (AABBs), which can result in inaccuracies in label representation.",
+   "line": "L1136",
+   "section": "limitations section",
+   "summary": "Axis-aligned boxes make the labels inaccurate",
+   "traits": {
+    "kind": [
+     "label quality"
+    ],
+    "part": [
+     "labels"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2406.01584",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: labels computed from exact simulator state, as SAT, Spatial457 and SPRITE already do. Whether the answer is visible in the render still needs a check."
+  },
+  {
+   "paper": "SpatialRGPT-Bench",
+   "quote": "The most accurate approach would be human labeling [74], although this requires significant effort. We leave these for future work.",
+   "line": "L1139",
+   "section": "limitations section",
+   "summary": "Human labeling would be most accurate but is left for future work",
+   "traits": {
+    "kind": [
+     "label quality",
+     "compute or cost"
+    ],
+    "part": [
+     "labels"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2406.01584",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: labels computed from exact simulator state, as SAT, Spatial457 and SPRITE already do. Whether the answer is visible in the render still needs a check."
+  },
+  {
+   "paper": "MMPerspective",
+   "quote": "First, the benchmark primarily focuses on static images and multiple-choice question answering (MCQA) formats, which may not fully capture the depth of spatial reasoning required in dynamic or open-ended tasks.",
+   "line": "L2849",
+   "section": "limitations section",
+   "summary": "Static images and multiple-choice only; misses dynamic, open-ended reasoning",
+   "traits": {
+    "kind": [
+     "static not interactive",
+     "answer format"
+    ],
+    "part": [
+     "tasks",
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2505.20426",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: the agent walks 0.5 m and turns 30 degrees, up to 10 moves, before answering. Scenes stay still; no manipulation. Theory of Space, EmbodiedEval and others also move."
+  },
+  {
+   "paper": "MMPerspective",
+   "quote": "Real-world applications often demand free-form generation, spatial manipulation, or multi-turn interactions that extend beyond our current evaluation scope.",
+   "line": "L2851",
+   "section": "limitations section",
+   "summary": "No free-form generation, manipulation or multi-turn interaction tasks",
+   "traits": {
+    "kind": [
+     "task coverage",
+     "static not interactive"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2505.20426",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "MMPerspective",
+   "quote": "the dataset still exhibits a bias toward architectural and indoor scenes, which may limit generalizability to natural environments or abstract visual contexts.",
+   "line": "L2864",
+   "section": "limitations section",
+   "summary": "Biased toward architectural and indoor scenes",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2505.20426",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "MMPerspective",
+   "quote": "some tasks inevitably contain ambiguous visual cues, and model errors may stem from subjective interpretations rather than a lack of geometric understanding.",
+   "line": "L2866",
+   "section": "limitations section",
+   "summary": "Ambiguous visual cues make some errors subjective",
+   "traits": {
+    "kind": [
+     "label quality"
+    ],
+    "part": [
+     "labels",
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2505.20426",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: labels computed from exact simulator state, as SAT, Spatial457 and SPRITE already do. Whether the answer is visible in the render still needs a check."
+  },
+  {
+   "paper": "MMPerspective",
+   "quote": "our benchmark assumes that all correct answers are equally accessible across models without considering differences in input modalities, prompting formats, or underlying vision-language alignment strategies.",
+   "line": "L2868",
+   "section": "limitations section",
+   "summary": "Ignores model differences in modality, prompting and alignment",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2505.20426",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "Anywhere3D-Bench",
+   "quote": "First, we plan to develop a training set for Anywhere3D-Bench. This would enable the supervised fine-tuning or reinforcement learning-based fine-tuning strategies",
+   "line": "L2535",
+   "section": "appendix",
+   "summary": "No training set yet; evaluation only",
+   "traits": {
+    "kind": [
+     "other"
+    ],
+    "part": [
+     "data",
+     "release"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2506.04897",
+   "strength": "scope or future work",
+   "judge_note": "future plan for a training split; missing split is neither scale nor release",
+   "our_status": "not addressed",
+   "our_reason": "not comparable"
+  },
+  {
+   "paper": "Anywhere3D-Bench",
+   "quote": "Second, we aim to perform a deeper analysis of the reasoning processes produced by models and design corresponding evaluation metrics to assess the correctness of intermediate reasoning steps.",
+   "line": "L2538",
+   "section": "appendix",
+   "summary": "Metric scores only final boxes, not intermediate reasoning steps",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2506.04897",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "Anywhere3D-Bench",
+   "quote": "In some cases, even if the final bounding box prediction is correct, the intermediate reasoning may involve compensatory errors—e.g., two incorrect steps canceling each other out.",
+   "line": "L2540",
+   "section": "appendix",
+   "summary": "Correct answers can hide compensating reasoning errors",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge",
+     "contamination or shortcuts"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2506.04897",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "Anywhere3D-Bench",
+   "quote": "Third, while current model outputs are represented as the center coordinates and size of a 3D bounding box, we are interested in exploring a multiple-choice formulation.",
+   "line": "L2545",
+   "section": "appendix",
+   "summary": "Only box-regression answer format; multiple-choice variant not yet explored",
+   "traits": {
+    "kind": [
+     "answer format"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2506.04897",
+   "strength": "scope or future work",
+   "judge_note": "future-work idea (MC variant), not framed as a weakness",
+   "our_status": "shared",
+   "our_reason": "Multiple choice and numbers checked by rules: the same format and extraction limits the rivals admit."
+  },
+  {
+   "paper": "Anywhere3D-Bench",
+   "quote": "Fifth, we hope to move beyond visual grounding alone and explore object generation at the grounded location",
+   "line": "L2553",
+   "section": "appendix",
+   "summary": "Covers grounding only, not object generation at grounded location",
+   "traits": {
+    "kind": [
+     "task coverage"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2506.04897",
+   "strength": "scope or future work",
+   "judge_note": "future-work extension to generation",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "Anywhere3D-Bench",
+   "quote": "In future work, we plan to extend the benchmark toward embodied tasks, enabling agents (e.g., robots or simulated avatars) to execute the instructions in interactive 3D environments.",
+   "line": "L2556",
+   "section": "appendix",
+   "summary": "Not embodied or interactive; agents do not execute instructions",
+   "traits": {
+    "kind": [
+     "static not interactive",
+     "embodiment or action space"
+    ],
+    "part": [
+     "tasks",
+     "environment"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2506.04897",
+   "strength": "scope or future work",
+   "judge_note": "future-work extension, not framed as weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: the agent walks 0.5 m and turns 30 degrees, up to 10 moves, before answering. Scenes stay still; no manipulation. Theory of Space, EmbodiedEval and others also move."
+  },
+  {
+   "paper": "Situat3DChange",
+   "quote": "The human change annotations are still limited, with each change annotated by only one annotator, which restricts diversity and limits the dataset’s extensibility.",
+   "line": "L1155",
+   "section": "limitations section",
+   "summary": "Each change annotated by one annotator; limited diversity",
+   "traits": {
+    "kind": [
+     "label quality",
+     "scale or size"
+    ],
+    "part": [
+     "labels"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2510.11509",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: labels computed from exact simulator state, as SAT, Spatial457 and SPRITE already do. Whether the answer is visible in the render still needs a check."
+  },
+  {
+   "paper": "Situat3DChange",
+   "quote": "Furthermore, the human-annotated data is not adapted to other domains, making the data generation pipeline difficult to transfer to other datasets.",
+   "line": "L1156",
+   "section": "limitations section",
+   "summary": "Human annotations not adapted to other domains; pipeline hard to transfer",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "data",
+     "labels"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2510.11509",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "Situat3DChange",
+   "quote": "As the 3RScan test data is unavailable, Situat3DChange supports only hold-out evaluation for MLLM, limiting its use for task-specific VQA.",
+   "line": "L1158",
+   "section": "limitations section",
+   "summary": "No official test split; only hold-out evaluation",
+   "traits": {
+    "kind": [
+     "reproducibility or release"
+    ],
+    "part": [
+     "evaluation",
+     "release"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2510.11509",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Release planned; API agents are not deterministic, one run per setting gives no spread, and asset licences may limit redistribution."
+  },
+  {
+   "paper": "ReVSI",
+   "quote": "relies on costly expert-level human annotation, which limits scalability to substantially larger datasets or training-scale supervision.",
+   "line": "L1348",
+   "section": "limitations section",
+   "summary": "Costly expert human annotation limits scaling to larger or training-scale data",
+   "traits": {
+    "kind": [
+     "scale or size",
+     "compute or cost"
+    ],
+    "part": [
+     "data",
+     "labels"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2604.24300",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. The fixed test is about 3,000 items; warehouses only."
+  },
+  {
+   "paper": "ReVSI",
+   "quote": "Developing automated or semi-automated pipelines for generating high-quality spatial supervision remains an important direction for future work.",
+   "line": "L1350",
+   "section": "future work",
+   "summary": "Automated pipelines for high-quality spatial labels are left to future work",
+   "traits": {
+    "kind": [
+     "scale or size"
+    ],
+    "part": [
+     "labels"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2604.24300",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. The fixed test is about 3,000 items; warehouses only."
+  },
+  {
+   "paper": "STRIDE-QA",
+   "quote": "because STRIDE-QA is the inaugural benchmark for spatiotemporal reasoning in autonomous driving and no comparable public dataset exists, we cannot yet quantify crossdataset generalization.",
+   "line": "L1934",
+   "section": "limitations section",
+   "summary": "Cross-dataset generalization cannot be measured; no comparable public dataset exists",
+   "traits": {
+    "kind": [
+     "other"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2508.10427",
+   "strength": "scope or future work",
+   "judge_note": "limit of the study's generalization check (no comparable dataset), not benchmark data/eval",
+   "our_status": "not addressed",
+   "our_reason": "not comparable"
+  },
+  {
+   "paper": "STRIDE-QA",
+   "quote": "its impact on safety-critical downstream tasks such as motion planning and behavior prediction has not been rigorously assessed.",
+   "line": "L1935",
+   "section": "limitations section",
+   "summary": "Effect on downstream driving tasks like planning not assessed",
+   "traits": {
+    "kind": [
+     "other"
+    ],
+    "part": [
+     "tasks",
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2508.10427",
+   "strength": "scope or future work",
+   "judge_note": "downstream-impact not assessed is a study scope point, not a data/protocol weakness; kind changed",
+   "our_status": "not addressed",
+   "our_reason": "not comparable"
+  },
+  {
+   "paper": "STRIDE-QA",
+   "quote": "This finding exposes a key limitation of relying on single-camera input for forecasting and highlights that integrating multi-camera information is a critical direction",
+   "line": "L1093",
+   "section": "discussion",
+   "summary": "Single front-camera input fails when agents leave the field of view",
+   "traits": {
+    "kind": [
+     "modality coverage"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "explicit limitation",
+     "future work"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2508.10427",
+   "strength": "scope or future work",
+   "judge_note": "finding about single-camera input from model error analysis; not stated as a benchmark weakness",
+   "our_status": "shared",
+   "our_reason": "Rendered RGB views only, the limit MetaSpace states; the moves give several views, which covers only part of it."
+  },
+  {
+   "paper": "STRIDE-QA",
+   "quote": "underscores the need for autonomous-driving VLMs to integrate multi-camera inputs and motivates future work on efficiently combining multi-view information.",
+   "line": "L1939",
+   "section": "future work",
+   "summary": "Multi-camera, multi-view input left to future work",
+   "traits": {
+    "kind": [
+     "modality coverage"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2508.10427",
+   "strength": "scope or future work",
+   "judge_note": "future work drawn from a model finding, not stated as a benchmark weakness",
+   "our_status": "shared",
+   "our_reason": "Rendered RGB views only, the limit MetaSpace states; the moves give several views, which covers only part of it."
+  },
+  {
+   "paper": "STRIDE-QA",
+   "quote": "we will refine the evaluation protocol by adding finer-grained metrics and release it alongside STRIDE-QA",
+   "line": "L1940",
+   "section": "future work",
+   "summary": "Evaluation protocol needs finer-grained metrics; not yet released",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge",
+     "reproducibility or release"
+    ],
+    "part": [
+     "evaluation",
+     "release"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2508.10427",
+   "strength": "scope or future work",
+   "judge_note": "future-work plan to refine and release protocol",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "VIR-Bench",
+   "quote": "Looking ahead, we intend to expand our dataset by increasing geographic and",
+   "line": "L1193",
+   "section": "conclusion",
+   "summary": "Geographic diversity is limited (Japan only); expansion planned",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2509.19002",
+   "strength": "scope or future work",
+   "judge_note": "future-work expansion; 'Japan only' not in quote but supported by paper (L101)",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "VIR-Bench",
+   "quote": "linguistic diversity, incorporating a broader range of filming styles, and enhancing annotation richness.",
+   "line": "L1196",
+   "section": "conclusion",
+   "summary": "Language, filming-style and annotation richness to be broadened in future",
+   "traits": {
+    "kind": [
+     "language coverage",
+     "domain or scene coverage",
+     "label quality"
+    ],
+    "part": [
+     "data",
+     "labels"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2509.19002",
+   "strength": "scope or future work",
+   "judge_note": "future-work expansion plan in conclusion, not framed as weakness",
+   "our_status": "not addressed",
+   "our_reason": "English questions only"
+  },
+  {
+   "paper": "VIR-Bench",
+   "quote": "Commercial use of any kind is strictly prohibited. The dataset may not be redistributed on servers outside Japan or under alternative licenses.",
+   "line": "L1651",
+   "section": "appendix",
+   "summary": "Research-only release; no commercial use or redistribution outside Japan",
+   "traits": {
+    "kind": [
+     "reproducibility or release"
+    ],
+    "part": [
+     "release"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2509.19002",
+   "strength": "scope or future work",
+   "judge_note": "legal license terms, presented as compliance not weakness",
+   "our_status": "shared",
+   "our_reason": "Release planned; API agents are not deterministic, one run per setting gives no spread, and asset licences may limit redistribution."
+  },
+  {
+   "paper": "SSI-Bench",
+   "quote": "This design choice inevitably limits scalability: constructing and verifying instances requires substantial expert time and careful quality control, making it less scalable than fully automated generation pipelines.",
+   "line": "L3109",
+   "section": "limitations section",
+   "summary": "Fully human curation limits scalability; needs much expert time",
+   "traits": {
+    "kind": [
+     "scale or size",
+     "compute or cost"
+    ],
+    "part": [
+     "data",
+     "labels"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2602.07864",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. The fixed test is about 3,000 items; warehouses only."
+  },
+  {
+   "paper": "SSI-Bench",
+   "quote": "As models improve and performance begins to saturate, expanding the benchmark—potentially with more diverse structures and harder cases—may become necessary",
+   "line": "L3113",
+   "section": "limitations section",
+   "summary": "1,000 samples may need expansion with diverse, harder cases later",
+   "traits": {
+    "kind": [
+     "scale or size",
+     "domain or scene coverage"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2602.07864",
+   "strength": "scope or future work",
+   "judge_note": "authors say current scale is sufficient; expansion framed as future need",
+   "our_status": "addressed",
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. The fixed test is about 3,000 items; warehouses only."
+  },
+  {
+   "paper": "SSI-Bench",
+   "quote": "This reduces the marginal cost of scaling, although human review remains necessary to preserve answer uniqueness, visual clarity, and resistance to superficial shortcut cues.",
+   "line": "L3118",
+   "section": "limitations section",
+   "summary": "Semi-automatic expansion still needs human review for quality and shortcuts",
+   "traits": {
+    "kind": [
+     "compute or cost",
+     "contamination or shortcuts"
+    ],
+    "part": [
+     "labels"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Conference model benchmarks",
+   "arxiv": "2602.07864",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "up to 10 moves and several tool calls per question make agent runs costly"
+  },
+  {
+   "paper": "SpatialAct",
+   "quote": "A key limitation is that all evaluations are conducted in simulated scenes, and it remains unclear how performance translates to real-world environments.",
+   "line": "L1403",
+   "section": "discussion",
+   "summary": "All evaluation is in simulated scenes; real-world transfer unknown.",
+   "traits": {
+    "kind": [
+     "sim-to-real gap",
+     "synthetic data only"
+    ],
+    "part": [
+     "environment",
+     "data"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2605.31148",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "rendered warehouses only; a small real-to-sim check is planned but the gap remains"
+  },
+  {
+   "paper": "SceneActBench",
+   "quote": "The main study evaluates proprietary VLM configurations and uses one completed run per configuration–case pair",
+   "line": "L1668",
+   "section": "limitations section",
+   "summary": "Only proprietary VLM configurations are evaluated.",
+   "traits": {
+    "kind": [
+     "model coverage"
+    ],
+    "part": [
+     "models tested"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2607.22393",
+   "strength": "stated weakness",
+   "our_status": "not addressed",
+   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+  },
+  {
+   "paper": "SceneActBench",
+   "quote": "uses one completed run per configuration–case pair, so the reported Overall scores should not be interpreted as repeated-run estimates.",
+   "line": "L1668",
+   "section": "limitations section",
+   "summary": "Single run per configuration-case pair; scores are not repeated-run estimates.",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge",
+     "reproducibility or release"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2607.22393",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "SceneActBench",
+   "quote": "The Dynamic task contains ten scenes and is best viewed as a targeted stress test rather than a broad estimate of dynamic-scene performance.",
+   "line": "L1670",
+   "section": "limitations section",
+   "summary": "Dynamic task has only ten scenes; not a broad estimate.",
+   "traits": {
+    "kind": [
+     "scale or size",
+     "domain or scene coverage"
+    ],
+    "part": [
+     "data",
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2607.22393",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. The fixed test is about 3,000 items; warehouses only."
+  },
+  {
+   "paper": "SceneActBench",
+   "quote": "The Overall score depends on fixed normalisation constants, which are design choices;",
+   "line": "L1671",
+   "section": "limitations section",
+   "summary": "Overall score relies on fixed, hand-chosen normalisation constants.",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2607.22393",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "SceneActBench",
+   "quote": "Comparisons with task-specialist 3D pipelines remain an important direction for future work.",
+   "line": "L1673",
+   "section": "limitations section",
+   "summary": "No comparison with task-specialist 3D pipelines.",
+   "traits": {
+    "kind": [
+     "model coverage"
+    ],
+    "part": [
+     "models tested"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2607.22393",
+   "strength": "stated weakness",
+   "our_status": "not addressed",
+   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+  },
+  {
+   "paper": "SceneActBench",
+   "quote": "SceneActBench gives a common basis for measuring them as future work expands to broader scenes, open-weight models, and richer interactions.",
+   "line": "L1683",
+   "section": "conclusion",
+   "summary": "Scene coverage is narrow; broader scenes left to future work.",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "data",
+     "environment"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2607.22393",
+   "strength": "scope or future work",
+   "judge_note": "conclusion future-work line; 'narrow' is implied, not stated",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "ESI-Bench",
+   "quote": "One limitation is rendering realism. Although OmniGibson provides realistic scenes and physics, visual appearance still differs from real camera data in texture quality, lighting, motion blur, and sensor artifacts.",
+   "line": "L1706",
+   "section": "limitations section",
+   "summary": "Simulator rendering differs from real camera data (texture, lighting, blur, sensor artifacts).",
+   "traits": {
+    "kind": [
+     "sim-to-real gap"
+    ],
+    "part": [
+     "environment",
+     "data"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2605.18746",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "rendered warehouses only; a small real-to-sim check is planned but the gap remains"
+  },
+  {
+   "paper": "ESI-Bench",
+   "quote": "We do not claim that simulator performance directly transfers to real-world robotics.",
+   "line": "L2762",
+   "section": "appendix",
+   "summary": "Simulator performance is not claimed to transfer to real-world robotics.",
+   "traits": {
+    "kind": [
+     "sim-to-real gap"
+    ],
+    "part": [
+     "environment"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2605.18746",
+   "strength": "scope or future work",
+   "judge_note": "simulation presented as intended design choice for controlled diagnosis",
+   "our_status": "shared",
+   "our_reason": "rendered warehouses only; a small real-to-sim check is planned but the gap remains"
+  },
+  {
+   "paper": "ESI-Bench",
+   "quote": "A full benchmark for metacognition is beyond the scope of this work",
+   "line": "L2699",
+   "section": "appendix",
+   "summary": "Metacognition is not fully benchmarked; out of scope.",
+   "traits": {
+    "kind": [
+     "task coverage"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2605.18746",
+   "strength": "scope or future work",
+   "judge_note": "scope statement, not framed as weakness",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "SpatialWorld",
+   "quote": "Like most embodied AI benchmarks, S PATIALW ORLD operates in simulated environments rather than on physical robotic platforms.",
+   "line": "L3001",
+   "section": "limitations section",
+   "summary": "Runs in simulators, not on physical robots.",
+   "traits": {
+    "kind": [
+     "sim-to-real gap"
+    ],
+    "part": [
+     "environment"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2606.09669",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "rendered warehouses only; a small real-to-sim check is planned but the gap remains"
+  },
+  {
+   "paper": "SpatialWorld",
+   "quote": "to ensure annotation quality, the current 760 tasks are carefully handcrafted, making the scale more modest compared to automatically generated datasets.",
+   "line": "L3002",
+   "section": "limitations section",
+   "summary": "Only 760 handcrafted tasks; modest scale.",
+   "traits": {
+    "kind": [
+     "scale or size"
+    ],
+    "part": [
+     "data",
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2606.09669",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. The fixed test is about 3,000 items; warehouses only."
+  },
+  {
+   "paper": "SpatialWorld",
+   "quote": "These tasks cover six scenario categories and eight backends, and the rich diversity of real-world spatial reasoning scenarios offers ample room for future expansion.",
+   "line": "L3003",
+   "section": "limitations section",
+   "summary": "Covers only six scenario categories and eight backends.",
+   "traits": {
+    "kind": [
+     "domain or scene coverage",
+     "task coverage"
+    ],
+    "part": [
+     "tasks",
+     "environment"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2606.09669",
+   "strength": "scope or future work",
+   "judge_note": "framed as room for future expansion rather than a weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "VisGym",
+   "quote": "This suggests the presence of additional failure modes not captured by our taxonomy, which we leave for future work.",
+   "line": "L2356",
+   "section": "appendix",
+   "summary": "Failure-mode taxonomy misses some failure modes.",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2601.16973",
+   "strength": "scope or future work",
+   "judge_note": "limit of an ablation failure-taxonomy analysis, left to future work",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "MineAnyBuild",
+   "quote": "Evaluation tools that we choose are relatively slow and require manual operations.",
+   "line": "L1829",
+   "section": "limitations section",
+   "summary": "Evaluation tools are slow and need manual operation.",
+   "traits": {
+    "kind": [
+     "compute or cost",
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2505.20148",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "up to 10 moves and several tool calls per question make agent runs costly"
+  },
+  {
+   "paper": "MineAnyBuild",
+   "quote": "Evaluation based on a scoring system still has drawbacks compared to evaluation based on models or fixed criteria.",
+   "line": "L1831",
+   "section": "limitations section",
+   "summary": "Scoring-based evaluation less reliable and stable than model-based evaluators.",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2505.20148",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "MineAnyBuild",
+   "quote": "The output format based on the 3D blueprint matrix is not the best so far.",
+   "line": "L1837",
+   "section": "limitations section",
+   "summary": "3D blueprint matrix output format is suboptimal (token/sequence limits).",
+   "traits": {
+    "kind": [
+     "answer format"
+    ],
+    "part": [
+     "evaluation",
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2505.20148",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Multiple choice and numbers checked by rules: the same format and extraction limits the rivals admit."
+  },
+  {
+   "paper": "MineAnyBuild",
+   "quote": "Considering the limited resources, we did not use GPUs with more memory to run open-source models with larger parameters.",
+   "line": "L3337",
+   "section": "appendix",
+   "summary": "Larger open-source models not evaluated due to limited GPU resources.",
+   "traits": {
+    "kind": [
+     "model coverage",
+     "compute or cost"
+    ],
+    "part": [
+     "models tested"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2505.20148",
+   "strength": "stated weakness",
+   "our_status": "not addressed",
+   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+  },
+  {
+   "paper": "MineAnyBuild",
+   "quote": "The input/output of these agents cannot be directly transferred to our benchmark, therefore we need to do some adaptation works for further evaluation.",
+   "line": "L3811",
+   "section": "appendix",
+   "summary": "Domain-specific Minecraft agents not evaluated; need adaptation.",
+   "traits": {
+    "kind": [
+     "model coverage"
+    ],
+    "part": [
+     "models tested"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2505.20148",
+   "strength": "scope or future work",
+   "judge_note": "future-work note on untested baselines",
+   "our_status": "not addressed",
+   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+  },
+  {
+   "paper": "MineAnyBuild",
+   "quote": "We plan to recruit ∼10 human participants with experience in Minecraft building",
+   "line": "L3806",
+   "section": "appendix",
+   "summary": "No human expert baseline yet; planned.",
+   "traits": {
+    "kind": [
+     "other"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2505.20148",
+   "strength": "scope or future work",
+   "judge_note": "future-work plan for a human baseline",
+   "our_status": "not addressed",
+   "our_reason": "not comparable"
+  },
+  {
+   "paper": "MineAnyBuild",
+   "quote": "Currently, most of our evaluations are based on zero-shot querying of MLLMs, and they usually respond with plans relying on their original knowledge base.",
+   "line": "L1864",
+   "section": "future work",
+   "summary": "Evaluations are mostly zero-shot MLLM queries without memory modules.",
+   "traits": {
+    "kind": [
+     "model coverage"
+    ],
+    "part": [
+     "evaluation",
+     "models tested"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Agent benchmarks",
+   "arxiv": "2505.20148",
+   "strength": "scope or future work",
+   "judge_note": "future-direction bullet; kind: only zero-shot agents evaluated",
+   "our_status": "not addressed",
+   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+  },
+  {
+   "paper": "Theory of Space",
+   "quote": "An important direction for future work is to extend T HEORY OF S PACE beyond single-agent settings to multi-agent exploration",
+   "line": "L220",
+   "section": "other",
+   "summary": "Single-agent only; multi-agent exploration left to future work",
+   "traits": {
+    "kind": [
+     "task coverage"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "strength": "scope or future work",
+   "judge_note": "future-work extension to multi-agent",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "Theory of Space",
+   "quote": "While it is a lossy compression of the agent's true internal state, the explicit map remains a strong diagnostic signal.",
+   "line": "L1444",
+   "section": "other",
+   "summary": "Explicit cognitive map is a lossy view of the model's internal belief",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "strength": "scope or future work",
+   "judge_note": "caveat on their probe; authors argue it remains a strong diagnostic",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "Theory of Space",
+   "quote": "While acknowledging that correlation does not imply causality, we treat the explicit map as a robust, albeit conservative, signal",
+   "line": "L1456",
+   "section": "other",
+   "summary": "Map-to-success link is correlational, not causal evidence",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2602.07055",
+   "strength": "scope or future work",
+   "judge_note": "caveat on diagnostic proxy, presented as robust signal",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "quote": "However, robustness is limited by testing on a single office, static hazards,",
+   "line": "L1092",
+   "section": "conclusion",
+   "summary": "Only one office environment tested",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "environment"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "quote": "robustness is limited by testing on a single office, static hazards, one safety prompt, and a text-biased inventory.",
+   "line": "L1092",
+   "section": "conclusion",
+   "summary": "Hazards are static, not dynamic emergencies",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "environment"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "quote": "limited by testing on a single office, static hazards, one safety prompt, and a text-biased inventory.",
+   "line": "L1092",
+   "section": "conclusion",
+   "summary": "Only one safety prompt used",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "quote": "testing on a single office, static hazards, one safety prompt, and a text-biased inventory.",
+   "line": "L1092",
+   "section": "conclusion",
+   "summary": "Object inventory is text-biased",
+   "traits": {
+    "kind": [
+     "other"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "strength": "stated weakness",
+   "our_status": "not addressed",
+   "our_reason": "not comparable"
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "quote": "Our study informs future research to evaluate VLMs across dynamic emergencies,",
+   "line": "L1094",
+   "section": "future work",
+   "summary": "Future work: evaluate across dynamic emergencies",
+   "traits": {
+    "kind": [
+     "task coverage"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "strength": "scope or future work",
+   "judge_note": "future-research line (pairs with stated static-hazards limit)",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "quote": "Future evaluations should also explore multi-agent coordination with human-in-the-loop.",
+   "line": "L1096",
+   "section": "future work",
+   "summary": "Multi-agent coordination with humans not evaluated",
+   "traits": {
+    "kind": [
+     "task coverage"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.08077",
+   "strength": "scope or future work",
+   "judge_note": "future-work idea",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "WebStep",
+   "quote": "As a result, the benchmark does not capture some properties of live websites, including dynamic content updates, session-dependent state, asynchronous loading, personalized recommendations, and thirdparty integrations.",
+   "line": "L1726",
+   "section": "limitations section",
+   "summary": "Deterministic self-hosted sites miss live-website dynamics",
+   "traits": {
+    "kind": [
+     "sim-to-real gap"
+    ],
+    "part": [
+     "environment"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "rendered warehouses only; a small real-to-sim check is planned but the gap remains"
+  },
+  {
+   "paper": "WebStep",
+   "quote": "The benchmark spans ten web domains, but it does not cover every application type.",
+   "line": "L1730",
+   "section": "limitations section",
+   "summary": "Ten domains only; not every application type covered",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "environment"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "WebStep",
+   "quote": "In particular, domains involving sensitive data handling, complex authorization flows, or rich media interaction are not included.",
+   "line": "L1731",
+   "section": "limitations section",
+   "summary": "No sensitive-data, complex authorization or rich-media domains",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "environment"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "WebStep",
+   "quote": "World data is generated synthetically through seeded procedures.",
+   "line": "L1735",
+   "section": "limitations section",
+   "summary": "World data is synthetic, missing organic real-world patterns",
+   "traits": {
+    "kind": [
+     "synthetic data only"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "all scenes are rendered in Isaac Sim"
+  },
+  {
+   "paper": "WebStep",
+   "quote": "it may miss properties of organic real-world data such as long-tail popularity patterns, organically correlated attributes, or temporal drift.",
+   "line": "L1737",
+   "section": "limitations section",
+   "summary": "Synthetic data may miss long-tail, correlation and temporal drift",
+   "traits": {
+    "kind": [
+     "synthetic data only"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "all scenes are rendered in Isaac Sim"
+  },
+  {
+   "paper": "WebStep",
+   "quote": "This does not capture the full ambiguity, underspecification, or open-endedness of real user requests.",
+   "line": "L1740",
+   "section": "limitations section",
+   "summary": "Template tasks lack ambiguity and open-endedness of real requests",
+   "traits": {
+    "kind": [
+     "task coverage"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "WebStep",
+   "quote": "Our skill-level analysis measures whether agents invoke the required action types, not whether each action succeeds in the agent's intended sense.",
+   "line": "L1745",
+   "section": "limitations section",
+   "summary": "Measures skill invocation, not per-action skill success",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "WebStep",
+   "quote": "Other interaction modes, such as dragand-drop, keyboard shortcuts, or direct URL navigation, are not included.",
+   "line": "L1751",
+   "section": "limitations section",
+   "summary": "No drag-and-drop, shortcuts or URL navigation actions",
+   "traits": {
+    "kind": [
+     "embodiment or action space"
+    ],
+    "part": [
+     "environment"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "walk 0.5 m, turn 30 degrees and look only; no picking up in v1"
+  },
+  {
+   "paper": "WebStep",
+   "quote": "although full end-to-end run reproducibility may still be affected by model-side sources of non-determinism such as stochastic decoding or API variation.",
+   "line": "L1527",
+   "section": "other",
+   "summary": "End-to-end runs may vary from model-side non-determinism",
+   "traits": {
+    "kind": [
+     "reproducibility or release"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "strength": "scope or future work",
+   "judge_note": "model-side nondeterminism caveat in reproducibility statement, not a benchmark design weakness",
+   "our_status": "shared",
+   "our_reason": "Release planned; API agents are not deterministic, one run per setting gives no spread, and asset licences may limit redistribution."
+  },
+  {
+   "paper": "WebStep",
+   "quote": "For the closed-source OpenAI CUA and Claude CUA agents, exact reproducibility cannot be guaranteed due to potential server-side non-determinism in the API;",
+   "line": "L2040",
+   "section": "appendix",
+   "summary": "Closed-source API agents not exactly reproducible",
+   "traits": {
+    "kind": [
+     "reproducibility or release"
+    ],
+    "part": [
+     "models tested"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.15673",
+   "strength": "scope or future work",
+   "judge_note": "reproducibility caveat on API agents; authors report low variance",
+   "our_status": "shared",
+   "our_reason": "Release planned; API agents are not deterministic, one run per setting gives no spread, and asset licences may limit redistribution."
+  },
+  {
+   "paper": "MetaSpace",
+   "quote": "In these two MRs, we employed fixed thresholds (e.g., 𝜖 = 0.1 for MR5 and 𝛿 = 0.05 for MR6) to quantify violations, which were derived from human baselines.",
+   "line": "L2030",
+   "section": "other",
+   "summary": "Fixed human-derived thresholds cause false positives in extreme cases",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.07533",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "MetaSpace",
+   "quote": "However, we acknowledge that false negatives may still occur. This limitation is common in testing and highlights the need for ongoing refinement.",
+   "line": "L2170",
+   "section": "discussion",
+   "summary": "Metamorphic oracle can miss errors (false negatives)",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.07533",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "MetaSpace",
+   "quote": "The remaining 8.5% stems from scenarios where the agent's spatial reasoning is consistent with MRs yet factually incorrect",
+   "line": "L1801",
+   "section": "other",
+   "summary": "Consistent but factually wrong reasoning escapes detection",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.07533",
+   "strength": "scope or future work",
+   "judge_note": "false-negative rate reported as favorable result vs baselines, not framed as a weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "MetaSpace",
+   "quote": "The current implementation of MetaSpace focuses on three embodied scenarios and eight SC capabilities. While this selection is diverse, it does not encompass all potential embodied tasks.",
+   "line": "L2177",
+   "section": "discussion",
+   "summary": "Only three scenarios and eight capabilities; not all embodied tasks",
+   "traits": {
+    "kind": [
+     "task coverage"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.07533",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "MetaSpace",
+   "quote": "Additionally, all experiments are conducted in simulated environments, which may introduce the Sim-to-Real Gap.",
+   "line": "L2179",
+   "section": "discussion",
+   "summary": "Simulation only, possible sim-to-real gap",
+   "traits": {
+    "kind": [
+     "sim-to-real gap"
+    ],
+    "part": [
+     "environment"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.07533",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "rendered warehouses only; a small real-to-sim check is planned but the gap remains"
+  },
+  {
+   "paper": "MetaSpace",
+   "quote": "Our experiments in § 6 focus on RGB-based MLLMs.",
+   "line": "L2183",
+   "section": "discussion",
+   "summary": "Only RGB-based MLLM agents evaluated",
+   "traits": {
+    "kind": [
+     "model coverage",
+     "modality coverage"
+    ],
+    "part": [
+     "models tested"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.07533",
+   "strength": "scope or future work",
+   "judge_note": "threat-to-validity note; authors argue MRs apply broadly",
+   "our_status": "not addressed",
+   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+  },
+  {
+   "paper": "MetaSpace",
+   "quote": "Also, our future work will focus on investigating these validity concerns.",
+   "line": "L2188",
+   "section": "future work",
+   "summary": "Validity concerns left for future investigation",
+   "traits": {
+    "kind": [
+     "other"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.07533",
+   "strength": "scope or future work",
+   "judge_note": "vague pointer to validity threats that authors argue are mitigated",
+   "our_status": "not addressed",
+   "our_reason": "not comparable"
+  },
+  {
+   "paper": "MetaSpace",
+   "quote": "Due to privacy and licensing constraints, some thirdparty datasets used in our experiments (e.g., EB-Navigation, EB-Manipulation, AerialVLN) cannot be redistributed directly.",
+   "line": "L2271",
+   "section": "other",
+   "summary": "Some third-party datasets cannot be redistributed",
+   "traits": {
+    "kind": [
+     "reproducibility or release"
+    ],
+    "part": [
+     "release"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2608.07533",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Release planned; API agents are not deterministic, one run per setting gives no spread, and asset licences may limit redistribution."
+  },
+  {
+   "paper": "CanTest",
+   "quote": "A key assumption in CanTest is the availability of an \"expert\" model to construct capability-specific oracles,",
+   "line": "L1214",
+   "section": "limitations section",
+   "summary": "Oracles assume an available expert model",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2604.25161",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "CanTest",
+   "quote": "In settings where such an expert is not directly provided, obtaining reliable supervision may require additional prior knowledge or effort.",
+   "line": "L1217",
+   "section": "limitations section",
+   "summary": "Without an expert, supervision needs extra knowledge or annotation",
+   "traits": {
+    "kind": [
+     "label quality",
+     "compute or cost"
+    ],
+    "part": [
+     "labels"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2604.25161",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: labels computed from exact simulator state, as SAT, Spatial457 and SPRITE already do. Whether the answer is visible in the render still needs a check."
+  },
+  {
+   "paper": "CanTest",
+   "quote": "Our current evaluation is conducted in simulation, and directly transferring our oracle design to the physical world is nontrivial.",
+   "line": "L1223",
+   "section": "limitations section",
+   "summary": "Simulation only; oracle transfer to physical world is nontrivial",
+   "traits": {
+    "kind": [
+     "sim-to-real gap"
+    ],
+    "part": [
+     "environment"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2604.25161",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "rendered warehouses only; a small real-to-sim check is planned but the gap remains"
+  },
+  {
+   "paper": "CanTest",
+   "quote": "In future work, we will explore (i) leveraging human-in-the-loop supervision for sparse but high-value annotations",
+   "line": "L1226",
+   "section": "future work",
+   "summary": "Future: human-in-the-loop supervision to calibrate oracles",
+   "traits": {
+    "kind": [
+     "sim-to-real gap"
+    ],
+    "part": [
+     "labels"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2604.25161",
+   "strength": "scope or future work",
+   "judge_note": "future-work idea; context is adapting oracles for sim2real, not label quality",
+   "our_status": "shared",
+   "our_reason": "rendered warehouses only; a small real-to-sim check is planned but the gap remains"
+  },
+  {
+   "paper": "EqBen",
+   "quote": "The stable diffusion model [51] is pre-trained on similar VL corpus to these VLMs. Hence, the generated images can be biased towards the same underlying data distribution, much easier for VLMs to tell the differences.",
+   "line": "L1350",
+   "section": "other",
+   "summary": "EQ-SD generated images share VLM training distribution, making the subset easier",
+   "traits": {
+    "kind": [
+     "contamination or shortcuts",
+     "synthetic data only"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2303.14465",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: private test seed, answer-flipping twins, and a text-only prune copied from VSI-Bench-Debiased, which brings its size-versus-bias trade-off. A released generator can be trained toward."
+  },
+  {
+   "paper": "EqBen",
+   "quote": "the generated images maybe visually minimally different to human eyes, but it is unclear whether in the pixel space, they are minimally different w.r.t. the model input.",
+   "line": "L1353",
+   "section": "other",
+   "summary": "Unclear whether EQ-SD image pairs are truly minimal changes in pixel space",
+   "traits": {
+    "kind": [
+     "other"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2303.14465",
+   "strength": "stated weakness",
+   "our_status": "not addressed",
+   "our_reason": "not comparable"
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "quote": "we study relative-position judgments (i.e., left, right, above, below) in controlled two- and three-object scenes, with objects at fixed grid positions and templated queries.",
+   "line": "L1710",
+   "section": "limitations section",
+   "summary": "Only four relations in controlled 2-3 object scenes, fixed grid, templated queries",
+   "traits": {
+    "kind": [
+     "task coverage",
+     "domain or scene coverage",
+     "synthetic data only",
+     "answer format"
+    ],
+    "part": [
+     "data",
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "strength": "scope or future work",
+   "judge_note": "deliberate controlled-scene design to enable causal interventions",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "quote": "Extending the analysis to depth, distance and multi-object relations, freer layouts and open-ended phrasings is a natural next step.",
+   "line": "L1713",
+   "section": "limitations section",
+   "summary": "Depth, distance, multi-object relations, free layouts, open phrasings left for future work",
+   "traits": {
+    "kind": [
+     "task coverage",
+     "answer format"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "strength": "scope or future work",
+   "judge_note": "scope of controlled analysis data, framed as natural next step",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "quote": "Our mechanistic analyses cover three open 7B–12B models from different families; larger, MoE and proprietary models remain to be examined.",
+   "line": "L1718",
+   "section": "limitations section",
+   "summary": "Mechanistic analyses cover only three open 7B-12B models",
+   "traits": {
+    "kind": [
+     "model coverage"
+    ],
+    "part": [
+     "models tested"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "strength": "scope or future work",
+   "judge_note": "scope of the mechanistic analysis, not the dataset",
+   "our_status": "not addressed",
+   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "quote": "Code, experiment configurations and synthetic datasets will be released upon publication.",
+   "line": "L1699",
+   "section": "other",
+   "summary": "Code and synthetic data not yet released, promised upon publication",
+   "traits": {
+    "kind": [
+     "reproducibility or release"
+    ],
+    "part": [
+     "release"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2609.35486",
+   "strength": "scope or future work",
+   "judge_note": "release promise in reproducibility statement, not framed as a weakness",
+   "our_status": "shared",
+   "our_reason": "Release planned; API agents are not deterministic, one run per setting gives no spread, and asset licences may limit redistribution."
+  },
+  {
+   "paper": "Synthetic minimal video pairs (UE5)",
+   "quote": "Synthetic scenes reduce privacy risk, but domain shift remains; models that perform well here may degrade in the wild.",
+   "line": "L432",
+   "section": "discussion",
+   "summary": "Synthetic-to-real domain shift: good scores may not hold in the wild",
+   "traits": {
+    "kind": [
+     "sim-to-real gap",
+     "synthetic data only"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2601.15780",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "rendered warehouses only; a small real-to-sim check is planned but the gap remains"
+  },
+  {
+   "paper": "Synthetic minimal video pairs (UE5)",
+   "quote": "We release code, prompts, and data to enable reproduction under the licenses of the source assets (Unreal Engine/CitySample, Mixamo/Adobe, and Poly Haven HDRIs), which prohibit training on the assets themselves.",
+   "line": "L433",
+   "section": "discussion",
+   "summary": "Asset licenses prohibit training on the released assets",
+   "traits": {
+    "kind": [
+     "reproducibility or release"
+    ],
+    "part": [
+     "release"
+    ],
+    "stated_as": [
+     "caveat"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2601.15780",
+   "strength": "scope or future work",
+   "judge_note": "license terms of source assets; not framed as a weakness",
+   "our_status": "shared",
+   "our_reason": "Release planned; API agents are not deterministic, one run per setting gives no spread, and asset licences may limit redistribution."
+  },
+  {
+   "paper": "Synthetic minimal video pairs (UE5)",
+   "quote": "Future directions include multi-party interactions, occlusion stress tests, and egocentric viewpoints",
+   "line": "L417",
+   "section": "conclusion",
+   "summary": "Multi-party interactions and occlusion stress tests are not yet covered",
+   "traits": {
+    "kind": [
+     "task coverage"
+    ],
+    "part": [
+     "tasks"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2601.15780",
+   "strength": "scope or future work",
+   "judge_note": "future-directions list, not framed as a weakness",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "Synthetic minimal video pairs (UE5)",
+   "quote": "egocentric viewpoints (first-person perspectives from wearable or mobile cameras)",
+   "line": "L418",
+   "section": "conclusion",
+   "summary": "Egocentric first-person viewpoints are not yet covered",
+   "traits": {
+    "kind": [
+     "domain or scene coverage"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2601.15780",
+   "strength": "scope or future work",
+   "judge_note": "future-direction list, not framed as weakness",
+   "our_status": "shared",
+   "our_reason": "warehouses only"
+  },
+  {
+   "paper": "NaturalBench",
+   "quote": "Our collected samples may inherit biases from web-scraped datasets and foundation models [57, 64], making human verification crucial.",
+   "line": "L1079",
+   "section": "limitations section",
+   "summary": "Samples may inherit biases from web-scraped data and foundation models",
+   "traits": {
+    "kind": [
+     "label quality",
+     "other"
+    ],
+    "part": [
+     "data",
+     "labels"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2410.14669",
+   "strength": "stated weakness",
+   "our_status": "addressed",
+   "our_reason": "Planned: labels computed from exact simulator state, as SAT, Spatial457 and SPRITE already do. Whether the answer is visible in the render still needs a check."
+  },
+  {
+   "paper": "NaturalBench",
+   "quote": "While this work focuses on model performance for individual skill tags, future work may analyze performance using combinations of skills.",
+   "line": "L1080",
+   "section": "limitations section",
+   "summary": "Analysis per individual skill tag only, not skill combinations",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge",
+     "task coverage"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2410.14669",
+   "strength": "scope or future work",
+   "judge_note": "future-work analysis idea",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "ViewDiag",
+   "quote": "The internal-collapse probe is limited to models with accessible hidden representations,",
+   "line": "L629",
+   "section": "limitations section",
+   "summary": "Internal-collapse probe works only on models with accessible hidden states",
+   "traits": {
+    "kind": [
+     "model coverage"
+    ],
+    "part": [
+     "models tested",
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.02742",
+   "strength": "stated weakness",
+   "our_status": "not addressed",
+   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+  },
+  {
+   "paper": "ViewDiag",
+   "quote": "our evidence-sensitivity analysis relies on proxy metrics derived from prediction behavior.",
+   "line": "L630",
+   "section": "limitations section",
+   "summary": "Evidence sensitivity measured through behavioral proxy metrics",
+   "traits": {
+    "kind": [
+     "evaluation metric or judge"
+    ],
+    "part": [
+     "evaluation"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.02742",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  {
+   "paper": "ViewDiag",
+   "quote": "ViewDiag is also limited in scope, spanning three datasets and a single task, fixed-region distance estimation, which bounds our empirical claims.",
+   "line": "L631",
+   "section": "limitations section",
+   "summary": "Only three datasets and one task, fixed-region distance estimation",
+   "traits": {
+    "kind": [
+     "task coverage",
+     "domain or scene coverage",
+     "scale or size"
+    ],
+    "part": [
+     "data",
+     "tasks"
+    ],
+    "stated_as": [
+     "explicit limitation"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.02742",
+   "strength": "stated weakness",
+   "our_status": "shared",
+   "our_reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  {
+   "paper": "ViewDiag",
+   "quote": "incorporate pose-aware geometric perturbations to test evidence dependence under controlled view changes.",
+   "line": "L637",
+   "section": "limitations section",
+   "summary": "Pose-aware geometric perturbations under controlled view changes left for future work",
+   "traits": {
+    "kind": [
+     "other"
+    ],
+    "part": [
+     "data"
+    ],
+    "stated_as": [
+     "future work"
+    ]
+   },
+   "group": "Found by novelty audit",
+   "arxiv": "2606.02742",
+   "strength": "scope or future work",
+   "judge_note": "future-work extension of perturbation probes",
+   "our_status": "not addressed",
+   "our_reason": "not comparable"
+  }
+ ],
+ "none_stated": [
+  "DSI-Bench",
+  "ERQA",
+  "HouseLayout3D",
+  "Omni3D-Bench",
+  "SPBench (SpatialLadder)",
+  "SpatialBench",
+  "SpatialTree",
+  "Video-MME"
+ ],
+ "dropped_by_audit": [
+  {
+   "paper": "PerceptionComp",
+   "quote": "We do not annotate personally sensitive attributes (e.g., identity, race, or other demographic traits), and the benchmark is not intended for identity recognition, surveillance, or sensitive-attribute inference.",
+   "line": "L1734",
+   "reason": "ethics statement / intended-use caveat, not a weakness"
+  },
+  {
+   "paper": "MindCube",
+   "quote": "Furthermore, the training, fine-tuning, and evaluation of the large-scale Vision-Language Models discussed in this paper carry a significant computational and environmental cost.",
+   "line": "L1393",
+   "reason": "generic ethics boilerplate about VLM training cost, not the benchmark"
+  },
+  {
+   "paper": "MindCube",
+   "quote": "we recognize that technologies enhancing spatial reasoning in machines could have dual-use applications.",
+   "line": "L1396",
+   "reason": "generic dual-use ethics boilerplate about the field"
+  },
+  {
+   "paper": "MindCube",
+   "quote": "due to limitations in the raw dataset, the rotation setting does not support view interpolation beyond five steps;",
+   "line": "L3727",
+   "reason": "raw-data limit only constrains a side view-interpolation experiment, not the benchmark"
+  },
+  {
+   "paper": "MMSI-Bench",
+   "quote": "Additionally, since regions are generally static, we do not include motion-related tasks for regions.",
+   "line": "L306",
+   "reason": "intended design choice (regions are static), not framed as a weakness"
+  },
+  {
+   "paper": "MMSI-Bench",
+   "quote": "improvements in spatial reasoning enabled by MMSI-Bench may have unintended applications, such as enhanced surveillance or automated decision-making systems that could impact privacy or disproportionately affect certain groups.",
+   "line": "L1894",
+   "reason": "generic broader-impact dual-use boilerplate"
+  },
+  {
+   "paper": "MMSI-Bench",
+   "quote": "From an environmental perspective, we acknowledge the significant computational resources required to evaluate modern vision-language models.",
+   "line": "L1899",
+   "reason": "broader-impact boilerplate on evaluation compute"
+  },
+  {
+   "paper": "BLINK",
+   "quote": "However, if you are the copyright owner of any image included in our work and believe that its use conflicts with your licensing agreements, please contact us directly.",
+   "line": "L2549",
+   "reason": "copyright contact boilerplate, not a stated benchmark weakness"
+  },
+  {
+   "paper": "PAI-Bench (understanding)",
+   "quote": "All models are evaluated using 16 video frames as input, except for InternVL3.5, which can accommodate only 8 frames due to its context length.",
+   "line": "L1400",
+   "reason": "evaluation-setup detail stated as intended, not a weakness"
+  },
+  {
+   "paper": "SpatialRGPT-Bench",
+   "quote": "Furthermore, this method still cannot handle extreme cases when objects are partially elevated",
+   "line": "L2182",
+   "reason": "limit of the PCA-OBB box method in the training-data pipeline; the benchmark uses Omni3D ground-truth boxes"
+  },
+  {
+   "paper": "SpatialRGPT-Bench",
+   "quote": "Evaluating SpatialRGPT’s performance is also challenging, particularly in accurately measuring the spatial information. This is an area for future enhancement",
+   "line": "L2197",
+   "reason": "broader-impacts remark on evaluating the SpatialRGPT model, not the benchmark"
+  },
+  {
+   "paper": "SpatialEval",
+   "quote": "While our analysis is detailed and extensive, it remains primarily empirical. We believe that embarking on a formal theoretical study, despite its challenges, would significantly enrich our understanding",
+   "line": "L1471",
+   "reason": "limit of the analysis style, not of the benchmark"
+  },
+  {
+   "paper": "SpatialEval",
+   "quote": "Moreover, our focus has been on in-depth analysis rather than on developing new training strategies or adaptation algorithms to enhance spatial reasoning.",
+   "line": "L1474",
+   "reason": "not proposing training methods is scope of the study, not a benchmark limit"
+  },
+  {
+   "paper": "Anywhere3D-Bench",
+   "quote": "on some scenes of ScanNet due to feature misalignment. As a result, our evaluation is restricted to those scenes where results can be successfully generated.",
+   "line": "L2111",
+   "reason": "only one baseline (Grounded 3D-LLM) fails on some scenes; baseline limitation, summary overgeneralizes to 'some models'"
+  },
+  {
+   "paper": "STRIDE-QA",
+   "quote": "resource constraints restricted us to a lightweight LoRA adaptation; the upperbound performance attainable with full-parameter supervised fine-tuning therefore remains unexplored.",
+   "line": "L1935",
+   "reason": "scope of the fine-tuning study, not the benchmark"
+  },
+  {
+   "paper": "SSI-Bench",
+   "quote": "SSI-Bench is an offline evaluation benchmark and does not provide action policies, control interfaces, or deployment data.",
+   "line": "L1037",
+   "reason": "impact-statement reassurance; offline design presented as intended"
+  },
+  {
+   "paper": "SpatialAct",
+   "quote": "Additionally, we did not explore methods to enhance model capabilities for this task.",
+   "line": "L1405",
+   "reason": "not exploring improvement methods is not a benchmark limitation"
+  },
+  {
+   "paper": "MineAnyBuild",
+   "quote": "We would like to develop RL-based agents in the future to better adapt to our MineAnyBuild benchmark and datasets.",
+   "line": "L1861",
+   "reason": "future plan to build RL agents; not a benchmark weakness"
+  },
+  {
+   "paper": "EMRD (Explore, Map, Remember, Decide)",
+   "quote": "EMRD uses discrete navigation and perfect odometry, and thus isolates cognitive mapping from control noise.",
+   "line": "L1090",
+   "reason": "presented as intended design (isolates mapping from control noise)"
+  },
+  {
+   "paper": "MetaSpace",
+   "quote": "This excludes purely cognitive phenomena that lack observable behavioral correlates.",
+   "line": "L786",
+   "reason": "intended MR design criterion (testability), not a weakness"
+  },
+  {
+   "paper": "MetaSpace",
+   "quote": "Please note that MLLM inference requires access to proprietary model APIs, open-source model deployments, and suitable hardware (e.g., GPU) for full-scale experiments,",
+   "line": "L2275",
+   "reason": "standard artifact note that inference needs APIs/GPUs, not a benchmark weakness"
+  },
+  {
+   "paper": "EqBen",
+   "quote": "Since it is hard to reformat the MLLM free-form textual output to the label space, we randomly collect 20 samples from each subset of E Q B EN and manually compare",
+   "line": "L1605",
+   "reason": "scope of a side MLLM pilot experiment; core issue is manual scoring"
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "quote": "our localization analyses use correctly answered pairs and thus characterize how correct judgments are implemented.",
+   "line": "L1715",
+   "reason": "limit of the paper's interpretability analysis method, not a benchmark"
+  },
+  {
+   "paper": "Who Is Left of Whom?",
+   "quote": "attributing individual errors to specific components is left for future work.",
+   "line": "L1717",
+   "reason": "limit of the mechanistic analysis method, not a benchmark"
+  },
+  {
+   "paper": "Synthetic minimal video pairs (UE5)",
+   "quote": "It is not a safety system and should not be used to make operational decisions.",
+   "line": "L427",
+   "reason": "intended-use ethics disclaimer, not a benchmark weakness"
+  },
+  {
+   "paper": "NaturalBench",
+   "quote": "In this paper, we focus on model evaluation and leave data scaling for training to future work.",
+   "line": "L294",
+   "reason": "about using data for training, not a limit of the evaluation benchmark"
+  },
+  {
+   "paper": "NaturalBench",
+   "quote": "Due to the high cost, we only finetune GPT-4o on NaturalBench, not other benchmarks.",
+   "line": "L320",
+   "reason": "scope of a side fine-tuning experiment"
+  },
+  {
+   "paper": "ViewDiag",
+   "quote": "Our contribution is diagnostic rather than corrective: we characterize evidence-insensitive behavior but do not propose a mitigation method.",
+   "line": "L627",
+   "reason": "scope of contribution (no mitigation method), not a benchmark weakness"
+  }
+ ],
+ "none_after_audit": [
+  "PAI-Bench (understanding)",
+  "SpatialEval"
+ ],
+ "audit": "Every quote is a verbatim substring of the paper text (verify_quotes.py). Then fresh agents re-read each quote in context: 28 items that were not limitations of the paper's own benchmark (ethics boilerplate, a side study, a baseline method, an intended design) were dropped; items that are a scope choice or future-work plan rather than a stated weakness are marked \"scope or future work\"; 18 kinds were corrected and 2 summaries reworded.",
+ "ours_layer": {
+  "evaluation metric or judge": {
+   "status": "shared",
+   "reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+  },
+  "label quality": {
+   "status": "addressed",
+   "reason": "Planned: labels computed from exact simulator state, as SAT, Spatial457 and SPRITE already do. Whether the answer is visible in the render still needs a check."
+  },
+  "static not interactive": {
+   "status": "addressed",
+   "reason": "Planned: the agent walks 0.5 m and turns 30 degrees, up to 10 moves, before answering. Scenes stay still; no manipulation. Theory of Space, EmbodiedEval and others also move."
+  },
+  "contamination or shortcuts": {
+   "status": "shared",
+   "reason": "Planned: private test seed, answer-flipping twins, and a text-only prune copied from VSI-Bench-Debiased, which brings its size-versus-bias trade-off. A released generator can be trained toward."
+  },
+  "scale or size": {
+   "status": "addressed",
+   "reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. The fixed test is about 3,000 items; warehouses only."
+  },
+  "sim-to-real gap": {
+   "status": "shared",
+   "reason": "rendered warehouses only; a small real-to-sim check is planned but the gap remains"
+  },
+  "synthetic data only": {
+   "status": "shared",
+   "reason": "all scenes are rendered in Isaac Sim"
+  },
+  "domain or scene coverage": {
+   "status": "shared",
+   "reason": "warehouses only"
+  },
+  "task coverage": {
+   "status": "shared",
+   "reason": "3 levels, 8 categories, about 24 subcategories of spatial skills; no manipulation, planning over long horizons or language-heavy tasks"
+  },
+  "embodiment or action space": {
+   "status": "shared",
+   "reason": "walk 0.5 m, turn 30 degrees and look only; no picking up in v1"
+  },
+  "compute or cost": {
+   "status": "shared",
+   "reason": "up to 10 moves and several tool calls per question make agent runs costly"
+  },
+  "modality coverage": {
+   "status": "shared",
+   "reason": "Rendered RGB views only, the limit MetaSpace states; the moves give several views, which covers only part of it."
+  },
+  "answer format": {
+   "status": "shared",
+   "reason": "Multiple choice and numbers checked by rules: the same format and extraction limits the rivals admit."
+  },
+  "model coverage": {
+   "status": "not addressed",
+   "reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+  },
+  "reproducibility or release": {
+   "status": "shared",
+   "reason": "Release planned; API agents are not deterministic, one run per setting gives no spread, and asset licences may limit redistribution."
+  },
+  "safety or ethics": {
+   "status": "not addressed",
+   "reason": "no specific safety design"
+  },
+  "language coverage": {
+   "status": "not addressed",
+   "reason": "English questions only"
+  },
+  "other": {
+   "status": "not addressed",
+   "reason": "not comparable"
+  }
+ },
+ "ours_layer_audit": "Devil's-advocate audit (/audit-novelty, fresh agent, 2026-09-30): 2 of 5 \"addressed\" kinds downgraded to shared (judge, contamination), 3 reworded to say planned and not unique, 3 \"not addressed\" moved to shared. Nothing is built yet: every \"addressed\" is a plan."
+}

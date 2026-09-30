@@ -10,7 +10,7 @@
    "quote": "Does the benchmark address a meaningful gap or enable reliable comparison across methods? Does it change how we measure progress in this area?",
    "now": "yellow",
    "after": "green",
-   "status_note": "a crowded field: 39 related benchmarks and methods in the survey",
+   "status_note": "a crowded field: 53 related benchmarks and methods in the survey",
    "fix": "Lead with one finding: how often agents are right for the wrong reasons, and where the step-score ranking disagrees with the final-answer ranking. Then run the step grading on SPAR-Bench, a real benchmark that ships depth and camera poses per item, to show conclusions shift on an existing benchmark.",
    "evidence": [
     {
@@ -38,22 +38,26 @@
    "source": "Core reject reasons",
    "dim": "Originality",
    "quote": "Originality may be achieved through novel task design, evaluation setup, or analysis that reveals properties of existing benchmarks. Beating a baseline is not required.",
-   "now": "green",
+   "now": "yellow",
    "after": "green",
-   "status_note": "every step graded against exact state at test time, plus 3D twins",
-   "fix": "Keep the claim exactly scoped; the Survey tab becomes the related-work table and cites ESI-Bench, MindCube and Pigeon as the closest neighbours.",
+   "status_note": "audited 2026-09-30: 2 claims survive only narrowed; 2 of 4 proposed metrics taken or decoration",
+   "fix": "Claim only what survived the audit: (1) per-step grading of continuous 3D quantities and tool outputs against exact state, (2) camera-pose twins scored as pairs. Cite Theory of Space, WebStep, EqBen, NaturalBench, MetaSpace, Lanham and FRODO, CanTest as the closest work; re-audit before submission.",
    "evidence": [
     {
-     "label": "ESI-Bench",
-     "url": "https://arxiv.org/abs/2605.18746"
+     "label": "Theory of Space (ICLR 2026)",
+     "url": "https://arxiv.org/abs/2602.07055"
     },
     {
-     "label": "MindCube",
-     "url": "https://arxiv.org/abs/2506.21458"
+     "label": "EqBen (ICCV 2023)",
+     "url": "https://arxiv.org/abs/2303.14465"
     },
     {
-     "label": "Pigeon",
-     "url": "https://arxiv.org/abs/2606.02459"
+     "label": "MetaSpace (OOPSLA 2026)",
+     "url": "https://arxiv.org/abs/2608.07533"
+    },
+    {
+     "label": "Lanham 2023",
+     "url": "https://arxiv.org/abs/2307.13702"
     }
    ],
    "effort": "build 1 day (writing); no GPU",
