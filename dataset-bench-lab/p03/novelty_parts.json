@@ -92,10 +92,14 @@
     "FRODO (Making Reasoning Matter)",
     "Anywhere3D-Bench",
     "MetaSpace",
-    "Theory of Space"
+    "Theory of Space",
+    "ProcessBench",
+    "False positives under inference scaling",
+    "AGQA-Decomp",
+    "PrOntoQA"
    ],
    "verdict": "TAKEN",
-   "verdict_note": "causal checks of stated steps exist (Lanham 2023, FRODO)"
+   "verdict_note": "the rate itself is ProcessBench's share of correct answers with a wrong step (also 2502.06217); AGQA-Decomp uses the name with exact step truth; checking steps against simulator state is an add-on"
   },
   {
    "metric": "Per-tool perfect-swap gain",

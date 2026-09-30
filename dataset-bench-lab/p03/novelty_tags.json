@@ -862,5 +862,149 @@
   "quote": "",
   "line": "",
   "note": "Relation tasks get 0.5 per correct direction/distance bin and coordinate tasks get a similarity score; no per-category error tolerances."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "ProcessBench",
+  "part": "P1",
+  "has": "yes",
+  "quote": "denotes the proportion of samples with erroneous reasoning steps (i.e., annotated as erroneous) among all the samples with correct final answers.",
+  "line": "L424",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "ProcessBench",
+  "part": "P2",
+  "has": "yes",
+  "quote": "we still explicitly instructed them to inspect and verify the presented model-generated solutions step by step.",
+  "line": "L408",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "ProcessBench",
+  "part": "P3",
+  "has": "yes",
+  "quote": "In Figure 4, for each model used for solution generation, we plot the ratio of samples with erroneous reasoning steps (i.e., annotated as erroneous) among all the samples with correct final answers.",
+  "line": "L696",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "ProcessBench",
+  "part": "P4",
+  "has": "partial",
+  "quote": "We recruit human experts with doctoral-level mathematical expertise for annotation, and all of them are required to pass the mandatory proficiency examination and annotation tutorial.",
+  "line": "L398",
+  "note": "steps are judged by human experts (3-annotator agreement, given reference solutions), not checked against exact ground-truth values"
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "False positives under inference scaling",
+  "part": "P1",
+  "has": "yes",
+  "quote": "False positive rate is defined as the proportion of “false positives” among all responses deemed correct by the automatic evaluation.",
+  "line": "L361",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "False positives under inference scaling",
+  "part": "P2",
+  "has": "yes",
+  "quote": "Human evaluation involves a meticulous, step-by-step review of the model’s responses by human annotators, ensuring not only the correctness of the final answer but also the logical coherence and mathematical validity of the intermediate steps.",
+  "line": "L197",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "False positives under inference scaling",
+  "part": "P3",
+  "has": "yes",
+  "quote": "we systematically examine the prevalence of false positive solutions in mathematical problem solving for language models.",
+  "line": "L18",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "False positives under inference scaling",
+  "part": "P4",
+  "has": "partial",
+  "quote": "Let A represent the set of “false positives” identified through manual evaluation, which serves as the gold standard,",
+  "line": "L373",
+  "note": "gold standard is human annotators' judgment of step validity (minor errors may be disregarded), not exact ground-truth step values"
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "AGQA-Decomp",
+  "part": "P1",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "RWR conditions on compositions with at least one wrong sub-question answer and reports parent-question accuracy there; it does not restrict to correct final answers"
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "AGQA-Decomp",
+  "part": "P2",
+  "has": "partial",
+  "quote": "A sub-question isolates a subset of the reasoning steps that the original question requires, exposing model performance on subsets of intermediate reasoning steps.",
+  "line": "L181",
+  "note": "intermediate steps are probed as separately asked sub-questions to VQA models; the model's own stated reasoning is not inspected"
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "AGQA-Decomp",
+  "part": "P3",
+  "has": "partial",
+  "quote": "To compute this, we measure parent question accuracy across compositions where a model answers at least one sub-question incorrectly.",
+  "line": "L610",
+  "note": "reports accuracy given a wrong step (P(correct | wrong sub-answer)), not the share of correct answers whose steps are wrong"
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "AGQA-Decomp",
+  "part": "P4",
+  "has": "yes",
+  "quote": "Once all the questions are decomposed into DAGs of sub-questions, we programmatically propagate answers from the original AGQA questions to the sub-questions.",
+  "line": "L573",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "PrOntoQA",
+  "part": "P1",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "compares label accuracy with proof accuracy across 48 experiments and splits step types by correct vs incorrect proofs; never restricts to items with a correct label"
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "PrOntoQA",
+  "part": "P2",
+  "has": "yes",
+  "quote": "we parse each sentence of the predicted CoT into logical form via recursive-descent parsing using the simple grammar from the generative process.",
+  "line": "L362",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "PrOntoQA",
+  "part": "P3",
+  "has": "yes",
+  "quote": "Most predicted proof steps are strictly-valid (in the 5-hop experiments with fictional ontology, 93.2% of proof steps are strictly-valid, 2.4% are broadly-valid, and 5.9% are invalid).",
+  "line": "L647",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "PrOntoQA",
+  "part": "P4",
+  "has": "yes",
+  "quote": "We then directly analyze the model’s reasoning by inspecting each step in the reconstructed proof and comparing them against the gold proof.",
+  "line": "L52",
+  "note": ""
  }
 ]
