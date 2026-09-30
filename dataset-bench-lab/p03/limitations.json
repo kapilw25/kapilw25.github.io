@@ -74,7 +74,7 @@
    "strength": "scope or future work",
    "judge_note": "observation motivating their choice of scoring method per model type, not framed as a benchmark weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "CVBench",
@@ -214,7 +214,7 @@
    "arxiv": "2603.26653",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "PerceptionComp",
@@ -262,7 +262,7 @@
    "arxiv": "2604.05015",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "MindCube",
@@ -502,7 +502,7 @@
    "strength": "scope or future work",
    "judge_note": "prompt-sensitivity finding framed as future direction for models, not as benchmark weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "BLINK",
@@ -525,7 +525,7 @@
    "arxiv": "2404.12390",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "ViewSpatial-Bench",
@@ -696,7 +696,7 @@
    "strength": "scope or future work",
    "judge_note": "protocol caveat for one model's input frames; kind is eval protocol, not model coverage",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "VSI-Bench-Debiased (VSI-Bench-U)",
@@ -961,7 +961,7 @@
    "arxiv": "2505.20426",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "Anywhere3D-Bench",
@@ -1009,7 +1009,7 @@
    "arxiv": "2506.04897",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "Anywhere3D-Bench",
@@ -1033,7 +1033,7 @@
    "arxiv": "2506.04897",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "Anywhere3D-Bench",
@@ -1351,7 +1351,7 @@
    "strength": "scope or future work",
    "judge_note": "future-work plan to refine and release protocol",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "VIR-Bench",
@@ -1548,7 +1548,7 @@
    "arxiv": "2607.22393",
    "strength": "stated weakness",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+   "our_reason": "Depends on which models are run later. Planned: every model gets the same image budget (last 4 views plus a text log of earlier moves), so API image caps do not make inputs unequal."
   },
   {
    "paper": "SceneActBench",
@@ -1572,7 +1572,7 @@
    "arxiv": "2607.22393",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "SceneActBench",
@@ -1620,7 +1620,7 @@
    "arxiv": "2607.22393",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "SceneActBench",
@@ -1643,7 +1643,7 @@
    "arxiv": "2607.22393",
    "strength": "stated weakness",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+   "our_reason": "Depends on which models are run later. Planned: every model gets the same image budget (last 4 views plus a text log of earlier moves), so API image caps do not make inputs unequal."
   },
   {
    "paper": "SceneActBench",
@@ -1837,7 +1837,7 @@
    "strength": "scope or future work",
    "judge_note": "limit of an ablation failure-taxonomy analysis, left to future work",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "MineAnyBuild",
@@ -1884,7 +1884,7 @@
    "arxiv": "2505.20148",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "MineAnyBuild",
@@ -1932,7 +1932,7 @@
    "arxiv": "2505.20148",
    "strength": "stated weakness",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+   "our_reason": "Depends on which models are run later. Planned: every model gets the same image budget (last 4 views plus a text log of earlier moves), so API image caps do not make inputs unequal."
   },
   {
    "paper": "MineAnyBuild",
@@ -1956,7 +1956,7 @@
    "strength": "scope or future work",
    "judge_note": "future-work note on untested baselines",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+   "our_reason": "Depends on which models are run later. Planned: every model gets the same image budget (last 4 views plus a text log of earlier moves), so API image caps do not make inputs unequal."
   },
   {
    "paper": "MineAnyBuild",
@@ -2005,7 +2005,7 @@
    "strength": "scope or future work",
    "judge_note": "future-direction bullet; kind: only zero-shot agents evaluated",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+   "our_reason": "Depends on which models are run later. Planned: every model gets the same image budget (last 4 views plus a text log of earlier moves), so API image caps do not make inputs unequal."
   },
   {
    "paper": "Theory of Space",
@@ -2053,7 +2053,7 @@
    "strength": "scope or future work",
    "judge_note": "caveat on their probe; authors argue it remains a strong diagnostic",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "Theory of Space",
@@ -2077,7 +2077,7 @@
    "strength": "scope or future work",
    "judge_note": "caveat on diagnostic proxy, presented as robust signal",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "EMRD (Explore, Map, Remember, Decide)",
@@ -2146,7 +2146,7 @@
    "arxiv": "2608.08077",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "EMRD (Explore, Map, Remember, Decide)",
@@ -2378,7 +2378,7 @@
    "arxiv": "2606.15673",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "WebStep",
@@ -2472,7 +2472,7 @@
    "arxiv": "2608.07533",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "MetaSpace",
@@ -2495,7 +2495,7 @@
    "arxiv": "2608.07533",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "MetaSpace",
@@ -2519,7 +2519,7 @@
    "strength": "scope or future work",
    "judge_note": "false-negative rate reported as favorable result vs baselines, not framed as a weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "MetaSpace",
@@ -2590,7 +2590,7 @@
    "strength": "scope or future work",
    "judge_note": "threat-to-validity note; authors argue MRs apply broadly",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+   "our_reason": "Depends on which models are run later. Planned: every model gets the same image budget (last 4 views plus a text log of earlier moves), so API image caps do not make inputs unequal."
   },
   {
    "paper": "MetaSpace",
@@ -2660,7 +2660,7 @@
    "arxiv": "2604.25161",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "CanTest",
@@ -2855,7 +2855,7 @@
    "strength": "scope or future work",
    "judge_note": "scope of the mechanistic analysis, not the dataset",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+   "our_reason": "Depends on which models are run later. Planned: every model gets the same image budget (last 4 views plus a text log of earlier moves), so API image caps do not make inputs unequal."
   },
   {
    "paper": "Who Is Left of Whom?",
@@ -3025,7 +3025,7 @@
    "strength": "scope or future work",
    "judge_note": "future-work analysis idea",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "ViewDiag",
@@ -3049,7 +3049,7 @@
    "arxiv": "2606.02742",
    "strength": "stated weakness",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+   "our_reason": "Depends on which models are run later. Planned: every model gets the same image budget (last 4 views plus a text log of earlier moves), so API image caps do not make inputs unequal."
   },
   {
    "paper": "ViewDiag",
@@ -3072,7 +3072,7 @@
    "arxiv": "2606.02742",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "our_reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   {
    "paper": "ViewDiag",
@@ -3313,7 +3313,7 @@
  "ours_layer": {
   "evaluation metric or judge": {
    "status": "shared",
-   "reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge. Answer extraction and number tolerances still need hand-set thresholds, as in OmniSpatial and MetaSpace."
+   "reason": "Planned: fixed rules check answers and steps against exact simulator state, no AI judge; answers come as typed tool calls, with a text model extracting only on a parse failure (rate reported). Number tolerances are still hand-set, as in MetaSpace."
   },
   "label quality": {
    "status": "addressed",
@@ -3365,7 +3365,7 @@
   },
   "model coverage": {
    "status": "not addressed",
-   "reason": "Depends on which models are run later; up to 10 moves means many images, so API image caps will bite."
+   "reason": "Depends on which models are run later. Planned: every model gets the same image budget (last 4 views plus a text log of earlier moves), so API image caps do not make inputs unequal."
   },
   "reproducibility or release": {
    "status": "shared",

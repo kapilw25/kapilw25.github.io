@@ -1,0 +1,161 @@
+{
+ "updated": "2026-09-30",
+ "note": "Each planned metric's core mechanism split into 4 fixed parts before any rival was tagged. A rival sits on the bullseye ring equal to the number of parts it has (yes = 1, partial = 0.5); 4 of 4 = the centre = the mechanism is taken. Rivals are the closest sources the audit-novelty runs named, tagged by fresh agents with verbatim quotes.",
+ "claims": [
+  {
+   "metric": "Step score",
+   "claim": "At every step, the continuous 3D quantities and tool outputs the agent computes are graded against exact simulator state.",
+   "parts": [
+    {
+     "id": "P1",
+     "text": "grades intermediate steps or stated intermediate beliefs, not only the final answer"
+    },
+    {
+     "id": "P2",
+     "text": "the graded quantity is a continuous 3D value or a tool output (metric depth, distance, mask, 6-DoF camera pose), not a discrete label or grid cell"
+    },
+    {
+     "id": "P3",
+     "text": "the truth is exact environment or simulator state, not a human label or model judge"
+    },
+    {
+     "id": "P4",
+     "text": "graded at every step of an interactive, multi-step episode"
+    }
+   ],
+   "rivals": [
+    "Theory of Space",
+    "WebStep",
+    "SpatialTree",
+    "ESI-Bench",
+    "EMRD (Explore, Map, Remember, Decide)"
+   ],
+   "verdict": "NARROWED",
+   "verdict_note": "survives only for continuous 3D quantities and tool outputs"
+  },
+  {
+   "metric": "Twin pair score",
+   "claim": "Camera-pose twins: the same 3D scene re-rendered from a changed camera so the answer flips, each answer checked against exact state, scored as a pair.",
+   "parts": [
+    {
+     "id": "P1",
+     "text": "two or more items are scored jointly (credit only if both or all are right)"
+    },
+    {
+     "id": "P2",
+     "text": "the items differ by one controlled change that flips the correct answer"
+    },
+    {
+     "id": "P3",
+     "text": "the controlled change is a camera or viewpoint change of the same 3D scene"
+    },
+    {
+     "id": "P4",
+     "text": "each answer is checked against exact ground truth, not only for agreement between the two answers"
+    }
+   ],
+   "rivals": [
+    "EqBen",
+    "NaturalBench",
+    "MetaSpace",
+    "Who Is Left of Whom?",
+    "Synthetic minimal video pairs (UE5)",
+    "MMPerspective",
+    "ViewDiag"
+   ],
+   "verdict": "NARROWED",
+   "verdict_note": "survives only for camera-pose twins checked against exact state"
+  },
+  {
+   "metric": "Right-for-wrong-reasons rate",
+   "claim": "Among correct final answers, the share whose stated intermediate steps are wrong against exact state.",
+   "parts": [
+    {
+     "id": "P1",
+     "text": "looks only at items whose final answer is correct"
+    },
+    {
+     "id": "P2",
+     "text": "inspects the model's stated intermediate reasoning or steps"
+    },
+    {
+     "id": "P3",
+     "text": "reports how often the reasoning is wrong or not what produced the answer"
+    },
+    {
+     "id": "P4",
+     "text": "the intermediate steps are checked against exact ground truth values"
+    }
+   ],
+   "rivals": [
+    "Measuring Faithfulness in CoT (Lanham et al.)",
+    "FRODO (Making Reasoning Matter)",
+    "Anywhere3D-Bench",
+    "MetaSpace",
+    "Theory of Space"
+   ],
+   "verdict": "TAKEN",
+   "verdict_note": "causal checks of stated steps exist (Lanham 2023, FRODO)"
+  },
+  {
+   "metric": "Per-tool perfect-swap gain",
+   "claim": "Replace one tool at a time with exact simulator output and measure the accuracy gain.",
+   "parts": [
+    {
+     "id": "P1",
+     "text": "replaces a component, module or tool with ground-truth or oracle output"
+    },
+    {
+     "id": "P2",
+     "text": "does so for one component at a time"
+    },
+    {
+     "id": "P3",
+     "text": "measures the change in final task accuracy or success"
+    },
+    {
+     "id": "P4",
+     "text": "splits the total gain across several tools, including their combinations"
+    }
+   ],
+   "rivals": [
+    "CanTest",
+    "Seeing Is Not Measuring",
+    "ESI-Bench",
+    "MoDitector"
+   ],
+   "verdict": "NARROWED",
+   "verdict_note": "mostly decoration; only the multi-tool split is unseen"
+  },
+  {
+   "metric": "Graded credit",
+   "claim": "Partial credit for numeric answers by relative error, with category tolerances.",
+   "parts": [
+    {
+     "id": "P1",
+     "text": "gives partial credit for numeric answers"
+    },
+    {
+     "id": "P2",
+     "text": "the credit depends on the relative error to the true value"
+    },
+    {
+     "id": "P3",
+     "text": "uses several thresholds or a decaying curve, not a single cut-off"
+    },
+    {
+     "id": "P4",
+     "text": "uses different tolerances per question category"
+    }
+   ],
+   "rivals": [
+    "SpatialClaw",
+    "Omni3D-Bench",
+    "Theory of Space"
+   ],
+   "verdict": "NOT CLAIMED",
+   "verdict_note": "relative-error partial credit is standard"
+  }
+ ],
+ "verdict_source": "d01/literature/novelty_audit_log.md (audit-novelty, 2026-09-30)"
+}

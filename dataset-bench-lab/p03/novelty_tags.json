@@ -1,0 +1,866 @@
+[
+ {
+  "metric": "Step score",
+  "paper": "Theory of Space",
+  "part": "P1",
+  "has": "yes",
+  "quote": "spatial belief probing: we prompt it to reveal its internal spatial belief as a cognitive map at each step, letting us measure the quality of its underlying spatial model.",
+  "line": "L35",
+  "note": ""
+ },
+ {
+  "metric": "Step score",
+  "paper": "Theory of Space",
+  "part": "P2",
+  "has": "partial",
+  "quote": "Positional accuracy (pos.acc) is the Euclidean similarity between predicted and true object coordinates",
+  "line": "L1269",
+  "note": "Graded coordinates are 2D integer grid positions; directions and distances use discrete bins; no 3D value, depth, pose or tool output."
+ },
+ {
+  "metric": "Step score",
+  "paper": "Theory of Space",
+  "part": "P3",
+  "has": "yes",
+  "quote": "We compare the predicted local map to the ground-truth local map for the current field of view (FOV),",
+  "line": "L1284",
+  "note": "Truth is the procedurally generated scene layout."
+ },
+ {
+  "metric": "Step score",
+  "paper": "Theory of Space",
+  "part": "P4",
+  "has": "yes",
+  "quote": "Using global and local belief representations, we compute a set of diagnostic scores at each turn t (all per-turn except Correctness, which is computed only at the final turn after termination).",
+  "line": "L1276",
+  "note": ""
+ },
+ {
+  "metric": "Step score",
+  "paper": "WebStep",
+  "part": "P1",
+  "has": "yes",
+  "quote": "Exploration SR: Evaluates whether the agent isolates the correct target item",
+  "line": "L527",
+  "note": ""
+ },
+ {
+  "metric": "Step score",
+  "paper": "WebStep",
+  "part": "P2",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Graded quantities are discrete semantic web states, visited items and skill types; no continuous 3D values or tool outputs."
+ },
+ {
+  "metric": "Step score",
+  "paper": "WebStep",
+  "part": "P3",
+  "has": "yes",
+  "quote": "Each website is implemented so that the semantic MDP is the source of truth for all behavior.",
+  "line": "L282",
+  "note": ""
+ },
+ {
+  "metric": "Step score",
+  "paper": "WebStep",
+  "part": "P4",
+  "has": "partial",
+  "quote": "Because the GUI is rendered directly from the semantic model, the full semantic trajectory is recovered exactly, enabling automatic state tracking and process-level evaluation without manual annotation.",
+  "line": "L132",
+  "note": "Every step's state is recorded, but scores are per-episode (exploration SR, coverage, skill invocation); the paper says it does not measure per-action success."
+ },
+ {
+  "metric": "Step score",
+  "paper": "SpatialTree",
+  "part": "P1",
+  "has": "yes",
+  "quote": "For each action step, a combined metric is computed using relative distance and cosine similarity of movement vectors, producing a normalized score in [0, 1].",
+  "line": "L1756",
+  "note": "Stated only in the appendix."
+ },
+ {
+  "metric": "Step score",
+  "paper": "SpatialTree",
+  "part": "P2",
+  "has": "partial",
+  "quote": "we further analyze the quality of generated actions using metrics like positional error (L2 distance) and orientation error (angular difference) against ground-truth trajectories.",
+  "line": "L546",
+  "note": "Graded quantity is the agent's action or movement vector, not a computed 3D perception value or tool output; distance MSE applies to final answers only."
+ },
+ {
+  "metric": "Step score",
+  "paper": "SpatialTree",
+  "part": "P3",
+  "has": "no",
+  "quote": "we employ a set of expert perception models, including DepthAnything3 [64], SpatialTracker [58, 59], GeoCalib [52], and OrientAnything [57], to extract intermediate perceptual representations",
+  "line": "L322",
+  "note": "Truth comes from expert perception models, 3D reconstruction of internet videos, human annotation and a GPT judge, not exact simulator state."
+ },
+ {
+  "metric": "Step score",
+  "paper": "SpatialTree",
+  "part": "P4",
+  "has": "partial",
+  "quote": "To assess agentic competence, models are deployed in interactive simulated environments, such as those provided by EmbodiedBench [65].",
+  "line": "L1754",
+  "note": "Per-step scoring in interactive environments is stated only in the appendix; main L4 items are curated videos turned into multi-step multiple-choice and compared with reference trajectories."
+ },
+ {
+  "metric": "Step score",
+  "paper": "ESI-Bench",
+  "part": "P1",
+  "has": "partial",
+  "quote": "Belief revision rate is the percentage of trajectories where the predicted answer changes after additional observations.",
+  "line": "L2667",
+  "note": "Appendix-only trajectory behavior rates; intermediate steps are not graded for correctness. Headline metric is final-answer accuracy."
+ },
+ {
+  "metric": "Step score",
+  "paper": "ESI-Bench",
+  "part": "P2",
+  "has": "no",
+  "quote": "such as yes/no for relational tasks, a category for comparisons, an integer for counting, or an ordering for procedural tasks.",
+  "line": "L458",
+  "note": "Graded answers are discrete (yes/no, category, integer, ordering), not continuous 3D values or tool outputs."
+ },
+ {
+  "metric": "Step score",
+  "paper": "ESI-Bench",
+  "part": "P3",
+  "has": "yes",
+  "quote": "We load the room into OmniGibson, allow physics to settle, and query the simulator state to extract a structured scene graph",
+  "line": "L467",
+  "note": ""
+ },
+ {
+  "metric": "Step score",
+  "paper": "ESI-Bench",
+  "part": "P4",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Interactive episodes of up to 30 steps, but only the final committed answer is scored against the ground truth."
+ },
+ {
+  "metric": "Step score",
+  "paper": "EMRD (Explore, Map, Remember, Decide)",
+  "part": "P1",
+  "has": "yes",
+  "quote": "To evaluate cognitive map degradation over time, we track spatial drift across exploration steps.",
+  "line": "L227",
+  "note": ""
+ },
+ {
+  "metric": "Step score",
+  "paper": "EMRD (Explore, Map, Remember, Decide)",
+  "part": "P2",
+  "has": "partial",
+  "quote": "At each step, the model outputs its updated spatial belief state, with 2D coordinates (X, Z) of all major discovered items",
+  "line": "L561",
+  "note": "Only 2D object coordinates (floor plane) are graded; no height, depth, camera pose or tool output."
+ },
+ {
+  "metric": "Step score",
+  "paper": "EMRD (Explore, Map, Remember, Decide)",
+  "part": "P3",
+  "has": "yes",
+  "quote": "includes the agent's absolute pose (position and rotation) and the exact ground-truth coordinates of all salient objects.",
+  "line": "L1234",
+  "note": ""
+ },
+ {
+  "metric": "Step score",
+  "paper": "EMRD (Explore, Map, Remember, Decide)",
+  "part": "P4",
+  "has": "yes",
+  "quote": "the Temporal Belief Stability (TBS) score weights spatial drift against real-time map coverage. For episode i at step",
+  "line": "L230",
+  "note": "Per-step score is drift against the model's own first estimate plus coverage; positional accuracy against truth is on the terminal map only."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "EqBen",
+  "part": "P1",
+  "has": "yes",
+  "quote": "Group score combines the previous two, such that the VLMs win one point if and only if both text score and image score are 1",
+  "line": "L951",
+  "note": ""
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "EqBen",
+  "part": "P2",
+  "has": "yes",
+  "quote": "To more precisely control the varying component in images, we further explore the photo-realistic scene generator (Kubric [20]) and the open-source diffusion model (Stable Diffusion [51, 24]) to synthetically generate pairs of images",
+  "line": "L715",
+  "note": "One-phrase edits (attribute, count, location) in EQ-Kubric/EQ-SD; natural-video subsets differ by 2+ relationships."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "EqBen",
+  "part": "P3",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Changes are object attribute/count/location or temporal frame changes, not a camera or viewpoint change."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "EqBen",
+  "part": "P4",
+  "has": "partial",
+  "quote": "Text score measures whether the model can select the correct text for a given image.",
+  "line": "L948",
+  "note": "Checked against the correct image-caption match; captions come from annotations or generation prompts, exact rendered state only in EQ-Kubric."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "NaturalBench",
+  "part": "P1",
+  "has": "yes",
+  "quote": "metric awards one point when a model correctly answers all four (image, question) pairs in a test sample.",
+  "line": "L301",
+  "note": ""
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "NaturalBench",
+  "part": "P2",
+  "has": "partial",
+  "quote": "we adopt a vision-centric design by pairing each question with two images that yield different answers, preventing “blind” solutions from answering without using the images.",
+  "line": "L20",
+  "note": "Answer flips, but the two images are different natural photos found by CLIP mismatch, not one controlled change."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "NaturalBench",
+  "part": "P3",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Image pairs are distinct Flickr30K/DOCCI photos, not the same 3D scene from a changed camera."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "NaturalBench",
+  "part": "P4",
+  "has": "partial",
+  "quote": "When reporting performance, we generate answers using each model’s default decoding strategy and compare them to the ground-truth answers.",
+  "line": "L303",
+  "note": "Ground truth is ChatGPT-written and human-verified (annotator agreement), not exact scene state."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "MetaSpace",
+  "part": "P1",
+  "has": "partial",
+  "quote": "the algorithm checks consistency between the expected output inferred by the Prolog engine and the agent’s actual response; if the check fails, a violation is recorded",
+  "line": "L1019",
+  "note": "Original and transformed queries are scored as one test case, but credit is for mutual consistency, not both answers being correct."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "MetaSpace",
+  "part": "P2",
+  "has": "yes",
+  "quote": "Given a state pair (𝑠 1, 𝑠 2 ), the direction or motion from 𝑠 2 to 𝑠 1 must be the inverse of the one from 𝑠 1 to 𝑠 2",
+  "line": "L549",
+  "note": ""
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "MetaSpace",
+  "part": "P3",
+  "has": "partial",
+  "quote": "multiple time steps to observe the same objects from various angles. Perspective visualization often requires observations from multiple viewpoints that may not be captured in consecutive frames.",
+  "line": "L1225",
+  "note": "Viewpoints come from states along the agent trajectory; the metamorphic change itself is a query transformation, not a controlled camera change."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "MetaSpace",
+  "part": "P4",
+  "has": "no",
+  "quote": "Instead of asserting the exact output, it uses MRs to check for expected consistencies.",
+  "line": "L365",
+  "note": "Oracle is consistency between the agent's own answers (MR violations); consistent-yet-wrong answers are missed (L1801)."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "Who Is Left of Whom?",
+  "part": "P1",
+  "has": "yes",
+  "quote": "target-reference reversal consistency, which requires both the original and reversed questions to be answered correctly.",
+  "line": "L3617",
+  "note": ""
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "Who Is Left of Whom?",
+  "part": "P2",
+  "has": "yes",
+  "quote": "We construct two transformations which reverse the ground-truth relation (e.g. from left to right; cf. Figure 1B)",
+  "line": "L282",
+  "note": ""
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "Who Is Left of Whom?",
+  "part": "P3",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Changes are an object-location swap or a target/reference role reversal in 2D synthetic scenes or photos, not a camera change."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "Who Is Left of Whom?",
+  "part": "P4",
+  "has": "yes",
+  "quote": "Accuracy is evaluated on original queries, and each paired-consistency score requires both answers to match their respective ground truths.",
+  "line": "L293",
+  "note": ""
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "Synthetic minimal video pairs (UE5)",
+  "part": "P1",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Scores per-video accuracy; minimal-pair consistency is only recommended in the discussion (L436), not measured."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "Synthetic minimal video pairs (UE5)",
+  "part": "P2",
+  "has": "yes",
+  "quote": "each constructed as matched minimal pairs so that only one spatial factor changes: (i) Situational discrimination by varying motion style, (ii) Role binding by switching the attacker side",
+  "line": "L141",
+  "note": ""
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "Synthetic minimal video pairs (UE5)",
+  "part": "P3",
+  "has": "partial",
+  "quote": "we introduce four camera variations: three fixed viewpoints (left, middle, right sidewalk positions) and one zoomed perspective (via focal-length adjustment). These variations add controlled visual diversity without altering scene geometry.",
+  "line": "L107",
+  "note": "Camera views of the same UE5 scene exist, but the minimal-pair change is motion style, attacker side or heading, not the camera."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "Synthetic minimal video pairs (UE5)",
+  "part": "P4",
+  "has": "yes",
+  "quote": "where N is the total number of videos, yi the ground-truth label, and ŷi the predicted label.",
+  "line": "L228",
+  "note": ""
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "MMPerspective",
+  "part": "P1",
+  "has": "yes",
+  "quote": "A model is considered robust if it provides the same, correct answer across all such transformed variants.",
+  "line": "L176",
+  "note": ""
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "MMPerspective",
+  "part": "P2",
+  "has": "no",
+  "quote": "While these transformations do not alter the scene’s underlying geometry, they may obscure or de-emphasize key visual cues.",
+  "line": "L175",
+  "note": "Robustness variants (crop, flip, mask) keep the same answer; nothing flips it."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "MMPerspective",
+  "part": "P3",
+  "has": "partial",
+  "quote": "For each scene, we render multiple images with different camera transform and lens parameters.",
+  "line": "L196",
+  "note": "Re-rendered camera views are used to build VP data and perspective pairs, not as the change inside a jointly scored group (robust variants are crop/flip/mask)."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "MMPerspective",
+  "part": "P4",
+  "has": "partial",
+  "quote": "we use accuracy as the main evaluation metric, where each question has one correct answer.",
+  "line": "L217",
+  "note": "Correct answers are mostly manual annotations; exact ground truth only for Blender VP coordinates."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "ViewDiag",
+  "part": "P1",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Scores each query separately (MAE, Top1Mass, ESS); no joint credit across views."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "ViewDiag",
+  "part": "P2",
+  "has": "no",
+  "quote": "For a fixed region pair, the true metric distance remains invariant across viewpoints.",
+  "line": "L265",
+  "note": "Views keep the same correct answer; the test is invariance, not a flip."
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "ViewDiag",
+  "part": "P3",
+  "has": "yes",
+  "quote": "For each scene, we select multiple camera views in which the same region pair remains visible while preserving camera intrinsics, extrinsics, and depth support.",
+  "line": "L223",
+  "note": ""
+ },
+ {
+  "metric": "Twin pair score",
+  "paper": "ViewDiag",
+  "part": "P4",
+  "has": "yes",
+  "quote": "Each example queries the distance between two image regions and derives ground truth directly from scene geometry rather than human annotation.",
+  "line": "L205",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "Measuring Faithfulness in CoT (Lanham et al.)",
+  "part": "P1",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Uses all questions; measures whether the answer changes after CoT truncation/mistakes, regardless of whether the final answer is correct."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "Measuring Faithfulness in CoT (Lanham et al.)",
+  "part": "P2",
+  "has": "yes",
+  "quote": "Our tests intervene on the model's stated reasoning in different ways and evaluate how the model's answer changes in response.",
+  "line": "L162",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "Measuring Faithfulness in CoT (Lanham et al.)",
+  "part": "P3",
+  "has": "yes",
+  "quote": "the chain of thought changes the final answer less than 10% of the time, while for the highest AOC task (AQuA) the chain of thought changes the answer more than 60% of the time.",
+  "line": "L352",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "Measuring Faithfulness in CoT (Lanham et al.)",
+  "part": "P4",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Mistakes are inserted into CoT by a model; steps are never checked for correctness against ground-truth values."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "FRODO (Making Reasoning Matter)",
+  "part": "P1",
+  "has": "partial",
+  "quote": "we use only the instances where the answer predicted by GPT-3.5 is correct.",
+  "line": "L829",
+  "note": "Correct-answer filter is applied only to select training data, not to evaluate reasoning of correct answers."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "FRODO (Making Reasoning Matter)",
+  "part": "P2",
+  "has": "yes",
+  "quote": "we manually analyze the relevance of the 100 CoT generated by SFT and DPO.",
+  "line": "L1098",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "FRODO (Making Reasoning Matter)",
+  "part": "P3",
+  "has": "yes",
+  "quote": "We observed that SFT generates 74% and 54% relevant CoT, whereas DPO generated CoT 77% and 59% relevant for QuaRel and OBQA tasks, respectively.",
+  "line": "L1099",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "FRODO (Making Reasoning Matter)",
+  "part": "P4",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Reasoning steps are judged manually for relevance and via causal mediation (intervened chains), not against exact ground-truth values."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "Anywhere3D-Bench",
+  "part": "P1",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Error analysis covers failure cases; checking correct boxes for compensatory reasoning errors is only named as future work (L2541)."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "Anywhere3D-Bench",
+  "part": "P2",
+  "has": "yes",
+  "quote": "To identify the performance bottlenecks of existing MLLMs on our benchmark, we conduct a humanannotated error analysis on Gemini-2.5-Pro, which provides its reasoning process.",
+  "line": "L135",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "Anywhere3D-Bench",
+  "part": "P3",
+  "has": "partial",
+  "quote": "Overall, the proportions of the three error types are relatively balanced. However, at the part level, the proportion of perception errors is higher",
+  "line": "L1119",
+  "note": "Reports error-type proportions among failed items for one model; no rate of wrong reasoning behind correct answers."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "Anywhere3D-Bench",
+  "part": "P4",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Error types are human-annotated; intermediate steps are not scored against exact ground-truth values."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "MetaSpace",
+  "part": "P1",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Checks metamorphic-relation consistency on all trajectories; 'success by coincidence' is motivation (L2174), not a correct-only subset."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "MetaSpace",
+  "part": "P2",
+  "has": "partial",
+  "quote": "Case study of embodied spatial cognition errors in SC4-a, using orange and green backgrounds to highlight incorrect and correct reasoning steps, respectively.",
+  "line": "L2117",
+  "note": "Stated CoT steps are only inspected in a case study / 100-error manual analysis; the main method checks answers to generated probe queries."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "MetaSpace",
+  "part": "P3",
+  "has": "partial",
+  "quote": "MetaSpace successfully detects 90,422 spatial cognition errors in state-of-the-art (SOTA) MLLM-driven agents.",
+  "line": "L22",
+  "note": "Counts violations / SC score over probe queries, not the share of correct task outcomes whose reasoning is wrong."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "MetaSpace",
+  "part": "P4",
+  "has": "no",
+  "quote": "rather than defining the ground-truth of spatial relations. The oracle of MetaSpace relies on internal logical consistency",
+  "line": "L1232",
+  "note": "Oracle is internal logical/physical consistency between answers, explicitly not exact ground truth."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "Theory of Space",
+  "part": "P1",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Map correctness is correlated with downstream success over all samples; no subset restricted to correct answers."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "Theory of Space",
+  "part": "P2",
+  "has": "yes",
+  "quote": "we prompt it to reveal its internal spatial belief as a cognitive map at each step, letting us measure the quality of its underlying spatial model.",
+  "line": "L35",
+  "note": ""
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "Theory of Space",
+  "part": "P3",
+  "has": "partial",
+  "quote": "belief correctness is consistently and positively correlated with downstream success in both modalities, with all correlations significant (p < .001).",
+  "line": "L1452",
+  "note": "Reports map accuracy and its correlation with success, not how often a correct answer rests on a wrong map."
+ },
+ {
+  "metric": "Right-for-wrong-reasons rate",
+  "paper": "Theory of Space",
+  "part": "P4",
+  "has": "yes",
+  "quote": "RMSE is the root mean squared error between predicted and ground-truth object positions",
+  "line": "L1270",
+  "note": ""
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "CanTest",
+  "part": "P1",
+  "has": "yes",
+  "quote": "we repaired these cases by replacing the outputs of the erroneous capabilities with the expected output.",
+  "line": "L1162",
+  "note": ""
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "CanTest",
+  "part": "P2",
+  "has": "yes",
+  "quote": "for each detected error at time t in capability Cx , we intervene by replacing the agent output with the oracle output and roll out the remainder of the trajectory under this correction.",
+  "line": "L818",
+  "note": ""
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "CanTest",
+  "part": "P3",
+  "has": "yes",
+  "quote": "For each failure-responsible capability, a relatively high repair rate is achieved, i.e., repair rates ranging from 81.30% to 96.69%.",
+  "line": "L1167",
+  "note": ""
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "CanTest",
+  "part": "P4",
+  "has": "partial",
+  "quote": "When multiple failureinducing errors exist, we attribute the failure to the earliest one as the failure-source error",
+  "line": "L822",
+  "note": "Each failure is assigned to a single capability (earliest failure-inducing error); no joint swaps or split of gain across capability combinations."
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "Seeing Is Not Measuring",
+  "part": "P1",
+  "has": "yes",
+  "quote": "The perception backend swaps freely behind the same tool interface: a ground-truth (GT) oracle, real monocular 3D detectors",
+  "line": "L50",
+  "note": ""
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "Seeing Is Not Measuring",
+  "part": "P2",
+  "has": "partial",
+  "quote": "Swapping the backend behind detect object 3d changes only where the camera-space boxes come from, never the tool-calling structure.",
+  "line": "L161",
+  "note": "Only one tool (the 3D detector) is ever swapped; no per-tool sweep, other inputs (poses, frame selection) are GT in every condition."
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "Seeing Is Not Measuring",
+  "part": "P3",
+  "has": "yes",
+  "quote": "Tool calling lifts accuracy from 39.1% (visual) to 67.4% (WildDet3D) and 92.1% (GT), 2.8 points below the GT ceiling (94.9%)",
+  "line": "L233",
+  "note": ""
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "Seeing Is Not Measuring",
+  "part": "P4",
+  "has": "partial",
+  "quote": "Comparing each detector backend, behind a fixed tool chain, against a ground-truth oracle and a VLM-free geometric ceiling separates the two error sources",
+  "line": "L106",
+  "note": "Two-way split (perception vs orchestration) only; no split across several tools or their combinations."
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "ESI-Bench",
+  "part": "P1",
+  "has": "yes",
+  "quote": "Ground-Truth 3D+Gemini, where perfect point clouds derived directly from simulator state are used to construct scene graphs provided to the language model, serving as an oracle ablation for 3D grounding.",
+  "line": "L723",
+  "note": ""
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "ESI-Bench",
+  "part": "P2",
+  "has": "partial",
+  "quote": "Ground-Truth Passive provides the sequence of views rendered along the ground-truth action trajectory, serving as an oracle ablation that separates perception errors from action errors.",
+  "line": "L713",
+  "note": "Two separate oracle ablations (GT trajectory views, GT 3D scene graph) on different setups; not a one-at-a-time sweep over the components of one agent."
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "ESI-Bench",
+  "part": "P3",
+  "has": "yes",
+  "quote": "GPT-5 improves from 42.5% under active exploration to 95.0% with ground-truth trajectory views on Rigid Containment",
+  "line": "L1074",
+  "note": ""
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "ESI-Bench",
+  "part": "P4",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Reports per-paradigm accuracy gaps (active vs GT passive, VGGT vs GT 3D); no split of total gain across tools or combinations."
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "MoDitector",
+  "part": "P1",
+  "has": "yes",
+  "quote": "For the Perception module, we replace its results with bounding boxes retrieved from CARLA, ensuring that the module’s outputs align with the ground truth.",
+  "line": "L1296",
+  "note": ""
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "MoDitector",
+  "part": "P2",
+  "has": "yes",
+  "quote": "To evaluate the fidelity of Module-Specific Oracle, we rerun all detected MICSs by substituting the outputs of module",
+  "line": "L1293",
+  "note": ""
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "MoDitector",
+  "part": "P3",
+  "has": "yes",
+  "quote": "By replacing the module outputs with a safe ground truth, we observe that most of the detected MICSs can be repaired, with average repair rates of 89.2%, 89.3%, 100% and 100%",
+  "line": "L1305",
+  "note": ""
+ },
+ {
+  "metric": "Per-tool perfect-swap gain",
+  "paper": "MoDitector",
+  "part": "P4",
+  "has": "no",
+  "quote": "Currently, MoDitector only considers single-module analysis. However, our MoDitector can be easily extended to support the detection of MICSs induced by multiple modules",
+  "line": "L1494",
+  "note": "Single-module analysis only (multi-module is future work); no split of gain across modules or combinations."
+ },
+ {
+  "metric": "Graded credit",
+  "paper": "SpatialClaw",
+  "part": "P1",
+  "has": "yes",
+  "quote": "binary questions, receive a score of 1 when the predicted answer matches the reference and 0 otherwise. Numerical questions are scored with mean relative accuracy (MRA)",
+  "line": "L1880",
+  "note": ""
+ },
+ {
+  "metric": "Graded credit",
+  "paper": "SpatialClaw",
+  "part": "P2",
+  "has": "yes",
+  "quote": "Acc denotes per-sample 1/0 categorical scoring, MRA denotes mean relative accuracy on numerical questions",
+  "line": "L1795",
+  "note": ""
+ },
+ {
+  "metric": "Graded credit",
+  "paper": "SpatialClaw",
+  "part": "P3",
+  "has": "partial",
+  "quote": "Numerical questions are scored with mean relative accuracy (MRA) (Yang et al., 2025), where the acceptance threshold follows each benchmark's originating implementation.",
+  "line": "L1881",
+  "note": "Uses MRA (multi-threshold by definition) but the text speaks of a single 'acceptance threshold' and never lists the threshold set or curve."
+ },
+ {
+  "metric": "Graded credit",
+  "paper": "SpatialClaw",
+  "part": "P4",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Thresholds vary per source benchmark ('respecting each benchmark's original threshold settings'), not per question category; one MRA rule for all numerical questions."
+ },
+ {
+  "metric": "Graded credit",
+  "paper": "Omni3D-Bench",
+  "part": "P1",
+  "has": "yes",
+  "quote": "For queries with floating point answers, we report MRA [44] with thresholds C = {0.5, 0.55, ..., 0.95}",
+  "line": "L361",
+  "note": ""
+ },
+ {
+  "metric": "Graded credit",
+  "paper": "Omni3D-Bench",
+  "part": "P2",
+  "has": "yes",
+  "quote": "and ground truth y: P 1 <1−θ MRA = |C| θ∈C 1 |ŷ−y| y",
+  "line": "L364",
+  "note": ""
+ },
+ {
+  "metric": "Graded credit",
+  "paper": "Omni3D-Bench",
+  "part": "P3",
+  "has": "yes",
+  "quote": "we report MRA [44] with thresholds C = {0.5, 0.55, ..., 0.95}",
+  "line": "L362",
+  "note": ""
+ },
+ {
+  "metric": "Graded credit",
+  "paper": "Omni3D-Bench",
+  "part": "P4",
+  "has": "partial",
+  "quote": "For numeric (other) queries, which require floating point answers, we report MRA.",
+  "line": "L504",
+  "note": "Only a count vs float split (counts reported as plain accuracy, floats as MRA); all float categories share the same threshold set C, no per-category tolerances."
+ },
+ {
+  "metric": "Graded credit",
+  "paper": "Theory of Space",
+  "part": "P1",
+  "has": "yes",
+  "quote": "For tasks that output coordinates (view2loc, alloc.map), we compute a coordinate similarity score.",
+  "line": "L528",
+  "note": ""
+ },
+ {
+  "metric": "Graded credit",
+  "paper": "Theory of Space",
+  "part": "P2",
+  "has": "partial",
+  "quote": "(K/N ) · e−RMSE/L , where RMSE is the root mean squared error between predicted and ground-truth object positions, L is the RMS ℓ2 -norm of the positions of all objects in the scene",
+  "line": "L1270",
+  "note": "Error is normalized by the scene's overall RMS position scale L, not by each answer's own true value."
+ },
+ {
+  "metric": "Graded credit",
+  "paper": "Theory of Space",
+  "part": "P3",
+  "has": "yes",
+  "quote": "Positional accuracy (pos.acc) is the Euclidean similarity between predicted and true object coordinates: (K/N ) · e−RMSE/L",
+  "line": "L1269",
+  "note": ""
+ },
+ {
+  "metric": "Graded credit",
+  "paper": "Theory of Space",
+  "part": "P4",
+  "has": "no",
+  "quote": "",
+  "line": "",
+  "note": "Relation tasks get 0.5 per correct direction/distance bin and coordinate tasks get a similarity score; no per-category error tolerances."
+ }
+]
