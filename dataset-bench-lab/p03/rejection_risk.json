@@ -1,0 +1,410 @@
+{
+ "updated": "2026-09-30",
+ "source": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines",
+ "rows": [
+  {
+   "id": "1",
+   "order": 0,
+   "source": "Core reject reasons",
+   "dim": "Significance",
+   "quote": "Does the benchmark address a meaningful gap or enable reliable comparison across methods? Does it change how we measure progress in this area?",
+   "now": "yellow",
+   "after": "green",
+   "status_note": "a crowded field: 39 related benchmarks and methods in the survey",
+   "fix": "Lead with one finding: how often agents are right for the wrong reasons, and where the step-score ranking disagrees with the final-answer ranking. Then run the step grading on SPAR-Bench, a real benchmark that ships depth and camera poses per item, to show conclusions shift on an existing benchmark.",
+   "evidence": [
+    {
+     "label": "AgentBoard (NeurIPS 2024)",
+     "url": "https://arxiv.org/abs/2401.13178"
+    },
+    {
+     "label": "SPAR-Bench",
+     "url": "https://arxiv.org/abs/2503.22976"
+    },
+    {
+     "label": "guidelines",
+     "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines"
+    }
+   ],
+   "effort": "build 2-3 days; GPU part of the main runs + ~10-20 h for SPAR-Bench (~$10-20), estimate",
+   "when": "evaluation",
+   "consequence": "score",
+   "who": "Claude",
+   "reason": "Significance"
+  },
+  {
+   "id": "2",
+   "order": 1,
+   "source": "Core reject reasons",
+   "dim": "Originality",
+   "quote": "Originality may be achieved through novel task design, evaluation setup, or analysis that reveals properties of existing benchmarks. Beating a baseline is not required.",
+   "now": "green",
+   "after": "green",
+   "status_note": "every step graded against exact state at test time, plus 3D twins",
+   "fix": "Keep the claim exactly scoped; the Survey tab becomes the related-work table and cites ESI-Bench, MindCube and Pigeon as the closest neighbours.",
+   "evidence": [
+    {
+     "label": "ESI-Bench",
+     "url": "https://arxiv.org/abs/2605.18746"
+    },
+    {
+     "label": "MindCube",
+     "url": "https://arxiv.org/abs/2506.21458"
+    },
+    {
+     "label": "Pigeon",
+     "url": "https://arxiv.org/abs/2606.02459"
+    }
+   ],
+   "effort": "build 1 day (writing); no GPU",
+   "when": "submission",
+   "consequence": "score",
+   "who": "Claude",
+   "reason": "Originality"
+  },
+  {
+   "id": "3",
+   "order": 2,
+   "source": "Core reject reasons",
+   "dim": "Quality",
+   "quote": "Evaluate the rigor of task design, item selection, and evaluation setup. Assess whether benchmark saturation or overfitting is adequately addressed.",
+   "now": "yellow",
+   "after": "green",
+   "status_note": "no blind text-only check, error bars or label audit yet",
+   "fix": "(1) Run a text-only model and prune items it answers without the images. (2) Twins cancel guessing by design: one 3D change flips the answer. (3) Error bars clustered by twin pair. (4) Humans check 300 random items; unit tests for every checker. (5) Public dev split, private test split minted from a secret seed, so the test cannot be memorised.",
+   "evidence": [
+    {
+     "label": "VSI-Bench-Debiased",
+     "url": "https://arxiv.org/abs/2511.04655"
+    },
+    {
+     "label": "Adding Error Bars to Evals",
+     "url": "https://arxiv.org/abs/2411.00640"
+    },
+    {
+     "label": "EnigmaForge (private seed)",
+     "url": "https://arxiv.org/html/2609.30144v1"
+    },
+    {
+     "label": "VSTI-Bench label erratum",
+     "url": "https://huggingface.co/datasets/Journey9ni/vstibench"
+    }
+   ],
+   "effort": "build 3-4 days; GPU ~5 h text-only pass (~$5); 6-8 person-hours for the label check, estimate",
+   "when": "build",
+   "consequence": "score",
+   "who": "both",
+   "reason": "Rigor of design"
+  },
+  {
+   "id": "4",
+   "order": 3,
+   "source": "Core reject reasons",
+   "dim": "Quality",
+   "quote": "(Not quoted in the guidelines; closest:) Is the submission technically sound, and are the claims well-supported by empirical, analytical, or conceptual arguments?",
+   "now": "red",
+   "after": "green",
+   "status_note": "do scores on renders mean anything for real photos? the biggest risk",
+   "fix": "(1) Real-to-sim pairs: film a few real rooms or aisles on a phone, rebuild them as photoreal 3D scenes (Gaussian splatting), ask the same questions on the real photos and on the renders. (2) Rank 10+ models on our test and on OmniSpatial, MMSI and ViewSpatial; report rank correlation. (3) Tool check: depth and mask errors on renders match the same tools on real photos.",
+   "evidence": [
+    {
+     "label": "PolaRiS: 0.90 correlation",
+     "url": "https://arxiv.org/abs/2512.16881"
+    },
+    {
+     "label": "SIMPLER: rank-violation metric",
+     "url": "https://arxiv.org/abs/2405.05941"
+    }
+   ],
+   "effort": "build 1-2 weeks (capture, reconstruction, paired questions); GPU ~20-40 h (~$20-40), estimate",
+   "when": "pilot",
+   "consequence": "score",
+   "who": "both",
+   "reason": "Validity (sim vs real)"
+  },
+  {
+   "id": "5",
+   "order": 4,
+   "source": "Core reject reasons",
+   "dim": "Clarity",
+   "quote": "Benchmark construction, task design choices, and evaluation protocols are clearly described and reproducible. Could another team re-run the benchmark from this paper?",
+   "now": "yellow",
+   "after": "green",
+   "status_note": "no public host, harness or fixed split yet",
+   "fix": "Ship pre-rendered images plus truth files (no Isaac Sim needed to evaluate), a VLMEvalKit plug-in, a pinned environment and seeds, and the generator code.",
+   "evidence": [
+    {
+     "label": "BetterBench (NeurIPS 2024)",
+     "url": "https://arxiv.org/abs/2411.12990"
+    },
+    {
+     "label": "VLMEvalKit",
+     "url": "https://github.com/open-compass/VLMEvalKit"
+    }
+   ],
+   "effort": "build 3-5 days; no GPU",
+   "when": "build",
+   "consequence": "score",
+   "who": "Claude",
+   "reason": "Reproducibility"
+  },
+  {
+   "id": "6",
+   "order": 5,
+   "source": "Core reject reasons",
+   "dim": "Track policy",
+   "quote": "Is a valid Croissant file present? Is the RAI metadata complete (biases, limits, intended use, sensitive info) Is the dataset accessible without PI request",
+   "now": "yellow",
+   "after": "green",
+   "status_note": "asset licences and metadata not settled",
+   "fix": "SimReady Warehouse-01 is CC-BY-4.0, so renders can be shared with attribution (still to confirm: Isaac Sim's terms for rendered output). Host on Hugging Face, which writes the Croissant file; fill the responsible-AI fields (synthetic only, warehouse only, intended use).",
+   "evidence": [
+    {
+     "label": "SimReady Warehouse-01 card",
+     "url": "https://huggingface.co/datasets/nvidia/PhysicalAI-SimReady-Warehouse-01"
+    },
+    {
+     "label": "hosting guidelines",
+     "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsHosting"
+    }
+   ],
+   "effort": "build 1-2 days; $0",
+   "when": "submission",
+   "consequence": "desk reject",
+   "who": "Claude",
+   "reason": "Documentation and access"
+  },
+  {
+   "id": "7",
+   "order": 6,
+   "source": "Core reject reasons",
+   "dim": "Quality",
+   "quote": "(Common reviewer ask, not quoted:) enough frontier and open models, agents and a human baseline to enable reliable comparison across methods.",
+   "now": "green",
+   "after": "green",
+   "status_note": "cheap: inference only, and SpatialClaw's agents are open",
+   "fix": "Run 6-10 open models and the four agents (VADAR, pySpatial, SpaceTools, SpatialClaw); frontier APIs only after approval; a human baseline on the same 300 items (see B6).",
+   "evidence": [
+    {
+     "label": "SpatialClaw (agents, code)",
+     "url": "https://arxiv.org/abs/2606.13673"
+    },
+    {
+     "label": "guidelines",
+     "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines"
+    }
+   ],
+   "effort": "GPU ~50-100 h (~$50-100); paid APIs extra, ask first; human baseline 8-10 person-hours, estimate",
+   "when": "evaluation",
+   "consequence": "score",
+   "who": "both",
+   "reason": "Enough models tested"
+  },
+  {
+   "id": "B1",
+   "order": 7,
+   "source": "Audit: reasons first missed",
+   "dim": "Significance",
+   "quote": "we also ask that all reviewers reflect on the evaluative claims made by the authors; what specific evaluative claims their dataset supports, under what assumptions those claims hold, and what limitations constrain them",
+   "now": "yellow",
+   "after": "green",
+   "status_note": "claims, assumptions and limits not written down",
+   "fix": "Add one box to the paper: the claims the benchmark supports, the assumptions they rest on, and their limits (synthetic, warehouse only).",
+   "evidence": [
+    {
+     "label": "guidelines",
+     "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines"
+    }
+   ],
+   "effort": "half a day of writing",
+   "when": "submission",
+   "consequence": "score",
+   "who": "Claude",
+   "reason": "Evaluative claims"
+  },
+  {
+   "id": "B2",
+   "order": 8,
+   "source": "Audit: reasons first missed",
+   "dim": "Track policy",
+   "quote": "E&D authors were asked to indicate the primary contribution type of their paper. If introducing a new dataset, does the work comply with the Datasets and Data Resources type",
+   "now": "yellow",
+   "after": "green",
+   "status_note": "spans benchmark design, a new metric and a data generator",
+   "fix": "Pick Benchmark Design as the primary type and meet the dataset checks as well.",
+   "evidence": [
+    {
+     "label": "guidelines",
+     "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines"
+    }
+   ],
+   "effort": "a choice on the form",
+   "when": "submission",
+   "consequence": "score",
+   "who": "you",
+   "reason": "Contribution type"
+  },
+  {
+   "id": "B3",
+   "order": 9,
+   "source": "Audit: reasons first missed",
+   "dim": "Track policy",
+   "quote": "If the primary contribution is a reusable executable artifact (such as an evaluation toolkit, benchmarking platform, or data generator), code release is mandatory at the time of submission. No code = reject unless a convincing justification is provided",
+   "now": "red",
+   "after": "green",
+   "status_note": "generator and environment code not public",
+   "fix": "Publish the generator and the environment at an anonymised code link at submission, not as supplementary files.",
+   "evidence": [
+    {
+     "label": "guidelines",
+     "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines"
+    }
+   ],
+   "effort": "build 2-3 days of clean-up; $0",
+   "when": "build",
+   "consequence": "desk reject",
+   "who": "both",
+   "reason": "Code mandatory for executable artifacts"
+  },
+  {
+   "id": "B4",
+   "order": 10,
+   "source": "Audit: reasons first missed",
+   "dim": "Track policy",
+   "quote": "Double-blind review is the default for all ED submissions. This also applies to dataset and code URLs.",
+   "now": "yellow",
+   "after": "green",
+   "status_note": "public hub, daily social posts and accounts carry the owner's name",
+   "fix": "Keep the hub and posts out of the paper; host data and code under anonymous Hugging Face and GitHub accounts, with nothing identifying in the Croissant file; check the main handbook's rule on social posts.",
+   "evidence": [
+    {
+     "label": "hosting guidelines",
+     "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsHosting"
+    },
+    {
+     "label": "main track handbook",
+     "url": "https://neurips.cc/Conferences/2026/MainTrackHandbook"
+    }
+   ],
+   "effort": "half a day; $0",
+   "when": "build",
+   "consequence": "desk reject",
+   "who": "you",
+   "reason": "Anonymity of data and code links"
+  },
+  {
+   "id": "B5",
+   "order": 11,
+   "source": "Audit: reasons first missed",
+   "dim": "Track policy",
+   "quote": "If you encounter a submission missing a Croissant file or providing an invalid/placeholder one, please flag it to your Area Chair. Empty or placeholder text should be flagged to your AC and may be desk-rejected.",
+   "now": "yellow",
+   "after": "green",
+   "status_note": "no Croissant file yet",
+   "fix": "Generate the Croissant file on Hugging Face and fill real text in every responsible-AI field.",
+   "evidence": [
+    {
+     "label": "hosting guidelines",
+     "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsHosting"
+    }
+   ],
+   "effort": "half a day; $0",
+   "when": "submission",
+   "consequence": "desk reject",
+   "who": "Claude",
+   "reason": "Croissant desk-reject"
+  },
+  {
+   "id": "B6",
+   "order": 12,
+   "source": "Audit: reasons first missed",
+   "dim": "Track policy",
+   "quote": "IRB accreditation or equivalent institutional documentation is provided. A confirmation must be provided of fair compensation for all participants",
+   "now": "yellow",
+   "after": "green",
+   "status_note": "a human baseline is research on people",
+   "fix": "Use unpaid expert annotators, or get approval and pay fairly, and report it.",
+   "evidence": [
+    {
+     "label": "guidelines",
+     "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines"
+    }
+   ],
+   "effort": "half a day of paperwork; annotator pay if paid",
+   "when": "evaluation",
+   "consequence": "score",
+   "who": "you",
+   "reason": "Human baseline is research on people"
+  },
+  {
+   "id": "B7",
+   "order": 13,
+   "source": "Audit: reasons first missed",
+   "dim": "Track policy",
+   "quote": "authors should clearly document any important, original, or non-standard use of agents or LLMs in their methodology; verifying citations and avoiding hallucinated or misleading content",
+   "now": "yellow",
+   "after": "green",
+   "status_note": "LLM-polished wording and AI judges would be undisclosed",
+   "fix": "Disclose LLM-polished question wording and any AI judge; routine coding help needs no disclosure; check every citation.",
+   "evidence": [
+    {
+     "label": "main track handbook",
+     "url": "https://neurips.cc/Conferences/2026/MainTrackHandbook"
+    },
+    {
+     "label": "guidelines",
+     "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines"
+    }
+   ],
+   "effort": "one hour of writing",
+   "when": "submission",
+   "consequence": "score",
+   "who": "Claude",
+   "reason": "Disclosing AI use"
+  },
+  {
+   "id": "B8",
+   "order": 14,
+   "source": "Audit: reasons first missed",
+   "dim": "Quality",
+   "quote": "Is this a complete piece of work or work in progress?",
+   "now": "yellow",
+   "after": "green",
+   "status_note": "nothing generated or evaluated yet",
+   "fix": "Finish every agent run and the validity study (row 4) before submission; submit to the later deadline if they are not done.",
+   "evidence": [
+    {
+     "label": "guidelines",
+     "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines"
+    }
+   ],
+   "effort": "schedule, no extra cost",
+   "when": "evaluation",
+   "consequence": "score",
+   "who": "both",
+   "reason": "Complete work, not work in progress"
+  },
+  {
+   "id": "B9",
+   "order": 15,
+   "source": "Audit: reasons first missed",
+   "dim": "Track policy",
+   "quote": "the main content of the paper must fit within the 9-page limit; submissions must use the official LaTeX style file; We allow page excess of the paper limit up to 5 lines.",
+   "now": "green",
+   "after": "green",
+   "status_note": "easy to meet",
+   "fix": "Official style file, 9 pages including Limitations; a frank Limitations section is rewarded.",
+   "evidence": [
+    {
+     "label": "guidelines",
+     "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines"
+    }
+   ],
+   "effort": "half a day",
+   "when": "submission",
+   "consequence": "desk reject",
+   "who": "Claude",
+   "reason": "Formatting desk-reject"
+  }
+ ]
+}
