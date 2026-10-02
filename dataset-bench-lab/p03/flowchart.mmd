@@ -1,38 +1,34 @@
-flowchart TD
-  subgraph S1["🖥️ Stage 1 · GPU · script ready"]
-    W[("🏭 SimReady Warehouse-01<br/>Isaac Sim 6.0.1 · USD stage")]
-    R["📸 Render RGB + depth per view<br/>start views first · 60-minute cap"]
-    DC{"🔍 Depth check<br/>render matches answer key?"}
+flowchart TB
+  subgraph A["① Make the questions"]
+    direction LR
+    W[("🏭 SimReady Warehouse-01<br/>Isaac Sim 6.0.1 · GPU")]
+    SF[("📄 Scene file = answer key<br/>every object a box:<br/>name, centre, size")]
+    QM["❓ Question maker<br/>blue barrel left of the<br/>green box tower? → left"]
+    TR["👯 Triple, pair-first<br/>base: left · flip: right · keep: left<br/>camera move · object swap · frame switch"]
+    VP["🗺️ View plan<br/>start views · 2 moves away · rest"]
+    W -->|export every labelled object| SF --> QM -->|only twinnable questions| TR --> VP
   end
-  subgraph S0["💻 Stage 0 · Mac · done"]
-    SF[("📄 Scene file = answer key<br/>each object a box: name, centre, size<br/>repeated names never asked")]
-    QM["❓ Question maker<br/>is the blue barrel left of the green box tower?<br/>answer from geometry: left"]
-    TR["👯 Triple, built pair-first<br/>base: left · flip: right · keep: left<br/>flip by camera move, object swap or frame switch"]
-    VP["🗺️ View plan<br/>0 start views · 1 two moves away · 2 rest of grid"]
+  subgraph B["② Render on the GPU"]
+    direction LR
+    R["📸 RGB + depth per view<br/>start views first · 60-minute cap"]
+    DC{"🔍 Depth check<br/>render matches<br/>the answer key?"}
+    R --> DC
+    DC -.->|❌ fail: fix first| R
   end
-  subgraph S2["🤖 Stage 2 · API models · queued"]
-    M["☁️ OpenAI · Google · Anthropic · xAI<br/>Fireworks · Alibaba Cloud"]
+  subgraph C["③ Answer and grade"]
+    direction LR
+    M["☁️ API models<br/>OpenAI · Google · Anthropic<br/>xAI · Fireworks · Alibaba"]
     H["🧑 Human-play page<br/>same views, same grader"]
-    AL["🔁 Agent loop<br/>sees last 4 views + move log<br/>move · turn · look up to 10 · measure · answer"]
-    G{"⚖️ Grader, rules only<br/>answer · every stated step · triple"}
-    OUT["📊 accuracy · step score · triple score<br/>right answer, wrong step % · parse failures<br/>+ no-image baseline + label audit"]
+    AL["🔁 Agent loop<br/>last 4 views + move log<br/>move · turn · look ≤ 10<br/>measure · answer"]
+    G{"⚖️ Grader, rules only<br/>vs the answer key:<br/>answer · each step · triple"}
+    OUT["📊 accuracy · step score<br/>triple score · wrong-step %<br/>no-image baseline · label audit"]
+    S3["📦 Stage 3<br/>~3,000 triples · release"]
+    M --> AL
+    H --> AL
+    AL -->|tool calls| G --> OUT --> S3
   end
-  S3["📦 Stage 3 · about 3,000 triples<br/>human check of 300 · release files"]
-
-  W -->|export every labelled object as a box| SF
-  SF --> QM
-  QM -->|only questions that can be twinned| TR
-  TR --> VP
-  VP -->|views to render, priority order| R
-  R --> DC
-  DC -->|✅ pass| AL
-  DC -.->|❌ fail: fix before rendering more| R
-  M --> AL
-  H --> AL
-  AL -->|tool calls| G
-  SF -.->|exact truth| G
-  G --> OUT
-  OUT --> S3
+  A -->|views to render| B
+  B -->|✅ depth check passed| C
 
   classDef done fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16
   classDef ready fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#422006
