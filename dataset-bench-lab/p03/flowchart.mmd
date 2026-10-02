@@ -1,0 +1,42 @@
+flowchart TD
+  subgraph S1["🖥️ Stage 1 · GPU · script ready"]
+    W[("🏭 SimReady Warehouse-01<br/>Isaac Sim 6.0.1 · USD stage")]
+    R["📸 Render RGB + depth per view<br/>start views first · 60-minute cap"]
+    DC{"🔍 Depth check<br/>render matches answer key?"}
+  end
+  subgraph S0["💻 Stage 0 · Mac · done"]
+    SF[("📄 Scene file = answer key<br/>each object a box: name, centre, size<br/>repeated names never asked")]
+    QM["❓ Question maker<br/>is the blue barrel left of the green box tower?<br/>answer from geometry: left"]
+    TR["👯 Triple, built pair-first<br/>base: left · flip: right · keep: left<br/>flip by camera move, object swap or frame switch"]
+    VP["🗺️ View plan<br/>0 start views · 1 two moves away · 2 rest of grid"]
+  end
+  subgraph S2["🤖 Stage 2 · API models · queued"]
+    M["☁️ OpenAI · Google · Anthropic · xAI<br/>Fireworks · Alibaba Cloud"]
+    H["🧑 Human-play page<br/>same views, same grader"]
+    AL["🔁 Agent loop<br/>sees last 4 views + move log<br/>move · turn · look up to 10 · measure · answer"]
+    G{"⚖️ Grader, rules only<br/>answer · every stated step · triple"}
+    OUT["📊 accuracy · step score · triple score<br/>right answer, wrong step % · parse failures<br/>+ no-image baseline + label audit"]
+  end
+  S3["📦 Stage 3 · about 3,000 triples<br/>human check of 300 · release files"]
+
+  W -->|export every labelled object as a box| SF
+  SF --> QM
+  QM -->|only questions that can be twinned| TR
+  TR --> VP
+  VP -->|views to render, priority order| R
+  R --> DC
+  DC -->|✅ pass| AL
+  DC -.->|❌ fail: fix before rendering more| R
+  M --> AL
+  H --> AL
+  AL -->|tool calls| G
+  SF -.->|exact truth| G
+  G --> OUT
+  OUT --> S3
+
+  classDef done fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16
+  classDef ready fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#422006
+  classDef queued fill:#e2e8f0,stroke:#64748b,stroke-width:2px,color:#0f172a
+  class SF,QM,TR,VP done
+  class W,R,DC ready
+  class M,H,AL,G,OUT,S3 queued
