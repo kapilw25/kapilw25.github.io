@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-30",
+ "updated": "2026-10-02",
  "source": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines",
  "rows": [
   {
@@ -409,6 +409,36 @@
    "consequence": "desk reject",
    "who": "Claude",
    "reason": "Formatting desk-reject"
+  },
+  {
+   "id": "C1",
+   "order": 16,
+   "source": "Critiques from prior work",
+   "dim": "Quality",
+   "reason": "Discrete moves on pre-rendered views",
+   "quote": "(Not quoted in the guidelines; closest, NeurIPS D&B 2023 review form:) are the evaluation methods and experiment design appropriate?",
+   "now": "yellow",
+   "after": "green",
+   "status_note": "our design follows R2R and Touchdown (agents move between pre-captured views); VLN-CE argued that teleporting between fixed nodes skips real navigation challenges; 17 of 26 checked benchmarks render live",
+   "fix": "(1) State the grid in the paper: 0.5 m steps and 30-degree turns, far finer than R2R's nodes about 2.25 m apart, and why frozen views help (reproducible, no simulator needed to evaluate). (2) A small live split in the appendix: continuous moves rendered on demand for about 50 triples on the GPU; report whether the ranking of models changes. (3) Name the precedent and the critique in the limitations.",
+   "evidence": [
+    {
+     "label": "VLN-CE: the fixed-node critique",
+     "url": "https://arxiv.org/abs/2004.02857"
+    },
+    {
+     "label": "R2R: views on a navigation graph",
+     "url": "https://arxiv.org/abs/1711.07280"
+    },
+    {
+     "label": "OpenEQA: offline and live splits",
+     "url": "https://open-eqa.github.io/assets/pdfs/paper.pdf"
+    }
+   ],
+   "effort": "build 2-3 days (a live-render agent loop); GPU about 2-4 h for 50 live triples (about $2-4), estimate",
+   "when": "evaluation",
+   "consequence": "score",
+   "who": "both"
   }
  ]
 }

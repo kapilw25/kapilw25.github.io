@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-01",
+ "updated": "2026-10-02",
  "note": "Build stages and twin designs for the Execution tab. Measured numbers are read by build_page.py from bench/results/twin_designs.json and bench/results/pairs_poc.json; this file holds the plan text only.",
  "stages": [
   {
@@ -39,12 +39,21 @@
    "evidence": "bench/models.json"
   },
   {
-   "stage": "3 · full set",
+   "stage": "3 · phase 1: test set",
    "where": "GPU and Mac",
    "status": "queued",
-   "makes": "about 3,000 questions as triples across scenes; human check of 300 items; release files",
+   "makes": "about 3,000 test questions (about 1,000 triples) across the scenes; the full model list; a human baseline; a label audit on a sample; release files",
    "now": "-",
-   "next": "-",
+   "next": "done when: renders pass the depth check, ~1,000 triples are built, models are scored (smoke run, then the full list), and the human baseline and label audit are done",
+   "evidence": "-"
+  },
+  {
+   "stage": "4 · phase 2: training split",
+   "where": "GPU and Mac",
+   "status": "queued",
+   "makes": "about 50,000 training triples (150,000 questions) with their renders, from seeds disjoint from the private test seed",
+   "now": "-",
+   "next": "starts when: phase 1 is done; stage 1 has measured views per second and size per view; a scene-variety plan exists (object shuffles, more SimReady scenes); training seeds are fixed. Open: a small fine-tune to show the split helps, or release it as RL-ready data with its training value untested",
    "evidence": "-"
   }
  ],
