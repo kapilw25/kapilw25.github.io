@@ -39,6 +39,15 @@
    "evidence": "bench/models.json"
   },
   {
+   "stage": "2b · live-render check",
+   "where": "GPU (RTX PRO 6000) and API",
+   "status": "queued",
+   "makes": "about 50 triples where the agent moves freely (any step length, any turn) and Isaac Sim renders each view on demand; the same models and the same grader as on the frozen grid",
+   "now": "-",
+   "next": "done when: the model ranking on the live triples vs the same triples on the frozen grid is reported (rank correlation); it answers row C1 on Rejection Risk. Cost: about 2-4 GPU hours and, with 3-4 models, roughly $50-70 of API calls (estimate)",
+   "evidence": "Rejection Risk C1 (VLN-CE critique)"
+  },
+  {
    "stage": "3 · phase 1: test set",
    "where": "GPU and Mac",
    "status": "queued",
