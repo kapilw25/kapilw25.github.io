@@ -695,9 +695,9 @@ td.home-col.ours-home{background:rgba(148,163,184,.22);font-style:italic}
 <p>Legend: 📉 cost / 🛡️ mitigation. Superseded fallback: the two-dimension LIBERO-PRO plan (object attributes, task redesign) stays valid as a Franka-only external check inside this project.</p>
 </section>
 <section class="panel" id="tab-first-steps" role="tabpanel"><h2>🗺️ First five steps, cheapest first</h2><ol>
-<li>Write the test spec: factors, levels, held-out rule, task list, episode counts, statistics; owner file <code>d01/literature/area_b_test_spec.md</code> (to be created, no GPU).</li>
-<li>Stand up Isaac Lab-Arena with the SimReady warehouse and one G1 pick-walk-place chain; record 10 seed demos; script <code>d01/generate/arena_seed_demos.py</code> (to be created, one RTX GPU).</li>
-<li>Mimic expansion plus twins for two factors (object colour, camera) with replay verification; script <code>d01/generate/twins.py</code> (to be created).</li>
+<li>Write the test spec: factors, levels, held-out rule, task list, episode counts, statistics; owner file <code>literature/area_b_test_spec.md</code> (to be created, no GPU).</li>
+<li>Stand up Isaac Lab-Arena with the SimReady warehouse and one G1 pick-walk-place chain; record 10 seed demos; script <code>papers/p02-humanoid-warehouse/generate/arena_seed_demos.py</code> (to be created, one RTX GPU).</li>
+<li>Mimic expansion plus twins for two factors (object colour, camera) with replay verification; script <code>papers/p02-humanoid-warehouse/generate/twins.py</code> (to be created).</li>
 <li>Evaluate GR00T N1.x zero-shot and after R1 on the v0 test; confirm the test is failed by current policies, otherwise change the factors before building more.</li>
 <li>Add rivals as co-training columns, then the loop from Plan 02 on a dev split of our own factors.</li>
 </ol>
