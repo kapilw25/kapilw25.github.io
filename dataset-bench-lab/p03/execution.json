@@ -1,0 +1,143 @@
+{
+ "updated": "2026-10-01",
+ "note": "Build stages and twin designs for the Execution tab. Measured numbers are read by build_page.py from bench/results/twin_designs.json and bench/results/pairs_poc.json; this file holds the plan text only.",
+ "stages": [
+  {
+   "stage": "0 · generator and grader",
+   "where": "Mac, no simulator",
+   "status": "done",
+   "makes": "questions answered from exact 3D state, the agent loop (typed tool calls, last 4 views + move log, up to 10 moves), a grader for answers and every stated step, no AI judge",
+   "now": "13 of 13 tests pass; perfect test agent 100%; lucky agent (right answers, steps 40% off) 0% on steps",
+   "next": "-",
+   "evidence": "bench/results/stage0_selfcheck.md"
+  },
+  {
+   "stage": "0b · twin designs",
+   "where": "Mac, two test scenes",
+   "status": "done",
+   "makes": "10 twin designs measured on a sparse and a cluttered test warehouse; proof-of-concept set D2 + D4 + D8, each with a D10 keep twin, built pair-first",
+   "now": "see the Twin designs sub-tab; 20 triples per test scene",
+   "next": "scale to all 10 designs (Twin designs sub-tab, column 'To scale')",
+   "evidence": "bench/results/twin_designs.md, bench/results/pairs_poc.md"
+  },
+  {
+   "stage": "1 · render the warehouse",
+   "where": "GPU (RTX PRO 6000)",
+   "status": "script ready",
+   "makes": "Isaac Sim 6.0.1 (pip, Python 3.12, own venv) loads SimReady Warehouse-01, exports every labelled object as a box into the scene file (repeated names not askable), builds the question triples, renders RGB + depth per view in priority order (start views, then views 2 moves away, then the rest), renders swap twins in their edited scene, and checks rendered depth against the scene file",
+   "now": "dry run on the Mac with a fake renderer: 20 triples, 984 views written, depth check 254 of 254; a 783-object test scene builds 20 triples in 9 s; 13 tests pass",
+   "next": "rent an RTX PRO 6000 with driver 595.58.03 or newer, Ubuntu 22.04+, 50 GB free; run bench/stage1_gpu.sh (10-minute smoke, then a 60-minute render cap)",
+   "evidence": "bench/stage1_gpu.sh, bench/spbench/render.py, bench/spbench/isaac_backend.py"
+  },
+  {
+   "stage": "2 · first models",
+   "where": "Mac (open 4B model) and API",
+   "status": "queued",
+   "makes": "about 200 questions as triples; Qwen3-VL-4B, one API vision model (newest the key lists), one larger open model",
+   "now": "-",
+   "next": "accuracy, step score, triple score, parse failures; a no-image baseline and a label audit on a sample",
+   "evidence": "-"
+  },
+  {
+   "stage": "3 · full set",
+   "where": "GPU and Mac",
+   "status": "queued",
+   "makes": "about 3,000 questions as triples across scenes; human check of 300 items; release files",
+   "now": "-",
+   "next": "-",
+   "evidence": "-"
+  }
+ ],
+ "twins": [
+  {
+   "code": "D1",
+   "name": "near pair, small move",
+   "changes": "camera",
+   "poc": "no",
+   "render": "cached grid view",
+   "scale": "needs scenes with many object pairs closer than 3 m (real shelving aisles); pick such pairs first",
+   "source": "proposed 2026-09-30"
+  },
+  {
+   "code": "D2",
+   "name": "camera move",
+   "changes": "camera",
+   "poc": "yes",
+   "render": "cached grid view",
+   "scale": "already in the set; record each pair's move and turn; cap the move per scene size",
+   "source": "proposed 2026-09-30"
+  },
+  {
+   "code": "D3",
+   "name": "camera height",
+   "changes": "camera",
+   "poc": "no",
+   "render": "a second and third grid height (3x renders)",
+   "scale": "render the grid at 0.8, 1.5 and 3.0 m; only above-or-below questions flip (visibility never did)",
+   "source": "proposed 2026-09-30"
+  },
+  {
+   "code": "D4",
+   "name": "object swap",
+   "changes": "scene edit",
+   "poc": "yes",
+   "render": "1 extra render per pair",
+   "scale": "already in the set; move two prims in the USD stage, render the start view again, re-export the scene file",
+   "source": "contrast sets (Gardner 2020); Causal VQA (CVPR 2020)"
+  },
+  {
+   "code": "D5",
+   "name": "object nudge",
+   "changes": "scene edit",
+   "poc": "no",
+   "render": "1 extra render per pair",
+   "scale": "collision-free placement within 2 m, then the same re-render as D4",
+   "source": "Causal VQA; MindEdit-Bench"
+  },
+  {
+   "code": "D6",
+   "name": "orbit 180",
+   "changes": "camera",
+   "poc": "no",
+   "render": "1 off-grid render per pair",
+   "scale": "render the view facing the pair from the far side; moves are large (9 to 11 m)",
+   "source": "CVT-Bench"
+  },
+  {
+   "code": "D7",
+   "name": "azimuth sweep",
+   "changes": "camera",
+   "poc": "no",
+   "render": "1 off-grid render per pair",
+   "scale": "render views around the pair in 45-degree steps and keep the smallest that flips",
+   "source": "CVT-Bench"
+  },
+  {
+   "code": "D8",
+   "name": "frame switch",
+   "changes": "question only",
+   "poc": "yes",
+   "render": "none",
+   "scale": "already in the set; needs a third object visible in the same view",
+   "source": "frame-of-reference and perspective-taking studies"
+  },
+  {
+   "code": "D9",
+   "name": "occluder in or out",
+   "changes": "scene edit",
+   "poc": "no",
+   "render": "1 extra render per pair",
+   "scale": "insert a crate prim between camera and object (or remove the blocker), re-render; rare in both test scenes",
+   "source": "MindEdit-Bench; CARETS"
+  },
+  {
+   "code": "D10",
+   "name": "keep-answer twin",
+   "changes": "camera",
+   "poc": "yes",
+   "render": "cached grid view",
+   "scale": "already in the set: every pair carries one, making a triple",
+   "source": "Causal VQA; CARETS"
+  }
+ ]
+}
