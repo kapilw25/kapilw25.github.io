@@ -31,11 +31,11 @@
   },
   {
    "stage": "2 · first models",
-   "where": "Mac (open 4B model) and API",
+   "where": "API only (no self-hosted models)",
    "status": "queued",
-   "makes": "about 200 questions as triples; Qwen3-VL-4B, one API vision model (newest the key lists), one larger open model",
+   "makes": "about 200 questions as triples, run through APIs only: closed models (OpenAI, Google, Anthropic, xAI) and open-weight models served by Fireworks; model list chosen 2026-10-01, ids resolved from each provider's listing at call time",
    "now": "-",
-   "next": "accuracy, step score, triple score, parse failures; a no-image baseline and a label audit on a sample",
+   "next": "a 20-triple smoke run on two cheap models first, to read real token counts; then accuracy, step score, triple score, parse failures; a no-image baseline and a label audit on a sample",
    "evidence": "-"
   },
   {
