@@ -417,10 +417,10 @@
    "dim": "Quality",
    "reason": "Discrete moves on pre-rendered views",
    "quote": "(Not quoted in the guidelines; closest, NeurIPS D&B 2023 review form:) are the evaluation methods and experiment design appropriate?",
-   "now": "yellow",
+   "now": "green",
    "after": "green",
-   "status_note": "our design follows R2R and Touchdown (agents move between pre-captured views); VLN-CE argued that teleporting between fixed nodes skips real navigation challenges; 17 of 26 checked benchmarks render live",
-   "fix": "(1) State the grid in the paper: 0.5 m steps and 30-degree turns, far finer than R2R's nodes about 2.25 m apart, and why frozen views help (reproducible, no simulator needed to evaluate). (2) A small live split in the appendix: continuous moves rendered on demand for about 50 triples on the GPU; report whether the ranking of models changes. (3) Name the precedent and the critique in the limitations.",
+   "status_note": "resolved by design (2026-10-02): every evaluation renders live with free movement, as VLN-CE asks; the new risk is cost (live GPU per run, long episodes)",
+   "fix": "Done by design: long-horizon tasks with free movement, rendered live. Keep reproducibility with fixed seeds, pinned simulator version and logged poses for every episode.",
    "evidence": [
     {
      "label": "VLN-CE: the fixed-node critique",

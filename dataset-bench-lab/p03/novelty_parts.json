@@ -30,8 +30,8 @@
     "ESI-Bench",
     "EMRD (Explore, Map, Remember, Decide)"
    ],
-   "verdict": "NARROWED",
-   "verdict_note": "survives only for continuous 3D quantities and tool outputs"
+   "verdict": "DECORATION",
+   "verdict_note": "2026-10-02 audit: a combination of Theory of Space, EMRD, SpaMEM and OST-Bench; at most narrowed to metric 3D quantities in one agent-driven episode"
   },
   {
    "metric": "Twin pair score",

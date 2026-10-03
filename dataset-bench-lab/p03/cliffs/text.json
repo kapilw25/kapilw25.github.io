@@ -1,0 +1,365 @@
+{
+ "intro": "State-change cliffs: one variable changes, the question stays word for word, and the answer has to come from exact 3D state. Each tab shows one task family in the warehouse, built from NVIDIA's SimReady assets at their real sizes. Layouts, cameras, answers and twins come from bench/spbench/cliffs.py; the 3D view draws exactly that output. The accuracy numbers on each chart are the design note's claims and have not been measured: the pilot fills the measured line.",
+ "order": [
+  "binding",
+  "occlusion",
+  "memory",
+  "deform",
+  "frames"
+ ],
+ "families": {
+  "binding": {
+   "tab": "1 · Binding",
+   "title": "Binding: clutter and look-alike boxes",
+   "note": "A warehouse shelf contains dozens of identically shaped boxes, but each has a unique, multi-layered descriptor combination (e.g., a Red box with a Blue stripe and a Hazard sticker vs. a Blue box with a Red stripe and a Fragile sticker). When there are only 2 distinct boxes, frontier VLMs achieve near 95% accuracy. However, as soon as you increase the density of overlapping features and boxes beyond a threshold of 5, the model's visual attention registers all the individual tokens (\"red\", \"blue\", \"stripe\", \"hazard\") but completely fails to correctly bind the features to their exact 3D coordinates.",
+   "objects": "Two 3-shelf units side by side (SimReady SM_Rack_F04: bottom 0.76 m, middle 1.21 m, top 1.66 m). Identically shaped 30 cm boxes, red or blue, with a stripe of the other colour and a sticker: hazard, fragile, keep dry, this way up, or none.",
+   "knob": "Boxes on the shelves",
+   "steps": [
+    {
+     "cap": "Two boxes on the middle shelf",
+     "sub": "The red box with a blue stripe carries the hazard sticker; the blue box with a red stripe carries the fragile sticker. From the camera, the hazard sticker's centre is {b_gap} px left of the fragile sticker's. Answer from the scene: {b_answer}.",
+     "knob": 0
+    },
+    {
+     "cap": "What the model has to bind",
+     "sub": "Each sticker belongs to one box, each box to one shelf, and each shelf to one height in the picture. Four features per box (box colour, stripe colour, sticker, shelf) must stay together.",
+     "knob": 0
+    },
+    {
+     "cap": "Add boxes, one at a time",
+     "sub": "Only the box count changes, from 2 to {b_nmax}. The two sticker boxes never move, so the answer stays {b_answer} at every count.",
+     "knob": 9
+    },
+    {
+     "cap": "{b_nmax} boxes: the cliff side",
+     "sub": "{b_swapped} boxes on other shelves carry the swapped combinations (a red box with a fragile sticker, a blue box with a hazard sticker), and {b_offmid} hazard or fragile stickers sit above or below the middle shelf. The answer is still {b_answer}.",
+     "knob": 9
+    },
+    {
+     "cap": "Its twins",
+     "sub": "Flip twin: the two sticker boxes swap places, answer {b_flip}. Keep twin: every other box gets new colours and stickers, answer {b_keep}. A triple scores only if all three are right; a coin manages that 1 time in 8.",
+     "knob": 9
+    },
+    {
+     "cap": "The picture the model gets",
+     "sub": "This is the full input: one picture and the question. The chart below shows the design note's claim (about 95% at 2 boxes, 0% beyond 5), not a measurement.",
+     "knob": 9
+    }
+   ],
+   "chart": {
+    "x": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     8,
+     12,
+     18,
+     24,
+     36
+    ],
+    "xlabel": "boxes on the shelves",
+    "claim": [
+     [
+      2,
+      95
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      36,
+      0
+     ]
+    ],
+    "claim_label": "claimed: near 95% at 2 boxes, 0% beyond 5"
+   },
+   "family": [
+    "Sweep: 2, 3, 4, 5, 6, 8, 12, 18, 24 and 36 boxes. The two sticker boxes keep their places, so clutter is the only change.",
+    "Live: the agent starts out of sight of the shelves, walks to them and answers from its own views; the question comes once both stickers have been in view.",
+    "Answer key: the two stickers' centres projected into the agent's last picture, from exact positions. Kept only when both stickers are unblocked and at least 20 px apart.",
+    "Twins: flip = the sticker boxes swap places; keep = every other box restyled. Scored per box count and per triple."
+   ],
+   "prior": "Reported before on simple 2D scenes: <a href=\"https://arxiv.org/abs/2411.00238\" target=\"_blank\" rel=\"noopener\">Campbell et al., NeurIPS 2024</a> found VLM accuracy high for 1 to 5 objects and a sharp drop at 6 or more. Not claimed as new here."
+  },
+  "occlusion": {
+   "tab": "2 · Occlusion",
+   "title": "Occlusion: the same scene from the side and from behind",
+   "note": "Position a forklift, a heavy pallet, and a fragile storage bin in a line. Camera View A shows all three clearly. Camera View B is positioned directly behind the forklift, so the pallet is partially occluding the fragile bin. Under a direct, non-occluded view (View A), frontier models can calculate spatial distances using semantic reasoning perfectly. But when shifted to View B (the occluded angle), models completely fail at depth estimation and hidden-surface relative layout tracking.",
+   "objects": "Forklift (SimReady SM_Forklift_C01_Blue, 3.73 m long, forks forward), a heavy strapped load on a pallet (sm_largecardboardboxe_a02), and a fragile storage bin (SM_Container_C04 with a fragile sticker), in a line behind the forklift.",
+   "knob": "Camera angle (90 = View A from the side, 0 = View B behind the forklift)",
+   "steps": [
+    {
+     "cap": "View A: all three in clear view",
+     "sub": "The bin sits {o_gap} m behind the forklift's rear; the heavy pallet stands behind the bin. From the side nothing is hidden ({o_hidA}% of the bin blocked). Answer: {o_answer}.",
+     "knob": 0
+    },
+    {
+     "cap": "Backing up 2 m",
+     "sub": "The answer key sweeps the forklift's rear footprint (1.36 m wide) 2 m straight back. It reaches the bin after {o_gap} m: contact, so the bin is crushed. Kept only when the gap is at least 0.25 m away from 2 m.",
+     "knob": 0
+    },
+    {
+     "cap": "Only the camera moves",
+     "sub": "Same forklift, same bin, same pallet, same question. The camera swings from the side to directly behind the forklift.",
+     "knob": 5
+    },
+    {
+     "cap": "View B: the pallet hides the bin",
+     "sub": "From behind, {o_hidB}% of the bin's visible surface is blocked by the pallet. The answer has not changed: {o_answer}.",
+     "knob": 5
+    },
+    {
+     "cap": "The gap shrinks in the picture",
+     "sub": "The same {o_gap} m gap spans {o_pxA} px in View A but {o_pxB} px in View B, because it now runs along the line of sight. Depth has to come from the 3D layout, not from the picture plane.",
+     "knob": 0
+    },
+    {
+     "cap": "Its twins",
+     "sub": "Flip twin: the bin sits 1.2 m farther back (2.6 m gap), answer {o_flip}. Keep twin: the pallet sits 0.4 m farther back, answer {o_keep}. The chart shows the design note's claim (perfect at View A, failure at View B), not a measurement.",
+     "knob": 0
+    }
+   ],
+   "chart": {
+    "x": [
+     90,
+     60,
+     45,
+     30,
+     15,
+     0
+    ],
+    "xlabel": "camera angle (90 = side, 0 = behind); bin hidden: {o_sweep}",
+    "claim": [
+     [
+      90,
+      100
+     ],
+     [
+      0,
+      0
+     ]
+    ],
+    "claim_label": "claimed: perfect at View A, failure at View B"
+   },
+   "family": [
+    "Sweep: camera angle 90, 60, 45, 30, 15 and 0 degrees around the line; the share of the bin hidden is measured at each.",
+    "Live: the start view is the swept variable. The agent may walk before answering, so the family also measures whether an agent moves to see past the pallet, and how many moves that costs.",
+    "Answer key: the rear footprint swept 2 m against the bin footprint, from exact poses. Gaps within 0.25 m of 2 m are not asked.",
+    "Twins: flip = the bin 1.2 m farther back; keep = the pallet 0.4 m farther back."
+   ],
+   "prior": ""
+  },
+  "memory": {
+   "tab": "3 · Memory",
+   "title": "Memory: ten picker tasks, a picture every two",
+   "note": "A robotic picker executes a sequence of 10 tasks in the warehouse (e.g., picking up items, placing them into bins, moving bins across shelves). Every 2 steps, the simulator updates the visual frame. On a 2-to-4 step tracking loop, frontier reasoning models maintain high accuracy. However, past a specific step threshold, models experience \"Visual Forgetting.\" A single tiny error in step 3 cascades silently, leading to an absolute breakdown in final state prediction by step 10.",
+   "objects": "A picker arm (drawn by us), six solid-walled bins B1 to B6 on the 3-shelf unit, and six identical small boxes (SimReady FlatBox) told apart only by a barcode label on one side: blue, red, green, black, orange, purple.",
+   "knob": "Steps before the question",
+   "steps": [
+    {
+     "cap": "Six bins, six look-alike items",
+     "sub": "Each item carries its barcode on one side. On the table the labels face the camera; inside a bin the walls hide them. A ceiling camera sees into every bin.",
+     "knob": 0
+    },
+    {
+     "cap": "Steps 1 and 2, then picture 1",
+     "sub": "Each pair of steps holds one item trip and one bin move to another shelf, and a bin holds at most one item. So a careful observer can always tell from two pictures what moved where.",
+     "knob": 0
+    },
+    {
+     "cap": "Steps 3 and 4, then picture 2",
+     "sub": "The blue item changes bins out of sight of its label. Only memory of the earlier pictures says which item it was.",
+     "knob": 1
+    },
+    {
+     "cap": "Steps 5 and 6, then picture 3",
+     "sub": "A bin with the blue item inside moves to another shelf; its label B-number goes with it.",
+     "knob": 2
+    },
+    {
+     "cap": "Steps 7 to 10, the last pictures",
+     "sub": "The true bin after each picture: {m_chain}. Answer at step 10: {m_answer}.",
+     "knob": 4
+    },
+    {
+     "cap": "One slip carries to the end",
+     "sub": "Misreading one trip makes every later answer wrong, because nothing in the last picture shows the blue label. Flip twin: {m_flip_change}, answer {m_flip}. Keep twin: {m_keep_change}, answer {m_keep}. A guess is right 1 time in 6.",
+     "knob": 4
+    }
+   ],
+   "chart": {
+    "x": [
+     2,
+     4,
+     6,
+     8,
+     10
+    ],
+    "xlabel": "steps before the question (a picture every 2)",
+    "claim": [
+     [
+      2,
+      90
+     ],
+     [
+      4,
+      90
+     ],
+     [
+      10,
+      0
+     ]
+    ],
+    "claim_label": "claimed: high at 2 to 4 steps, breakdown by 10"
+   },
+   "family": [
+    "Sweep: the question after 2, 4, 6, 8 or 10 steps of the same episode.",
+    "Live: the simulator runs the tasks; after every 2 tasks the agent gets the new picture and may move its own camera before the next one.",
+    "Answer key: the task log replayed on exact state. Episodes are kept only if every window is solvable from the pictures and the blue label is hidden whenever the question is asked.",
+    "Twins: flip = one blue trip goes to another bin; keep = another item's trip changes. Chance 1 in 6 per question."
+   ],
+   "prior": ""
+  },
+  "deform": {
+   "tab": "4 · Soft loads",
+   "title": "Soft loads: rigid boxes and cardboard under load",
+   "note": "The warehouse simulator contains objects with different structural physics: some are rigid steel parts, while others are soft cardboard boxes or deformable plastic wraps. The robot arm exerts torque to stack them. If the task involves rigid, binary physics (e.g., box fits on a shelf or it doesn't), the model uses text priors to succeed. But when introduced to contact-rich force feedback dynamics (e.g., soft objects shifting center of gravity or cardboard wrinkling under load), the model's visual reasoning completely disconnects from physical intuition.",
+   "objects": "Shelf X is the lower deck of a pallet rack (SimReady RackLargeEmpty_A1, 1.71 m clear to the deck above). Rigid steel parts cases (SM_Case_A01, 23 cm tall), cardboard boxes at the size of Cardbox_A1 (51 cm, drawn so they can deform), stretch wrap, and a palletizing arm (drawn by us).",
+   "knob": "Box material",
+   "steps": [
+    {
+     "cap": "Rigid steel cases: count and compare",
+     "sub": "Six cases stand on Shelf X. A seventh still fits under the deck above, so the answer is {d_steel6}. Nothing deforms: height alone decides.",
+     "knob": 0
+    },
+    {
+     "cap": "Seven cases: the deck is the limit",
+     "sub": "An eighth case would reach {d_steel_top} m, above the deck's underside at {d_clear} m: answer {d_steel7}. This is the binary case where text priors work.",
+     "knob": 1
+    },
+    {
+     "cap": "Only the material changes",
+     "sub": "Double-wall cardboard, two boxes of 30 kg. The bottom box carries {d_double_now}% of its strength and loses {d_double_loss}% of its height. A third box would load it to {d_double_after}%: answer {d_double}.",
+     "knob": 2
+    },
+    {
+     "cap": "Damp single-wall: the bottom box bulges",
+     "sub": "The same two boxes, weaker board. The bottom box already carries {d_damp_now}% of its strength and has lost {d_damp_loss}% of its height. A third box would load it to {d_damp_after}%: crushed, answer {d_damp}.",
+     "knob": 4
+    },
+    {
+     "cap": "Stretch-wrapped: the bulge is hidden",
+     "sub": "The same damp boxes, wrapped. The film smooths the bulge the model would need to see, but the bottom box would still be crushed: answer {d_wrapped}.",
+     "knob": 5
+    },
+    {
+     "cap": "How the answer is computed",
+     "sub": "{d_model_note}",
+     "knob": 4
+    }
+   ],
+   "chart": {
+    "x": [
+     "rigid steel",
+     "double-wall",
+     "single-wall",
+     "damp single-wall",
+     "damp, wrapped"
+    ],
+    "xlabel": "box material",
+    "claim": [
+     [
+      "rigid steel",
+      90
+     ],
+     [
+      "damp single-wall",
+      0
+     ],
+     [
+      "damp, wrapped",
+      0
+     ]
+    ],
+    "claim_label": "claimed: text priors succeed on rigid boxes, fail on soft ones"
+   },
+   "family": [
+    "Sweep: rigid steel, double-wall, single-wall, damp single-wall, and damp stretch-wrapped boxes on the same shelf.",
+    "Live: the agent walks to Shelf X and may look from any side before answering; the arm stacks while it watches.",
+    "Answer key (planned): Isaac Sim places one more box of the same type and runs 5 s of soft-body physics; yes only if it fits under the deck, no box is crushed and the stack does not tip. Runs only after a cardboard realism test: NVIDIA's forum reports non-realistic cardboard with the default soft bodies.",
+    "Twins: flip = double-wall instead of damp board; keep = the same damp boxes, wrapped."
+   ],
+   "prior": ""
+  },
+  "frames": {
+   "tab": "5 · Frames",
+   "title": "Frames: the forklift's left is not the AGV's left",
+   "note": "An AGV (Automated Guided Vehicle) is navigating a warehouse aisle. The VQA prompt changes perspective mid-interaction. Frontier models are heavily biased toward static, camera-frame spatial coordinates (allocentric). The exact moment you require a coordinate space transformation between two active, moving entities in a 3D simulation, their spatial accuracy collapses completely. They struggle immensely with laterality inversion (left/right confusion) across dynamic frame shifts.",
+   "note_fix": "Wording fix: camera-frame coordinates are egocentric (centred on the viewer); the forklift's and the AGV's own frames are object-centred.",
+   "objects": "An aisle of pallet racks (SimReady RackLongEmpty_A1), the forklift, an AGV (drawn by us after the iw.hub shape, green lights at the front) and a red tool chest (drawn by us). The tool chest is placed on the forklift's left, so the prompt's premise is true.",
+   "knob": "Frame changes the question needs",
+   "steps": [
+    {
+     "cap": "The aisle",
+     "sub": "The forklift faces the AGV's back. The tool chest stands {f_lat} m to the forklift's left. The camera looks down the aisle from behind the forklift.",
+     "knob": 0
+    },
+    {
+     "cap": "Turn 1: the camera's frame",
+     "sub": "In the picture, the tool chest is to the {f_cam} of the forklift. No frame change is needed.",
+     "knob": 0
+    },
+    {
+     "cap": "The forklift's frame",
+     "sub": "From the forklift's seat, the tool chest is on its left: the premise of the prompt holds.",
+     "knob": 1
+    },
+    {
+     "cap": "The AGV turns 180 degrees",
+     "sub": "Before the turn the chest is on the AGV's {f_now}. The AGV turns to face the forklift.",
+     "knob": 1
+    },
+    {
+     "cap": "Facing each other: left becomes right",
+     "sub": "After the turn the two vehicles face each other, so the forklift's left is the AGV's right. Answer: {f_answer}. Repeating the premise ('left') or reading the picture ('{f_cam}') gives the wrong answer.",
+     "knob": 2
+    },
+    {
+     "cap": "Its twins",
+     "sub": "Flip twin: the forklift faces the other way and the chest moves to stay on its left, answer {f_flip}. Keep twin: the AGV starts 1.4 m farther and 0.5 m to the side, answer {f_keep}.",
+     "knob": 2
+    }
+   ],
+   "chart": {
+    "x": [
+     0,
+     1,
+     2
+    ],
+    "xlabel": "frame changes the question needs (0 = picture, 1 = AGV now, 2 = the prompt)",
+    "claim": [
+     [
+      0,
+      90
+     ],
+     [
+      2,
+      0
+     ]
+    ],
+    "claim_label": "claimed: fine in the camera frame, collapses with a frame shift"
+   },
+   "family": [
+    "Sweep: 0, 1 or 2 frame changes for the same scene (the picture's frame, the AGV's frame now, the prompt's forklift-to-turned-AGV change).",
+    "Live: the agent watches through an aisle camera; in a second setting it rides the AGV's own camera and turns with it.",
+    "Answer key: the chest's offset along the AGV's right-hand direction after the turn, from exact poses. Kept only when the offset is at least 0.5 m; the premise is checked the same way.",
+    "Twins: flip = the forklift faces the other way; keep = the AGV starts elsewhere in the aisle."
+   ],
+   "prior": ""
+  }
+ },
+ "credits": "3D assets: NVIDIA PhysicalAI-SimReady-Warehouse-01 (CC BY 4.0), converted to glTF by us. Lighting and floor: Poly Haven, Sergej Majboroda and Rob Tuytel (CC0). Stickers: GHS07 and ISO 7000 symbols from Wikimedia Commons (public domain, CC0). Robot arms, AGV, tool chest, bins, painted boxes and wrap: drawn by our page code. Full list: docs/cliffs/assets/CREDITS.md."
+}
