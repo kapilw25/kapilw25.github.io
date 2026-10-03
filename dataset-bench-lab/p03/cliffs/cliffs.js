@@ -660,7 +660,7 @@ FAM.memory = {
     for (const [dx, dz] of [[1, 1], [1, -1], [-1, 1], [-1, -1]]) { const l = own(new THREE.Mesh(new THREE.BoxGeometry(0.04, T.size[1], 0.04), mat(0x50565e, 0.4, 0.7))); l.position.set(T.pos[0] + dx * (T.size[0] / 2 - 0.04), T.size[1] / 2, T.pos[2] + dz * (T.size[2] / 2 - 0.04)); root.add(l); }
     Me.bins = {}; for (const b of Object.keys(ep.start_slots)) { const m = makeBin(b); Me.bins[b] = m; root.add(m); }
     Me.items = {}; for (const c of ["blue", "red", "green", "black", "orange", "purple"]) { const m = await makeItem(c); Me.items[c] = m; root.add(m); }
-    Me.arm = makeArm(d.arm); root.add(Me.arm.root); Me.arm.home = ik(Me.arm, V3(0.75, 1.32, 1.28), "down"); Me.arm.setQ(Me.arm.home);   // parked over the table, out of the camera's view of the bins
+    Me.arm = makeArm(d.arm); root.add(Me.arm.root); Me.arm.home = ik(Me.arm, V3(1.3, 0.72, 1.35), "forward"); Me.arm.setQ(Me.arm.home);   // parked to the right, low, out of the camera's view of the bins and the table
     Me.rig = cameraRig(d.camera, "ceiling camera", 0x2563eb); root.add(Me.rig);
     Me.lblue = lbl("blue barcode item", "key", V3(0, 0, 0)); Me.lans = lbl("", "good", V3(0, 2.15, 0.2)); Me.lans.visible = false;
     setModelCam(d.camera); sunOver(0.3, 0.6, 4);
