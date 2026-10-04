@@ -34,8 +34,9 @@ function makePane(el) {
   const scene = new THREE.Scene(); scene.background = new THREE.Color(0xdfe3e8);
   scene.add(new THREE.HemisphereLight(0xffffff, 0x50555c, 1.6));
   const sun = new THREE.DirectionalLight(0xffffff, 1.8); sun.position.set(6, 14, 9); scene.add(sun);
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(80, 80), new THREE.MeshStandardMaterial({color: 0xa3a8ad, roughness: 0.9}));
-  floor.rotation.x = -Math.PI / 2; scene.add(floor);
+  // one floor under all three roaming scenes (x from -10 to 50 m), wide enough that its edge never shows
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(220, 220), new THREE.MeshStandardMaterial({color: 0xa3a8ad, roughness: 0.9}));
+  floor.rotation.x = -Math.PI / 2; floor.position.x = 18; scene.add(floor);
   const cam = new THREE.PerspectiveCamera(50, 16 / 9, 0.05, 300);
   const ctl = new OrbitControls(cam, R.domElement); ctl.enableDamping = false; ctl.maxPolarAngle = Math.PI * 0.49;
   const pane = {el, R, scene, cam, ctl, world: new THREE.Group(), objs: {}, home: null};
@@ -147,4 +148,39 @@ export async function show(key, step) {
 
 export function home() {   // back to the model's camera
   S.panes.forEach(p => { if (!p.home) return; p.cam.position.copy(P(p.home.pos)); p.ctl.target.copy(P(p.home.look)); p.ctl.update(); draw(p); });
+}
+
+// ------------------------------------------------------------------------------------------------ roaming episode
+// roam.json (bench/spbench/roam.py): one episode over three scenes, its flip and keep twins; per picture the objects
+// (null = not there) and the robot's own camera. The panes always show the robot's view of the current picture.
+export async function initRoam(opts) {
+  S.base = opts.base; S.onStatus = opts.onStatus || (() => {});
+  S.loader = new GLTFLoader(); S.loader.setMeshoptDecoder(MeshoptDecoder);
+  S.onStatus("loading the roaming episode");
+  S.roam = await (await fetch(opts.url)).json();
+  S.panes = opts.panes.map(makePane);
+  S.onStatus("placing the warehouse models");
+  await Promise.all(S.panes.map((p, k) => buildRoam(p, ["question", "flip", "keep"][k])));
+  S.onStatus("");
+}
+
+async function buildRoam(pane, role) {
+  const R = S.roam, ep = R.episodes[role];
+  pane.world.clear(); pane.objs = {};
+  for (const f of R.fixtures) { const g = await place(f.asset, "", f.size); pose(g, f.asset, [...f.pos, f.yaw, 0]); pane.world.add(g); }
+  for (const lab of R.labels) pane.world.add(labelMesh(lab));
+  for (let i = 0; i < ep.ids.length; i++) {
+    const [kind, look, size] = ep.objs[i], g = await place(kind, look, size);
+    g.visible = false; pane.objs[ep.ids[i]] = {g, kind}; pane.world.add(g);
+  }
+}
+
+export function showRoam(step) {
+  if (!S.roam) return;
+  S.panes.forEach((p, k) => {
+    const ep = S.roam.episodes[["question", "flip", "keep"][k]], f = ep.frames[Math.min(step, ep.frames.length - 1)];
+    ep.ids.forEach((id, i) => { const o = p.objs[id]; if (!o) return; o.g.visible = !!f[i]; if (f[i]) pose(o.g, o.kind, f[i]); });
+    const c = ep.cams[Math.min(step, ep.cams.length - 1)];
+    p.home = c; p.cam.position.copy(P(c.pos)); p.ctl.target.copy(P(c.look)); fit(p); p.ctl.update(); draw(p);
+  });
 }
