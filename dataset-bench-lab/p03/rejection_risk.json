@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-02",
+ "updated": "2026-10-03",
  "source": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines",
  "rows": [
   {
@@ -10,23 +10,19 @@
    "quote": "Does the benchmark address a meaningful gap or enable reliable comparison across methods? Does it change how we measure progress in this area?",
    "now": "yellow",
    "after": "green",
-   "status_note": "a crowded field: 53 related benchmarks and methods in the survey",
-   "fix": "Lead with one finding: how often agents are right for the wrong reasons, and where the step-score ranking disagrees with the final-answer ranking. Then run the step grading on SPAR-Bench, a real benchmark that ships depth and camera poses per item, to show conclusions shift on an existing benchmark.",
+   "status_note": "a crowded field: 63 related benchmarks and methods in the survey",
+   "fix": "Lead with one measured finding: accuracy against the number of dependent steps K (1 to 30) on 3.2, 3.5, 5.10 and 3.1, next to a same-length control chain, the guess line and the ideal observer (a scripted solver and humans at 95%+). The shape is measured, not promised.",
    "evidence": [
     {
      "label": "AgentBoard (NeurIPS 2024)",
      "url": "https://arxiv.org/abs/2401.13178"
     },
     {
-     "label": "SPAR-Bench",
-     "url": "https://arxiv.org/abs/2503.22976"
-    },
-    {
      "label": "guidelines",
      "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines"
     }
    ],
-   "effort": "build 2-3 days; GPU part of the main runs + ~10-20 h for SPAR-Bench (~$10-20), estimate",
+   "effort": "smoke test, then the headline grid within the $2,000 API cap; GPU for rendering, estimate",
    "when": "evaluation",
    "consequence": "score",
    "who": "Claude",
@@ -40,8 +36,8 @@
    "quote": "Originality may be achieved through novel task design, evaluation setup, or analysis that reveals properties of existing benchmarks. Beating a baseline is not required.",
    "now": "yellow",
    "after": "green",
-   "status_note": "audited 2026-09-30: 2 claims survive only narrowed; 2 of 4 proposed metrics taken or decoration",
-   "fix": "Claim only what survived the audit: (1) per-step grading of continuous 3D quantities and tool outputs against exact state, (2) camera-pose twins scored as pairs. Cite Theory of Space, WebStep, EqBen, NaturalBench, MetaSpace, Lanham and FRODO, CanTest as the closest work; re-audit before submission.",
+   "status_note": "audited 2026-09-30 and 2026-10-02: step score is decoration; camera-pose twins survive only narrowed; box swaps alone (3.2) are taken by VET-Bench",
+   "fix": "Claim only the narrowed camera-pose twins (checked against exact state, scored with their flip and keep twins); not step grading, not box swaps alone (VET-Bench). Audit the dependent chain before any claim about it. Cite Theory of Space, EMRD, SpaMEM, OST-Bench, EqBen, NaturalBench, MetaSpace, VET-Bench and MET-Bench as the closest work; re-audit before submission.",
    "evidence": [
     {
      "label": "Theory of Space (ICLR 2026)",
@@ -58,6 +54,10 @@
     {
      "label": "Lanham 2023",
      "url": "https://arxiv.org/abs/2307.13702"
+    },
+    {
+     "label": "VET-Bench (shell game)",
+     "url": "https://arxiv.org/abs/2603.08436"
     }
    ],
    "effort": "build 1 day (writing); no GPU",
@@ -75,7 +75,7 @@
    "now": "yellow",
    "after": "green",
    "status_note": "no blind text-only check, error bars or label audit yet",
-   "fix": "(1) Run a text-only model and prune items it answers without the images. (2) Twins cancel guessing by design: one 3D change flips the answer. (3) Error bars clustered by twin pair. (4) Humans check 300 random items; unit tests for every checker. (5) Public dev split, private test split minted from a secret seed, so the test cannot be memorised.",
+   "fix": "(1) Run a text-only model and prune items it answers without the images. (2) Twins cut guessing: a full triple by luck is 1 in 8 on two-choice questions and about 0.5% on six-choice ones. (3) Error bars by triple, 40 items per dial level. (4) Humans check 300 random items; unit tests for every checker. (5) Public dev split, private test split minted from a secret seed, so the test cannot be memorised. (6) A scripted solver and humans on the same inputs must stay at 95%+.",
    "evidence": [
     {
      "label": "VSI-Bench-Debiased",
@@ -135,7 +135,7 @@
    "now": "yellow",
    "after": "green",
    "status_note": "no public host, harness or fixed split yet",
-   "fix": "Ship pre-rendered images plus truth files (no Isaac Sim needed to evaluate), a VLMEvalKit plug-in, a pinned environment and seeds, and the generator code.",
+   "fix": "Ship pre-rendered images plus truth files for the watch-only runs (no Isaac Sim needed to evaluate), a VLMEvalKit plug-in, a pinned environment and seeds, and the generator code; the live slice needs Isaac Sim, so its simulator version, seeds and every pose are logged.",
    "evidence": [
     {
      "label": "BetterBench (NeurIPS 2024)",
@@ -184,10 +184,10 @@
    "source": "Core reject reasons",
    "dim": "Quality",
    "quote": "(Common reviewer ask, not quoted:) enough frontier and open models, agents and a human baseline to enable reliable comparison across methods.",
-   "now": "green",
+   "now": "yellow",
    "after": "green",
-   "status_note": "cheap: inference only, and SpatialClaw's agents are open",
-   "fix": "Run 6-10 open models and the four agents (VADAR, pySpatial, SpaceTools, SpatialClaw); frontier APIs only after approval; a human baseline on the same 300 items (see B6).",
+   "status_note": "API models only (decided 2026-10-01), $2,000 in total for every provider; Claude, Gemini and xAI keys still missing; no open models in the plan",
+   "fix": "Run the models.json list through APIs (OpenAI, Claude, Gemini, Kimi-K3, Qwen, Grok): a smoke test of the live environment first, medium thinking with a heavy-thinking slice, spend capped in code; a human baseline on the same items (see B6). Open: whether to add open models or the four agents (VADAR, pySpatial, SpaceTools, SpatialClaw).",
    "evidence": [
     {
      "label": "SpatialClaw (agents, code)",
@@ -198,7 +198,7 @@
      "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines"
     }
    ],
-   "effort": "GPU ~50-100 h (~$50-100); paid APIs extra, ask first; human baseline 8-10 person-hours, estimate",
+   "effort": "API budget $2,000 in total (cap); GPU for rendering, estimate; human baseline 8-10 person-hours, estimate",
    "when": "evaluation",
    "consequence": "score",
    "who": "both",
@@ -417,10 +417,10 @@
    "dim": "Quality",
    "reason": "Discrete moves on pre-rendered views",
    "quote": "(Not quoted in the guidelines; closest, NeurIPS D&B 2023 review form:) are the evaluation methods and experiment design appropriate?",
-   "now": "green",
+   "now": "yellow",
    "after": "green",
-   "status_note": "resolved by design (2026-10-02): every evaluation renders live with free movement, as VLN-CE asks; the new risk is cost (live GPU per run, long episodes)",
-   "fix": "Done by design: long-horizon tasks with free movement, rendered live. Keep reproducibility with fixed seeds, pinned simulator version and logged poses for every episode.",
+   "status_note": "design changed 2026-10-03: headline runs are watch-only (the model moves nothing, rendered once, the same pixels for every model, as OpenEQA's offline split); every run where the model moves renders live (the live slice). The agent claim rests on the smaller live slice; the live loop is not built yet",
+   "fix": "Live rendering with free movement for every run where the model moves; watch-only runs rendered once. Keep reproducibility with fixed seeds, a pinned simulator version and logged poses for every episode; report the live slice next to the watch-only headline.",
    "evidence": [
     {
      "label": "VLN-CE: the fixed-node critique",
@@ -435,10 +435,36 @@
      "url": "https://open-eqa.github.io/assets/pdfs/paper.pdf"
     }
    ],
-   "effort": "build 2-3 days (a live-render agent loop); GPU about 2-4 h for 50 live triples (about $2-4), estimate",
+   "effort": "build 2-3 days (a live-render agent loop); GPU for the live slice, estimate",
    "when": "evaluation",
    "consequence": "score",
    "who": "both"
+  },
+  {
+   "id": "C2",
+   "source": "Critiques from prior work",
+   "dim": "Quality",
+   "reason": "The harness causes the failure",
+   "quote": "(Common reviewer ask, not quoted:) is the drop caused by the model, or by what the harness lets it see (picture caps, dropped history)?",
+   "now": "yellow",
+   "after": "green",
+   "status_note": "the live slice shows only the last 2 pictures plus the model's own notes",
+   "fix": "Headline watch-only runs give every model the full picture history (at most 30, the Kimi-K3 API cap); the notes-only live slice is reported as its own setting; the scripted solver and humans get exactly the same inputs and must reach 95%+ at every level.",
+   "evidence": [
+    {
+     "label": "VET-Bench (full videos)",
+     "url": "https://arxiv.org/abs/2603.08436"
+    },
+    {
+     "label": "MET-Bench (text vs image updates)",
+     "url": "https://arxiv.org/abs/2502.10886"
+    }
+   ],
+   "effort": "included in the headline runs; the solver is code, the panel 8-10 person-hours, estimate",
+   "when": "evaluation",
+   "consequence": "score",
+   "who": "both",
+   "order": 17
   }
  ]
 }

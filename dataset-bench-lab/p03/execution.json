@@ -1,12 +1,12 @@
 {
- "updated": "2026-10-02",
+ "updated": "2026-10-03",
  "note": "Build stages and twin designs for the Execution tab. Measured numbers are read by build_page.py from bench/results/twin_designs.json and bench/results/pairs_poc.json; this file holds the plan text only.",
  "stages": [
   {
    "stage": "0 · generator and grader",
    "where": "Mac, no simulator",
    "status": "done",
-   "makes": "questions answered from exact 3D state, the agent loop (typed tool calls, last 4 views + move log, up to 10 moves), a grader for answers and every stated step, no AI judge",
+   "makes": "questions answered from exact 3D state, the agent loop (typed tool calls, last 4 views + move log, up to 10 moves), a grader for answers and every stated step, no AI judge; the agent loop's picture rule is replaced by the 2026-10-03 plan (watch-only: full history, at most 30; live slice: last 2 plus notes)",
    "now": "13 of 13 tests pass; perfect test agent 100%; lucky agent (right answers, steps 40% off) 0% on steps",
    "next": "-",
    "evidence": "bench/results/stage0_selfcheck.md"
@@ -26,7 +26,7 @@
    "status": "done",
    "makes": "five task families, each with its prompt word for word and one swept variable: binding (2 to 36 boxes), occlusion (camera from the side to behind the forklift), memory (2 to 10 picker steps, a picture every 2), soft loads (rigid steel to damp cardboard), frames (0 to 2 frame changes); answers from exact state, a flip and a keep twin each; the 3D page tabs under How it works",
    "now": "binding: answer left at every box count, flip right, keep left; occlusion: bin hidden 0% from the side, 57% from behind, answer yes (flip no); memory: blue item in B1, B3, B4, B4, B4 after 2 to 10 steps, label hidden in every question picture; soft loads: steel 6 yes, 7 no, double-wall yes, damp no, wrapped no (page model); frames: picture left, premise left, answer right",
-   "next": "stage 1 renders the same layouts in Isaac Sim; a cardboard realism test before soft loads gets Isaac soft-body answer keys; the pilot draws the measured curves",
+   "next": "stage 1 renders the same layouts in Isaac Sim; soft loads dropped 2026-10-03 (Isaac Sim 6.0.1 deformables keep no lasting crush and have no static friction), the rigid part becomes 'add one item: does it tip within 3 s?'; the memory family moves to a picture after every step and the dependent-chain dial; the measured runs draw the curves",
    "evidence": "bench/spbench/cliffs.py, docs/cliffs/scenes.json, tests/test_spbench.py (test_cliff_families_keep_prompts_and_answers)"
   },
   {
@@ -35,16 +35,16 @@
    "status": "script ready",
    "makes": "Isaac Sim 6.0.1 (pip, Python 3.12, own venv) loads SimReady Warehouse-01, exports every labelled object as a box into the scene file (repeated names not askable), builds the question triples, renders RGB + depth per view in priority order (start views, then views 2 moves away, then the rest), renders swap twins in their edited scene, and checks rendered depth against the scene file",
    "now": "dry run on the Mac with a fake renderer: 20 triples, 984 views written, depth check 254 of 254; a 783-object test scene builds 20 triples in 9 s; 13 tests pass",
-   "next": "rent an RTX PRO 6000 (driver 595.58.03+, Ubuntu 22.04+, 50 GB); run bench/stage1_gpu.sh for the smoke render; then the live agent loop (long-horizon tasks rendered on demand, about 16 episodes in parallel) replaces the frozen render pass",
+   "next": "rent an RTX PRO 6000 (driver 595.58.03+, Ubuntu 22.04+, 50 GB) for a pilot capped at 1 GPU-hour that scores every stage; then watch-only episodes are rendered once for every model, and the live slice renders each view on demand while the model moves",
    "evidence": "bench/stage1_gpu.sh, bench/spbench/render.py, bench/spbench/isaac_backend.py"
   },
   {
    "stage": "2 · first models",
    "where": "API only (no self-hosted models)",
    "status": "queued",
-   "makes": "about 200 questions as triples, through APIs only: OpenAI (GPT-6 Astra, GPT-6.1 Sol), Google (Gemini 3.1 Pro, 3.8 Flash), Anthropic (Opus 5.5, Fable 5.1, Sonnet 5.5), xAI (Grok 4.7), Fireworks (Kimi K3, Inkling, DeepSeek V4.1 Flash), Alibaba Cloud (Qwen3.8-Max, after a one-image test); a human-play page on the same renders, scored by the same grader",
-   "now": "OpenAI and Fireworks ids confirmed from their listings (2026-10-01); Google, Anthropic, xAI and Alibaba keys still to add",
-   "next": "a 20-triple smoke run on two cheap models first, to read real token counts; then accuracy, step score, triple score, parse failures; a no-image baseline and a label audit on a sample",
+   "makes": "a smoke test of the live environment first (OpenAI, Claude, Gemini, Kimi-K3, Qwen, Grok); then the headline sub-tasks 3.2, 3.5, 5.10 and 3.1 with the dependent-chain dial K = 1 to 30 at 6 levels and a same-length control chain: 6 levels x 40 items x 3 twins = 720 runs per sub-task per model, alone and mixed; watch-only runs get the full picture history (at most 30) at check-ins (steps 3, 9, 15 and the end), the live slice the last 2 pictures plus the model's notes; drift answers at steps 3, 9 and 15; medium thinking with a heavy-thinking slice; total API budget $2,000 for all providers, capped in code; a human-play page on the same pictures, scored by the same grader",
+   "now": "OpenAI and Fireworks keys work (checked 2026-10-03); Fireworks also lists Qwen 3.8 Max; Claude, Gemini and xAI keys still to add",
+   "next": "the smoke test reads real token counts and sets the spend per provider; then accuracy per dial level next to the guess line (under it = systematic error), the triple score, drift answers and parse failures; a no-image baseline and a label audit on a sample",
    "evidence": "bench/models.json"
   },
   {
@@ -57,19 +57,28 @@
    "evidence": "Rejection Risk C1 (VLN-CE critique)"
   },
   {
+   "stage": "2c · ideal observer",
+   "where": "Mac and a small human panel",
+   "status": "queued",
+   "makes": "a scripted solver that gets exactly what each model gets, and a small human panel on the same pictures; both must stay at 95% or above at every dial level, or the level is fixed before it is reported",
+   "now": "-",
+   "next": "build the solver with the dependent-chain generator; recruit the panel (see Rejection Risk B6)",
+   "evidence": "notes/taxonomy50_long_horizon_2026-10-02.md"
+  },
+  {
    "stage": "3 · phase 1: test set",
    "where": "GPU and Mac",
    "status": "queued",
-   "makes": "about 3,000 test questions (about 1,000 triples) across the scenes; the full model list; a human baseline; a label audit on a sample; release files",
+   "makes": "after the headline curves: 447 episodes covering every pair of the 50 sub-tasks (443 triples + 4 pairs); the full model list; a human baseline; a label audit on a sample; release files",
    "now": "-",
-   "next": "done when: renders pass the depth check, ~1,000 triples are built, models are scored (smoke run, then the full list), and the human baseline and label audit are done",
+   "next": "done when: renders pass the depth check, the 447 episodes are built and scored, and the human baseline and label audit are done",
    "evidence": "-"
   },
   {
    "stage": "4 · phase 2: training split",
    "where": "GPU and Mac",
    "status": "queued",
-   "makes": "about 50,000 training triples (150,000 questions) with their renders, from seeds disjoint from the private test seed",
+   "makes": "a pool of about 50,000 episodes (every one of the 20,341 mixes about 2.5 times) with their renders, from seeds disjoint from the private test seed",
    "now": "-",
    "next": "starts when: phase 1 is done; stage 1 has measured views per second and size per view; a scene-variety plan exists (object shuffles, more SimReady scenes); training seeds are fixed. Open: a small fine-tune to show the split helps, or release it as RL-ready data with its training value untested",
    "evidence": "-"

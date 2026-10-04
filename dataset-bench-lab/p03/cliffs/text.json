@@ -1,5 +1,5 @@
 {
- "intro": "State-change cliffs: one variable changes, the question stays word for word, and the answer has to come from exact 3D state. Each tab shows one task family in the warehouse, built from NVIDIA's SimReady assets at their real sizes. Layouts, cameras, answers and twins come from bench/spbench/cliffs.py; the 3D view draws exactly that output. The accuracy numbers on each chart are the design note's claims and have not been measured: the pilot fills the measured line.",
+ "intro": "State-change cliffs: one variable changes, the question stays word for word, and the answer has to come from exact 3D state. Each tab shows one task family in the warehouse, built from NVIDIA's SimReady assets at their real sizes. Layouts, cameras, answers and twins come from bench/spbench/cliffs.py; the 3D view draws exactly that output. The accuracy numbers on each chart are the design note's claims and have not been measured: after the smoke test, the measured runs draw the line. These tabs are 3D demos of the five families; the 2026-10-03 plan (Execution > Plan) changes some of them, as each tab says.",
  "order": [
   "binding",
   "occlusion",
@@ -98,7 +98,7 @@
     },
     {
      "cap": "Backing up 2 m",
-     "sub": "The answer key sweeps the forklift's rear footprint (1.36 m wide) 2 m straight back. It reaches the bin after {o_gap} m: contact, so the bin is crushed. Kept only when the gap is at least 0.25 m away from 2 m.",
+     "sub": "The answer key sweeps the forklift's rear footprint (1.36 m wide) 2 m straight back. It reaches the bin after {o_gap} m: contact: the forklift hits the bin. Kept only when the gap is at least 0.25 m away from 2 m.",
      "knob": 0
     },
     {
@@ -154,7 +154,7 @@
   },
   "memory": {
    "tab": "3 · Memory",
-   "title": "Memory: ten picker tasks, a picture every two",
+   "title": "Memory: ten picker tasks (this demo: a picture every two)",
    "note": "A robotic picker executes a sequence of 10 tasks in the warehouse (e.g., picking up items, placing them into bins, moving bins across shelves). Every 2 steps, the simulator updates the visual frame. On a 2-to-4 step tracking loop, frontier reasoning models maintain high accuracy. However, past a specific step threshold, models experience \"Visual Forgetting.\" A single tiny error in step 3 cascades silently, leading to an absolute breakdown in final state prediction by step 10.",
    "objects": "A picker arm (drawn by us), six solid-walled bins B1 to B6 on the 3-shelf unit, and six identical small boxes (SimReady FlatBox) told apart only by a barcode label on one side: blue, red, green, black, orange, purple.",
    "knob": "Steps before the question",
@@ -219,13 +219,14 @@
     "Sweep: the question after 2, 4, 6, 8 or 10 steps of the same episode.",
     "Live: the simulator runs the tasks; after every 2 tasks the agent gets the new picture and may move its own camera before the next one.",
     "Answer key: the task log replayed on exact state. Episodes are kept only if every window is solvable from the pictures and the blue label is hidden whenever the question is asked.",
-    "Twins: flip = one blue trip goes to another bin; keep = another item's trip changes. Chance 1 in 6 per question."
+    "Twins: flip = one blue trip goes to another bin; keep = another item's trip changes. Chance 1 in 6 per question.",
+    "Plan (2026-10-03): a picture after every step; the dial becomes K = 1 to 30 dependent steps at 6 levels, next to a control chain of the same length in which each step acts on a new item; the model states the blue item's bin at steps 3, 9 and 15 (drift answers). Not yet in this 3D demo."
    ],
    "prior": ""
   },
   "deform": {
-   "tab": "4 · Soft loads",
-   "title": "Soft loads: rigid boxes and cardboard under load",
+   "tab": "4 · Soft loads (dropped)",
+   "title": "Soft loads: dropped from the benchmark (2026-10-03)",
    "note": "The warehouse simulator contains objects with different structural physics: some are rigid steel parts, while others are soft cardboard boxes or deformable plastic wraps. The robot arm exerts torque to stack them. If the task involves rigid, binary physics (e.g., box fits on a shelf or it doesn't), the model uses text priors to succeed. But when introduced to contact-rich force feedback dynamics (e.g., soft objects shifting center of gravity or cardboard wrinkling under load), the model's visual reasoning completely disconnects from physical intuition.",
    "objects": "Shelf X is the lower deck of a pallet rack (SimReady RackLargeEmpty_A1, 1.71 m clear to the deck above). Rigid steel parts cases (SM_Case_A01, 23 cm tall), cardboard boxes at the size of Cardbox_A1 (51 cm, drawn so they can deform), stretch wrap, and a palletizing arm (drawn by us).",
    "knob": "Box material",
@@ -237,7 +238,7 @@
     },
     {
      "cap": "Seven cases: the deck is the limit",
-     "sub": "An eighth case would reach {d_steel_top} m, above the deck's underside at {d_clear} m: answer {d_steel7}. This is the binary case where text priors work.",
+     "sub": "An eighth case would reach {d_steel_top} m, above the deck's underside at {d_clear} m: answer {d_steel7}. Height alone decides.",
      "knob": 1
     },
     {
@@ -289,10 +290,11 @@
    "family": [
     "Sweep: rigid steel, double-wall, single-wall, damp single-wall, and damp stretch-wrapped boxes on the same shelf.",
     "Live: the agent walks to Shelf X and may look from any side before answering; the arm stacks while it watches.",
-    "Answer key (planned): Isaac Sim places one more box of the same type and runs 5 s of soft-body physics; yes only if it fits under the deck, no box is crushed and the stack does not tip. Runs only after a cardboard realism test: NVIDIA's forum reports non-realistic cardboard with the default soft bodies.",
+    "Answer key: dropped. It was planned as Isaac Sim soft-body physics after a cardboard realism test; the 2026-10-03 check found no lasting crush and no static friction in Isaac Sim 6.0.1's deformables. The page model below is a drawing aid, not an answer key.",
     "Twins: flip = double-wall instead of damp board; keep = the same damp boxes, wrapped."
    ],
-   "prior": ""
+   "prior": "",
+   "banner": "Dropped 2026-10-03: Isaac Sim 6.0.1's soft bodies (PhysX deformables) keep no lasting crush and have no static friction, so a cardboard answer key would not be realistic. The rigid part stays, as physics sub-task 4.2: steel cases, drums and solid crates, 'add one item: does it tip within 3 s?', answered by rigid-body physics with near-threshold cases removed. This tab is kept as a record of the dropped design."
   },
   "frames": {
    "tab": "5 · Frames",

@@ -1,28 +1,28 @@
 flowchart TB
-  subgraph A["① Make the questions"]
+  subgraph A["① Make the episodes"]
     direction LR
     W[("🏭 SimReady Warehouse-01<br/>Isaac Sim 6.0.1 · GPU")]
     SF[("📄 Scene file = answer key<br/>every object a box:<br/>name, centre, size")]
-    QM["❓ Question maker<br/>blue barrel left of the<br/>green box tower? → left"]
-    TR["👯 Triple, pair-first<br/>base: left · flip: right · keep: left<br/>camera move · object swap · frame switch"]
-    VP["🗺️ View plan<br/>start views · 2 moves away · rest"]
-    W -->|export every labelled object| SF --> QM -->|only twinnable questions| TR --> VP
+    EM["🎲 Episode maker<br/>1 to 3 of 50 sub-tasks<br/>≤ 1 outside camera · ≤ 30 steps<br/>20,341 mixes"]
+    DCH["🔗 Dependent chain K = 1 to 30<br/>+ a same-length control chain<br/>headline: 3.2 · 3.5 · 5.10 · 3.1"]
+    TR["👯 Triple<br/>question · flip twin · keep twin"]
+    W -->|export every labelled object| SF --> EM --> DCH --> TR
   end
   subgraph B["② Render on the GPU"]
     direction LR
-    R["📸 RGB + depth per view<br/>start views first · 60-minute cap"]
+    R["📸 RGB + depth<br/>watch-only: rendered once, same pixels for all<br/>live slice: rendered on demand"]
     DC{"🔍 Depth check<br/>render matches<br/>the answer key?"}
     R --> DC
     DC -.->|❌ fail: fix first| R
   end
   subgraph C["③ Answer and grade"]
     direction LR
-    M["☁️ API models<br/>OpenAI · Google · Anthropic<br/>xAI · Fireworks · Alibaba"]
-    H["🧑 Human-play page<br/>same views, same grader"]
-    AL["🔁 Agent loop<br/>last 4 views + move log<br/>move · turn · look ≤ 10<br/>measure · answer"]
-    G{"⚖️ Grader, rules only<br/>vs the answer key:<br/>answer · each step · triple"}
-    OUT["📊 accuracy · step score<br/>triple score · wrong-step %<br/>no-image baseline · label audit"]
-    S3["📦 Stage 3<br/>~3,000 triples · release"]
+    M["☁️ API models<br/>OpenAI · Claude · Gemini<br/>Kimi-K3 · Qwen · Grok<br/>$2,000 total, capped in code"]
+    H["🧑 Human-play page + scripted solver<br/>same pictures, same grader"]
+    AL["🔁 Agent loop<br/>watch-only: full history ≤ 30 pictures,<br/>check-ins at steps 3 · 9 · 15 · end<br/>live: last 2 pictures + own notes"]
+    G{"⚖️ Grader, rules only<br/>vs the answer key:<br/>answer · drift answers · triple"}
+    OUT["📊 accuracy per dial level vs the guess line<br/>triple score · drift at 3, 9, 15<br/>solver and humans ≥ 95%"]
+    S3["📦 headline curves<br/>then 447 episodes · then 50,000"]
     M --> AL
     H --> AL
     AL -->|tool calls| G --> OUT --> S3
@@ -33,6 +33,6 @@ flowchart TB
   classDef done fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#052e16
   classDef ready fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#422006
   classDef queued fill:#e2e8f0,stroke:#64748b,stroke-width:2px,color:#0f172a
-  class SF,QM,TR,VP done
+  class SF,TR done
   class W,R,DC ready
-  class M,H,AL,G,OUT,S3 queued
+  class EM,DCH,M,H,AL,G,OUT,S3 queued

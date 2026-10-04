@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-30",
+ "updated": "2026-10-03",
  "traits": {
   "scores": [
    "final answer",
@@ -16034,7 +16034,7 @@
    "role": "evaluation",
    "headline": true,
    "measures": "Share of held-out test questions answered correctly, reported per level, category and subcategory.",
-   "calculation": "mean over test items of 1[answer == answer computed from exact simulator state]; multiple choice by exact match, numbers within the category's tolerance band; Protocol (planned, not claimed as new): answers and stated steps come as typed tool calls, e.g. answer(distance_m=2.1); a text model (Jev) extracts a value only when a call fails to parse, and that rate is reported; every model gets the same image budget (the last 4 views plus a text log of earlier moves).",
+   "calculation": "mean over test items of 1[answer == answer computed from exact simulator state]; multiple choice by exact match, numbers within the category's tolerance band; Protocol (planned, not claimed as new): answers and stated steps come as typed tool calls, e.g. answer(distance_m=2.1); a text model (Jev) extracts a value only when a call fails to parse, and that rate is reported; every model gets the same pictures: watch-only headline runs show the full picture history so far (at most 30, the Kimi-K3 API cap) at check-in calls (steps 3, 9, 15 and the end); the live slice shows the last 2 pictures plus the model's own notes.",
    "lines": "plan_area_a L120, L158; p03 design choices 2026-09-30 (planned)",
    "traits": {
     "scores": [
@@ -16073,7 +16073,7 @@
    "role": "evaluation",
    "headline": true,
    "measures": "How often the quantities an agent computes on the way (depths, distances, 3D positions, masks, camera poses, its map or belief after each move) match exact simulator state.",
-   "calculation": "for every step t of an episode and every quantity q the agent computes or states: s(q) = 1[|q - q*| / q* <= tolerance band] for numbers, 1[IoU(mask, mask*) >= threshold] for masks, 1[angle error <= one bin] for directions, where q* is read from the simulator at step t; step score = mean of s over all graded quantities of the episode, then mean over episodes; Protocol (planned, not claimed as new): answers and stated steps come as typed tool calls, e.g. answer(distance_m=2.1); a text model (Jev) extracts a value only when a call fails to parse, and that rate is reported; every model gets the same image budget (the last 4 views plus a text log of earlier moves).",
+   "calculation": "for every step t of an episode and every quantity q the agent computes or states: s(q) = 1[|q - q*| / q* <= tolerance band] for numbers, 1[IoU(mask, mask*) >= threshold] for masks, 1[angle error <= one bin] for directions, where q* is read from the simulator at step t; step score = mean of s over all graded quantities of the episode, then mean over episodes; Protocol (planned, not claimed as new): answers and stated steps come as typed tool calls, e.g. answer(distance_m=2.1); a text model (Jev) extracts a value only when a call fails to parse, and that rate is reported; every model gets the same pictures: watch-only headline runs show the full picture history so far (at most 30, the Kimi-K3 API cap) at check-in calls (steps 3, 9, 15 and the end); the live slice shows the last 2 pictures plus the model's own notes.",
    "lines": "plan_area_a L120, L158; p03 design choices 2026-09-30 (planned)",
    "traits": {
     "scores": [
@@ -16112,13 +16112,13 @@
    "group": "OURS (planned)",
    "arxiv": "",
    "ours": true,
-   "metric": "Twin pair score",
+   "metric": "Twin triple score",
    "canonical": "twin pair accuracy",
    "role": "evaluation",
    "headline": true,
-   "measures": "Share of twin pairs (the same rendered scene with one 3D factor changed: camera height, one object moved) where both answers are right.",
-   "calculation": "mean over twin pairs of 1[answer_a correct AND answer_b correct]; the flipped answer of the twin comes from exact simulator state",
-   "lines": "plan_area_a L120, L158; p03 design choices 2026-09-30 (planned)",
+   "measures": "Share of triples (a question, its flip twin and its keep twin: the same scene with one 3D factor changed) where all three answers are right.",
+   "calculation": "mean over triples of 1[question correct AND flip twin correct AND keep twin correct]; every answer comes from exact simulator state; a guess gets a full triple about 1 time in 8 on two-choice questions and about 0.5% on six-choice ones",
+   "lines": "plan_area_a L120, L158; p03 design choices 2026-09-30 (planned); triples per the 2026-10-03 plan",
    "traits": {
     "scores": [
      "pair or group"
