@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-03",
+ "updated": "2026-10-04",
  "rows": [
   {
    "group": "Single-image spatial",
@@ -1585,11 +1585,11 @@
    "code": "",
    "data": "",
    "venue": "planned (NeurIPS 2027, tentative)",
-   "input": "live episodes up to 30 steps mixing 1 to 3 of 50 sub-tasks; headline runs watch-only (the full picture history, at most 30); a live slice where the model moves its own camera",
-   "x": "first set: 720 runs per headline sub-task per model (4 to 6 sub-tasks); later 447 episodes, then a 50,000-episode pool",
-   "x_num": 2880,
+   "input": "the robot walks a 3D warehouse floor through up to 30 rooms, each a different one of the 50 sub-tasks (used at most once); live loop: every call the current view, the previous view and the model's own notes, then a move (step, turn, go through the labelled door to room N); one question per room plus recall questions about earlier rooms",
+   "x": "first: one storyboard-approved episode of 6 to 8 rooms, then 30-room episodes; the owner audits 10 before any paid call; the set size is re-decided under the $2,000 API cap",
+   "x_num": null,
    "yz": "5 / 50",
-   "skills": "binding in clutter, occlusion and depth, memory over long episodes, rigid physics, frames of reference (5 categories, 50 sub-tasks)",
+   "skills": "binding in clutter, occlusion and depth, memory across rooms, rigid physics, frames of reference (5 categories, 50 sub-tasks, one per room)",
    "truth": "sim: Isaac Sim 6.0 exact state (SimReady warehouses); checkers write every answer",
    "moves": "yes",
    "steps": "yes",
@@ -1599,7 +1599,7 @@
    "spacetools": null,
    "spatialclaw": null,
    "threat": "ours",
-   "threat_note": "2026-10-02 audit: per-step grading is a combination of Theory of Space, EMRD, SpaMEM and OST-Bench, not claimed; camera-pose twins survive only narrowed; box swaps (3.2) are taken by VET-Bench; the dependent chain is not yet audited"
+   "threat_note": "2026-10-02 audit: per-step grading is a combination of Theory of Space, EMRD, SpaMEM and OST-Bench, not claimed; camera-pose twins survive only narrowed; box swaps (3.2) are taken by VET-Bench; the per-scene dependent chain is old plan (archived); the memory-distance dial across rooms is not claimed, audit pending (long-video memory benchmarks may cover parts)"
   }
  ]
 }

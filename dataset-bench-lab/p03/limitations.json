@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-03",
+ "updated": "2026-10-04",
  "limitations": [
   {
    "paper": "OmniSpatial",
@@ -24,7 +24,7 @@
    "arxiv": "2506.03135",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "OmniSpatial",
@@ -49,7 +49,7 @@
    "strength": "scope or future work",
    "judge_note": "future-work idea (robot execution), not framed as a weakness",
    "our_status": "shared",
-   "our_reason": "walk 0.5 m, turn 30 degrees and look only; no picking up in v1"
+   "our_reason": "step, turn, look and go through a labelled door to the next room only; no picking up in v1"
   },
   {
    "paper": "OmniSpatial",
@@ -97,7 +97,7 @@
    "arxiv": "2508.19542",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "CVBench",
@@ -143,7 +143,7 @@
    "arxiv": "2603.26653",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "PerceptionComp",
@@ -309,7 +309,7 @@
    "arxiv": "2505.23764",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. First set: 720 runs per headline sub-task per model; later 447 episodes covering every pair of sub-tasks, then a 50,000-episode pool; warehouses only."
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. Episodes of up to 30 rooms, each a different one of the 50 sub-tasks used at most once; first a 6 to 8-room episode, then 30 rooms; the set size is re-decided under the $2,000 API cap; warehouses only."
   },
   {
    "paper": "MMSI-Bench",
@@ -333,7 +333,7 @@
    "strength": "scope or future work",
    "judge_note": "authors argue 1,000 is sufficient now; hypothetical future saturation",
    "our_status": "addressed",
-   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. First set: 720 runs per headline sub-task per model; later 447 episodes covering every pair of sub-tasks, then a 50,000-episode pool; warehouses only."
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. Episodes of up to 30 rooms, each a different one of the 50 sub-tasks used at most once; first a 6 to 8-room episode, then 30 rooms; the set size is re-decided under the $2,000 API cap; warehouses only."
   },
   {
    "paper": "MMSI-Bench",
@@ -357,7 +357,7 @@
    "strength": "scope or future work",
    "judge_note": "intended design choice (human-answerable questions), scope limit not framed as weakness",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "SPAR-Bench",
@@ -381,7 +381,7 @@
    "arxiv": "2503.22976",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: live episodes up to 30 steps in which the model moves its own camera (the live slice). The headline runs are watch-only and rendered once, so they are not interactive. Theory of Space, EmbodiedEval and others also move."
+   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
   },
   {
    "paper": "SPAR-Bench",
@@ -406,7 +406,7 @@
    "arxiv": "2503.22976",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: live episodes up to 30 steps in which the model moves its own camera (the live slice). The headline runs are watch-only and rendered once, so they are not interactive. Theory of Space, EmbodiedEval and others also move."
+   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
   },
   {
    "paper": "SPAR-Bench",
@@ -478,7 +478,7 @@
    "arxiv": "2404.12390",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "BLINK",
@@ -596,7 +596,7 @@
    "arxiv": "2505.21500",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: live episodes up to 30 steps in which the model moves its own camera (the live slice). The headline runs are watch-only and rendered once, so they are not interactive. Theory of Space, EmbodiedEval and others also move."
+   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
   },
   {
    "paper": "ViewSpatial-Bench",
@@ -620,7 +620,7 @@
    "arxiv": "2505.21500",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: live episodes up to 30 steps in which the model moves its own camera (the live slice). The headline runs are watch-only and rendered once, so they are not interactive. Theory of Space, EmbodiedEval and others also move."
+   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
   },
   {
    "paper": "MMSI-Video-Bench",
@@ -645,7 +645,7 @@
    "strength": "scope or future work",
    "judge_note": "they add a second Sufficient-Coverage track with all annotation frames, so summary 'not full frames' is wrong; rationale for protocol, not a weakness",
    "our_status": "shared",
-   "our_reason": "episodes up to 30 steps and 720 runs per headline sub-task per model make API runs costly; the first spend is capped at $2,000 for all providers together"
+   "our_reason": "full navigation takes about 90 to 150 model calls per 30-room episode (3 to 5 moves per room), so API runs are costly; the first spend is capped at $2,000 for all providers together and the cost per episode is to be recomputed"
   },
   {
    "paper": "OSI-Bench",
@@ -670,7 +670,7 @@
    "arxiv": "2512.19683",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "OSI-Bench",
@@ -721,7 +721,7 @@
    "strength": "scope or future work",
    "judge_note": "method parameter trade-off description, not stated as a limitation",
    "our_status": "addressed",
-   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. First set: 720 runs per headline sub-task per model; later 447 episodes covering every pair of sub-tasks, then a 50,000-episode pool; warehouses only."
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. Episodes of up to 30 rooms, each a different one of the 50 sub-tasks used at most once; first a 6 to 8-room episode, then 30 rooms; the set size is re-decided under the $2,000 API cap; warehouses only."
   },
   {
    "paper": "VSI-Bench-Debiased (VSI-Bench-U)",
@@ -867,7 +867,7 @@
    "arxiv": "2505.20426",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: live episodes up to 30 steps in which the model moves its own camera (the live slice). The headline runs are watch-only and rendered once, so they are not interactive. Theory of Space, EmbodiedEval and others also move."
+   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
   },
   {
    "paper": "MMPerspective",
@@ -891,7 +891,7 @@
    "arxiv": "2505.20426",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "MMPerspective",
@@ -1081,7 +1081,7 @@
    "strength": "scope or future work",
    "judge_note": "future-work extension to generation",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "Anywhere3D-Bench",
@@ -1107,7 +1107,7 @@
    "strength": "scope or future work",
    "judge_note": "future-work extension, not framed as weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: live episodes up to 30 steps in which the model moves its own camera (the live slice). The headline runs are watch-only and rendered once, so they are not interactive. Theory of Space, EmbodiedEval and others also move."
+   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
   },
   {
    "paper": "Situat3DChange",
@@ -1204,7 +1204,7 @@
    "arxiv": "2604.24300",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. First set: 720 runs per headline sub-task per model; later 447 episodes covering every pair of sub-tasks, then a 50,000-episode pool; warehouses only."
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. Episodes of up to 30 rooms, each a different one of the 50 sub-tasks used at most once; first a 6 to 8-room episode, then 30 rooms; the set size is re-decided under the $2,000 API cap; warehouses only."
   },
   {
    "paper": "ReVSI",
@@ -1227,7 +1227,7 @@
    "arxiv": "2604.24300",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. First set: 720 runs per headline sub-task per model; later 447 episodes covering every pair of sub-tasks, then a 50,000-episode pool; warehouses only."
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. Episodes of up to 30 rooms, each a different one of the 50 sub-tasks used at most once; first a 6 to 8-room episode, then 30 rooms; the set size is re-decided under the $2,000 API cap; warehouses only."
   },
   {
    "paper": "STRIDE-QA",
@@ -1451,7 +1451,7 @@
    "arxiv": "2602.07864",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. First set: 720 runs per headline sub-task per model; later 447 episodes covering every pair of sub-tasks, then a 50,000-episode pool; warehouses only."
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. Episodes of up to 30 rooms, each a different one of the 50 sub-tasks used at most once; first a 6 to 8-room episode, then 30 rooms; the set size is re-decided under the $2,000 API cap; warehouses only."
   },
   {
    "paper": "SSI-Bench",
@@ -1476,7 +1476,7 @@
    "strength": "scope or future work",
    "judge_note": "authors say current scale is sufficient; expansion framed as future need",
    "our_status": "addressed",
-   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. First set: 720 runs per headline sub-task per model; later 447 episodes covering every pair of sub-tasks, then a 50,000-episode pool; warehouses only."
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. Episodes of up to 30 rooms, each a different one of the 50 sub-tasks used at most once; first a 6 to 8-room episode, then 30 rooms; the set size is re-decided under the $2,000 API cap; warehouses only."
   },
   {
    "paper": "SSI-Bench",
@@ -1500,7 +1500,7 @@
    "arxiv": "2602.07864",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "episodes up to 30 steps and 720 runs per headline sub-task per model make API runs costly; the first spend is capped at $2,000 for all providers together"
+   "our_reason": "full navigation takes about 90 to 150 model calls per 30-room episode (3 to 5 moves per room), so API runs are costly; the first spend is capped at $2,000 for all providers together and the cost per episode is to be recomputed"
   },
   {
    "paper": "SpatialAct",
@@ -1548,7 +1548,7 @@
    "arxiv": "2607.22393",
    "strength": "stated weakness",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same pictures: the full history so far (at most 30, the Kimi-K3 API cap) in watch-only runs, the last 2 plus its own notes in the live slice."
+   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same input: each call its current view, its previous view and its own notes (2 pictures per call, so Kimi-K3's 30-picture cap is never hit)."
   },
   {
    "paper": "SceneActBench",
@@ -1597,7 +1597,7 @@
    "arxiv": "2607.22393",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. First set: 720 runs per headline sub-task per model; later 447 episodes covering every pair of sub-tasks, then a 50,000-episode pool; warehouses only."
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. Episodes of up to 30 rooms, each a different one of the 50 sub-tasks used at most once; first a 6 to 8-room episode, then 30 rooms; the set size is re-decided under the $2,000 API cap; warehouses only."
   },
   {
    "paper": "SceneActBench",
@@ -1643,7 +1643,7 @@
    "arxiv": "2607.22393",
    "strength": "stated weakness",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same pictures: the full history so far (at most 30, the Kimi-K3 API cap) in watch-only runs, the last 2 plus its own notes in the live slice."
+   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same input: each call its current view, its previous view and its own notes (2 pictures per call, so Kimi-K3's 30-picture cap is never hit)."
   },
   {
    "paper": "SceneActBench",
@@ -1740,7 +1740,7 @@
    "strength": "scope or future work",
    "judge_note": "scope statement, not framed as weakness",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "SpatialWorld",
@@ -1787,7 +1787,7 @@
    "arxiv": "2606.09669",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. First set: 720 runs per headline sub-task per model; later 447 episodes covering every pair of sub-tasks, then a 50,000-episode pool; warehouses only."
+   "our_reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. Episodes of up to 30 rooms, each a different one of the 50 sub-tasks used at most once; first a 6 to 8-room episode, then 30 rooms; the set size is re-decided under the $2,000 API cap; warehouses only."
   },
   {
    "paper": "SpatialWorld",
@@ -1861,7 +1861,7 @@
    "arxiv": "2505.20148",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "episodes up to 30 steps and 720 runs per headline sub-task per model make API runs costly; the first spend is capped at $2,000 for all providers together"
+   "our_reason": "full navigation takes about 90 to 150 model calls per 30-room episode (3 to 5 moves per room), so API runs are costly; the first spend is capped at $2,000 for all providers together and the cost per episode is to be recomputed"
   },
   {
    "paper": "MineAnyBuild",
@@ -1932,7 +1932,7 @@
    "arxiv": "2505.20148",
    "strength": "stated weakness",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same pictures: the full history so far (at most 30, the Kimi-K3 API cap) in watch-only runs, the last 2 plus its own notes in the live slice."
+   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same input: each call its current view, its previous view and its own notes (2 pictures per call, so Kimi-K3's 30-picture cap is never hit)."
   },
   {
    "paper": "MineAnyBuild",
@@ -1956,7 +1956,7 @@
    "strength": "scope or future work",
    "judge_note": "future-work note on untested baselines",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same pictures: the full history so far (at most 30, the Kimi-K3 API cap) in watch-only runs, the last 2 plus its own notes in the live slice."
+   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same input: each call its current view, its previous view and its own notes (2 pictures per call, so Kimi-K3's 30-picture cap is never hit)."
   },
   {
    "paper": "MineAnyBuild",
@@ -2005,7 +2005,7 @@
    "strength": "scope or future work",
    "judge_note": "future-direction bullet; kind: only zero-shot agents evaluated",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same pictures: the full history so far (at most 30, the Kimi-K3 API cap) in watch-only runs, the last 2 plus its own notes in the live slice."
+   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same input: each call its current view, its previous view and its own notes (2 pictures per call, so Kimi-K3's 30-picture cap is never hit)."
   },
   {
    "paper": "Theory of Space",
@@ -2029,7 +2029,7 @@
    "strength": "scope or future work",
    "judge_note": "future-work extension to multi-agent",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "Theory of Space",
@@ -2193,7 +2193,7 @@
    "strength": "scope or future work",
    "judge_note": "future-research line (pairs with stated static-hazards limit)",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "EMRD (Explore, Map, Remember, Decide)",
@@ -2217,7 +2217,7 @@
    "strength": "scope or future work",
    "judge_note": "future-work idea",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "WebStep",
@@ -2355,7 +2355,7 @@
    "arxiv": "2606.15673",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "WebStep",
@@ -2401,7 +2401,7 @@
    "arxiv": "2606.15673",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "walk 0.5 m, turn 30 degrees and look only; no picking up in v1"
+   "our_reason": "step, turn, look and go through a labelled door to the next room only; no picking up in v1"
   },
   {
    "paper": "WebStep",
@@ -2542,7 +2542,7 @@
    "arxiv": "2608.07533",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "MetaSpace",
@@ -2590,7 +2590,7 @@
    "strength": "scope or future work",
    "judge_note": "threat-to-validity note; authors argue MRs apply broadly",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same pictures: the full history so far (at most 30, the Kimi-K3 API cap) in watch-only runs, the last 2 plus its own notes in the live slice."
+   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same input: each call its current view, its previous view and its own notes (2 pictures per call, so Kimi-K3's 30-picture cap is never hit)."
   },
   {
    "paper": "MetaSpace",
@@ -2806,7 +2806,7 @@
    "strength": "scope or future work",
    "judge_note": "deliberate controlled-scene design to enable causal interventions",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "Who Is Left of Whom?",
@@ -2831,7 +2831,7 @@
    "strength": "scope or future work",
    "judge_note": "scope of controlled analysis data, framed as natural next step",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "Who Is Left of Whom?",
@@ -2855,7 +2855,7 @@
    "strength": "scope or future work",
    "judge_note": "scope of the mechanistic analysis, not the dataset",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same pictures: the full history so far (at most 30, the Kimi-K3 API cap) in watch-only runs, the last 2 plus its own notes in the live slice."
+   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same input: each call its current view, its previous view and its own notes (2 pictures per call, so Kimi-K3's 30-picture cap is never hit)."
   },
   {
    "paper": "Who Is Left of Whom?",
@@ -2951,7 +2951,7 @@
    "strength": "scope or future work",
    "judge_note": "future-directions list, not framed as a weakness",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "Synthetic minimal video pairs (UE5)",
@@ -3049,7 +3049,7 @@
    "arxiv": "2606.02742",
    "strength": "stated weakness",
    "our_status": "not addressed",
-   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same pictures: the full history so far (at most 30, the Kimi-K3 API cap) in watch-only runs, the last 2 plus its own notes in the live slice."
+   "our_reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same input: each call its current view, its previous view and its own notes (2 pictures per call, so Kimi-K3's 30-picture cap is never hit)."
   },
   {
    "paper": "ViewDiag",
@@ -3098,7 +3098,7 @@
    "arxiv": "2606.02742",
    "strength": "stated weakness",
    "our_status": "shared",
-   "our_reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "our_reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   {
    "paper": "ViewDiag",
@@ -3321,7 +3321,7 @@
   },
   "static not interactive": {
    "status": "addressed",
-   "reason": "Planned: live episodes up to 30 steps in which the model moves its own camera (the live slice). The headline runs are watch-only and rendered once, so they are not interactive. Theory of Space, EmbodiedEval and others also move."
+   "reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
   },
   "contamination or shortcuts": {
    "status": "shared",
@@ -3329,7 +3329,7 @@
   },
   "scale or size": {
    "status": "addressed",
-   "reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. First set: 720 runs per headline sub-task per model; later 447 episodes covering every pair of sub-tasks, then a 50,000-episode pool; warehouses only."
+   "reason": "Planned: a generator mints scenes and questions without human labels, as InfiniBench, SPRITE and SAT do. Episodes of up to 30 rooms, each a different one of the 50 sub-tasks used at most once; first a 6 to 8-room episode, then 30 rooms; the set size is re-decided under the $2,000 API cap; warehouses only."
   },
   "sim-to-real gap": {
    "status": "shared",
@@ -3345,15 +3345,15 @@
   },
   "task coverage": {
    "status": "shared",
-   "reason": "5 categories, 50 sub-tasks of spatial skills; long episodes test state tracking, not planning; no manipulation or language-heavy tasks"
+   "reason": "5 categories, 50 sub-tasks of spatial skills, one per room; long episodes test memory across rooms and moving between labelled doors, not open-ended planning; no manipulation or language-heavy tasks"
   },
   "embodiment or action space": {
    "status": "shared",
-   "reason": "walk 0.5 m, turn 30 degrees and look only; no picking up in v1"
+   "reason": "step, turn, look and go through a labelled door to the next room only; no picking up in v1"
   },
   "compute or cost": {
    "status": "shared",
-   "reason": "episodes up to 30 steps and 720 runs per headline sub-task per model make API runs costly; the first spend is capped at $2,000 for all providers together"
+   "reason": "full navigation takes about 90 to 150 model calls per 30-room episode (3 to 5 moves per room), so API runs are costly; the first spend is capped at $2,000 for all providers together and the cost per episode is to be recomputed"
   },
   "modality coverage": {
    "status": "shared",
@@ -3365,7 +3365,7 @@
   },
   "model coverage": {
    "status": "not addressed",
-   "reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same pictures: the full history so far (at most 30, the Kimi-K3 API cap) in watch-only runs, the last 2 plus its own notes in the live slice."
+   "reason": "Depends on which models are run. Planned: OpenAI, Claude, Gemini, Kimi-K3, Qwen and Grok through APIs, no open models. Every model gets the same input: each call its current view, its previous view and its own notes (2 pictures per call, so Kimi-K3's 30-picture cap is never hit)."
   },
   "reproducibility or release": {
    "status": "shared",

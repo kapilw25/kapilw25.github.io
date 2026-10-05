@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-03",
+ "updated": "2026-10-04",
  "source": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines",
  "rows": [
   {
@@ -11,7 +11,7 @@
    "now": "yellow",
    "after": "green",
    "status_note": "a crowded field: 63 related benchmarks and methods in the survey",
-   "fix": "Lead with one measured finding: accuracy against the number of dependent steps K (1 to 30) on 3.2, 3.5, 5.10 and 3.1, next to a same-length control chain, the guess line and the ideal observer (a scripted solver and humans at 95%+). The shape is measured, not promised.",
+   "fix": "Lead with one measured finding: accuracy against memory distance d (rooms since the fact was seen, 1 to 29) in 30-room navigation episodes, next to the guess line and the ideal observer (a scripted solver and humans at 95%+). The shape is measured, not promised; the dial is not claimed, audit pending.",
    "evidence": [
     {
      "label": "AgentBoard (NeurIPS 2024)",
@@ -22,7 +22,7 @@
      "url": "https://neurips.cc/Conferences/2026/EvaluationsDatasetsReviewerGuidelines"
     }
    ],
-   "effort": "smoke test, then the headline grid within the $2,000 API cap; GPU for rendering, estimate",
+   "effort": "storyboard, rough cut, a 6 to 8-room episode, then 30 rooms; the owner audits 10 episodes before any paid call; then a smoke test within the $2,000 API cap; GPU for rendering, estimate",
    "when": "evaluation",
    "consequence": "score",
    "who": "Claude",
@@ -37,7 +37,7 @@
    "now": "yellow",
    "after": "green",
    "status_note": "audited 2026-09-30 and 2026-10-02: step score is decoration; camera-pose twins survive only narrowed; box swaps alone (3.2) are taken by VET-Bench",
-   "fix": "Claim only the narrowed camera-pose twins (checked against exact state, scored with their flip and keep twins); not step grading, not box swaps alone (VET-Bench). Audit the dependent chain before any claim about it. Cite Theory of Space, EMRD, SpaMEM, OST-Bench, EqBen, NaturalBench, MetaSpace, VET-Bench and MET-Bench as the closest work; re-audit before submission.",
+   "fix": "Claim only the narrowed camera-pose twins (checked against exact state, scored with their flip and keep twins); not step grading, not box swaps alone (VET-Bench). The per-scene dependent chain is old plan (archived); the memory-distance dial is not claimed, audit pending (long-video memory benchmarks may cover parts). Cite Theory of Space, EMRD, SpaMEM, OST-Bench, EqBen, NaturalBench, MetaSpace, VET-Bench and MET-Bench as the closest work; re-audit before submission.",
    "evidence": [
     {
      "label": "Theory of Space (ICLR 2026)",
@@ -135,7 +135,7 @@
    "now": "yellow",
    "after": "green",
    "status_note": "no public host, harness or fixed split yet",
-   "fix": "Ship pre-rendered images plus truth files for the watch-only runs (no Isaac Sim needed to evaluate), a VLMEvalKit plug-in, a pinned environment and seeds, and the generator code; the live slice needs Isaac Sim, so its simulator version, seeds and every pose are logged.",
+   "fix": "Ship the generator code, the floor plans and truth files, a VLMEvalKit plug-in, a pinned environment and seeds; watch-only runs ship their pre-rendered pictures (no Isaac Sim needed to evaluate those); navigation runs need Isaac Sim, so its version, seeds and every robot pose are logged.",
    "evidence": [
     {
      "label": "BetterBench (NeurIPS 2024)",
@@ -187,7 +187,7 @@
    "now": "yellow",
    "after": "green",
    "status_note": "API models only (decided 2026-10-01), $2,000 in total for every provider; Claude, Gemini and xAI keys still missing; no open models in the plan",
-   "fix": "Run the models.json list through APIs (OpenAI, Claude, Gemini, Kimi-K3, Qwen, Grok): a smoke test of the live environment first, medium thinking with a heavy-thinking slice, spend capped in code; a human baseline on the same items (see B6). Open: whether to add open models or the four agents (VADAR, pySpatial, SpaceTools, SpatialClaw).",
+   "fix": "Run the models.json list through APIs (OpenAI, Claude, Gemini, Kimi-K3, Qwen, Grok): a smoke test of the navigation loop first, after the owner's audit of 10 episodes, medium thinking with a heavy-thinking slice, spend capped in code; a human baseline on the same items (see B6). Open: whether to add open models or the four agents (VADAR, pySpatial, SpaceTools, SpatialClaw).",
    "evidence": [
     {
      "label": "SpatialClaw (agents, code)",
@@ -419,8 +419,8 @@
    "quote": "(Not quoted in the guidelines; closest, NeurIPS D&B 2023 review form:) are the evaluation methods and experiment design appropriate?",
    "now": "yellow",
    "after": "green",
-   "status_note": "design changed 2026-10-03: headline runs are watch-only (the model moves nothing, rendered once, the same pixels for every model, as OpenEQA's offline split); every run where the model moves renders live (the live slice). The agent claim rests on the smaller live slice; the live loop is not built yet",
-   "fix": "Live rendering with free movement for every run where the model moves; watch-only runs rendered once. Keep reproducibility with fixed seeds, a pinned simulator version and logged poses for every episode; report the live slice next to the watch-only headline.",
+   "status_note": "design changed 2026-10-04: the model walks through up to 30 rooms in a live loop, choosing every move while each view renders; cheaper watch-only runs (no moves, rendered once) sit beside it; the navigation loop and the room floor are not built yet",
+   "fix": "Live rendering with free movement for every navigation run; watch-only runs rendered once. Keep reproducibility with fixed seeds, a pinned simulator version and logged robot poses for every episode; report the navigation slice next to the watch-only runs.",
    "evidence": [
     {
      "label": "VLN-CE: the fixed-node critique",
@@ -435,7 +435,7 @@
      "url": "https://open-eqa.github.io/assets/pdfs/paper.pdf"
     }
    ],
-   "effort": "build 2-3 days (a live-render agent loop); GPU for the live slice, estimate",
+   "effort": "build several days (a 30-room floor, the navigation loop, the room kinds); GPU for the navigation runs, estimate",
    "when": "evaluation",
    "consequence": "score",
    "who": "both"
@@ -448,8 +448,8 @@
    "quote": "(Common reviewer ask, not quoted:) is the drop caused by the model, or by what the harness lets it see (picture caps, dropped history)?",
    "now": "yellow",
    "after": "green",
-   "status_note": "the live slice shows only the last 2 pictures plus the model's own notes",
-   "fix": "Headline watch-only runs give every model the full picture history (at most 30, the Kimi-K3 API cap); the notes-only live slice is reported as its own setting; the scripted solver and humans get exactly the same inputs and must reach 95%+ at every level.",
+   "status_note": "every call shows only the current view, the previous view and the model's own notes, so the harness itself could cause failures",
+   "fix": "Every model gets the same input (2 pictures per call plus its own notes; Kimi-K3's 30-picture cap is never hit); a full-history watch-only setting is reported beside it; the scripted solver and humans get exactly the same inputs and must reach 95%+ at every memory distance.",
    "evidence": [
     {
      "label": "VET-Bench (full videos)",
@@ -460,7 +460,7 @@
      "url": "https://arxiv.org/abs/2502.10886"
     }
    ],
-   "effort": "included in the headline runs; the solver is code, the panel 8-10 person-hours, estimate",
+   "effort": "included in the navigation runs; the solver is code, the panel 8-10 person-hours, estimate",
    "when": "evaluation",
    "consequence": "score",
    "who": "both",
