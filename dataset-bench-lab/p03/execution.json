@@ -63,7 +63,7 @@
    "makes": "a scripted solver that gets exactly what each model gets, and a small human panel on the same pictures; both must stay at 95% or above at every dial level, or the level is fixed before it is reported",
    "now": "-",
    "next": "build the solver with the dependent-chain generator; recruit the panel (see Rejection Risk B6)",
-   "evidence": "notes/taxonomy50_long_horizon_2026-10-02.md"
+   "evidence": "notes/v02_taxonomy50_long_horizon_2026-10-02.md"
   },
   {
    "stage": "3 · phase 1: test set",

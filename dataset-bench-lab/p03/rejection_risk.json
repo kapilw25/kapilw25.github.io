@@ -135,7 +135,7 @@
    "now": "yellow",
    "after": "green",
    "status_note": "no public host, harness or fixed split yet",
-   "fix": "Ship the generator code, the floor plans and truth files, a VLMEvalKit plug-in, a pinned environment and seeds; watch-only runs ship their pre-rendered pictures (no Isaac Sim needed to evaluate those); navigation runs need Isaac Sim, so its version, seeds and every robot pose are logged.",
+   "fix": "Ship the generator code, the floor plans and truth files, a VLMEvalKit plug-in, a pinned environment and seeds; the scripted comparison run ships its pre-rendered pictures (no Isaac Sim needed to evaluate it); navigation runs need Isaac Sim, so its version, seeds and every robot pose are logged.",
    "evidence": [
     {
      "label": "BetterBench (NeurIPS 2024)",
@@ -419,8 +419,8 @@
    "quote": "(Not quoted in the guidelines; closest, NeurIPS D&B 2023 review form:) are the evaluation methods and experiment design appropriate?",
    "now": "yellow",
    "after": "green",
-   "status_note": "design changed 2026-10-04: the model walks through up to 30 rooms in a live loop, choosing every move while each view renders; cheaper watch-only runs (no moves, rendered once) sit beside it; the navigation loop and the room floor are not built yet",
-   "fix": "Live rendering with free movement for every navigation run; watch-only runs rendered once. Keep reproducibility with fixed seeds, a pinned simulator version and logged robot poses for every episode; report the navigation slice next to the watch-only runs.",
+   "status_note": "design changed 2026-10-04: the model walks through up to 30 rooms in a live loop, choosing every move while each view renders; a smaller scripted comparison run (the same pictures for every model, rendered once) sits beside it; the navigation loop and the room floor are not built yet",
+   "fix": "Live rendering with free movement for every model-steered run; the scripted comparison run rendered once. Keep reproducibility with fixed seeds, a pinned simulator version and logged robot poses for every episode; report the model-steered result next to the scripted comparison run.",
    "evidence": [
     {
      "label": "VLN-CE: the fixed-node critique",
@@ -449,7 +449,7 @@
    "now": "yellow",
    "after": "green",
    "status_note": "every call shows only the current view, the previous view and the model's own notes, so the harness itself could cause failures",
-   "fix": "Every model gets the same input (2 pictures per call plus its own notes; Kimi-K3's 30-picture cap is never hit); a full-history watch-only setting is reported beside it; the scripted solver and humans get exactly the same inputs and must reach 95%+ at every memory distance.",
+   "fix": "Every model gets the same kind of input (2 pictures per call plus its own notes; Kimi-K3's 30-picture cap is never hit); a scripted comparison run gives every model the same pictures; the scripted solver and humans get exactly the same inputs and must reach 95%+ at every memory distance.",
    "evidence": [
     {
      "label": "VET-Bench (full videos)",

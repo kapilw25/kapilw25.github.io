@@ -381,7 +381,7 @@
    "arxiv": "2503.22976",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
+   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. The model-steered walk carries the main result (the next door is named; past a move cap the robot is placed at the question spot); a smaller scripted walk, the same pictures for every model, is the comparison run. Theory of Space, EmbodiedEval and others also move."
   },
   {
    "paper": "SPAR-Bench",
@@ -406,7 +406,7 @@
    "arxiv": "2503.22976",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
+   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. The model-steered walk carries the main result (the next door is named; past a move cap the robot is placed at the question spot); a smaller scripted walk, the same pictures for every model, is the comparison run. Theory of Space, EmbodiedEval and others also move."
   },
   {
    "paper": "SPAR-Bench",
@@ -596,7 +596,7 @@
    "arxiv": "2505.21500",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
+   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. The model-steered walk carries the main result (the next door is named; past a move cap the robot is placed at the question spot); a smaller scripted walk, the same pictures for every model, is the comparison run. Theory of Space, EmbodiedEval and others also move."
   },
   {
    "paper": "ViewSpatial-Bench",
@@ -620,7 +620,7 @@
    "arxiv": "2505.21500",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
+   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. The model-steered walk carries the main result (the next door is named; past a move cap the robot is placed at the question spot); a smaller scripted walk, the same pictures for every model, is the comparison run. Theory of Space, EmbodiedEval and others also move."
   },
   {
    "paper": "MMSI-Video-Bench",
@@ -867,7 +867,7 @@
    "arxiv": "2505.20426",
    "strength": "stated weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
+   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. The model-steered walk carries the main result (the next door is named; past a move cap the robot is placed at the question spot); a smaller scripted walk, the same pictures for every model, is the comparison run. Theory of Space, EmbodiedEval and others also move."
   },
   {
    "paper": "MMPerspective",
@@ -1107,7 +1107,7 @@
    "strength": "scope or future work",
    "judge_note": "future-work extension, not framed as weakness",
    "our_status": "addressed",
-   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
+   "our_reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. The model-steered walk carries the main result (the next door is named; past a move cap the robot is placed at the question spot); a smaller scripted walk, the same pictures for every model, is the comparison run. Theory of Space, EmbodiedEval and others also move."
   },
   {
    "paper": "Situat3DChange",
@@ -3321,7 +3321,7 @@
   },
   "static not interactive": {
    "status": "addressed",
-   "reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. Cheaper watch-only runs (no moves, rendered once) sit beside a smaller paid navigation slice. Theory of Space, EmbodiedEval and others also move."
+   "reason": "Planned: the model walks a 3D warehouse through up to 30 rooms in a live loop, choosing every move (step, turn, go through the labelled door to room N) while each view is rendered; one question per room. The model-steered walk carries the main result (the next door is named; past a move cap the robot is placed at the question spot); a smaller scripted walk, the same pictures for every model, is the comparison run. Theory of Space, EmbodiedEval and others also move."
   },
   "contamination or shortcuts": {
    "status": "shared",
