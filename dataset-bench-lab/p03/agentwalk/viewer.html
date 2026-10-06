@@ -31,6 +31,9 @@ html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.35 -apple-s
 .opt.wrong{border-color:var(--wrong);background:rgba(239,68,68,.16)}
 #verdict{margin-top:8px;font-weight:700;font-size:15px}
 #qcount{position:absolute;right:14px;top:10px;color:var(--muted);font-size:12px}
+#why{position:absolute;left:14px;right:14px;bottom:10px;border-top:1px solid var(--line);padding-top:8px;font-size:12.5px;color:var(--muted)}
+#why b{color:var(--ink)}#why .bar{display:inline-block;height:9px;border-radius:2px;margin:0 6px 0 4px;vertical-align:middle}
+#why .row{display:flex;align-items:center;gap:6px;margin:2px 0}#why .lab{width:230px}
 #score{left:1056px;top:64px;width:528px;height:120px;padding:6px 12px}
 #big{font-size:26px;font-weight:800}#big small{font-size:14px;color:var(--muted);font-weight:600}
 .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}.chip{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:1px 7px;color:var(--muted)}
@@ -48,7 +51,7 @@ svg text{font-family:inherit}
   <div class="box" id="hdr"><b>One agent walks a 30-room 3D warehouse</b><span id="mode"></span><span id="model"></span><div class="sp"></div>
     <span>call <em id="calln">0</em></span><span>room <em id="roomn">-</em></span><span id="clock"></span></div>
   <div class="box" id="cam"><img id="pic" alt=""><div id="camtag">What the agent sees: the robot camera</div><div id="think">thinking…</div><div id="movebar"></div></div>
-  <div class="box" id="qbox"><div id="qcount"></div><div id="goal"></div><div id="qmeta"></div><div id="qtext"></div><div id="opts"></div><div id="verdict"></div></div>
+  <div class="box" id="qbox"><div id="qcount"></div><div id="goal"></div><div id="qmeta"></div><div id="qtext"></div><div id="opts"></div><div id="verdict"></div><div id="why"></div></div>
   <div class="box" id="score"><div id="big"></div><div class="chips" id="chips"></div></div>
   <div class="box" id="c1"><div class="ttl">Accuracy vs rooms walked (all questions so far)</div><svg id="s1" width="528" height="114"></svg></div>
   <div class="box" id="c2"><div class="ttl">Accuracy vs memory distance (rooms between seeing and asking)</div><svg id="s2" width="528" height="114"></svg></div>
@@ -72,6 +75,58 @@ addEventListener("resize", fit); fit();
 function el(tag, attrs, parent, text) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; if (parent) parent.appendChild(e); return e; }
 const pct = (r, n) => (n ? Math.round(100 * r / n) : 0);
 
+// Why each wrong answer happened, read from the log (rules, not certainties):
+//   bad reply        the reply was unreadable or not one of the 6 choices
+//   own room         a question about the room it was in (d = 0) answered wrong: perception or reasoning
+//   missed a look    Tote X: an arm move since the last re-sync was shown while the camera did not face the cart
+//   carried a slip   Tote X: an earlier Tote X answer in the same stretch (since the start or a gate) was already wrong
+//   updated wrong    Tote X: it watched every arm move since the re-sync and still got it wrong
+//   never took in    a fact whose same-room check (d = 0) it had already got wrong
+//   lost after squeeze  a fact seen right, wrong later, with a memory squeeze (its own summary) in between
+//   lost from memory a fact seen, wrong later, with no squeeze in between
+const CAUSES = ["missed a look", "updated wrong", "carried a slip", "lost after squeeze", "lost from memory", "never took in", "own room", "bad reply"];
+const CCOL = {"missed a look": "#f97316", "updated wrong": "#eab308", "carried a slip": "#a855f7", "lost after squeeze": "#38bdf8",
+              "lost from memory": "#0ea5e9", "never took in": "#64748b", "own room": "#94a3b8", "bad reply": "#ef4444"};
+let CAUSE = {};
+function causes() {
+  CAUSE = {};
+  const calls = RUN.calls.filter((c) => !c.pending), seg = [];      // segment start = the walk's start or a gate stop
+  let segStart = 0, toteWrongInSeg = false;
+  const factSeen = {};                                               // crate code or fact question -> was its d = 0 check wrong?
+  for (const c of calls) {
+    if (c.cam === "gate") { segStart = c.call; toteWrongInSeg = false; }
+    for (const a of c.answers || []) {
+      const key = c.call + "|" + a.key, isTote = a.kind === "tote" || (a.kind === "room" && a.about === "R1");
+      if (a.kind === "fact" && a.d === 0) factSeen[a.question.replace("In this room, ", "")] = a.right;
+      if (a.right) continue;
+      let why;
+      if (!a.parsed) why = "bad reply";
+      else if (isTote) {
+        const moves = calls.filter((x) => x.call > segStart && x.call <= c.call && x.stage > 0 && x.docked !== undefined);
+        if (toteWrongInSeg) why = "carried a slip";
+        else if (moves.some((x) => x.cam !== "back")) why = "missed a look";
+        else why = "updated wrong";
+      } else if (a.kind === "room") why = "own room";
+      else {
+        const crate = (a.question.match(/crate tagged (\w+)/) || [])[1];
+        const d0wrong = crate && Object.keys(factSeen).some((q) => q.includes(crate) && factSeen[q] === false);
+        const src = +String(a.about).slice(1), lastIn = Math.max(0, ...calls.filter((x) => x.room === a.about).map((x) => x.call));
+        const sq = (RUN.memory_events || []).some((e) => e.after_call >= lastIn && e.after_call < c.call);
+        why = d0wrong ? "never took in" : sq ? "lost after squeeze" : "lost from memory";
+        void src;
+      }
+      CAUSE[key] = why;
+      if (isTote) toteWrongInSeg = true;
+    }
+  }
+}
+function whyTally(uptoCall, phase) {
+  const n = {};
+  for (const k in CAUSE) { const call = +k.split("|")[0]; if (call < uptoCall || (call === uptoCall && phase >= 2)) n[CAUSE[k]] = (n[CAUSE[k]] || 0) + 1; }
+  const tot = Object.values(n).reduce((a, b) => a + b, 0), mx = Math.max(1, ...Object.values(n));
+  $("why").innerHTML = "<b>Why the wrong answers were wrong</b> (" + tot + " so far; read from the log)" +
+    CAUSES.filter((k) => n[k]).map((k) => `<div class="row"><span class="lab">${k}</span><span class="bar" style="width:${Math.round(220 * n[k] / mx)}px;background:${CCOL[k]}"></span><b>${n[k]}</b></div>`).join("");
+}
 function timeline() {                       // replay: when each call starts and when its pick and result show
   TL = []; let t = 0;
   for (const c of RUN.calls) {
@@ -111,7 +166,8 @@ function draw(i, phase, thinkingFor) {      // phase: 0 = question shown, 1 = pi
       return `<div class="${cls}">${esc(ch)}${mark}</div>`;
     }).join("");
     $("verdict").innerHTML = !a || phase < 2 ? "" : (a.right ? "<span style='color:var(--right)'>✅ right</span>" :
-      `<span style='color:var(--wrong)'>❌ wrong</span> <span style='color:var(--muted)'>(agent: ${esc(a.reply == null ? "no answer" : a.reply)}; answer: ${esc(a.answer)})</span>`) +
+      `<span style='color:var(--wrong)'>❌ wrong</span> <span style='color:var(--muted)'>(agent: ${esc(a.reply == null ? "no answer" : a.reply)}; answer: ${esc(a.answer)})</span>` +
+      (CAUSE[c.call + "|" + a.key] ? ` <span style='color:${CCOL[CAUSE[c.call + "|" + a.key]]}'>· why: ${CAUSE[c.call + "|" + a.key]}</span>` : "")) +
       (qs.length > 1 ? " · " + (c.answers || []).slice(1).map((x) => (x.right ? "✅" : "❌") + " " + esc(x.kind === "tote" ? "Tote X" : x.kind === "fact" ? "fact from " + x.about : "own")).join(" · ") : "");
   }
   const evs = (RUN.memory_events || []).filter((x) => x.after_call < c.call), last = evs[evs.length - 1];
@@ -128,7 +184,7 @@ function draw(i, phase, thinkingFor) {      // phase: 0 = question shown, 1 = pi
   // what counts so far: answers up to this call (this call's only once its result shows)
   const ans = [];
   for (const x of RUN.calls) { if (x.call > c.call || x.pending) break; if (x.call === c.call && phase < 2) break; (x.answers || []).forEach((a) => ans.push({...a, asked_in: x.room})); }
-  score(ans, c); chart1(ans); chart2(ans); chart3(ans); chart4(c); tote(ans, c); map(c);
+  score(ans, c); chart1(ans); chart2(ans); chart3(ans); chart4(c); tote(ans, c); map(c); whyTally(c.call, phase);
 }
 const esc = (s) => String(s).replace(/[&<>]/g, (m) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;"}[m]));
 
@@ -141,7 +197,8 @@ function score(ans, c) {
   const chips = [["room questions", by((a) => a.kind === "room")], ["Tote X", by((a) => a.kind === "tote")], ["earlier facts", by((a) => a.kind === "fact")],
     ["invalid moves", upto.filter((x) => x.move && x.move.valid === false).length], ["bad replies", upto.filter((x) => !x.reply_ok).length + ans.filter((a) => !a.parsed).length],
     ["nav misses", legs.filter((l) => l.navigation_miss).length + (RUN.rooms || []).filter((x) => x.dock_placed && upto.some((y) => y.room === x.room && y.stage > 0)).length],
-    ["found way alone", legs.filter((l) => l.recovered_alone).length]];
+    ["found way alone", legs.filter((l) => l.recovered_alone).length],
+    ["harness errors", upto.reduce((t, x) => t + Math.max(0, (x.tries || 1) - 1), 0) + " (not scored)"]];
   $("chips").innerHTML = chips.map(([k, v]) => `<span class="chip">${k} <b>${v}</b></span>`).join("") +
     `<span class="chip" style="border-color:#b45309;color:#f59e0b">1 walk: linked answers, no error bars yet</span>`;
 }
@@ -248,6 +305,7 @@ $("pic").onload = () => { window.frameReady = true; };
 async function load() {
   RUN = await (await fetch(`${RUNDIR}/run.json?t=${Date.now()}`)).json();
   if (!EP) EP = await fetch(Q.get("nav") || "../../docs/episodes/nav.json").then((r) => r.json()).catch(() => null);
+  causes();
   $("model").textContent = RUN.meta.model + (RUN.meta.protocol && RUN.meta.protocol.effort ? " · effort " + RUN.meta.protocol.effort : "") +
     (RUN.meta.label ? " · DEMO, not a benchmark score" : ""); return RUN;
 }

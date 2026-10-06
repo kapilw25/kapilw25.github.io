@@ -1,7 +1,40 @@
-{"updated": "2026-10-05", "rows": [
- {"group": "Plan", "part": "🧱 Fact memory load", "evidence": "earlier facts 7 of 7, even 28 rooms back: it wrote every fact into its notes and kept them through 12 memory squeezes it chose itself", "change": "6 tagged crates per room (180 code-colour pairs per walk), asked about from later rooms; a same-room crate question checks it saw them", "status": "🔵 built in the tuning generator; first tuning walk next"},
- {"group": "Plan", "part": "🛒 Harder Tote X, fair start", "evidence": "wrong R1 to R13 only because it missed two arm moves in R1 and R2; once re-synced it tracked 39 arm moves (13 rooms) without a slip", "change": "2 swaps and 1 decoy (lift and put back) per room; the arm waits one call after docking; a re-sync gate every 5 rooms, the gap a tuning knob; the gate screen lights only while the cart is inside", "status": "🔵 built in the generator; the walk runner update next"},
- {"group": "Plan", "part": "📏 Measure it right", "evidence": "14 answers about earlier rooms, 1 to 4 per distance bar; Tote X answers in one walk share one chain, so they are not independent", "change": "Tote X and fact lines against distance with an S-curve fit (d50) and error bars resampled over walks; 3 fresh seeds never used in tuning; cost by room", "status": "🟡 charts in the replay; fit and fresh seeds next"},
- {"group": "Plan", "part": "🖼️ Limit picture history", "evidence": "with its whole conversation it could look back at any picture until it chose to squeeze its memory", "change": "keep only the last N pictures, a fixed rule for every model; it conflicts with 'the agent decides its own memory', so it is tuned last and reported as a separate setting", "status": "⏳ not built"},
- {"group": "Plan", "part": "🔁 Tuning loop", "evidence": "walk 1 showed no fall with distance for any kind of question", "change": "Opus 5.5 at thinking 'xhigh' on practice seeds, at most $50 per walk; stop when, for Tote X and for facts, accuracy is at least 80% at 1 to 2 rooms and at most 33% at the longest distances, own-room questions stay at 85% or more, on 3 fresh seeds", "status": "⏳ starts after the walk runner update"}
-]}
+{
+ "updated": "2026-10-05",
+ "rows": [
+  {
+   "group": "Plan",
+   "part": "🧱 Fact memory load",
+   "evidence": "earlier facts 7 of 7, even 28 rooms back: it wrote every fact into its notes and kept them through 12 memory squeezes it chose itself",
+   "change": "6 tagged crates per room (180 code-colour pairs per walk), asked about from later rooms; a same-room crate question checks it saw them",
+   "status": "✅ built; level-1 walk running (seed 104, 20 crate questions)"
+  },
+  {
+   "group": "Plan",
+   "part": "🛒 Harder Tote X, fair start",
+   "evidence": "wrong R1 to R13 only because it missed two arm moves in R1 and R2; once re-synced it tracked 39 arm moves (13 rooms) without a slip",
+   "change": "2 swaps and 1 decoy (lift and put back) per room; the arm waits one call after docking; a re-sync gate every 5 rooms, the gap a tuning knob; the gate screen lights only while the cart is inside",
+   "status": "✅ built; a 6-room pilot with 2 swaps and 1 decoy per room was still 3 of 3 right, so level 1 uses 3 swaps and a gate every 10 rooms (running)"
+  },
+  {
+   "group": "Plan",
+   "part": "📏 Measure it right",
+   "evidence": "14 answers about earlier rooms, 1 to 4 per distance bar; Tote X answers in one walk share one chain, so they are not independent",
+   "change": "Tote X and fact lines against distance with an S-curve fit (d50) and error bars resampled over walks; 3 fresh seeds never used in tuning; cost by room",
+   "status": "✅ in the replay: Tote X vs facts, cost by room, why each wrong answer was wrong, harness errors; S-curve fit in analyze.py; fresh seeds 903, 905, 910, 912 screened"
+  },
+  {
+   "group": "Plan",
+   "part": "🖼️ Limit picture history",
+   "evidence": "with its whole conversation it could look back at any picture until it chose to squeeze its memory",
+   "change": "keep only the last N pictures, a fixed rule for every model; it conflicts with 'the agent decides its own memory', so it is tuned last and reported as a separate setting",
+   "status": "⏳ not built"
+  },
+  {
+   "group": "Plan",
+   "part": "🔁 Tuning loop",
+   "evidence": "walk 1 showed no fall with distance for any kind of question",
+   "change": "Opus 5.5 at thinking 'xhigh' on practice seeds, at most $50 per walk; stop when, for Tote X and for facts, accuracy is at least 80% at 1 to 2 rooms and at most 33% at the longest distances, own-room questions stay at 85% or more, on 3 fresh seeds",
+   "status": "🏃 level 1 running on practice seed 104 (thinking 'xhigh')"
+  }
+ ]
+}

@@ -51,8 +51,8 @@ export async function init(opts) {
 // The robot camera's picture for any pose: the world as it stands after step k (moved objects, the cart's totes), the
 // robot (and its towed cart) at `robot` = [x, y, yaw], the camera at cam.pos looking at cam.look. Returns a JPEG data URL
 // at the inset's size (1280 x 720 in the harness). Used by bench/agentwalk/walk.mjs when the agent steers.
-export function snap(k, robot, cam, quality) {
-  jump(k);
+export function snap(k, robot, cam, quality, show) {
+  jump(k); shown(show || []);
   S.pose = [...robot]; placeRobot(S.pose); aimRobot(cam.pos, cam.look); cull(robot[0]);
   S.RI.render(S.scene, S.rcam);
   return S.RI.domElement.toDataURL("image/jpeg", quality || 0.88);
@@ -178,7 +178,11 @@ async function build() {
     const g = await thing(x); g.position.copy(P(x.pos)); g.rotation.set(0, (x.yaw || 0) * D2R, -(x.tilt || 0) * D2R, "ZYX");
     S.scene.add(g); const it = track(g, x.pos[0], x.size[0] > 30); it.vis = x.vis !== 0;
   }
-  for (const l of S.D.labels) { const m = labelMesh(l); S.scene.add(m); track(m, l.pos[0], false); }
+  S.only = [];                                 // labels shown only at one moment (a gate's screen while the cart is inside)
+  for (const l of S.D.labels) {
+    const m = labelMesh(l); S.scene.add(m); const it = track(m, l.pos[0], false);
+    if (l.show_only) { it.vis = false; it.id = l.id; S.only.push(it); }
+  }
   for (const x of S.D.dyn) {
     const g = await thing(x); S.scene.add(g);
     const it = track(g, x.pos[0], false); it.p0 = [...x.pos, x.yaw || 0, x.tilt || 0, x.vis === 0 ? 0 : 1];
@@ -191,6 +195,7 @@ function setPose(it, p) {
   it.g.position.copy(P(p)); it.g.rotation.set(0, p[3] * D2R, -p[4] * D2R, "ZYX"); it.g.visible = it.vis && it.near;
 }
 
+function shown(ids) { for (const it of S.only) { it.vis = ids.includes(it.id); it.g.visible = it.vis && it.near; } }
 function cull(x) {   // draw only what is near the robot: 30 rooms of shapes would slow the page
   S.cullAt = x;
   for (const it of S.items) { it.near = it.always || Math.abs(it.x - x) < NEAR; it.g.visible = it.vis && it.near; }
@@ -312,6 +317,7 @@ function jump(k) {   // place everything at once: replay every moved object up t
   const p = k === 0 ? S.D.start.robot : S.D.steps[k - 1].robot, c = camAt(k);
   S.pose = [...p]; placeRobot(p); aimRobot(c.pos, c.look); S.lookCur = [...c.look];
   setTotes(k === 0 ? 0 : S.D.steps[k - 1].cart);
+  shown(k > 0 && S.D.steps[k - 1].gate ? [S.D.steps[k - 1].gate] : []);
   const pose = {};
   for (const id in S.dyn) pose[id] = S.dyn[id].p0;
   for (const st of S.D.steps.slice(0, k)) for (const id in st.dyn || {}) pose[id] = st.dyn[id];
@@ -328,6 +334,7 @@ export function go(k) {
   if (k === S.k) return;
   if (k === S.k + 1) {          // one step forward: animate it
     const st = S.D.steps[k - 1], c = st.camera;
+    shown(st.gate ? [st.gate] : []);
     const A = {t0: performance.now(), end: st.robot, look0: S.lookCur, look: c.look, cam: c.pos, camz: c.pos[2], cart: st.cart,
                totes: [], dyn: []};
     const path = st.path && st.path.length ? st.path : [st.robot];
