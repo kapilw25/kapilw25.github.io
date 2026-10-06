@@ -1,0 +1,78 @@
+{
+ "runs": [
+  {
+   "name": "run2",
+   "seed": 7,
+   "model": "claude-opus-5-5",
+   "effort": "high",
+   "label": "Demo run through the Claude Code CLI: Claude Code adds its own lines to every call (an identity line, the account email, an environment block, the date), so this score is not a benchmark number.",
+   "started": "2026-10-05T22:36:15.667Z",
+   "finished": "2026-10-05T23:36:41.486Z",
+   "done": true,
+   "summary": {
+    "calls": 642,
+    "answers": 44,
+    "right": 39,
+    "by_kind": {
+     "room": {
+      "right": 28,
+      "n": 30
+     },
+     "tote": {
+      "right": 4,
+      "n": 7
+     },
+     "fact": {
+      "right": 7,
+      "n": 7
+     }
+    },
+    "by_d": {
+     "0": {
+      "right": 28,
+      "n": 30
+     },
+     "1": {
+      "right": 1,
+      "n": 1
+     },
+     "2-3": {
+      "right": 2,
+      "n": 3
+     },
+     "4-7": {
+      "right": 2,
+      "n": 3
+     },
+     "8-15": {
+      "right": 3,
+      "n": 4
+     },
+     "16-29": {
+      "right": 3,
+      "n": 3
+     }
+    },
+    "tool_use": {
+     "invalid_action": 0,
+     "bad_reply": 0,
+     "navigation_miss": 2
+    },
+    "recovered_alone": 0,
+    "moves_per_leg": 10.5,
+    "first_slip_room": "R1",
+    "seen_right_then_lost": {
+     "n": 0,
+     "of": 7
+    },
+    "after_gate": "right before the gate",
+    "squeezes": 12,
+    "overflows": 0,
+    "cost_usd": 19.327,
+    "minutes": 60.4
+   },
+   "video": "agentwalk/run2/replay_ff.mp4",
+   "viewer": "agentwalk/viewer.html?run=run2&mode=replay&ff=1&nav=../episodes/nav.json"
+  }
+ ]
+}

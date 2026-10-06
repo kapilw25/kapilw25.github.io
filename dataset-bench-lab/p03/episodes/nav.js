@@ -43,8 +43,19 @@ export async function init(opts) {
   S.robot = robotBody(); S.cart = cartBody(); S.robot.add(S.cart); S.scene.add(S.robot);
   S.k = 0; S.anim = null; S.cullAt = null;
   jump(0);
+  if (opts.still) { fit(); S.status(""); return; }   // render on request only (snap), for the agent-walk harness
   new ResizeObserver(fit).observe(opts.main); new ResizeObserver(fit).observe(opts.inset); fit();
   S.status(""); loop();
+}
+
+// The robot camera's picture for any pose: the world as it stands after step k (moved objects, the cart's totes), the
+// robot (and its towed cart) at `robot` = [x, y, yaw], the camera at cam.pos looking at cam.look. Returns a JPEG data URL
+// at the inset's size (1280 x 720 in the harness). Used by bench/agentwalk/walk.mjs when the agent steers.
+export function snap(k, robot, cam, quality) {
+  jump(k);
+  S.pose = [...robot]; placeRobot(S.pose); aimRobot(cam.pos, cam.look); cull(robot[0]);
+  S.RI.render(S.scene, S.rcam);
+  return S.RI.domElement.toDataURL("image/jpeg", quality || 0.88);
 }
 
 function renderer(el) {
