@@ -1202,30 +1202,30 @@
    "effort": "xhigh",
    "label": "Demo run through the Claude Code CLI: Claude Code adds its own lines to every call (an identity line, the account email, an environment block, the date), so this score is not a benchmark number.",
    "started": "2026-10-07T09:31:30.989Z",
-   "finished": "2026-10-07T10:23:24.999Z",
+   "finished": null,
    "done": false,
    "summary": {
-    "calls": 472,
-    "answers": 41,
-    "right": 38,
+    "calls": 582,
+    "answers": 52,
+    "right": 47,
     "by_kind": {
      "room": {
-      "right": 18,
-      "n": 20
+      "right": 23,
+      "n": 25
      },
      "tote": {
-      "right": 6,
-      "n": 6
+      "right": 7,
+      "n": 7
      },
      "fact": {
-      "right": 4,
-      "n": 4
+      "right": 6,
+      "n": 6
      }
     },
     "by_d": {
      "0": {
-      "right": 24,
-      "n": 26
+      "right": 30,
+      "n": 32
      },
      "1": {
       "right": 2,
@@ -1240,12 +1240,12 @@
       "n": 1
      },
      "8-15": {
-      "right": 7,
-      "n": 7
+      "right": 8,
+      "n": 8
      },
      "16-29": {
-      "right": 2,
-      "n": 3
+      "right": 4,
+      "n": 7
      }
     },
     "tool_use": {
@@ -1254,22 +1254,22 @@
      "navigation_miss": 1
     },
     "recovered_alone": 0,
-    "moves_per_leg": 9.14,
+    "moves_per_leg": 9.12,
     "first_slip_room": null,
     "seen_right_then_lost": {
      "n": 0,
-     "of": 4
+     "of": 6
     },
     "after_gate": {
      "recovered": 0,
      "anchored": 0,
      "right_before": 0
     },
-    "stopped": "cost cap $50 reached at call 472",
+    "stopped": null,
     "squeezes": 0,
-    "overflows": 0,
-    "cost_usd": 50.186,
-    "minutes": 51.9
+    "overflows": 1,
+    "cost_usd": 77.284,
+    "minutes": 127.2
    },
    "baselines": {
     "box": {
@@ -1330,27 +1330,27 @@
    "finished": null,
    "done": false,
    "summary": {
-    "calls": 363,
-    "answers": 30,
-    "right": 24,
+    "calls": 456,
+    "answers": 36,
+    "right": 28,
     "by_kind": {
      "room": {
-      "right": 13,
-      "n": 14
+      "right": 16,
+      "n": 18
      },
      "tote": {
       "right": 5,
       "n": 5
      },
      "fact": {
-      "right": 3,
-      "n": 3
+      "right": 4,
+      "n": 4
      }
     },
     "by_d": {
      "0": {
-      "right": 17,
-      "n": 18
+      "right": 20,
+      "n": 22
      },
      "1": {
       "right": 1,
@@ -1365,25 +1365,25 @@
       "n": 3
      },
      "8-15": {
-      "right": 3,
-      "n": 6
+      "right": 4,
+      "n": 7
      },
      "16-29": {
       "right": 0,
-      "n": 0
+      "n": 1
      }
     },
     "tool_use": {
      "invalid_action": 1,
-     "bad_reply": 1,
+     "bad_reply": 2,
      "navigation_miss": 2
     },
     "recovered_alone": 0,
-    "moves_per_leg": 10.87,
+    "moves_per_leg": 10.84,
     "first_slip_room": null,
     "seen_right_then_lost": {
      "n": 0,
-     "of": 3
+     "of": 4
     },
     "after_gate": {
      "recovered": 0,
@@ -1391,10 +1391,10 @@
      "right_before": 0
     },
     "stopped": null,
-    "squeezes": 5,
+    "squeezes": 8,
     "overflows": 0,
-    "cost_usd": 19.216,
-    "minutes": 59.6
+    "cost_usd": 23.126,
+    "minutes": 74.8
    },
    "baselines": {
     "box": {
@@ -1452,30 +1452,30 @@
    "effort": "xhigh",
    "label": "Demo run through the Claude Code CLI: Claude Code adds its own lines to every call (an identity line, the account email, an environment block, the date), so this score is not a benchmark number.",
    "started": "2026-10-07T09:31:30.990Z",
-   "finished": null,
-   "done": false,
+   "finished": "2026-10-07T11:27:48.612Z",
+   "done": true,
    "summary": {
-    "calls": 673,
-    "answers": 55,
-    "right": 46,
+    "calls": 724,
+    "answers": 60,
+    "right": 50,
     "by_kind": {
      "room": {
-      "right": 27,
-      "n": 27
+      "right": 29,
+      "n": 29
      },
      "tote": {
-      "right": 7,
-      "n": 7
+      "right": 8,
+      "n": 8
      },
      "fact": {
-      "right": 5,
-      "n": 6
+      "right": 6,
+      "n": 7
      }
     },
     "by_d": {
      "0": {
-      "right": 34,
-      "n": 34
+      "right": 36,
+      "n": 36
      },
      "1": {
       "right": 1,
@@ -1494,8 +1494,8 @@
       "n": 7
      },
      "16-29": {
-      "right": 2,
-      "n": 7
+      "right": 4,
+      "n": 10
      }
     },
     "tool_use": {
@@ -1504,11 +1504,11 @@
      "navigation_miss": 1
     },
     "recovered_alone": 0,
-    "moves_per_leg": 8.79,
+    "moves_per_leg": 8.73,
     "first_slip_room": null,
     "seen_right_then_lost": {
      "n": 1,
-     "of": 6
+     "of": 7
     },
     "after_gate": {
      "recovered": 0,
@@ -1518,8 +1518,8 @@
     "stopped": null,
     "squeezes": 9,
     "overflows": 0,
-    "cost_usd": 32.495,
-    "minutes": 111.8
+    "cost_usd": 35.251,
+    "minutes": 116.3
    },
    "baselines": {
     "box": {
