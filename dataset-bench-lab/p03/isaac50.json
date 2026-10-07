@@ -1,5 +1,5 @@
 {
- "built": "2026-10-07 08:09 UTC",
+ "built": "2026-10-07 08:57 UTC",
  "n_modes": 50,
  "K_ASK": [
   1,
@@ -853,10 +853,42 @@
     "compiled_on_gpu": true,
     "gpu_pictures": 21,
     "sim_keys_agree": true,
-    "web_scene": "isaac50/scene/m2_8/scene.json"
+    "web_scene": "isaac50/scene/m2_8/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 16,
+     "max_abs_diff_vs_mac": 0.3000000000000007
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "At the start the arm stood at base 0, shoulder 30, elbow 40 degrees (base: turn about its column, 0 = reaching straight away from you, positive = to your left; shoulder: lean of the upper arm from straight up; elbow: further bend of the forearm). The arm is under a hood now. Give the joint changes that bring it back to that start pose: {\"dtheta\": [base, shoulder, elbow]} in degrees.",
+     "shape": "{\"dtheta\": [base, shoulder, elbow]}"
+    },
+    {
+     "K": 3,
+     "question": "At the start the arm stood at base 0, shoulder 30, elbow 40 degrees (base: turn about its column, 0 = reaching straight away from you, positive = to your left; shoulder: lean of the upper arm from straight up; elbow: further bend of the forearm). The arm is under a hood now. Give the joint changes that bring it back to that start pose: {\"dtheta\": [base, shoulder, elbow]} in degrees.",
+     "shape": "{\"dtheta\": [base, shoulder, elbow]}"
+    },
+    {
+     "K": 5,
+     "question": "At the start the arm stood at base 0, shoulder 30, elbow 40 degrees (base: turn about its column, 0 = reaching straight away from you, positive = to your left; shoulder: lean of the upper arm from straight up; elbow: further bend of the forearm). The arm is under a hood now. Give the joint changes that bring it back to that start pose: {\"dtheta\": [base, shoulder, elbow]} in degrees.",
+     "shape": "{\"dtheta\": [base, shoulder, elbow]}"
+    },
+    {
+     "K": 10,
+     "question": "At the start the arm stood at base 0, shoulder 30, elbow 40 degrees (base: turn about its column, 0 = reaching straight away from you, positive = to your left; shoulder: lean of the upper arm from straight up; elbow: further bend of the forearm). The arm is under a hood now. Give the joint changes that bring it back to that start pose: {\"dtheta\": [base, shoulder, elbow]} in degrees.",
+     "shape": "{\"dtheta\": [base, shoulder, elbow]}"
+    },
+    {
+     "K": 15,
+     "question": "At the start the arm stood at base 0, shoulder 30, elbow 40 degrees (base: turn about its column, 0 = reaching straight away from you, positive = to your left; shoulder: lean of the upper arm from straight up; elbow: further bend of the forearm). The arm is under a hood now. Give the joint changes that bring it back to that start pose: {\"dtheta\": [base, shoulder, elbow]} in degrees.",
+     "shape": "{\"dtheta\": [base, shoulder, elbow]}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1705,10 +1737,10 @@
    "name": "Deformable Conveyor Sag",
    "v12_description": "Placing an ultra-heavy steel casting on a flexible rubber conveyor belt, causing it to bow down between rollers. The model interprets the sag as a mechanical break in the structural track.",
    "v12_action_target": "The model must track and output height adjustments [z] for a downstream pickup interface. Treating the sag as a break causes it to freeze downstream operations entirely, halting the system loop.",
-   "physics": "deformable",
+   "physics": "rigid",
    "artifact": {
     "usda": "bench/isaac50/scenes/m4_7/m4_7.usda",
-    "bytes": 38272,
+    "bytes": 38914,
     "prims": 38,
     "objects": 7,
     "time_samples": 21,
@@ -1717,10 +1749,42 @@
     "compiled_on_gpu": true,
     "gpu_pictures": 21,
     "sim_keys_agree": true,
-    "web_scene": "isaac50/scene/m4_7/scene.json"
+    "web_scene": "isaac50/scene/m4_7/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 15,
+     "max_abs_diff_vs_mac": 0.0009
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "Each step a casting lay on the rubber belt between the rollers (the belt bows, it does not break), then moved on downstream. Give the pickup height adjustment for the casting in the first picture after the start (picture 1): {\"z\": m}, the height of its top above the floor as it lay on the belt.",
+     "shape": "{\"z\": m}"
+    },
+    {
+     "K": 3,
+     "question": "Each step a casting lay on the rubber belt between the rollers (the belt bows, it does not break), then moved on downstream. Give the pickup height adjustment for the casting in the first picture after the start (picture 1): {\"z\": m}, the height of its top above the floor as it lay on the belt.",
+     "shape": "{\"z\": m}"
+    },
+    {
+     "K": 5,
+     "question": "Each step a casting lay on the rubber belt between the rollers (the belt bows, it does not break), then moved on downstream. Give the pickup height adjustment for the casting in the first picture after the start (picture 1): {\"z\": m}, the height of its top above the floor as it lay on the belt.",
+     "shape": "{\"z\": m}"
+    },
+    {
+     "K": 10,
+     "question": "Each step a casting lay on the rubber belt between the rollers (the belt bows, it does not break), then moved on downstream. Give the pickup height adjustment for the casting in the first picture after the start (picture 1): {\"z\": m}, the height of its top above the floor as it lay on the belt.",
+     "shape": "{\"z\": m}"
+    },
+    {
+     "K": 15,
+     "question": "Each step a casting lay on the rubber belt between the rollers (the belt bows, it does not break), then moved on downstream. Give the pickup height adjustment for the casting in the first picture after the start (picture 1): {\"z\": m}, the height of its top above the floor as it lay on the belt.",
+     "shape": "{\"z\": m}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -2086,9 +2150,9 @@
    "physics": "none",
    "artifact": {
     "usda": "bench/isaac50/scenes/m5_6/m5_6.usda",
-    "bytes": 58050,
-    "prims": 100,
-    "objects": 22,
+    "bytes": 52113,
+    "prims": 84,
+    "objects": 18,
     "time_samples": 21,
     "textures": 1,
     "opened_ok": true,

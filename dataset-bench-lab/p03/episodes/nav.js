@@ -56,7 +56,12 @@ export function snap(k, robot, cam, quality, show) {
   jump(k); shown(show || []);
   S.pose = [...robot]; placeRobot(S.pose); aimRobot(cam.pos, cam.look); cull(robot[0]);
   aimSun(robot);
+  const dark = !!(S.D.cart_states[S.cartIdx] || {}).dark;   // a dark bay: only the lit cart (a child of the robot) is in the picture,
+  const hid = [], bg = S.scene.background;                    // no floor, wall, station post or label to calibrate the wobble against
+  if (dark) { for (const o of S.scene.children) if (o !== S.robot && !o.isLight && o.visible) { o.visible = false; hid.push(o); }
+              S.scene.background = new THREE.Color(0x050505); }
   S.RI.render(S.scene, S.rcam);
+  if (dark) { for (const o of hid) o.visible = true; S.scene.background = bg; }
   return S.RI.domElement.toDataURL("image/jpeg", quality || 0.88);
 }
 
