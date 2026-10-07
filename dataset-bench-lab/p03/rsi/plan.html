@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Cliff Plan Board</title>
+<style>
+:root{--bg:#f7f7f5;--panel:#ffffff;--ink:#1d2327;--muted:#5f6b73;--line:#dde2e5;--soft:#eef1f3;--accent:#2563eb;--ok:#15803d}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;--line:#2c3338;
+--soft:#20262a;--accent:#7aa7ff;--ok:#6fd49a}}
+:root[data-theme="dark"]{--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;--line:#2c3338;--soft:#20262a;--accent:#7aa7ff;--ok:#6fd49a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:16px}
+h1{font-size:24px;margin:0 0 6px}
+.lede{color:var(--muted);margin:0 0 12px}
+.tiles{display:none}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 14px;min-width:120px}
+.tile b{font-size:22px;display:block}
+.tile span{color:var(--muted);font-size:12px}
+.legend{color:var(--muted);font-size:13px;margin:0 0 14px}
+.sec{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin:0 0 12px;overflow:hidden}
+.sec h2{font-size:15px;margin:0;padding:10px 14px;background:var(--soft);border-bottom:1px solid var(--line)}
+table{width:100%;border-collapse:collapse}
+td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.st{white-space:nowrap;width:150px;font-weight:600}
+td.wh{white-space:nowrap;width:70px;color:var(--muted)}
+td.t b{display:block}
+td.t small{color:var(--muted)}
+td.r{width:330px;color:var(--muted);font-size:13px}
+td.r a{color:var(--accent)}
+@media (max-width:760px){td.r{display:none}td.st{width:auto}}
+.live{font-size:12px;color:var(--muted)}
+.live b{color:var(--ok)}
+.chip{display:inline-block;font:11px ui-monospace,Menlo,monospace;background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:0 5px;margin:2px 3px 0 0;color:var(--muted)}
+.audit{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin:0 0 12px;overflow:hidden}
+.audit h2{font-size:15px;margin:0;padding:10px 14px;background:var(--soft);border-bottom:1px solid var(--line)}
+.audit td.c{white-space:nowrap;width:46px;font-size:18px}
+.audit td.k{white-space:nowrap;width:190px;font-weight:600}
+.audit td.n{white-space:nowrap;width:150px;color:var(--muted);font-size:13px}
+.next{background:#2563eb;color:#fff;border-radius:5px;padding:0 6px;font-size:11px;margin-left:6px}
+.note{color:var(--muted);font-size:13px;margin:0 0 12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Plan board: every episode, past and future</h1>
+  <p class="lede">One row per episode or test, in the order they run. Rows that ran link to their round; queued tests update live from their own result files.</p>
+  <div class="sd-wrap"><aside class="side" id="side" aria-label="Filters"></aside><div>
+  <p class="legend">Clusters: 🔴 exhausted · 🟠 done on Mac, GPU open · 🟡 open · ⚪ untried · ⛔ waits on you &nbsp;|&nbsp; Tags: E = E1-E9 list · IB = in-between list · RA = v12 robot actions · T = top-10 · G = GPU list · V = taxonomy id<br>✅ cliff found · ❌ ran, no cliff · 🏃 running · ⏳ queued · 🗓️ planned · ⛔ waits on you · ⏹️ stopped &nbsp;|&nbsp; 🍎 Mac · 🎮 GPU · 🌐 paid API · 🧍 you &nbsp; <span class="live" id="live"></span></p>
+  <div id="board"></div>
+  </div></div>
+</div>
+<script src="snapshot.js"></script>
+<script src="rsi_data.js"></script>
+<script>
+RSI.theme();
+var esc = RSI.esc, $ = function (id) { return document.getElementById(id); };
+var ST = {cliff: "✅ cliff found", done: "❌ no cliff", running: "🏃 running", queued: "⏳ queued", planned: "🗓️ planned", owner: "⛔ waits on you", stopped: "⏹️ stopped"};
+var WH = {mac: "🍎 Mac", gpu: "🎮 GPU", api: "🌐 API", you: "🧍 you"};
+var CS = {closed: "🔴 exhausted", closed_mac: "🟠 done on Mac, GPU open", open: "🟡 open", untried: "⚪ untried", owner: "⛔ waits on you"};
+function get(url, kind) {
+  return fetch(url + "?t=" + Date.now(), {cache: "no-store"}).then(function (r) { if (!r.ok) throw 0; return kind === "json" ? r.json() : r.text(); });
+}
+function liveStatus(it) {          // a queued test: done when its score has the version, running when it has answers
+  if (!it.probe) return Promise.resolve(null);
+  var base = "../../bench/runs/agentwalk/" + it.probe + "/";
+  return get(base + "score.json", "json").then(function (sc) { if (sc[it.version]) return {status: "done", sc: sc[it.version]}; throw 0; })
+    .catch(function () {
+      return get(base + "results.jsonl", "text").then(function (t) {
+        var n = t.split("\n").filter(function (l) { return l.indexOf('"version":"' + it.version + '"') >= 0; }).length;
+        return n ? {status: "running", n: n} : null;
+      }).catch(function () { return null; });
+    });
+}
+function result(it, rounds) {
+  var r = it.iter ? rounds.filter(function (x) { return x.id === it.iter; })[0] : null, h = [];
+  if (r) h.push('<a href="rounds.html?round=' + r.i + '" target="_top">round ' + r.i + "</a> · " + esc(r.d.reason || ""));
+  if (it.live && it.live.sc) { var s = it.live.sc; h.push(s.mae != null ? "miss " + s.mae + " " + (s.unit || "") + ", bias " + s.bias : JSON.stringify(s.within || "")); }
+  if (it.live && it.live.n) h.push(it.live.n + " answers in");
+  if (it.replay) h.push('<a href="../agentwalk/' + esc(it.replay) + '/replay_ff.mp4" target="_blank">▶ replay</a>');
+  return h.join("<br>");
+}
+var SEL = {}, LAST = null;
+function groupsOf(plan) {
+  var cl = {}; plan.clusters.forEach(function (c) { cl[c.id] = c; });
+  var st = ["done", "cliff", "running", "queued", "planned", "owner", "stopped"];
+  var src = [["E", "E1-E9 list"], ["IB", "in-between list"], ["RA", "v12 robot actions"], ["T", "top-10"], ["G", "GPU list"], ["V", "taxonomy id (v03 / v12)"]];
+  var has = function (it, p) { return (it.tags || []).some(function (t) { return t.split(" ")[0] === p || t.indexOf(p) === 0 && /^E\d/.test(t) && p === "E"; }); };
+  return [
+    {k: "status", l: "Status", items: st.map(function (x) { return {v: x, l: ST[x], match: function (it) { return it.status === x; }}; })},
+    {k: "cluster", l: "Cluster", items: plan.clusters.map(function (c) { return {v: c.id, l: c.icon + " " + c.id + " " + c.title, match: function (it) { return it.cluster === c.id; }}; })},
+    {k: "cstate", l: "Cluster state", items: Object.keys(CS).map(function (x) { return {v: x, l: CS[x], match: function (it) { return (cl[it.cluster] || {}).status === x; }}; })},
+    {k: "where", l: "Where it runs", items: Object.keys(WH).map(function (x) { return {v: x, l: WH[x], match: function (it) { return it.where === x; }}; })},
+    {k: "src", l: "Source list", items: src.map(function (x) { return {v: x[0], l: x[0] + " · " + x[1], match: function (it) { return has(it, x[0]); }}; })}
+  ];
+}
+function render(plan, data, src) {
+  LAST = [plan, data, src];
+  var groups = groupsOf(plan), vis = plan.items.filter(function (it) { return RSI.pass(it, groups, SEL); });
+  RSI.panel($("side"), plan.items, groups, SEL, function () { render.apply(null, LAST); },
+            [[vis.length + " of " + plan.items.length, "rows shown"], ["$" + data.spent.toFixed(0), "spent so far"]]);
+  var nextId = (plan.order || "").split(" ")[0];
+  var merged = plan.items.filter(function (it) { var lists = {}; (it.tags || []).forEach(function (t) { if (t.split(" ")[0] !== "V") lists[t] = 1; }); return Object.keys(lists).length > 1; });
+  var nTags = plan.items.reduce(function (a, it) { return a + (it.tags || []).filter(function (t) { return t.split(" ")[0] !== "V"; }).length; }, 0);
+  var shownCl = plan.clusters.filter(function (c) { return vis.some(function (it) { return it.cluster === c.id; }); });
+  var h = '<div class="audit"><h2>🧩 Cluster audit: a cluster closes after 2+ no-cliff results with no untested lever left; then the next open cluster runs</h2><table>' +
+    shownCl.map(function (c) {
+      var its = plan.items.filter(function (it) { return it.cluster === c.id; });
+      var ran = its.filter(function (it) { return it.status === "done"; }).length, left = its.filter(function (it) { return ["planned", "queued", "running"].indexOf(it.status) >= 0; }).length;
+      return '<tr><td class="c">' + c.icon + '</td><td class="k">' + esc(c.id) + " · " + (CS[c.status] || c.status) + (c.id === nextId ? '<span class="next">NEXT</span>' : "") +
+        '</td><td class="t"><b>' + esc(c.title) + "</b><small>" + esc(c.why) + " · " + esc(c.verdict) + '</small></td><td class="n">' + ran + " ran, no cliff · " + left + " to go</td></tr>";
+    }).join("") + "</table></div>";
+  h += '<p class="note">🔁 Redundancy audit: ' + nTags + " list entries (E, IB, RA, T, G) merged into " + plan.items.length + " rows; " + merged.length +
+    " rows carry the same idea from two or more lists (their tags show each source). Order: " + esc(plan.order || "") + "</p>";
+  h += shownCl.map(function (c) {
+    var rows = vis.filter(function (it) { return it.cluster === c.id; });
+    return '<div class="sec"><h2>' + c.icon + " " + esc(c.id) + " · " + esc(c.title) + " · " + (CS[c.status] || c.status) + "</h2><table>" + rows.map(function (it) {
+      return '<tr><td class="st">' + (ST[it.status] || it.status) + '</td><td class="wh">' + (WH[it.where] || "") + '</td><td class="t"><b>' + esc(it.title) +
+        "</b><small>" + esc(it.what) + "</small><br>" + (it.tags || []).map(function (t) { return '<span class="chip">' + esc(t) + "</span>"; }).join("") +
+        '</td><td class="r">' + result(it, data.rounds) + "</td></tr>"; }).join("") + "</table></div>";
+  }).join("") || '<p class="note">No row matches. Untick a box or press Clear all.</p>';
+  $("board").innerHTML = h;
+  $("live").innerHTML = src === "live" ? "<b>● live</b>, every 10 s · plan updated " + esc(plan.updated) : "saved copy · plan updated " + esc(plan.updated);
+  if (window.self !== window.top) parent.postMessage({rsiHeight: Math.ceil(document.querySelector(".wrap").getBoundingClientRect().height) + 8}, "*");
+}
+function refresh() {
+  var planP = get("../../bench/results/cliff_plan.json", "json").then(function (p) { return [p, "live"]; })
+    .catch(function () { return [window.RSI_PLAN || {clusters: [], items: []}, "snapshot"]; });
+  planP.then(function (pp) {
+    var plan = pp[0];
+    Promise.all(plan.items.map(function (it) { return it.status === "queued" || it.status === "running" ? liveStatus(it) : Promise.resolve(null); }))
+      .then(function (lv) {
+        lv.forEach(function (x, i) { if (x) { plan.items[i].status = x.status; plan.items[i].live = x; } });
+        RSI.load(function (data, src) { render(plan, data, pp[1] === "live" && src === "live" ? "live" : "snapshot"); });
+      });
+  });
+}
+if (window.self !== window.top) { document.querySelector("h1").hidden = true; document.querySelector(".lede").hidden = true; }
+refresh();
+setInterval(refresh, 10000);
+</script>
+</body>
+</html>

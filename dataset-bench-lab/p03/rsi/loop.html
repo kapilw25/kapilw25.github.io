@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Cliff Search Loop</title>
+<style>
+:root{--bg:#f7f7f5;--panel:#ffffff;--ink:#1d2327;--muted:#5f6b73;--line:#cfd6db;--soft:#eef1f3;--accent:#2563eb;--ok:#15803d;--bad:#c2410c;
+--warn:#b45309;--pill:#dbeafe;--pill-ink:#1e3a8a;--glow-ok:#dcfce7;--glow-bad:#ffedd5;--glow-blue:#e0ecff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;--line:#343c42;
+--soft:#20262a;--accent:#7aa7ff;--ok:#6fd49a;--bad:#f59e6b;--warn:#f0c060;--pill:#1e3a8a;--pill-ink:#dbeafe;--glow-ok:#153322;--glow-bad:#3a2412;--glow-blue:#172a4a}}
+:root[data-theme="dark"]{--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;--line:#343c42;--soft:#20262a;--accent:#7aa7ff;--ok:#6fd49a;
+--bad:#f59e6b;--warn:#f0c060;--pill:#1e3a8a;--pill-ink:#dbeafe;--glow-ok:#153322;--glow-bad:#3a2412;--glow-blue:#172a4a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0 0}
+.bar button{font:inherit;background:var(--soft);border:1px solid var(--line);border-radius:6px;color:var(--ink);padding:4px 10px;cursor:pointer}
+.bar input[type=range]{flex:1;min-width:160px}
+.live{font-size:12px;color:var(--muted)}
+.live b{color:var(--ok)}
+svg{width:100%;height:auto;display:block}
+svg text{fill:var(--ink);font-family:inherit}
+.box{fill:var(--panel);stroke:var(--line);stroke-width:1.5;rx:12}
+.box.on-blue{fill:var(--glow-blue);stroke:var(--accent)}
+.box.on-ok{fill:var(--glow-ok);stroke:var(--ok)}
+.box.on-bad{fill:var(--glow-bad);stroke:var(--bad)}
+.item{fill:var(--soft);stroke:var(--line);rx:6}
+.item.hit{fill:var(--glow-blue);stroke:var(--accent);stroke-width:2}
+.item.never{opacity:.55}
+.t-h{font-size:16px;font-weight:600}
+.t-s{font-size:12px;fill:var(--muted)}
+.t-m{font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.cap{font-size:10.5px;letter-spacing:.08em;fill:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.edge{fill:none;stroke:var(--muted);stroke-width:1.3}
+.edge.dash{stroke-dasharray:4 4}
+.sq{stroke:var(--accent);stroke-width:1.2;fill:none;rx:2}
+.sq.full{fill:var(--accent)}
+.stall{fill:var(--soft);stroke:var(--line)}
+.stall.on{fill:#f59e0b33;stroke:var(--warn)}
+.pill rect{fill:var(--pill);stroke:var(--accent)}
+.pill text{fill:var(--pill-ink);font-size:11px;font-family:ui-monospace,Menlo,monospace}
+.caption{margin:12px 0 0;color:var(--muted)}
+.caption b{color:var(--ink)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+.cols h2{font-size:17px;margin:0 0 2px;display:flex;align-items:center;gap:8px}
+.cols h2 i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.cols .sub{color:var(--muted);margin:0 0 10px;font-size:13px}
+.cols h3{font-size:14px;margin:12px 0 2px;border-top:1px solid var(--line);padding-top:10px}
+.cols p{margin:0;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="sd-wrap"><aside class="side" id="side" aria-label="Filters"></aside><div>
+  <div class="card">
+    <svg id="loop" viewBox="0 0 1080 450" role="img" aria-label="One round of the cliff search">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="currentColor" style="color:var(--muted)"/></marker></defs>
+      <text x="40" y="34" class="t-s">round <tspan id="rnd" class="t-m" style="fill:var(--accent)">0</tspan> / <tspan id="rndT" class="t-m">T</tspan></text>
+      <text x="40" y="58" class="t-s">deepest cliff so far <tspan id="inc" class="t-m" style="fill:var(--accent)">0</tspan> · target 47 pts</text>
+      <text x="40" y="82" class="t-s" id="rkind"></text>
+
+      <rect id="bH" class="box" x="40" y="100" width="210" height="300"/>
+      <text x="58" y="128" class="t-h">Benchmark H<tspan dy="4" font-size="11">t</tspan></text>
+      <g id="parts"></g>
+      <text x="40" y="420" class="cap">EVERY PART CAN BE CHANGED</text>
+
+      <rect id="bP" class="box" x="300" y="60" width="240" height="150"/>
+      <text x="318" y="88" class="t-h">Proposer</text>
+      <text x="318" y="116" class="t-s">parts changed b<tspan dy="3" font-size="9">t</tspan></text>
+      <g id="sqs"></g>
+      <text x="318" y="142" class="t-s">ledger L<tspan dy="3" font-size="9">t</tspan></text>
+      <text x="440" y="142" class="t-m" style="fill:var(--accent)" id="ledger">0 entries</text>
+      <rect id="stall" class="stall" x="316" y="160" width="208" height="26" rx="6"/>
+      <text x="328" y="178" class="t-s" id="stallT">stall → try an untried part</text>
+      <text x="300" y="230" class="cap">PROPOSAL SIDE</text>
+
+      <rect id="bC" class="box" x="590" y="78" width="160" height="120"/>
+      <text x="606" y="104" class="t-h">Leak critic</text>
+      <text x="606" y="126" class="t-s">best no-notes guess</text>
+      <text x="606" y="144" class="t-s">≤ 25% on long questions</text>
+      <text x="606" y="176" class="t-m" id="critT"></text>
+
+      <rect id="bE" class="box" x="800" y="78" width="240" height="120"/>
+      <text x="816" y="104" class="t-h">Evaluate</text>
+      <text x="816" y="126" class="t-s">single-step test (k fresh calls)</text>
+      <text x="816" y="144" class="t-s">or a walk (up to 30 rooms)</text>
+      <text x="816" y="176" class="t-m" id="evalT"></text>
+
+      <rect id="bG" class="box" x="740" y="262" width="300" height="140"/>
+      <text x="756" y="288" class="t-h">Selection gate</text>
+      <rect class="item" id="g1" x="756" y="300" width="268" height="28"/>
+      <text x="768" y="319" class="t-m" font-size="11">≥ 80% at 1-2 rooms · ≤ 33% at end</text>
+      <rect class="item" id="g2" x="756" y="336" width="268" height="28"/>
+      <text x="768" y="355" class="t-m" font-size="11">test first · a walk costs ≤ $50</text>
+      <text x="756" y="388" class="t-s" id="gateT"></text>
+      <text x="740" y="420" class="cap">SELECTION SIDE</text>
+
+      <rect id="bR" class="box" x="436" y="318" width="282" height="70"/>
+      <text x="452" y="344" class="t-h">rejected</text>
+      <text x="452" y="370" class="t-m" font-size="11" style="fill:var(--accent)" id="rejT"></text>
+
+      <path class="edge" d="M250,170 C280,170 270,120 300,120" marker-end="url(#ar)"/>
+      <text x="258" y="214" class="t-s">feedback</text>
+      <path class="edge" d="M540,134 L590,134" marker-end="url(#ar)"/>
+      <text x="543" y="124" class="t-s">idea</text>
+      <path class="edge" d="M750,134 L800,134" marker-end="url(#ar)"/>
+      <path class="edge" d="M920,198 L920,262" marker-end="url(#ar)"/>
+      <text x="928" y="236" class="t-s">depth, cost</text>
+      <path class="edge" d="M740,300 L250,300" marker-end="url(#ar)"/>
+      <text x="300" y="292" class="t-s">H<tspan dy="3" font-size="9">t+1</tspan><tspan dy="-3"> ← deepest admissible cliff</tspan></text>
+      <path class="edge dash" d="M670,198 L670,318" marker-end="url(#ar)"/>
+      <path class="edge dash" d="M740,352 L710,352" marker-end="url(#ar)"/>
+      <path class="edge dash" d="M760,262 C700,240 560,230 530,212" marker-end="url(#ar)"/>
+      <text x="590" y="262" class="t-s">drop dead ideas</text>
+      <g class="pill" id="pill" transform="translate(-100,-100)"><rect x="-18" y="-11" width="36" height="22" rx="8"/><text x="-8" y="4">H′</text></g>
+    </svg>
+    <p class="caption" id="cap"></p>
+    <div class="bar">
+      <button id="prev" aria-label="previous round">◀</button><button id="play">pause</button><button id="next" aria-label="next round">▶</button>
+      <input type="range" id="seek" min="1" max="1" value="1" aria-label="round">
+      <span class="live" id="live"></span>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="card"><h2><i style="background:var(--accent)"></i>Proposal side</h2><p class="sub">how search effort is spent</p>
+      <h3>Test before walk</h3><p>Every idea first gets a single-step test (16 to 36 fresh calls, about $1 to $5); a 30-room walk (about $25) runs only when the test predicts a fall.</p>
+      <h3>Evidence-aware ledger</h3><p>Every try is logged with its hypothesis, settings, scores, cause and next steps, so a dead idea is not tried again.</p>
+      <h3>Explore untried parts</h3><p>When rounds stop deepening the cliff, change a part never touched yet (the camera, the memory rules, the renderer).</p>
+      <h3>One walk at a time</h3><p>Walks run one after another on the Mac, so the plan's usage window is not spent twice as fast.</p></div>
+    <div class="card"><h2><i style="background:var(--ok)"></i>Selection side</h2><p class="sub">which results count</p>
+      <h3>Leak critic</h3><p>The best no-notes guess must stay at 25% or below on the long questions; every run carries random and heuristic baselines.</p>
+      <h3>Cliff gate</h3><p>At least 80% at 1 to 2 rooms and at most 33% at the longest distances, own room at least 85%, on 3 fresh seeds.</p>
+      <h3>Noise band</h3><p>One wrong answer in 5 to 10 long questions moves accuracy 10 to 20 points; a fall must clear that band (10 points here).</p>
+      <h3>Cost rule</h3><p>At most $50 a walk; the search stops spending on an idea the test already killed.</p></div>
+  </div>
+</div></div></div>
+<script src="snapshot.js"></script>
+<script src="rsi_data.js"></script>
+<script>
+RSI.theme();
+var D = null, cur = 1, playing = true, timer = null, phase = 0, NS = "http://www.w3.org/2000/svg";
+var $ = function (id) { return document.getElementById(id); };
+var POS = [[420, 60], [670, 78], [920, 78], [890, 262], [145, 100], [575, 318]];   // on each box's top edge: proposer, critic, evaluate, gate, benchmark, rejected
+function el(tag, attrs, parent, text) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; parent.appendChild(e); return e; }
+function cls(id, c) { $(id).setAttribute("class", "box" + (c ? " " + c : "")); }
+function pct(v) { return v == null ? "–" : Math.round(v * 100) + "%"; }
+
+function drawParts(r) {
+  var g = $("parts"); g.innerHTML = "";
+  RSI.PARTS.forEach(function (p, i) {
+    var hit = (r.d.parts || []).indexOf(p[0]) >= 0, never = !D.tried[p[0]];
+    el("rect", {x: 56, y: 146 + i * 34, width: 178, height: 26, class: "item" + (hit && phase >= 4 ? " hit" : "") + (never ? " never" : "")}, g);
+    el("text", {x: 68, y: 164 + i * 34, class: "t-m"}, g, p[1] + (never ? "  · untried" : ""));
+  });
+}
+function show(i, ph) {
+  if (!D || !D.rounds.length) return;
+  var r = D.rounds[i - 1], d = r.d; phase = ph;
+  $("rnd").textContent = r.i; $("rndT").textContent = D.rounds.length;
+  var prevBest = i > 1 ? D.rounds[i - 2].best : 0;
+  $("inc").textContent = (ph >= 4 ? r.best : prevBest) == null ? "–" : (ph >= 4 ? r.best : prevBest) + " pts";
+  $("rkind").textContent = r.id + " · " + r.when + " · " + r.kind;
+  $("ledger").textContent = r.ledger + (r.ledger === 1 ? " entry" : " entries");
+  var sq = $("sqs"); sq.innerHTML = ""; var n = Math.min(4, (d.parts || []).length);
+  for (var k = 0; k < 4; k++) el("rect", {x: 440 + k * 20, y: 104, width: 14, height: 14, class: "sq" + (k < n ? " full" : "")}, sq);
+  var stalled = i > 1 && D.rounds[i - 2].stall >= 3;
+  $("stall").setAttribute("class", "stall" + (stalled ? " on" : ""));
+  drawParts(r);
+  ["bP", "bC", "bE", "bG", "bH", "bR"].forEach(function (b) { cls(b, ""); });
+  $("g1").setAttribute("class", "item"); $("g2").setAttribute("class", "item");
+  $("critT").textContent = ""; $("evalT").textContent = ""; $("gateT").textContent = "";
+  var rej = {critic: 0, screen: 0, void: 0, no_gain: 0};
+  D.rounds.slice(0, ph >= 4 ? i : i - 1).forEach(function (x) { if (rej[x.d.gate] != null) rej[x.d.gate]++; });
+  $("rejT").textContent = "critic " + rej.critic + " · test " + rej.screen + " · flat " + rej.no_gain + " · void " + rej.void;
+  if (ph === 0) cls("bP", "on-blue");
+  if (ph >= 1) {
+    var lk = d.leak;
+    $("critT").textContent = lk && lk.floor != null ? (lk.ok ? "✓ " : "✗ ") + pct(lk.floor) : d.gate === "measure" ? "sets the check" : "✓ not measured";
+    cls("bC", lk && !lk.ok ? "on-bad" : "on-ok");
+  }
+  if (ph >= 2 && d.gate !== "critic") {
+    var ev = d.eval === "walk" ? "walk" + (d.k ? " " + d.k + " rooms" : "") : d.eval === "test" ? "test" + (d.k ? " k=" + d.k : "") : "no evaluation";
+    $("evalT").textContent = ev + (d.depth != null ? " · " + pct(d.short) + " → " + pct(d.long) + " · " + d.depth + " pts" + (d.depth_kind === "predicted" ? " (pred.)" : "") : "");
+    cls("bE", "on-blue");
+  }
+  if (ph >= 3 && d.gate !== "critic") {
+    var pass1 = d.depth != null && d.depth >= RSI.TARGET && (d.short || 0) >= 0.8;
+    $("g1").setAttribute("class", "item " + (pass1 ? "hit" : ""));
+    $("gateT").textContent = RSI.GATE[d.gate] || d.gate;
+    cls("bG", d.gate === "accepted" || d.gate === "screen_pass" || d.gate === "base" ? "on-ok" : "on-bad");
+  }
+  if (ph >= 4) {
+    if (d.gate === "accepted" || d.gate === "base") cls("bH", "on-ok");
+    else if (d.gate === "screen_pass") cls("bH", "on-blue");
+    else cls("bR", "on-bad");
+  }
+  var to = d.gate === "critic" && ph >= 2 ? POS[5] : ph >= 4 ? (d.gate === "accepted" || d.gate === "base" || d.gate === "screen_pass" ? POS[4] : POS[5]) : POS[Math.min(ph, 3)];
+  $("pill").setAttribute("transform", "translate(" + to[0] + "," + to[1] + ")");
+  $("cap").innerHTML = "<b>" + RSI.esc(r.id) + ".</b> " + RSI.esc(r.hyp) + (d.reason ? " <b>Verdict:</b> " + RSI.esc(d.reason) + "." : "") +
+    (r.late ? " <i>(logged late)</i>" : "");
+  $("seek").max = D.rounds.length; $("seek").value = i;
+}
+var SEL = {};
+function groups() {
+  return [
+    {k: "eval", l: "Evaluated by", items: [["walk", "🚶 walk"], ["test", "🧪 single-step test"], ["none", "📏 measurement only"]].map(function (x) { return {v: x[0], l: x[1], match: function (r) { return (r.d.eval || "none") === x[0]; }}; })},
+    {k: "gate", l: "Gate verdict", items: Object.keys(RSI.GATE).map(function (g) { return {v: g, l: RSI.GATE[g], match: function (r) { return r.d.gate === g; }}; })},
+    {k: "part", l: "Part changed", items: RSI.PARTS.map(function (p) { return {v: p[0], l: p[1], match: function (r) { return (r.d.parts || []).indexOf(p[0]) >= 0; }}; })}
+  ];
+}
+function okR(i) { return i >= 1 && i <= D.rounds.length && RSI.pass(D.rounds[i - 1], groups(), SEL); }
+function nextR(i, dir) { for (var j = i + dir; j >= 1 && j <= D.rounds.length; j += dir) if (okR(j)) return j; return i; }
+function drawSide() {
+  var n = D.rounds.filter(function (r) { return RSI.pass(r, groups(), SEL); }).length;
+  RSI.panel($("side"), D.rounds, groups(), SEL, function () { drawSide(); if (!okR(cur)) { var j = nextR(0, 1); if (okR(j)) { cur = j; show(cur, 4); } } },
+            [[n + " of " + D.rounds.length, "rounds play"], ["$" + D.spent.toFixed(0), "spent"]]);
+}
+function tick() {
+  if (!D) return;
+  if (phase < 4) { phase++; show(cur, phase); return; }
+  var nx = nextR(cur, 1);
+  if (nx !== cur) { cur = nx; show(cur, 0); } else { playing = false; $("play").textContent = "play"; stop(); }
+}
+function stop() { if (timer) clearInterval(timer); timer = null; }
+function start() { stop(); timer = setInterval(tick, 900); }
+$("play").onclick = function () { playing = !playing; this.textContent = playing ? "pause" : "play"; if (playing) { if (cur >= D.rounds.length && phase >= 4) { cur = 1; phase = 0; show(1, 0); } start(); } else stop(); };
+$("prev").onclick = function () { playing = false; $("play").textContent = "play"; stop(); cur = nextR(cur, -1); show(cur, 4); };
+$("next").onclick = function () { playing = false; $("play").textContent = "play"; stop(); cur = nextR(cur, 1); show(cur, 4); };
+$("seek").oninput = function () { playing = false; $("play").textContent = "play"; stop(); cur = +this.value; show(cur, 4); };
+document.addEventListener("keydown", function (e) { if (e.key === "ArrowLeft") $("prev").onclick(); if (e.key === "ArrowRight") $("next").onclick(); });
+function refresh(first) {
+  RSI.load(function (data, src) {
+    var grew = D && data.rounds.length > D.rounds.length, n0 = D ? D.rounds.length : 0;
+    D = data;
+    $("live").innerHTML = (src === "live" ? "<b>● live</b> from the tuning log, re-read every 10 s" : "saved copy (open through the local server for live)") +
+      " · " + D.rounds.length + " rounds · $" + D.spent.toFixed(0) + " spent";
+    drawSide();
+    if (first) { cur = okR(1) ? 1 : nextR(0, 1); show(cur, 0); start(); }
+    else if (grew) { cur = n0 + 1; playing = true; $("play").textContent = "pause"; show(cur, 0); start(); }   // a new round: play it through the loop
+  });
+}
+refresh(true);
+setInterval(function () { refresh(false); }, 10000);
+function postH() { if (window.self !== window.top) parent.postMessage({rsiHeight: Math.ceil(document.querySelector(".wrap").getBoundingClientRect().height) + 8}, "*"); }
+window.addEventListener("load", postH); window.addEventListener("resize", postH); setTimeout(postH, 800);
+</script>
+</body>
+</html>

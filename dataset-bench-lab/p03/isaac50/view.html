@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Isaac 50 Viewer</title>
+<style>
+:root{--bg:#f7f7f5;--panel:#ffffff;--ink:#1d2327;--muted:#5f6b73;--line:#dde2e5;--soft:#eef1f3;--accent:#2563eb;--ok:#15803d;--warn:#b45309;--bad:#b91c1c;--sky:#dfe6ec}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;--line:#2c3338;
+--soft:#20262a;--accent:#7aa7ff;--ok:#6fd49a;--warn:#f0b35a;--bad:#f87171;--sky:#1b2329}}
+:root[data-theme="dark"]{--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;--line:#2c3338;--soft:#20262a;--accent:#7aa7ff;--ok:#6fd49a;--warn:#f0b35a;--bad:#f87171;--sky:#1b2329}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1500px;margin:0 auto;padding:12px 16px}
+h1{font-size:20px;margin:0 0 4px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 10px}
+select,button{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:3fr 2fr;gap:12px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;min-width:0}
+#view{width:100%;height:56vh;min-height:300px;border-radius:8px;overflow:hidden;background:var(--sky);touch-action:none}
+#pic{width:100%;aspect-ratio:16/9;object-fit:contain;background:var(--soft);border-radius:8px;display:block}
+.cap{color:var(--muted);font-size:12px;margin-top:4px}
+.slider{display:flex;align-items:center;gap:10px;margin-top:8px}
+.slider input{flex:1}
+#flabel{min-width:220px;font:600 13px ui-monospace,Menlo,monospace}
+.q{border-top:1px dashed var(--line);padding:7px 0;cursor:pointer}
+.q:hover{background:var(--soft)}
+.q b{font:700 12px ui-monospace,Menlo,monospace;color:var(--accent);margin-right:6px}
+.key{font:12px ui-monospace,Menlo,monospace;color:var(--muted);margin-top:2px}
+.mut{color:var(--muted)}
+.banner{border:1px solid var(--warn);color:var(--warn);border-radius:8px;padding:6px 10px;margin:6px 0}
+.chip{display:inline-block;font:11px ui-monospace,Menlo,monospace;background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:0 5px;margin-right:4px;color:var(--muted)}
+a{color:var(--accent)}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body>
+<div class="wrap">
+<h1 id="title">Isaac 50: one 3D scene per v12 sub-failure mode</h1>
+<div class="bar">
+  <select id="mode" aria-label="mode"></select>
+  <button id="orbit" class="on">Spin the scene</button>
+  <button id="robot">Robot camera</button>
+  <button id="play">▶ Play</button>
+  <a href="table.html">all 50 modes</a>
+</div>
+<div id="banner"></div>
+<div class="grid">
+  <div class="card">
+    <div id="view"></div>
+    <div class="slider"><input id="frame" type="range" min="0" max="0" value="0" aria-label="picture"><span id="flabel"></span></div>
+    <div class="cap">Drag to spin, pinch or scroll to zoom. The slider walks through every picture the model sees: the start, each of the 15
+    state changes, and the question picture after K = 1, 3, 5, 10 and 15 changes. Shapes, colours, positions and visibility are read from
+    the scene's .usda file itself.</div>
+  </div>
+  <div class="card">
+    <img id="pic" alt="Isaac Sim render of the robot camera at this picture">
+    <div class="cap" id="piccap"></div>
+    <div id="meta" style="margin-top:8px"></div>
+    <div id="qs" style="margin-top:6px"></div>
+  </div>
+</div>
+</div>
+<script src="data.js"></script>
+<script type="module">
+import * as THREE from "three";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+
+THREE.Object3D.DEFAULT_UP.set(0, 0, 1);                          // the scenes are z-up, in metres
+const C = window.ISAAC50 || {rows: []}, ROWS = C.rows || [];
+const PUB = ROWS.length > 0 && !!ROWS[0].hidden;                  // the public copy: no answers, no design (hub_public.py)
+const tagOf = (code) => "m" + code.replace(".", "_");
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const ready = (r) => !PUB || r.public_3d !== false;                // physics modes stay off the public page until simulated
+
+const el = $("view");
+const renderer = new THREE.WebGLRenderer({antialias: true});
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+el.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8f96, 1.6));
+const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(6, -4, 10); scene.add(sun);
+const ocam = new THREE.PerspectiveCamera(50, 1, 0.05, 400);
+const rcam = new THREE.PerspectiveCamera(50, 16 / 9, 0.05, 400);
+const controls = new OrbitControls(ocam, renderer.domElement);
+controls.enableDamping = true;
+let S = null, objs = [], cur = 0, useRobot = false, timer = null, row = null;
+const loader = new THREE.TextureLoader();
+
+function size() {
+  const w = el.clientWidth, h = el.clientHeight;
+  renderer.setSize(w, h, false); renderer.domElement.style.width = "100%"; renderer.domElement.style.height = "100%";
+  ocam.aspect = w / h; ocam.updateProjectionMatrix();
+}
+window.addEventListener("resize", size);
+
+function geom(g) {
+  if (g.type === "Cube") return new THREE.BoxGeometry(g.size, g.size, g.size);
+  if (g.type === "Sphere") return new THREE.SphereGeometry(g.radius, 32, 16);
+  if (g.type === "Cylinder") {
+    const c = new THREE.CylinderGeometry(g.radius, g.radius, g.height, 40);   // three's cylinder runs along y
+    if (g.axis === "Z") c.rotateX(Math.PI / 2); else if (g.axis === "X") c.rotateZ(-Math.PI / 2);
+    return c;
+  }
+  const pos = [], uv = [];                                          // a Mesh: triangulated fans, one corner at a time
+  let off = 0;
+  g.counts.forEach((n) => {
+    for (let k = 1; k < n - 1; k++) for (const cI of [off, off + k, off + k + 1]) {
+      const vi = g.indices[cI]; pos.push(...g.points[vi]);
+      if (g.st) {
+        const si = g.st_interp === "faceVarying" ? (g.st_indices ? g.st_indices[cI] : cI) : (g.st_indices ? g.st_indices[vi] : vi);
+        uv.push(...(g.st[si] || [0, 0]));
+      }
+    }
+    off += n;
+  });
+  const b = new THREE.BufferGeometry();
+  b.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  if (uv.length) b.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  b.computeVertexNormals();
+  return b;
+}
+const at = (v, i) => (Array.isArray(v) && Array.isArray(v[0]) ? v[i] : v);          // a per-picture list or one value
+const atB = (v, i) => (Array.isArray(v) ? v[i] : v);
+const atM = (v, i) => (Array.isArray(v[0]) ? v[i] : v);
+
+function build(dir) {
+  objs.forEach((o) => { scene.remove(o.mesh); o.mesh.geometry.dispose(); });
+  objs = [];
+  const box = new THREE.Box3();
+  S.shapes.forEach((g) => {
+    const col = at(g.color || [0.7, 0.7, 0.7], 0);
+    const m = new THREE.MeshStandardMaterial({color: new THREE.Color(...col), roughness: g.rough ?? 0.6, metalness: g.metal ?? 0,
+      transparent: (g.opacity ?? 1) < 1, opacity: g.opacity ?? 1, side: g.type === "Mesh" ? THREE.DoubleSide : THREE.FrontSide});
+    if ((g.metal ?? 0) > 0.8) { m.color.set(0xb7c0c8); m.metalness = 0.25; m.roughness = 0.15; }   // a mirror has nothing to reflect here: drawn glossy grey (the Isaac picture shows the real mirror)
+    if (g.tex) { const t = loader.load(dir + g.tex); t.colorSpace = THREE.SRGBColorSpace; m.map = t; m.color.set(0xffffff); }
+    const mesh = new THREE.Mesh(geom(g), m);
+    mesh.matrixAutoUpdate = false;
+    scene.add(mesh); objs.push({g, mesh});
+    if (!/Floor/i.test(g.path)) { mesh.matrix.fromArray(atM(g.m, 0)); mesh.updateMatrixWorld(true); box.expandByObject(mesh); }
+  });
+  const c = box.getCenter(new THREE.Vector3()), r = Math.max(2, box.getSize(new THREE.Vector3()).length());
+  controls.target.copy(c); ocam.position.set(c.x - 0.9 * r, c.y - 0.9 * r, c.z + 0.7 * r); ocam.near = 0.02; ocam.far = 50 * r;
+  ocam.updateProjectionMatrix(); controls.update();
+}
+
+function show(i) {
+  cur = i; $("frame").value = i;
+  const f = S.frames[i];
+  objs.forEach(({g, mesh}) => {
+    mesh.matrix.fromArray(atM(g.m, i));                              // USD row-major, row vectors = three's column-major array
+    mesh.visible = atB(g.vis, i) !== false;
+    if (!g.tex && g.color) mesh.material.color.setRGB(...at(g.color, i));
+  });
+  const cm = new THREE.Matrix4().fromArray(S.camera.m[i]);
+  cm.decompose(rcam.position, rcam.quaternion, rcam.scale);
+  rcam.fov = 2 * Math.atan(S.camera.vaperture / (2 * S.camera.focal)) * 180 / Math.PI;
+  rcam.aspect = S.camera.haperture / S.camera.vaperture; rcam.updateProjectionMatrix();
+  const K = Object.keys(S.question_tc).find((k) => +S.question_tc[k] === f.tc);
+  $("flabel").textContent = `${i + 1}/${S.frames.length} · ${f.label}${K ? ` (question K = ${K})` : ""}`;
+  if (f.pic) { $("pic").src = `scene/${tagOf(row.code)}/${f.pic}`; $("pic").style.display = ""; $("piccap").textContent = "Isaac Sim 6.1 RTX render of the robot camera at this picture (what the model sees)."; }
+  else { $("pic").removeAttribute("src"); $("piccap").textContent = "No Isaac render for this picture yet."; }
+  document.querySelectorAll(".q").forEach((d) => d.style.outline = +d.dataset.tc === f.tc ? `2px solid ${css("--accent")}` : "none");
+}
+
+function loop() {
+  requestAnimationFrame(loop);
+  controls.enabled = !useRobot; controls.update();
+  if (useRobot) {
+    const w = el.clientWidth, h = el.clientHeight, ar = rcam.aspect;   // letterbox the robot's 16:9 view
+    let vw = w, vh = w / ar; if (vh > h) { vh = h; vw = h * ar; }
+    renderer.setScissorTest(false); renderer.setClearColor(css("--bg") || "#111"); renderer.clear();
+    renderer.setViewport((w - vw) / 2, (h - vh) / 2, vw, vh); renderer.setScissor((w - vw) / 2, (h - vh) / 2, vw, vh);
+    renderer.setScissorTest(true); scene.background = new THREE.Color(css("--sky") || "#dfe6ec"); renderer.render(scene, rcam);
+    renderer.setScissorTest(false); renderer.setViewport(0, 0, w, h);
+  } else { scene.background = new THREE.Color(css("--sky") || "#dfe6ec"); renderer.render(scene, ocam); }
+}
+
+async function load(code) {
+  row = ROWS.find((r) => r.code === code) || ROWS[0];
+  history.replaceState(null, "", `?m=${row.code}`);
+  $("title").textContent = `${row.code} ${row.name}`;
+  $("meta").innerHTML = `<span class="chip">${esc(row.category)}</span>${row.physics && row.physics !== "none" ? `<span class="chip">physics: ${esc(row.physics)}</span>` : ""}` +
+    `<div style="margin-top:6px"><b>v12 action target.</b> ${esc(row.v12_action_target)}</div>` +
+    `<details style="margin-top:4px"><summary class="mut">v12 description</summary>${esc(row.v12_description)}</details>`;
+  $("qs").innerHTML = "<b>The 5 questions</b> <span class='mut'>(tap one to jump to its picture)</span>" + row.questions.map((q) =>
+    `<div class="q" data-tc="${S0tc(q.K)}"><b>K=${q.K}</b>${esc(q.question)}` +
+    (PUB ? `<div class="key">answer: hidden until the paper</div>` : `<div class="key">answer: ${esc(q.key_text)}</div>`) + "</div>").join("");
+  $("banner").innerHTML = !ready(row) ? `<div class="banner">This mode needs real Isaac physics; it appears here once it is simulated.</div>` :
+    (!PUB && row.physics && row.physics !== "none" ? `<div class="banner">Physics here is animated, not simulated yet (real Isaac physics is being added).</div>` : "");
+  if (!ready(row)) { $("view").style.visibility = "hidden"; return; }
+  $("view").style.visibility = "";
+  const dir = `scene/${tagOf(row.code)}/`;
+  S = await (await fetch(dir + "scene.json")).json();
+  $("frame").max = S.frames.length - 1;
+  build(dir); size();
+  const first = S.frames.findIndex((f, i) => S.shapes.some((g) => !/Floor|\/gx|\/gy|wall_/.test(g.path) && atB(g.vis, i) !== false));
+  show(Math.max(0, first));                                            // open on the first picture with something in it
+  document.querySelectorAll(".q").forEach((d) => d.onclick = () => { const i = S.frames.findIndex((f) => f.tc === +d.dataset.tc); if (i >= 0) show(i); });
+}
+const S0tc = (K) => 10 * K + 5;                                    // the question picture after K changes (core.py)
+
+$("mode").innerHTML = ROWS.map((r) => `<option value="${esc(r.code)}">${esc(r.code)} ${esc(r.name)}${ready(r) ? "" : " (physics: soon)"}</option>`).join("");
+$("mode").onchange = () => load($("mode").value);
+$("frame").oninput = () => show(+$("frame").value);
+$("orbit").onclick = () => { useRobot = false; $("orbit").classList.add("on"); $("robot").classList.remove("on"); };
+$("robot").onclick = () => { useRobot = true; $("robot").classList.add("on"); $("orbit").classList.remove("on"); };
+$("play").onclick = () => {
+  if (timer) { clearInterval(timer); timer = null; $("play").textContent = "▶ Play"; return; }
+  $("play").textContent = "⏸ Pause";
+  timer = setInterval(() => { if (S) show((cur + 1) % S.frames.length); }, 900);
+};
+const want = new URLSearchParams(location.search).get("m");
+$("mode").value = want && ROWS.some((r) => r.code === want) ? want : (ROWS[0] || {}).code;
+size(); loop();
+if (ROWS.length) load($("mode").value);
+</script>
+</body>
+</html>

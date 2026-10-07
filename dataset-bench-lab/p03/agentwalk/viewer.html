@@ -5,14 +5,15 @@
      live: polls run.json every second. replay: plays the recorded calls at watch speed; window.seek(t) draws time t
      (the recorder steps through it frame by frame). -->
 <style>
-:root{--bg:#0f1318;--panel:#171d24;--line:#2a333d;--ink:#e8edf2;--muted:#93a1ae;--right:#22c55e;--wrong:#ef4444;--pick:#3b82f6;--gold:#f2b705;--guess:#a78bfa}
+:root{--bg:#0f1318;--panel:#171d24;--line:#2a333d;--ink:#e8edf2;--muted:#93a1ae;--right:#22c55e;--wrong:#ef4444;--pick:#3b82f6;--gold:#f2b705;--guess:#a78bfa;--assume:#cbd5e1}
 :root[data-theme="light"]{--bg:#f4f5f7;--panel:#ffffff;--line:#d9dee4;--ink:#15191e;--muted:#5d6874}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;overflow:hidden}
-#stage{position:absolute;left:0;top:0;width:1600px;height:1000px;transform-origin:0 0}
+:root{--sw:1600px;--rw:528px;--hw:260px}
+#stage{position:absolute;left:0;top:0;width:var(--sw);height:1000px;transform-origin:0 0}
 .box{position:absolute;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .ttl{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:8px 12px 4px}
-#hdr{left:16px;top:10px;width:1568px;height:44px;display:flex;align-items:center;gap:14px;padding:0 14px}
+#hdr{left:16px;top:10px;width:calc(var(--sw) - 32px);height:44px;display:flex;align-items:center;gap:14px;padding:0 14px}
 #hdr b{font-size:16px}#mode{padding:2px 8px;border-radius:6px;font-weight:700;font-size:12px}
 .live{background:#dc2626;color:#fff}.replay{background:#334155;color:#fff}
 #hdr .sp{flex:1}#hdr span{color:var(--muted)}#hdr em{font-style:normal;color:var(--ink);font-weight:600}
@@ -34,32 +35,55 @@ html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.35 -apple-s
 #why{position:absolute;left:14px;right:14px;bottom:10px;border-top:1px solid var(--line);padding-top:8px;font-size:12.5px;color:var(--muted)}
 #why b{color:var(--ink)}#why .bar{display:inline-block;height:9px;border-radius:2px;margin:0 6px 0 4px;vertical-align:middle}
 #why .row{display:flex;align-items:center;gap:6px;margin:2px 0}#why .lab{width:230px}
-#score{left:1056px;top:64px;width:528px;height:120px;padding:6px 12px}
+#why .fixrow{margin-top:5px;padding-top:5px;border-top:1px dashed var(--line)}#why .fx{margin-left:12px;white-space:nowrap}#why .fx i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px}
+#score{left:1056px;top:64px;width:var(--rw);height:120px;padding:6px 12px}
 #big{font-size:26px;font-weight:800}#big small{font-size:14px;color:var(--muted);font-weight:600}
 .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}.chip{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:1px 7px;color:var(--muted)}
 .chip b{color:var(--ink)}
-#c1{left:1056px;top:192px;width:528px;height:142px}#c2{left:1056px;top:342px;width:528px;height:142px}
-#c3{left:1056px;top:492px;width:260px;height:126px}#c4{left:1324px;top:492px;width:260px;height:126px}
-#notes{left:1056px;top:626px;width:528px;height:114px}#notes p{margin:0 12px;font-size:13px;line-height:17px;color:var(--ink);overflow:hidden;white-space:pre-wrap;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical}
-#tote{left:1056px;top:748px;width:528px;height:96px}
-#map{left:1056px;top:852px;width:528px;height:132px}
+#c1{left:1056px;top:192px;width:var(--rw);height:142px}#c2{left:1056px;top:342px;width:var(--rw);height:142px}
+#c3{left:1056px;top:492px;width:var(--hw);height:126px}#c4{left:calc(1064px + var(--hw));top:492px;width:var(--hw);height:126px}
+#notes{left:1056px;top:626px;width:var(--rw);height:114px}#notes p{margin:0 12px;font-size:13px;line-height:17px;color:var(--ink);overflow:hidden;white-space:pre-wrap;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical}
+#tote{left:1056px;top:748px;width:var(--rw);height:96px}
+#map{left:1056px;top:852px;width:var(--rw);height:132px}
 .key{font-size:10px;color:var(--muted);margin:0 12px}.key i{display:inline-block;width:9px;height:3px;margin:0 3px 2px 6px;vertical-align:middle}
 #goal{color:var(--muted);font-size:13px;margin-bottom:6px;max-height:36px;overflow:hidden}
 svg text{font-family:inherit}
+/* video layout (?layout=video, 1920 x 1080, what record.mjs films): fewer panels, each scaled so no text is under 14 px;
+   the dashboard layout above stays as it is. body.end = the closing card: every final chart large. */
+body.video #stage{width:1920px;height:1080px}
+body.video #hdr{top:6px;height:40px;width:1888px}body.video #hdr b{font-size:22px}body.video #hdr span{font-size:17px}body.video #mode{font-size:15px}
+body.video #cam{top:52px}body.video #camtag,body.video #think{font-size:16px}body.video #movebar{font-size:19px}
+body.video #qbox{top:636px;height:441px}body.video #qmeta{font-size:16px}body.video #qtext{font-size:24px;max-height:100px}
+body.video #goal{font-size:17px;max-height:46px}body.video .opt{font-size:19px;min-height:50px}body.video #verdict{font-size:20px}body.video #qcount{font-size:16px}
+body.video #why{font-size:16px}body.video #why .lab{width:300px}
+body.video #notes,body.video #map{display:none}
+body.video #score,body.video #c1,body.video #c2,body.video #tote{left:1056px;transform:scale(1.606);transform-origin:0 0}
+body.video #score{top:52px}body.video #c1{top:250px}body.video #c2{top:483px}body.video #tote{top:716px}
+body.video #c3,body.video #c4{top:875px;transform:scale(1.6);transform-origin:0 0}body.video #c3{left:1056px}body.video #c4{left:1488px}
+body.video #endttl{display:none}
+body.video.end #cam{display:none}body.video.end #endttl{display:inline;color:var(--gold);font-weight:700}
+body.video.end #c1,body.video.end #c2,body.video.end #c3,body.video.end #c4,body.video.end #tote,body.video.end #score{transform:scale(1.75)}
+body.video.end #c1{left:16px;top:52px}body.video.end #c2{left:960px;top:52px}
+body.video.end #c3{left:16px;top:309px}body.video.end #c4{left:479px;top:309px}
+body.video.end #tote{left:960px;top:309px}body.video.end #score{left:960px;top:485px}
+body.video.end #qbox{left:16px;top:540px;height:190px;transform:scale(.9);transform-origin:0 0}
+body.video.end #why{position:static;border-top:none;padding-top:0}
+body.video.end #goal,body.video.end #qmeta,body.video.end #qtext,body.video.end #opts,body.video.end #verdict,body.video.end #qcount{display:none}
 </style></head><body>
 <div id="stage">
-  <div class="box" id="hdr"><b>One agent walks a 30-room 3D warehouse</b><span id="mode"></span><span id="model"></span><div class="sp"></div>
+  <div class="box" id="hdr"><b>One agent walks a 30-room 3D warehouse</b><span id="mode"></span><span id="model"></span><span id="endttl">the walk's final charts</span><div class="sp"></div>
     <span>call <em id="calln">0</em></span><span>room <em id="roomn">-</em></span><span id="clock"></span></div>
   <div class="box" id="cam"><img id="pic" alt=""><div id="camtag">What the agent sees: the robot camera</div><div id="think">thinking…</div><div id="movebar"></div></div>
   <div class="box" id="qbox"><div id="qcount"></div><div id="goal"></div><div id="qmeta"></div><div id="qtext"></div><div id="opts"></div><div id="verdict"></div><div id="why"></div></div>
   <div class="box" id="score"><div id="big"></div><div class="chips" id="chips"></div></div>
   <div class="box" id="c1"><div class="ttl">Accuracy vs rooms walked (all questions so far)</div><svg id="s1" width="528" height="114"></svg></div>
   <div class="box" id="c2"><div class="ttl">Accuracy vs memory distance (rooms between seeing and asking)</div><svg id="s2" width="528" height="114"></svg></div>
-  <div class="box" id="c3"><div class="ttl">By kind vs memory distance</div><svg id="s5" width="260" height="78"></svg>
-    <div class="key"><i style="background:#f59e0b"></i>Tote X<i style="background:#38bdf8"></i>earlier facts<i style="background:#94a3b8"></i>own room</div></div>
+  <div class="box" id="c3"><div class="ttl">By kind vs memory distance</div><svg id="s5" width="260" height="66"></svg>
+    <div class="key" id="kindkey" style="font-size:9px;margin:0 6px"><i style="background:#f59e0b"></i>followed box<i style="background:#38bdf8"></i>facts<i style="background:#94a3b8"></i>own room</div>
+    <div class="key" style="font-size:9px;margin:0 6px">┄ heuristic <span style="color:var(--guess)">┄ random</span> <span style="color:var(--assume)">┈ guess 1/6</span></div></div>
   <div class="box" id="c4"><div class="ttl">Cost vs rooms walked (USD)</div><svg id="s6" width="260" height="96"></svg></div>
   <div class="box" id="notes"><div class="ttl" id="notesttl">Agent's notes (its words, this call)</div><p id="notetext"></p></div>
-  <div class="box" id="tote"><div class="ttl">Tote X: true slot after each room · the agent's answer where asked</div><svg id="s3" width="528" height="66"></svg></div>
+  <div class="box" id="tote"><div class="ttl">Followed box: true slot per room · the agent's answer where asked</div><svg id="s3" width="528" height="66"></svg></div>
   <div class="box" id="map"><div class="ttl">Where the robot is (top view, north up)</div><svg id="s4" width="528" height="104"></svg></div>
 </div>
 <script>
@@ -68,9 +92,36 @@ if (Q.get("theme") === "light") document.documentElement.dataset.theme = "light"
 const $ = (id) => document.getElementById(id), NS = "http://www.w3.org/2000/svg";
 const T = Q.get("ff") ? {move: 0.3, watch: 0.35, ask: 1.4, pick: 0.8, result: 1.2}      // fast-forward
                       : {move: 1.2, watch: 1.6, ask: 2.4, pick: 1.4, result: 1.8};
-let RUN = null, EP = null, TL = [], TOTAL = 0, shown = -1;
+let RUN = null, EP = null, BASE = null, ANN = null, TL = [], TOTAL = 0, shown = -1;
+// measured floors per question (baselines.py): the random and heuristic baselines; keyed like the answers
+const NR = () => (RUN && RUN.meta && RUN.meta.rooms) || 30;   // rooms in this walk (a short walk draws only its own rooms)
+const ticks = () => { const n = NR(), st = n <= 10 ? 5 : 10, t = [1]; for (let k = st; k < n; k += st) t.push(k); t.push(n); return t; };
+const fl = (a) => BASE && BASE.per_question[`${a.at}|${a.kind}|${a.about}|${a.d}`];
+const floorPct = (xs, f) => { const v = xs.map(fl).filter(Boolean); return v.length ? 100 * v.reduce((t, b) => t + (b[f] ?? b.random), 0) / v.length : null; };
+// the three baselines, drawn the same way in every chart: guess = 1 in 6, assumed; random and heuristic = measured
+const BL = [["heuristic", "measured", "var(--gold)", "5 3"], ["random", "measured", "var(--guess)", "4 3"], ["guess 1/6", "assumed", "var(--assume)", "1.5 3"]];
+function legend(svg, x0, y0, step) {        // a key in a chart's right margin: line sample, name, and measured or assumed
+  BL.forEach(([name, how, col, dash], i) => { const y = y0 + i * step;
+    el("line", {x1: x0, x2: x0 + 12, y1: y - 3, y2: y - 3, stroke: col, "stroke-width": 2, "stroke-dasharray": dash}, svg);
+    el("text", {x: x0 + 15, y, "font-size": 10, fill: col}, svg, name);
+    el("text", {x: x0 + 15, y: y + 10, "font-size": 9, fill: "var(--muted)"}, svg, how); });
+}
 
-function fit() { const s = Math.min(innerWidth / 1600, innerHeight / 1000); $("stage").style.transform = `scale(${s})`; }
+// the stage is 1000 px high; on a wide window it grows wider and only the right-hand charts take the extra width
+let RW = 528, HW = 260;
+const VIDEO = Q.get("layout") === "video";
+if (VIDEO) document.body.classList.add("video");
+window.endCard = (on) => document.body.classList.toggle("end", on !== false);   // record.mjs: the closing card
+function fit() {
+  const SW = VIDEO ? 1920 : Math.max(1600, Math.round(1000 * innerWidth / innerHeight)), SH = VIDEO ? 1080 : 1000;
+  const s = Math.min(innerWidth / SW, innerHeight / SH);
+  RW = VIDEO ? 528 : SW - 1072; HW = Math.floor((RW - 8) / 2);   // video: panels keep their natural size and are scaled up
+  const st = document.documentElement.style; st.setProperty("--sw", SW + "px"); st.setProperty("--rw", RW + "px"); st.setProperty("--hw", HW + "px");
+  for (const id of ["s1", "s2", "s3", "s4"]) $(id).setAttribute("width", RW);
+  for (const id of ["s5", "s6"]) $(id).setAttribute("width", HW);
+  $("stage").style.transform = `scale(${s})`;
+  if (window.redraw) window.redraw();
+}
 addEventListener("resize", fit); fit();
 function el(tag, attrs, parent, text) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; if (parent) parent.appendChild(e); return e; }
 const pct = (r, n) => (n ? Math.round(100 * r / n) : 0);
@@ -78,9 +129,9 @@ const pct = (r, n) => (n ? Math.round(100 * r / n) : 0);
 // Why each wrong answer happened, read from the log (rules, not certainties):
 //   bad reply        the reply was unreadable or not one of the 6 choices
 //   own room         a question about the room it was in (d = 0) answered wrong: perception or reasoning
-//   missed a look    Tote X: an arm move since the last re-sync was shown while the camera did not face the cart
-//   carried a slip   Tote X: an earlier Tote X answer in the same stretch (since the start or a gate) was already wrong
-//   updated wrong    Tote X: it watched every arm move since the re-sync and still got it wrong
+//   missed a look    followed box: an arm move since the last re-sync was shown while the camera did not face the cart
+//   carried a slip   followed box: an earlier followed-box answer in the same stretch (since the start or a gate) was already wrong
+//   updated wrong    followed box: it watched every arm move since the re-sync and still got it wrong
 //   never took in    a fact whose same-room check (d = 0) it had already got wrong
 //   lost after squeeze  a fact seen right, wrong later, with a memory squeeze (its own summary) in between
 //   lost from memory a fact seen, wrong later, with no squeeze in between
@@ -120,12 +171,36 @@ function causes() {
     }
   }
 }
+// What came after each wrong answer (analyze.py fixed_carried, same rules): the next answer about the same thing was right
+// with a gate stop or a leaked answer in between (fixed after a re-sync), right otherwise (fixed on its own), wrong
+// (carried), or not asked yet / again.
+const FIXK = [["fixed on its own", "#22c55e"], ["fixed after a re-sync", "#f2b705"], ["carried", "#ef4444"], ["not asked again", "#64748b"]];
+function thing(a) {
+  if (a.kind === "tote" || (a.kind === "room" && a.about === "R1")) return "box";
+  const m = a.question.match(/crate tagged (\w+)/);
+  return m ? "crate:" + m[1] : a.kind + ":" + a.about + "|" + a.question.replace("In this room, ", "");
+}
+function fixCarry(uptoCall, phase) {
+  const calls = RUN.calls.filter((c) => !c.pending && (c.call < uptoCall || (c.call === uptoCall && phase >= 2)));
+  const gates = calls.filter((c) => c.cam === "gate").map((c) => c.call), leaked = new Set(((ANN && ANN.leaked) || []).map((x) => x.call));
+  const seq = []; calls.forEach((c) => (c.answers || []).forEach((a) => seq.push([c.call, a])));
+  const n = Object.fromEntries(FIXK.map(([k]) => [k, 0]));
+  seq.forEach(([call, a], i) => {
+    if (a.right) return;
+    const t = thing(a), nx = seq.slice(i + 1).find(([, b]) => thing(b) === t);
+    const how = !nx ? "not asked again" : !nx[1].right ? "carried" : (gates.some((g) => call < g && g <= nx[0]) || leaked.has(nx[0])) ? "fixed after a re-sync" : "fixed on its own";
+    n[how]++;
+  });
+  return n;
+}
 function whyTally(uptoCall, phase) {
   const n = {};
   for (const k in CAUSE) { const call = +k.split("|")[0]; if (call < uptoCall || (call === uptoCall && phase >= 2)) n[CAUSE[k]] = (n[CAUSE[k]] || 0) + 1; }
-  const tot = Object.values(n).reduce((a, b) => a + b, 0), mx = Math.max(1, ...Object.values(n));
+  const tot = Object.values(n).reduce((a, b) => a + b, 0), mx = Math.max(1, ...Object.values(n)), fc = fixCarry(uptoCall, phase);
   $("why").innerHTML = "<b>Why the wrong answers were wrong</b> (" + tot + " so far; read from the log)" +
-    CAUSES.filter((k) => n[k]).map((k) => `<div class="row"><span class="lab">${k}</span><span class="bar" style="width:${Math.round(220 * n[k] / mx)}px;background:${CCOL[k]}"></span><b>${n[k]}</b></div>`).join("");
+    CAUSES.filter((k) => n[k]).map((k) => `<div class="row"><span class="lab">${k}</span><span class="bar" style="width:${Math.round(220 * n[k] / mx)}px;background:${CCOL[k]}"></span><b>${n[k]}</b></div>`).join("") +
+    `<div class="fixrow"><b>What came next</b> (next answer on the same thing): ` +
+    FIXK.map(([k, col]) => `<span class="fx"><i style="background:${col}"></i>${k === "not asked again" ? "not asked (yet)" : k} <b>${fc[k]}</b></span>`).join("") + "</div>";
 }
 function timeline() {                       // replay: when each call starts and when its pick and result show
   TL = []; let t = 0;
@@ -137,7 +212,9 @@ function timeline() {                       // replay: when each call starts and
   TOTAL = t;
 }
 
+window.redraw = () => { if (window.lastDraw) draw(...window.lastDraw); };
 function draw(i, phase, thinkingFor) {      // phase: 0 = question shown, 1 = pick shown, 2 = result shown
+  window.lastDraw = [i, phase, thinkingFor];
   const c = RUN.calls[i]; if (!c) return;
   $("calln").textContent = c.call; $("roomn").textContent = c.mode === "leg" ? `corridor → ${c.room}` : c.room;
   if ($("pic").getAttribute("src") !== `${RUNDIR}/${c.picture}`) { window.frameReady = false; $("pic").src = `${RUNDIR}/${c.picture}`; }
@@ -155,9 +232,15 @@ function draw(i, phase, thinkingFor) {      // phase: 0 = question shown, 1 = pi
   } else {
     const k = 0, q = qs[k], a = (c.answers || [])[k] || null;   // one card; extra questions in the same call are listed in its meta line
     $("qtext").style.color = "";
-    $("qmeta").textContent = `${q.kind === "room" ? "this room's question" : q.kind === "tote" ? "running state: Tote X" : "recall: a fact from " + q.about}` +
+    $("qmeta").textContent = `${q.kind === "room" ? "this room's question" : q.kind === "tote" ? "running state: the followed box" : q.kind === "pipe" ? (q.d ? "running total: the pipes" : "this room's pipe") : q.kind === "push" ? (q.d ? "running total: the pushes" : "this room's push") : q.kind === "turn" ? (q.d ? "running total: the turns" : "this room's turn") : "recall: a fact from " + q.about}` +
       ` · memory distance ${q.d}` + (qs.length > 1 ? ` · +${qs.length - 1} more question(s) this call` : "");
     $("qtext").textContent = q.question;
+    if (q.format) {                                        // asked without choices (exact-number walk): the agent's own answer against the truth
+      const tr = a ? (a.format === "number" ? `${a.truth} ± ${a.tol}` : a.answer) : "";
+      $("opts").innerHTML = `<div class="opt">asked without choices · ${q.format === "number" ? "a number" : "a few words"}</div>` +
+        (a && phase >= 1 ? `<div class="opt pick">agent: ${esc(a.reply == null ? "no answer" : a.reply)}${a.format === "open" && a.parsed ? " → " + esc(a.pick) : ""}</div>` : "") +
+        (a && phase >= 2 ? `<div class="opt ${a.right ? "right" : "wrong"}">truth: ${esc(tr)} ${a.right ? "✓" : "✗"}</div>` : "");
+    } else
     $("opts").innerHTML = q.choices.map((ch) => {
       let cls = "opt";
       if (a && phase >= 1 && a.pick === ch) cls += " pick";
@@ -168,7 +251,7 @@ function draw(i, phase, thinkingFor) {      // phase: 0 = question shown, 1 = pi
     $("verdict").innerHTML = !a || phase < 2 ? "" : (a.right ? "<span style='color:var(--right)'>✅ right</span>" :
       `<span style='color:var(--wrong)'>❌ wrong</span> <span style='color:var(--muted)'>(agent: ${esc(a.reply == null ? "no answer" : a.reply)}; answer: ${esc(a.answer)})</span>` +
       (CAUSE[c.call + "|" + a.key] ? ` <span style='color:${CCOL[CAUSE[c.call + "|" + a.key]]}'>· why: ${CAUSE[c.call + "|" + a.key]}</span>` : "")) +
-      (qs.length > 1 ? " · " + (c.answers || []).slice(1).map((x) => (x.right ? "✅" : "❌") + " " + esc(x.kind === "tote" ? "Tote X" : x.kind === "fact" ? "fact from " + x.about : "own")).join(" · ") : "");
+      (qs.length > 1 ? " · " + (c.answers || []).slice(1).map((x) => (x.right ? "✅" : "❌") + " " + esc(x.kind === "tote" ? "followed box" : x.kind === "fact" ? "fact from " + x.about : "own")).join(" · ") : "");
   }
   const evs = (RUN.memory_events || []).filter((x) => x.after_call < c.call), last = evs[evs.length - 1];
   const nSq = evs.filter((x) => x.kind === "squeeze").length, nOv = evs.filter((x) => x.kind === "overflow").length;
@@ -190,85 +273,104 @@ const esc = (s) => String(s).replace(/[&<>]/g, (m) => ({"&": "&amp;", "<": "&lt;
 
 function score(ans, c) {
   const r = ans.filter((a) => a.right).length, by = (f) => { const xs = ans.filter(f); return `${xs.filter((a) => a.right).length}/${xs.length}`; };
-  const nq = (RUN.meta.n_questions || 44);
-  $("big").innerHTML = `${r} / ${ans.length} right <small>(${pct(r, ans.length)}%) · ${nq} in the walk · guess 1 in 6</small>`;
+  const nq = EP ? EP.questions.filter((q) => +q.room.slice(1) <= NR()).length : (RUN.meta.n_questions || 44);   // asked in this walk's rooms
+  const lz = floorPct(ans, "heuristic"), rd = floorPct(ans, "random_measured");
+  $("big").innerHTML = `${r} / ${ans.length} right <small>(${pct(r, ans.length)}%) · ${nq} in the walk · ` +
+    (BASE ? (ans.length ? `floor ${Math.round(Math.max(rd ?? 0, lz ?? 0))}%` : "floor -") : "guess 1 in 6 (assumed)") + "</small>";
   const upto = RUN.calls.filter((x) => !x.pending && x.call <= c.call);
   const legs = (RUN.legs || []).filter((l) => upto.some((x) => x.room === l.room && x.mode === "room"));
-  const chips = [["room questions", by((a) => a.kind === "room")], ["Tote X", by((a) => a.kind === "tote")], ["earlier facts", by((a) => a.kind === "fact")],
-    ["invalid moves", upto.filter((x) => x.move && x.move.valid === false).length], ["bad replies", upto.filter((x) => !x.reply_ok).length + ans.filter((a) => !a.parsed).length],
+  const chips = (BASE ? [["guess / random / heuristic", `17 / ${Math.round(rd ?? 100 / 6)} / ${Math.round(lz ?? 100 / 6)}%`]] : []).concat([["room", by((a) => a.kind === "room")], ["followed box", by((a) => a.kind === "tote")], ["facts", by((a) => a.kind === "fact")]].concat(ans.some((a) => a.kind === "pipe") ? [["pipes", by((a) => a.kind === "pipe")]] : []).concat(ans.some((a) => a.kind === "push") ? [["pushes", by((a) => a.kind === "push")]] : []).concat(ans.some((a) => a.kind === "turn") ? [["turns", by((a) => a.kind === "turn")]] : []).concat([
+    ["invalid / bad replies", upto.filter((x) => x.move && x.move.valid === false).length + " / " + (upto.filter((x) => !x.reply_ok).length + ans.filter((a) => !a.parsed).length)],
     ["nav misses", legs.filter((l) => l.navigation_miss).length + (RUN.rooms || []).filter((x) => x.dock_placed && upto.some((y) => y.room === x.room && y.stage > 0)).length],
-    ["found way alone", legs.filter((l) => l.recovered_alone).length],
-    ["harness errors", upto.reduce((t, x) => t + Math.max(0, (x.tries || 1) - 1), 0) + " (not scored)"]];
+    ["found way", legs.filter((l) => l.recovered_alone).length],
+    ["harness errors", upto.reduce((t, x) => t + Math.max(0, (x.tries || 1) - 1), 0) + " (not scored)"]]));
   $("chips").innerHTML = chips.map(([k, v]) => `<span class="chip">${k} <b>${v}</b></span>`).join("") +
-    `<span class="chip" style="border-color:#b45309;color:#f59e0b">1 walk: linked answers, no error bars yet</span>`;
+    `<span class="chip" style="border-color:#b45309;color:#f59e0b">1 walk, no error bars</span>` +
+    (BASE ? "" : `<span class="chip" style="border-color:#b91c1c;color:#f87171">no measured baselines: run incomplete</span>`);
 }
 
 function axes(svg, ylab, right) {
-  svg.innerHTML = ""; const W = 528, H = 114, L = 40, B = 18, R = right || 10, Tt = 6;
+  svg.innerHTML = ""; const W = RW, H = 114, L = 40, B = 18, R = right || 10, Tt = 6;
   for (const p of [0, 50, 100]) { const y = Tt + (H - B - Tt) * (1 - p / 100); el("line", {x1: L, x2: W - R, y1: y, y2: y, stroke: "var(--line)"}, svg); el("text", {x: L - 6, y: y + 4, "text-anchor": "end", "font-size": 10, fill: "var(--muted)"}, svg, p + "%"); }
-  const gy = Tt + (H - B - Tt) * (1 - 1 / 6);
-  el("line", {x1: L, x2: W - R, y1: gy, y2: gy, stroke: "var(--guess)", "stroke-dasharray": "4 3"}, svg);
-  el("text", {x: W - 2, y: gy - 3, "text-anchor": "end", "font-size": 10, fill: "var(--guess)"}, svg, R > 30 ? "guess 1/6" : "guess line 1 in 6");
+  const gy = Tt + (H - B - Tt) * (1 - 1 / 6);   // the guess line: 1 in 6, assumed (6 choices a question)
+  el("line", {x1: L, x2: W - R, y1: gy, y2: gy, stroke: "var(--assume)", "stroke-width": 1.4, "stroke-dasharray": "1.5 3"}, svg);
+  legend(svg, W - R + 6, Tt + 12, 30);
   return {W, H, L, B, R, Tt, y: (p) => Tt + (H - B - Tt) * (1 - p / 100)};
 }
 function chart1(ans) {
-  const svg = $("s1"), A = axes(svg), x = (k) => A.L + (A.W - A.L - A.R) * (k - 0.5) / 30;
-  for (const k of [1, 10, 20, 30]) el("text", {x: x(k), y: A.H - 4, "text-anchor": "middle", "font-size": 10, fill: "var(--muted)"}, svg, "R" + k);
+  const svg = $("s1"), A = axes(svg, null, 76), N = NR(), x = (k) => A.L + (A.W - A.L - A.R) * (k - 0.5) / N;
+  for (const k of ticks()) el("text", {x: k === N ? A.W - 3 : x(k), y: A.H - 4, "text-anchor": k === N ? "end" : "middle", "font-size": 10, fill: "var(--muted)"}, svg, "R" + k);
   let r = 0, n = 0, pts = [];
   ans.forEach((a) => { n++; if (a.right) r++; const k = +a.asked_in.slice(1); pts.push([x(k), A.y(100 * r / n)]);
     el("circle", {cx: x(k), cy: a.right ? A.y(100) + 3 : A.y(0) - 3, r: 2.6, fill: a.right ? "var(--right)" : "var(--wrong)"}, svg); });
   if (pts.length) el("polyline", {points: pts.map((p) => p.join(",")).join(" "), fill: "none", stroke: "var(--pick)", "stroke-width": 2.2}, svg);
+  if (BASE && ans.length)                    // the measured baselines' running scores on the same questions
+    for (const [f, col, dash] of [["random_measured", "var(--guess)", "4 3"], ["heuristic", "var(--gold)", "5 3"]]) {
+      let s = 0; const lp = ans.map((a, i) => { const b = fl(a) || {random: 1 / 6, heuristic: 1 / 6}; s += b[f] ?? b.random; return [x(+a.asked_in.slice(1)), A.y(100 * s / (i + 1))]; });
+      el("polyline", {points: lp.map((p) => p.join(",")).join(" "), fill: "none", stroke: col, "stroke-width": 1.6, "stroke-dasharray": dash}, svg);
+    }
 }
 function chart2(ans) {
-  const svg = $("s2"), A = axes(svg, null, 54), bins = [["0", 0, 0, "own room"], ["1", 1, 1], ["2-3", 2, 3], ["4-7", 4, 7], ["8-15", 8, 15], ["16-29", 16, 29]];
-  const bw = (A.W - A.L - A.R) / bins.length;
+  const svg = $("s2"), A = axes(svg, null, 76), bins = [["0", 0, 0, "own room"], ["1", 1, 1], ["2-3", 2, 3], ["4-7", 4, 7], ["8-15", 8, 15], ["16-29", 16, 29]];
+  const bw = (A.W - A.L - A.R) / bins.length, hPts = [];
   bins.forEach(([lab, lo, hi], i) => {
     const xs = ans.filter((a) => a.d >= lo && a.d <= hi), r = xs.filter((a) => a.right).length, x0 = A.L + i * bw + 8, w = bw - 16;
     if (xs.length) { const y = A.y(pct(r, xs.length)); el("rect", {x: x0, y, width: w, height: A.y(0) - y, fill: lo === 0 ? "#64748b" : "var(--pick)", rx: 3}, svg);
       const inside = y < A.Tt + 14;           // a full bar: write its count inside, so the title never clips it
       el("text", {x: x0 + w / 2, y: inside ? y + 12 : y - 3, "text-anchor": "middle", "font-size": 10, fill: inside ? "#fff" : "var(--ink)"}, svg, `${r}/${xs.length}`); }
     el("text", {x: x0 + w / 2, y: A.H - 4, "text-anchor": "middle", "font-size": 10, fill: "var(--muted)"}, svg, "d " + lab);
+    for (const [f, col, dash, wd] of [["random_measured", "var(--guess)", "4 3", 1.6], ["heuristic", "var(--gold)", "5 3", 2.2]]) {
+      const v = floorPct(xs, f);              // the measured baselines on this bar's own questions: a dash across it
+      if (xs.length && v != null) { hPts.push(v);
+        el("line", {x1: x0 - 2, x2: x0 + w + 2, y1: A.y(v), y2: A.y(v), stroke: col, "stroke-width": wd, "stroke-dasharray": dash}, svg); }
+    }
   });
 }
 function mini(svg, W, H) {                // a small chart frame: 0, 50 and 100% lines and the guess line
-  svg.innerHTML = ""; const L = 30, B = 14, R = 6, Tt = 4, y = (p) => Tt + (H - B - Tt) * (1 - p / 100);
+  svg.innerHTML = ""; const L = 30, B = 14, R = 6, Tt = 8, y = (p) => Tt + (H - B - Tt) * (1 - p / 100);
   for (const p of [0, 50, 100]) { el("line", {x1: L, x2: W - R, y1: y(p), y2: y(p), stroke: "var(--line)"}, svg); el("text", {x: L - 4, y: y(p) + 3, "text-anchor": "end", "font-size": 9, fill: "var(--muted)"}, svg, p + "%"); }
-  el("line", {x1: L, x2: W - R, y1: y(100 / 6), y2: y(100 / 6), stroke: "var(--guess)", "stroke-dasharray": "3 3"}, svg);
+  el("line", {x1: L, x2: W - R, y1: y(100 / 6), y2: y(100 / 6), stroke: "var(--assume)", "stroke-width": 1.3, "stroke-dasharray": "1.5 3"}, svg);   // guess, assumed
   return {L, B, R, Tt, y};
 }
-function chart3(ans) {                      // Tote X and earlier facts as separate lines; own-room as one point at d 0
-  const svg = $("s5"), W = 260, H = 78, A = mini(svg, W, H), bins = [[0, 0, "0"], [1, 1, "1"], [2, 3, "2-3"], [4, 7, "4-7"], [8, 15, "8-15"], [16, 29, "16+"]];
+function chart3(ans) {                      // followed box and earlier facts as separate lines; own-room as one point at d 0
+  const svg = $("s5"), W = HW, H = 66, A = mini(svg, W, H), bins = [[0, 0, "0"], [1, 1, "1"], [2, 3, "2-3"], [4, 7, "4-7"], [8, 15, "8-15"], [16, 29, "16+"]];
   const x = (i) => A.L + (W - A.L - A.R) * (i + 0.5) / bins.length;
   bins.forEach(([lo, hi, lab], i) => el("text", {x: x(i), y: H - 2, "text-anchor": "middle", "font-size": 9, fill: "var(--muted)"}, svg, lab));
   const own = ans.filter((a) => a.kind === "room" && a.about !== "R1");
   if (own.length) el("circle", {cx: x(0), cy: A.y(pct(own.filter((a) => a.right).length, own.length)), r: 3.5, fill: "#94a3b8"}, svg);
-  for (const [kind, col] of [["tote", "#f59e0b"], ["fact", "#38bdf8"]]) {
+  const rm = floorPct(ans, "random_measured");   // random, measured, over the questions so far
+  if (rm != null) el("line", {x1: A.L, x2: W - A.R, y1: A.y(rm), y2: A.y(rm), stroke: "var(--guess)", "stroke-width": 1, "stroke-dasharray": "4 3"}, svg);
+  for (const [kind, col] of [["tote", "#f59e0b"], ["fact", "#38bdf8"], ["pipe", "#a3e635"], ["push", "#f472b6"], ["turn", "#c084fc"]]) {
     const pts = [];
     bins.forEach(([lo, hi], i) => { const xs = ans.filter((a) => (a.kind === kind || (kind === "tote" && a.about === "R1")) && a.d >= lo && a.d <= hi);
       if (xs.length) pts.push([x(i), A.y(pct(xs.filter((a) => a.right).length, xs.length)), xs.length]); });
     if (pts.length > 1) el("polyline", {points: pts.map((p) => p[0] + "," + p[1]).join(" "), fill: "none", stroke: col, "stroke-width": 2}, svg);
+    const lzp = [];                         // the heuristic baseline on the same questions: a thin dashed line in the kind's colour
+    bins.forEach(([lo, hi], i) => { const xs = ans.filter((a) => (a.kind === kind || (kind === "tote" && a.about === "R1")) && a.d >= lo && a.d <= hi);
+      const v = floorPct(xs, "heuristic"); if (v != null) lzp.push([x(i), A.y(v)]); });
+    if (lzp.length > 1) el("polyline", {points: lzp.map((p) => p.join(",")).join(" "), fill: "none", stroke: col, "stroke-width": 1, "stroke-dasharray": "3 2", opacity: 0.8}, svg);
     pts.forEach((p) => el("circle", {cx: p[0], cy: p[1], r: 2.4 + Math.min(3, p[2] / 2), fill: col}, svg));   // bigger dot = more answers
   }
 }
 function chart4(c) {                        // cumulative cost by room, from each call's own cost
-  const svg = $("s6"), W = 260, H = 96, L = 30, B = 14, R = 6, Tt = 4; svg.innerHTML = "";
+  const svg = $("s6"), W = HW, H = 96, L = 30, B = 14, R = 6, Tt = 8; svg.innerHTML = "";
   const upto = RUN.calls.filter((x) => !x.pending && x.call <= c.call), per = {};
   let run = 0; upto.forEach((x) => { run += x.cost_usd || 0; per[+x.room.slice(1)] = run; });
   (RUN.memory_events || []).filter((e) => e.after_call <= c.call).forEach((e) => { run += e.cost_usd || 0; });
   const top = Math.max(10, Math.ceil((RUN.summary && RUN.summary.cost_usd || run) / 10) * 10), y = (v) => Tt + (H - B - Tt) * (1 - v / top);
-  const xr = (k) => L + (W - L - R) * (k - 0.5) / 30;
+  const N = NR(), xr = (k) => L + (W - L - R) * (k - 0.5) / N;
   for (const v of [0, top / 2, top]) { el("line", {x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: "var(--line)"}, svg); el("text", {x: L - 4, y: y(v) + 3, "text-anchor": "end", "font-size": 9, fill: "var(--muted)"}, svg, "$" + v); }
-  for (const k of [1, 10, 20, 30]) el("text", {x: xr(k), y: H - 2, "text-anchor": "middle", "font-size": 9, fill: "var(--muted)"}, svg, "R" + k);
+  for (const k of ticks()) el("text", {x: k === N ? W - 3 : xr(k), y: H - 2, "text-anchor": k === N ? "end" : "middle", "font-size": 9, fill: "var(--muted)"}, svg, "R" + k);
   const pts = Object.keys(per).map(Number).sort((a, b) => a - b).map((k) => `${xr(k)},${y(per[k])}`);
   if (pts.length) el("polyline", {points: pts.join(" "), fill: "none", stroke: "#22c55e", "stroke-width": 2}, svg);
   el("text", {x: W - R, y: Tt + 10, "text-anchor": "end", "font-size": 10, fill: "var(--ink)"}, svg, "$" + run.toFixed(2));
 }
 function tote(ans, c) {
-  const svg = $("s3"); svg.innerHTML = ""; const truth = RUN.meta.x_truth, w = 528 / 30, G = +RUN.meta.gate.room.slice(1);
+  const svg = $("s3"); svg.innerHTML = ""; const truth = RUN.meta.x_truth, N = NR(), w = RW / N;
   const kr = +c.room.slice(1), doneUpTo = c.mode === "leg" ? kr - 1 : (c.stage >= 3 ? kr : kr - 1);   // rooms whose swap is done
-  const gateRooms = (RUN.meta.gates || [RUN.meta.gate]).filter(Boolean).map((g) => +g.room.slice(1));
+  const gateRooms = (RUN.meta.gates || [RUN.meta.gate]).filter(Boolean).map((g) => +g.room.slice(1)).filter((g) => g < N);   // a gate after the walk's last room is never passed
   const asked = {}; ans.filter((a) => a.kind === "tote" || (a.kind === "room" && a.about === "R1")).forEach((a) => { asked[+a.asked_in.slice(1)] = a; });
-  for (let k = 1; k <= 30; k++) {
+  for (let k = 1; k <= N; k++) {
     const x = (k - 1) * w, done = k <= doneUpTo;
     el("rect", {x: x + 1, y: 2, width: w - 2, height: 26, rx: 3, fill: done ? "#334155" : "transparent", stroke: "var(--line)"}, svg);
     if (done) el("text", {x: x + w / 2, y: 20, "text-anchor": "middle", "font-size": 11, fill: "#fff"}, svg, truth[k - 1]);
@@ -276,15 +378,15 @@ function tote(ans, c) {
     if (a) { el("rect", {x: x + 1, y: 32, width: w - 2, height: 22, rx: 3, fill: a.right ? "var(--right)" : "var(--wrong)"}, svg);
              el("text", {x: x + w / 2, y: 47, "text-anchor": "middle", "font-size": 10.5, fill: "#fff"}, svg, a.pick ? a.pick.replace("slot ", "") : "–"); }
     if (gateRooms.includes(k)) el("text", {x: x + w, y: 64, "text-anchor": "middle", "font-size": 9, fill: "var(--gold)"}, svg, gateRooms.length > 1 ? "▲" : "▲ scan gate");
-    if ((k % 5 === 0 || k === 1) && !(gateRooms.length === 1 && gateRooms.includes(k))) el("text", {x: k === 30 ? x + w - 1 : x + w / 2, y: 64, "text-anchor": k === 30 ? "end" : "middle", "font-size": 9, fill: "var(--muted)"}, svg, "R" + k);
+    if ((k % 5 === 0 || k === 1) && !(gateRooms.length === 1 && gateRooms.includes(k))) el("text", {x: k === N ? x + w - 4 : x + w / 2, y: 64, "text-anchor": k === N ? "end" : "middle", "font-size": 9, fill: "var(--muted)"}, svg, "R" + k);
   }
 }
 function map(c) {
   const svg = $("s4"); svg.innerHTML = ""; if (!EP) return;
-  const W = 528, H = 104, half = 25, cx = c.pose[0], s = W / (2 * half), X = (x) => (x - cx + half) * s, Y = (y) => H - 6 - (y + 2.5) * (H - 16) / 14;
+  const W = RW, H = 104, half = Math.round(25 * RW / 528), cx = c.pose[0], s = W / (2 * half), X = (x) => (x - cx + half) * s, Y = (y) => H - 6 - (y + 2.5) * (H - 16) / 14;
   // a progress strip of all 30 rooms
   const cur = +c.room.slice(1);
-  for (let k = 1; k <= 30; k++) el("rect", {x: (k - 1) * W / 30 + 1, y: 0, width: W / 30 - 2, height: 5, fill: k < cur ? "#64748b" : k === cur ? "var(--gold)" : "var(--line)"}, svg);
+  for (let k = 1; k <= NR(); k++) el("rect", {x: (k - 1) * W / NR() + 1, y: 0, width: W / NR() - 2, height: 5, fill: k < cur ? "#64748b" : k === cur ? "var(--gold)" : "var(--line)"}, svg);
   for (const o of EP.static) {
     const [x, y] = o.pos, [sx, sy, sz] = o.size; if (Math.abs(x - cx) > half + sx / 2 + 1 || sz < 0.05) continue;
     const yaw = (o.yaw || 0) * Math.PI / 180, hx = (Math.abs(sx * Math.cos(yaw)) + Math.abs(sy * Math.sin(yaw))) / 2, hy = (Math.abs(sx * Math.sin(yaw)) + Math.abs(sy * Math.cos(yaw))) / 2;
@@ -297,15 +399,22 @@ function map(c) {
   el("rect", {x: X(x - 1.05 * Math.cos(a)) - 4, y: Y(y - 1.05 * Math.sin(a)) - 4, width: 8, height: 8, fill: "#3b5f8f"}, svg);   // the cart
   el("polygon", {points: [p(1.3, 0), p(0.9, 2.5), p(0.9, -2.5)].join(" "), fill: "var(--gold)", stroke: "#000", "stroke-width": 0.8}, svg);
   for (let k = Math.max(0, Math.floor((cx - half) / 10)); k <= Math.min(29, Math.floor((cx + half) / 10)); k++)
-    el("text", {x: X(10 * k + 5), y: Y(10.6), "text-anchor": "middle", "font-size": 10, fill: k + 1 === cur ? "var(--gold)" : "var(--muted)"}, svg, "R" + (k + 1));
+    if (X(10 * k + 5) > 12 && X(10 * k + 5) < W - 12)   // only rooms whose name fits on the map strip
+      el("text", {x: X(10 * k + 5), y: Y(10.6), "text-anchor": "middle", "font-size": 10, fill: k + 1 === cur ? "var(--gold)" : "var(--muted)"}, svg, "R" + (k + 1));
 }
 
 // ------------------------------------------------------------------ live and replay
 $("pic").onload = () => { window.frameReady = true; };
 async function load() {
   RUN = await (await fetch(`${RUNDIR}/run.json?t=${Date.now()}`)).json();
+  if (!BASE) BASE = await fetch(`${RUNDIR}/baseline.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  if (!ANN) ANN = await fetch(`${RUNDIR}/annotations.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
   if (!EP) EP = await fetch(Q.get("nav") || "../../docs/episodes/nav.json").then((r) => r.json()).catch(() => null);
   causes();
+  const tallies = [["pipe", "#a3e635", "pipes"], ["push", "#f472b6", "pushes"], ["turn", "#c084fc", "turns"]]   // only the kinds this episode asks
+    .filter(([k]) => EP && EP.questions.some((q) => q.kind === k));
+  $("kindkey").innerHTML = `<i style="background:#f59e0b"></i>followed box<i style="background:#38bdf8"></i>facts<i style="background:#94a3b8"></i>own room` +
+    tallies.map(([, c, lab]) => `<i style="background:${c}"></i>${lab}`).join("");
   $("model").textContent = RUN.meta.model + (RUN.meta.protocol && RUN.meta.protocol.effort ? " · effort " + RUN.meta.protocol.effort : "") +
     (RUN.meta.label ? " · DEMO, not a benchmark score" : ""); return RUN;
 }
@@ -318,7 +427,11 @@ window.seek = (t) => {                      // replay: draw time t (seconds)
 };
 const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
 (async () => {
-  await load();
+  if (MODE === "live") {                                 // a queued walk has no run.json yet: say so and check again every 10 s
+    for (;;) { try { await load(); break; } catch (e) {
+      $("qtext").textContent = "Waiting for the walk to start (it is queued behind the job before it). This page checks again every 10 s.";
+      $("clock").textContent = "waiting"; await new Promise((r) => setTimeout(r, 10000)); } }
+  } else await load();
   $("mode").className = MODE === "live" ? "live" : "replay"; $("mode").textContent = MODE === "live" ? "● LIVE" : "REPLAY of the recorded run";
   if (MODE === "live") {
     const tick = async () => {

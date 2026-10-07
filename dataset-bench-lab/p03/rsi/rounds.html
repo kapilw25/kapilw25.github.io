@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Cliff Search Rounds</title>
+<style>
+:root{--bg:#f7f7f5;--panel:#ffffff;--ink:#1d2327;--muted:#5f6b73;--line:#cfd6db;--soft:#eef1f3;--accent:#2563eb;--band:#2563eb1f;--ok:#15803d;
+--warn:#b45309;--bad:#dc2626;--grey:#8a959c;--target:#7c3aed}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;--line:#343c42;
+--soft:#20262a;--accent:#7aa7ff;--band:#7aa7ff26;--ok:#6fd49a;--warn:#f0c060;--bad:#f87171;--grey:#7d8890;--target:#c4b5fd}}
+:root[data-theme="dark"]{--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;--line:#343c42;--soft:#20262a;--accent:#7aa7ff;--band:#7aa7ff26;
+--ok:#6fd49a;--warn:#f0c060;--bad:#f87171;--grey:#7d8890;--target:#c4b5fd}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:16px}
+h1{font-size:24px;margin:0 0 6px}
+.lede{color:var(--muted);margin:0 0 14px;max-width:760px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.tabs button{font:inherit;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:6px 14px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.meta{font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);margin:0 0 12px}
+.meta b{color:var(--ink);font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 12px}
+@media (max-width:760px){.tiles{grid-template-columns:repeat(2,1fr)}}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.tile .v{font:600 24px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace}
+.tile .v.acc{color:var(--accent)}
+.tile .l{color:var(--muted);font-size:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+svg{width:100%;height:auto;display:block}
+svg text{fill:var(--muted);font:11px ui-monospace,SFMono-Regular,Menlo,monospace}
+.grid line{stroke:var(--line)}
+.mk{cursor:pointer}
+.mk.sel{stroke:var(--ink);stroke-width:2.5}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:8px 0 0;color:var(--muted);font-size:12px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend svg{width:18px;height:18px;flex:none}
+.capt{color:var(--muted);font-size:13px;margin:8px 0 0}
+.capt b{color:var(--ink)}
+.two{display:grid;grid-template-columns:330px 1fr;gap:12px;margin-top:12px}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+.list{max-height:560px;overflow:auto;padding:0}
+.list .grp{position:sticky;top:0;background:var(--soft);padding:6px 12px;font:12px ui-monospace,Menlo,monospace;color:var(--muted);border-bottom:1px solid var(--line)}
+.list .row{padding:8px 12px;border-bottom:1px solid var(--line);cursor:pointer}
+.list .row.sel{background:var(--soft);box-shadow:inset 3px 0 0 var(--accent)}
+.list .row small{color:var(--muted)}
+.pillg{display:inline-block;border-radius:999px;padding:1px 8px;font-size:11px;border:1px solid var(--line);margin-right:6px}
+.g-accepted,.g-base{color:var(--accent);border-color:var(--accent)}
+.g-screen_pass{color:var(--accent);border-style:dashed;border-color:var(--accent)}
+.g-screen,.g-unconfirmed{color:var(--warn);border-color:var(--warn)}
+.g-critic{color:var(--bad);border-color:var(--bad)}
+.g-no_gain,.g-void,.g-measure,.g-running{color:var(--muted)}
+.det h2{font-size:17px;margin:4px 0 8px}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.badge{background:var(--soft);border-radius:6px;padding:2px 8px;font:12px ui-monospace,Menlo,monospace}
+.det h3{font-size:13px;margin:12px 0 4px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.det p{margin:0}
+.det pre{background:var(--soft);border-radius:8px;padding:10px;overflow:auto;font:12px/1.5 ui-monospace,Menlo,monospace;margin:0;white-space:pre-wrap}
+.live{font-size:12px;color:var(--muted)}
+.live b{color:var(--ok)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Watch the cliff search evolve, round by round</h1>
+  <p class="lede">Every try at the accuracy cliff: what it proposed, what the leak check said, how it was tested, how far accuracy fell, and why the gate kept or dropped it. Click any marker or row; use ← / → to step.</p>
+  <div class="sd-wrap"><aside class="side" id="side" aria-label="Filters"></aside><div>
+  <div class="meta" id="meta"></div>
+  <div class="card">
+    <svg id="chart" viewBox="0 0 1080 340" role="img" aria-label="Cliff depth per round"></svg>
+    <div class="legend" id="legend"></div>
+    <p class="capt"><b>Cliff depth per round</b> = accuracy at 1-2 rooms minus accuracy at the longest distances, in points. Line: the deepest
+      cliff measured by a walk so far. Shading: the noise band (10 points, about one wrong answer in ten long questions). Filled markers are
+      measured in walks; hollow ones are predicted by single-step tests. Dashed purple: the target, 47 points (80% to 33%). Bottom lane:
+      rounds never scored. <span class="live" id="live"></span></p>
+  </div>
+  <div class="two">
+    <div class="card list" id="list"></div>
+    <div class="card det" id="det"></div>
+  </div>
+  </div></div>
+</div>
+<script src="snapshot.js"></script>
+<script src="rsi_data.js"></script>
+<script>
+RSI.theme();
+var D = null, SEL_I = null, NS = "http://www.w3.org/2000/svg";
+var $ = function (id) { return document.getElementById(id); };
+var esc = RSI.esc;
+var TABS = [["all", "All rounds"], ["walk", "Walks"], ["test", "Single-step tests"]];
+function el(tag, a, p, t) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); if (t != null) e.textContent = t; p.appendChild(e); return e; }
+var SEL = {};
+function groups() {
+  var R = D ? D.rounds : [], days = [];
+  R.forEach(function (r) { var d = (r.when || "").split(" ")[0]; if (d && days.indexOf(d) < 0) days.push(d); });
+  return [
+    {k: "eval", l: "Evaluated by", items: [["walk", "🚶 walk"], ["test", "🧪 single-step test"], ["none", "📏 measurement only"]].map(function (x) { return {v: x[0], l: x[1], match: function (r) { return (r.d.eval || "none") === x[0]; }}; })},
+    {k: "gate", l: "Gate verdict", items: Object.keys(RSI.GATE).map(function (g) { return {v: g, l: RSI.GATE[g], match: function (r) { return r.d.gate === g; }}; })},
+    {k: "part", l: "Part changed", items: RSI.PARTS.map(function (p) { return {v: p[0], l: p[1], match: function (r) { return (r.d.parts || []).indexOf(p[0]) >= 0; }}; })},
+    {k: "day", l: "Day", items: days.map(function (d) { return {v: d, l: d, match: function (r) { return (r.when || "").indexOf(d) === 0; }}; })}
+  ];
+}
+function inTab(r) { return RSI.pass(r, groups(), SEL); }
+function pct(v) { return v == null ? "–" : Math.round(v * 100) + "%"; }
+function kindOf(r) {
+  var g = r.d.gate;
+  if (g === "accepted" || g === "base") return "acc";
+  if (g === "unconfirmed" && r.d.depth != null) return "unconf";
+  if (g === "critic") return "critic";
+  if (g === "void" || g === "measure" || g === "running" || r.d.depth == null) return "lane";
+  if (g === "screen") return "screen";
+  if (g === "screen_pass") return "pass";
+  return "flat";
+}
+function headerMeta() { var R = D.rounds, walks = R.filter(function (r) { return r.d.eval === "walk"; }).length, tests = R.filter(function (r) { return r.d.eval === "test"; }).length;
+  $("meta").innerHTML = "<b>evolve set</b> 30-room warehouse walks and single-step tests &nbsp; <b>policy</b> Claude Opus 5.5, thinking xhigh, Claude Code CLI (frozen)<br>" +
+    "<b>proposer / critic</b> this Claude Code session (Opus 5.5) &nbsp; <b>base</b> walk 1: 30 rooms, seed 7<br><b>rounds</b> " + R.length + " · " + walks + " walks, " + tests +
+    " tests &nbsp; <b>noise band δ</b> " + RSI.DELTA + " pts &nbsp; <b>target</b> " + RSI.TARGET + " pts"; }
+function tabs() {
+  $("tabs").innerHTML = TABS.map(function (t) { return '<button data-t="' + t[0] + '" aria-selected="' + (t[0] === TAB) + '">' + t[1] + "</button>"; }).join("");
+}
+function header() { if (!$("tiles")) { headerMeta(); return; }
+  var R = D.rounds, walks = R.filter(function (r) { return r.d.eval === "walk"; }).length, tests = R.filter(function (r) { return r.d.eval === "test"; }).length;
+  $("meta").innerHTML = "<b>evolve set</b> 30-room warehouse walks (seeds 7, 104, 108, 109, 111, 113) and single-step tests &nbsp; <b>policy</b> Claude Opus 5.5, thinking xhigh, Claude Code CLI (frozen)<br>" +
+    "<b>proposer / critic</b> this Claude Code session (Opus 5.5) &nbsp; <b>base</b> walk 1: 30 rooms, seed 7, followed box + facts<br>" +
+    "<b>rounds</b> " + R.length + " · " + walks + " walks, " + tests + " tests &nbsp; <b>noise band δ</b> " + RSI.DELTA + " pts &nbsp; <b>target</b> " + RSI.TARGET + " pts";
+  var b = D.blocked, h0 = R.length ? R[0].d.depth : null;
+  var tiles = [[(h0 == null ? "–" : h0) + " pts", "H₀ cliff depth (walk 1)", ""], [(D.best == null ? "–" : D.best) + " pts", "deepest cliff measured so far", "acc"],
+               [D.accepted + "", "rounds that deepened the cliff over " + R.length, "acc"],
+               [(b.critic + b.screen + b.no_gain + b.void) + "", "dropped: " + b.critic + " leak · " + b.screen + " test · " + b.no_gain + " flat walk · " + b.void + " void", ""]];
+  $("tiles").innerHTML = tiles.map(function (t) { return '<div class="tile"><div class="v ' + t[2] + '">' + esc(t[0]) + '</div><div class="l">' + esc(t[1]) + "</div></div>"; }).join("");
+}
+function chart() {
+  var s = $("chart"); s.innerHTML = "";
+  var R = D.rounds, W = 1080, H = 340, L = 54, Rm = 16, T = 18, B = 70, lane = H - 46;
+  var ymax = 80, n = Math.max(R.length, 1);
+  var x = function (i) { return L + (W - L - Rm) * (i - 0.5) / n; }, y = function (v) { return T + (lane - 26 - T) * (1 - v / ymax); };
+  var g = el("g", {class: "grid"}, s);
+  [0, 20, 40, 60, 80].forEach(function (v) { el("line", {x1: L, x2: W - Rm, y1: y(v), y2: y(v)}, g); el("text", {x: L - 8, y: y(v) + 4, "text-anchor": "end"}, s, v); });
+  el("text", {x: 14, y: (T + lane) / 2, transform: "rotate(-90 14 " + (T + lane) / 2 + ")", "text-anchor": "middle"}, s, "cliff depth (pts)");
+  el("line", {x1: L, x2: W - Rm, y1: y(RSI.TARGET), y2: y(RSI.TARGET), stroke: "var(--target)", "stroke-dasharray": "6 5", "stroke-width": 1.5}, s);
+  el("text", {x: W - Rm - 4, y: y(RSI.TARGET) - 6, "text-anchor": "end", fill: "var(--target)"}, s, "target 47 (80% → 33%)");
+  el("rect", {x: L, y: lane - 14, width: W - L - Rm, height: 26, fill: "var(--soft)"}, s);
+  el("text", {x: W - Rm - 6, y: lane + 4, "text-anchor": "end"}, s, "not scored");
+  var band = "", line = "", prev = null;
+  R.forEach(function (r) {
+    var b = r.best == null ? 0 : r.best, x0 = L + (W - L - Rm) * (r.i - 1) / n, x1 = L + (W - L - Rm) * r.i / n;
+    band += (band ? " L" : "M") + x0 + "," + y(b) + " L" + x1 + "," + y(b);
+    line += (line ? " L" : "M") + x0 + "," + y(b) + " L" + x1 + "," + y(b);
+    prev = b;
+  });
+  var lower = R.slice().reverse().map(function (r) { var b = r.best == null ? 0 : r.best; return [L + (W - L - Rm) * r.i / n, L + (W - L - Rm) * (r.i - 1) / n, y(Math.max(0, b - RSI.DELTA))]; });
+  var bp = band + lower.map(function (q) { return " L" + q[0] + "," + q[2] + " L" + q[1] + "," + q[2]; }).join("") + " Z";
+  el("path", {d: bp, fill: "var(--band)"}, s);
+  el("path", {d: line, fill: "none", stroke: "var(--accent)", "stroke-width": 2.5}, s);
+  R.forEach(function (r) {
+    if (!inTab(r)) return;
+    var k = kindOf(r), cx = x(r.i), sel = SEL_I === r.i ? " sel" : "", m;
+    if (k === "lane" || k === "critic") {
+      var ly = lane;
+      if (k === "critic") { m = el("path", {d: "M" + (cx - 6) + "," + (ly - 6) + " L" + (cx + 6) + "," + (ly + 6) + " M" + (cx + 6) + "," + (ly - 6) + " L" + (cx - 6) + "," + (ly + 6), stroke: "var(--bad)", "stroke-width": 2.5, class: "mk" + sel}, s); }
+      else m = el("line", {x1: cx - 7, x2: cx + 7, y1: ly, y2: ly, stroke: "var(--grey)", "stroke-width": 2.5, "stroke-dasharray": "3 2", class: "mk" + sel}, s);
+    } else {
+      var cy = y(Math.min(ymax, Math.max(0, r.d.depth)));
+      if (k === "acc") m = el("circle", {cx: cx, cy: cy, r: 7, fill: "var(--accent)", class: "mk" + sel}, s);
+      else if (k === "unconf") m = el("circle", {cx: cx, cy: cy, r: 7, fill: "var(--warn)", class: "mk" + sel}, s);
+      else if (k === "flat") m = el("circle", {cx: cx, cy: cy, r: 6.5, fill: "var(--panel)", stroke: "var(--grey)", "stroke-width": 2, class: "mk" + sel}, s);
+      else if (k === "pass") m = el("path", {d: "M" + cx + "," + (cy - 8) + " L" + (cx + 8) + "," + cy + " L" + cx + "," + (cy + 8) + " L" + (cx - 8) + "," + cy + " Z", fill: "var(--panel)", stroke: "var(--accent)", "stroke-width": 2, class: "mk" + sel}, s);
+      else m = el("path", {d: "M" + cx + "," + (cy - 8) + " L" + (cx + 8) + "," + (cy + 6) + " L" + (cx - 8) + "," + (cy + 6) + " Z", fill: "var(--panel)", stroke: "var(--warn)", "stroke-width": 2, class: "mk" + sel}, s);
+    }
+    m.setAttribute("data-i", r.i);
+    el("title", {}, m, r.id + " · " + r.kind + " · " + (r.d.depth == null ? "not scored" : r.d.depth + " pts " + (r.d.depth_kind || "")) + " · " + (RSI.GATE[r.d.gate] || r.d.gate));
+  });
+  var ticks = n <= 30 ? R.map(function (r) { return r.i; }) : R.filter(function (r) { return r.i % 5 === 0; }).map(function (r) { return r.i; });
+  ticks.forEach(function (i) { el("text", {x: x(i), y: H - 16, "text-anchor": "middle"}, s, i === 1 ? "H₀" : i); });
+  el("text", {x: (L + W - Rm) / 2, y: H - 2, "text-anchor": "middle"}, s, "round (log order)");
+  var cnt = {acc: 0, unconf: 0, flat: 0, pass: 0, screen: 0, critic: 0, lane: 0};
+  R.forEach(function (r) { if (inTab(r)) cnt[kindOf(r)]++; });
+  var sw = function (svg) { return '<svg width="18" height="18" viewBox="-9 -9 18 18" style="display:inline">' + svg + "</svg>"; };
+  $("legend").innerHTML = [
+    ['<line x1="-8" x2="8" y1="0" y2="0" stroke="var(--accent)" stroke-width="2.5"/>', "deepest cliff so far"],
+    ['<rect x="-8" y="-5" width="16" height="10" fill="var(--band)"/>', "noise band"],
+    ['<circle r="6" fill="var(--accent)"/>', "base or a deeper cliff (" + cnt.acc + ")"],
+    ['<circle r="6" fill="var(--warn)"/>', "fall measured, not admitted yet: 1 seed or a failed-audit question (" + cnt.unconf + ")"],
+    ['<circle r="5.5" fill="none" stroke="var(--grey)" stroke-width="2"/>', "walk, no fall (" + cnt.flat + ")"],
+    ['<path d="M0,-7 L7,0 L0,7 L-7,0 Z" fill="none" stroke="var(--accent)" stroke-width="2"/>', "test passed, sent to a walk (" + cnt.pass + ")"],
+    ['<path d="M0,-7 L7,5 L-7,5 Z" fill="none" stroke="var(--warn)" stroke-width="2"/>', "killed at the test (" + cnt.screen + ")"],
+    ['<path d="M-5,-5 L5,5 M5,-5 L-5,5" stroke="var(--bad)" stroke-width="2.5"/>', "stopped by the leak check (" + cnt.critic + ")"],
+    ['<line x1="-7" x2="7" y1="0" y2="0" stroke="var(--grey)" stroke-width="2.5" stroke-dasharray="3 2"/>', "void or measurement (" + cnt.lane + ")"]
+  ].map(function (z) { return "<span>" + sw(z[0]) + esc(z[1]) + "</span>"; }).join("");
+}
+function list() {
+  var R = D.rounds.filter(inTab), h = "", day = null;
+  R.slice().reverse().forEach(function (r) {
+    var dd = (r.when || "").split(" ")[0];
+    if (dd !== day) { day = dd; h += '<div class="grp">' + esc(dd) + " · deepest so far " + (r.best == null ? "–" : r.best + " pts") + "</div>"; }
+    h += '<div class="row' + (SEL_I === r.i ? " sel" : "") + '" data-i="' + r.i + '"><span class="pillg g-' + r.d.gate + '">' + esc(r.d.gate.replace("_", " ")) + "</span><b>" + esc(r.id) +
+      "</b> <small>" + esc((r.when || "").split(" ")[1] || "") + "</small><br><small>" + esc(r.kind) + "</small></div>";
+  });
+  $("list").innerHTML = h || '<div class="row">No rounds in this view.</div>';
+}
+function detail() {
+  var r = D.rounds.filter(function (x) { return x.i === SEL_I; })[0];
+  if (!r) { $("det").innerHTML = "<p>Pick a round.</p>"; return; }
+  var d = r.d, badges = [];
+  if (d.depth != null) badges.push("depth " + d.depth + " pts " + (d.depth_kind || ""));
+  if (d.short != null || d.long != null) badges.push(pct(d.short) + " → " + pct(d.long));
+  if (d.leak && d.leak.floor != null) badges.push("shortcut " + pct(d.leak.floor) + (d.leak.ok ? " ✓" : " ✗"));
+  if (d.eval) badges.push(d.eval + (d.k ? " · " + (d.eval === "walk" ? d.k + " rooms" : "k=" + d.k) : ""));
+  if (r.cost != null) badges.push("$" + (+r.cost).toFixed(2));
+  if ((d.parts || []).length) badges.push("changed: " + d.parts.join(", "));
+  var sc = r.scores && typeof r.scores === "object" ? Object.keys(r.scores).map(function (k) { var v = r.scores[k]; return k.replace(/_/g, " ") + ": " + (typeof v === "object" ? JSON.stringify(v) : v); }).join("\n") : String(r.scores || "");
+  $("det").innerHTML = '<span class="pillg g-' + d.gate + '">' + esc(RSI.GATE[d.gate] || d.gate) + "</span><h2>" + esc(r.id) + " · " + esc(r.kind) + "</h2>" +
+    '<div class="badges">' + badges.map(function (b) { return '<span class="badge">' + esc(b) + "</span>"; }).join("") + "</div>" +
+    "<h3>Proposal</h3><p>" + esc(r.hyp) + "</p>" +
+    "<h3>Gate</h3><p>" + esc(d.reason || "") + "</p>" +
+    (r.cause ? "<h3>Why</h3><p>" + esc(r.cause) + "</p>" : "") +
+    "<h3>Scores</h3><pre>" + esc(sc) + "</pre>" +
+    "<h3>Settings (the change)</h3><pre>" + esc(JSON.stringify(r.settings, null, 1)) + "</pre>" +
+    (r.next.length ? "<h3>Next</h3><p>" + esc(r.next.join("; ")) + "</p>" : "") +
+    "<h3>Evidence</h3><p>" + esc(r.evidence) + "</p><p class=\"live\">" + esc(r.when) + (r.late ? " · logged late " + esc(r.late) : "") + "</p>";
+}
+function postH() { if (window.self !== window.top) parent.postMessage({rsiHeight: Math.ceil(document.querySelector(".wrap").getBoundingClientRect().height) + 8}, "*"); }
+function render() {
+  var b = D.blocked, h0 = D.rounds.length ? D.rounds[0].d.depth : null, vis = D.rounds.filter(inTab).length;
+  RSI.panel($("side"), D.rounds, groups(), SEL, render, [[vis + " of " + D.rounds.length, "rounds shown"], [(h0 == null ? "–" : h0) + " pts", "H₀ cliff depth"],
+    [(D.best == null ? "–" : D.best) + " pts", "deepest measured"], ["$" + D.spent.toFixed(0), "spent"]]);
+  if (SEL && D.rounds.filter(inTab).map(function (r) { return r.i; }).indexOf(SEL_I) < 0) { var f = D.rounds.filter(inTab); SEL_I = f.length ? f[f.length - 1].i : null; }
+  header(); chart(); list(); detail(); postH(); }
+if (window.self !== window.top) { document.querySelector("h1").hidden = true; document.querySelector(".lede").hidden = true; }   // the dashboard tab shows them
+window.addEventListener("resize", postH);
+function pick(i) { SEL_I = i; chart(); list(); detail(); postH(); }
+
+$("chart").onclick = function (e) { var m = e.target.closest("[data-i]"); if (m) pick(+m.getAttribute("data-i")); };
+$("list").onclick = function (e) { var m = e.target.closest("[data-i]"); if (m) pick(+m.getAttribute("data-i")); };
+document.addEventListener("keydown", function (e) {
+  if (!D) return; var R = D.rounds.filter(inTab).map(function (r) { return r.i; }), k = R.indexOf(SEL_I);
+  if (e.key === "ArrowRight") pick(R[Math.min(R.length - 1, k + 1)]);
+  if (e.key === "ArrowLeft") pick(R[Math.max(0, k - 1)]);
+});
+function refresh(first) {
+  RSI.load(function (data, src) {
+    var grew = D && data.rounds.length > D.rounds.length;
+    D = data;
+    if (first || grew) SEL_I = D.rounds.length;
+    var want = +new URLSearchParams(location.search).get("round");      // rounds.html?round=N opens that round
+    if (first && want >= 1 && want <= D.rounds.length) SEL_I = want;
+    $("live").innerHTML = src === "live" ? "<b>● live</b>: re-read from the tuning log every 10 s." : "Saved copy; open through the local server for live rounds.";
+    render();
+  });
+}
+refresh(true);
+setInterval(function () { refresh(false); }, 10000);
+</script>
+</body>
+</html>

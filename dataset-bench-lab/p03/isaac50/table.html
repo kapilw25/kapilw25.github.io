@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Isaac 50 Modes</title>
+<style>
+:root{--bg:#f7f7f5;--panel:#ffffff;--ink:#1d2327;--muted:#5f6b73;--line:#dde2e5;--soft:#eef1f3;--accent:#2563eb;--ok:#15803d;--warn:#b45309;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;--line:#2c3338;
+--soft:#20262a;--accent:#7aa7ff;--ok:#6fd49a;--warn:#f0b35a;--bad:#f87171}}
+:root[data-theme="dark"]{--bg:#111416;--panel:#181c1f;--ink:#e6e9eb;--muted:#9aa5ad;--line:#2c3338;--soft:#20262a;--accent:#7aa7ff;--ok:#6fd49a;--warn:#f0b35a;--bad:#f87171}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1500px;margin:0 auto;padding:16px}
+h1{font-size:24px;margin:0 0 6px}
+.lede{color:var(--muted);margin:0 0 12px;max-width:1100px}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 14px;min-width:120px}
+.tile b{font-size:20px;display:block}
+.tile span{color:var(--muted);font-size:12px}
+table.t50{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.t50 th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:var(--soft);padding:8px 10px;border-bottom:1px solid var(--line)}
+.t50 td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13px}
+.t50 td.m{width:24%}.t50 td.a{width:20%}.t50 td.f{width:17%}.t50 td.q{width:39%}
+.code{font:700 13px ui-monospace,Menlo,monospace;color:var(--accent)}
+.nm{font-weight:700;font-size:14px}
+.chip{display:inline-block;font:11px ui-monospace,Menlo,monospace;background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:0 5px;margin:2px 3px 0 0;color:var(--muted)}
+.mut{color:var(--muted)}
+details{margin-top:4px}
+summary{cursor:pointer;color:var(--accent);font-size:12px}
+.qtext{margin:0 0 6px}
+.k{display:grid;grid-template-columns:44px 1fr;gap:2px 8px;font-size:12px;padding:3px 0;border-top:1px dashed var(--line)}
+.k b{font:700 12px ui-monospace,Menlo,monospace}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+.shape{font:12px ui-monospace,Menlo,monospace;background:var(--soft);border-radius:5px;padding:1px 5px}
+a{color:var(--accent)}
+@media (max-width:900px){.t50 td.f{display:none}.t50 th.f{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>50 sub-failure modes as Isaac scenes</h1>
+<p class="lede">One Isaac Sim scene (.usda) per v12 sub-failure mode: 15 state changes, and the same v12 robot action asked after
+K = 1, 3, 5, 10 and 15 of them, so each mode gets its own cliff along K (version 2: 22 modes ask about the case of picture 1 with
+K - 1 look-alike cases in between; every picture has its own camera shift and light). Answers are actions in the robot's own frame
+(points within max(0.3 m, 10% of the distance), lists, commands); keys come from the scene's state and are re-read from
+the Isaac stage on the GPU. Built on the Mac; not yet compiled on the GPU (pictures and physics outcomes come from there).</p>
+<div class="tiles" id="tiles"></div>
+<div class="sd-wrap"><aside class="side" id="side"></aside><main><table class="t50"><thead><tr>
+<th>Sub-failure mode</th><th>VLA action target</th><th class="f">3D artifact</th><th>5 questions (K = 1, 3, 5, 10, 15) and answers</th>
+</tr></thead><tbody id="rows"></tbody></table></main></div>
+<p class="mut" id="foot"></p>
+</div>
+<script src="../rsi/rsi_data.js"></script>
+<script src="data.js"></script>
+<script>
+(function () {
+  var C = window.ISAAC50 || {rows: []}, e = RSI.esc, rows = C.rows;
+  var PUB = rows.length > 0 && !!rows[0].hidden;   // public copy (hub_public.py): no answers, floors or design
+  function tag(r) { return "m" + r.code.replace(".", "_"); }
+  function ready(r) { return !PUB || r.public_3d !== false; }
+  function view3d(r) {
+    if (!ready(r)) return '<span class="mut">waiting for real Isaac physics; the 3D scene and questions appear once it is simulated</span>';
+    return '<a href="view.html?m=' + e(r.code) + '"><img src="scene/' + tag(r) + '/pics/tc010.jpg" alt="Isaac render" onerror="this.style.display=\'none\'" style="width:100%;max-width:260px;border-radius:6px;display:block;margin-bottom:4px">open the 3D scene</a>';
+  }
+  function ans(r) {
+    if (PUB) return "-";
+    var t = r.questions[0].key.t, f = r.questions[0].key.fields;
+    if (t === "obj") { var ts = Object.keys(f).map(function (k) { return f[k].t; }); t = ts.length > 1 ? "mixed" : ts[0]; }
+    return {p3: "point", p2: "floor point", plist2: "list of points", plist3: "list of points", nlist: "list of numbers", elist: "word list",
+            set: "set", enum: "word", num: "number", mixed: "point + setting"}[t] || t;
+  }
+  function pickMax(r) { var v = r.questions.map(function (q) { return q.floors.pick_lookalike; }).filter(function (x) { return x != null; }); return v.length ? Math.max.apply(null, v) : null; }
+  function stopRight(r) { return r.questions.filter(function (q) { return q.K >= 3 && q.floors.start_state_guess; }).length; }
+  function kback(r) { return r.questions.some(function (q) { return q.floors.latest_instance_guess != null; }); }
+  function allView(r) { return r.view_check.changes === r.view_check.in_view; }
+  var cats = [], mech = [], phys = [], at = [];
+  rows.forEach(function (r) { [[cats, r.category], [mech, r.mechanism], [phys, r.physics], [at, ans(r)]].forEach(function (p) { if (p[0].indexOf(p[1]) < 0) p[0].push(p[1]); }); });
+  var groups = [
+    {k: "cat", l: "Category", items: cats.map(function (c) { return {v: c, l: c, match: function (r) { return r.category === c; }}; })},
+    {k: "mech", l: "How K builds the state", items: mech.map(function (c) { return {v: c, l: {SHELL: "look-alikes moved (SHELL)", LEDGER: "one event per step (LEDGER)", EGO: "the robot moves (EGO)", HISTORY: "values change (HISTORY)"}[c] || c, match: function (r) { return r.mechanism === c; }}; })},
+    {k: "kb", l: "What K counts", items: [{v: "kb", l: "cases since picture 1 (K-back)", match: kback}, {v: "cum", l: "changes since the start", match: function (r) { return !kback(r); }}]},
+    {k: "phys", l: "Physics", items: phys.map(function (c) { return {v: c, l: {none: "kinematic only", rigid: "rigid bodies (GPU)", deformable: "deformable (GPU)", particles: "fluid (GPU)", fog: "fog (GPU)", articulation: "jointed arm"}[c] || c, match: function (r) { return r.physics === c; }}; })},
+    {k: "ans", l: "Answer type", items: at.map(function (c) { return {v: c, l: c, match: function (r) { return ans(r) === c; }}; })},
+    {k: "chk", l: "Checks", items: [
+      {v: "view", l: "every change in view", match: allView},
+      {v: "noview", l: "a change out of view", match: function (r) { return !allView(r); }},
+      {v: "pick", l: "look-alike guess over 25%", match: function (r) { var p = pickMax(r); return p != null && p > 0.25; }},
+      {v: "gpu", l: "compiled on the GPU", match: function (r) { return r.artifact.compiled_on_gpu; }},
+      {v: "nogpu", l: "not compiled yet", match: function (r) { return !r.artifact.compiled_on_gpu; }}]}];
+  if (PUB) groups = groups.filter(function (g) { return g.k === "cat" || g.k === "phys"; });
+  var sel = {cat: [], mech: [], kb: [], phys: [], ans: [], chk: []};
+  function qcell(r) {
+    if (PUB) {
+      if (!ready(r)) return '<span class="mut">waiting for real Isaac physics</span>';
+      return r.questions.map(function (q) { return '<div class="k"><b>K=' + q.K + "</b><span>" + e(q.question) + '<br><span class="mut">answer: hidden until the paper</span></span></div>'; }).join("");
+    }
+    var q0 = r.questions[0];
+    var h = '<p class="qtext">' + e(q0.question) + '</p><span class="shape">' + e(q0.shape) + "</span>";
+    r.questions.forEach(function (q) {
+      var fl = q.floors, bits = ["random " + (fl.random < 0.001 ? "<0.1%" : (100 * fl.random).toFixed(1) + "%")];
+      if (fl.pick_lookalike != null) bits.push("look-alike guess " + Math.round(100 * fl.pick_lookalike) + "%");
+      if (fl.start_state_guess != null) bits.push("stopped tracking: " + (fl.start_state_guess ? '<span class="warn">right</span>' : '<span class="ok">wrong</span>'));
+      if (fl.latest_instance_guess != null) bits.push("latest case instead of picture 1: " + (fl.latest_instance_guess ? '<span class="warn">right</span>' : '<span class="ok">wrong</span>'));
+      h += '<div class="k"><b>K=' + q.K + "</b><span>" + e(q.key_text) + '<br><span class="mut">' + bits.join(" · ") +
+           (q.answer_in_view === false ? ' · <span class="mut">answer point out of view (by design for this mode)</span>' : "") + "</span></span></div>";
+    });
+    return h;
+  }
+  function row(r) {
+    if (PUB) return '<tr><td class="m"><span class="code">' + e(r.code) + '</span> <span class="nm">' + e(r.name) + '</span><br><span class="chip">' + e(r.category) +
+      '</span><details><summary>v12 description</summary>' + e(r.v12_description) + "</details></td>" +
+      '<td class="a">' + e(r.v12_action_target) + '</td><td class="f">' + view3d(r) + '</td><td class="q">' + qcell(r) + "</td></tr>";
+    var vc = r.view_check, pk = pickMax(r);
+    var art = '<a href="../../' + e(r.artifact.usda) + '">' + e(r.artifact.usda.split("/").pop()) + "</a><br>" +
+      '<span class="mut">' + (r.artifact.bytes / 1024).toFixed(0) + " KB · " + r.artifact.objects + " objects · " + r.artifact.prims + " prims · " +
+      r.artifact.time_samples + " camera frames</span><br>" +
+      '<span class="chip">' + e(r.physics) + "</span> " + e(r.physics_note) + "<br>" +
+      "view check: " + (vc.changes ? (vc.in_view === vc.changes ? '<span class="ok">' : '<span class="warn">') + vc.in_view + "/" + vc.changes + " changes in the picture</span>" : '<span class="mut">the robot moves (no object changes)</span>') +
+      "<br>GPU: " + (r.artifact.compiled_on_gpu ? '<span class="ok">rendered in Isaac 6.1</span>' + (r.artifact.sim_keys_agree === true ? ', keys re-read from the stage agree' : r.artifact.sim_keys_agree === false ? ', <span class="bad">a key re-read from the stage differs</span>' : '') : '<span class="mut">not compiled yet</span>') +
+      '<br>' + view3d(r) +
+      (pk != null && pk > 0.25 ? '<br><span class="warn">look-alike guess up to ' + Math.round(100 * pk) + "%</span>" : "");
+    return '<tr><td class="m"><span class="code">' + e(r.code) + '</span> <span class="nm">' + e(r.name) + '</span><br><span class="chip">' + e(r.category) +
+      '</span><span class="chip">' + e(r.mechanism) + '</span><details><summary>v12 description</summary>' + e(r.v12_description) +
+      '</details><details open><summary>how this scene builds it</summary>' + e(r.design) + "</details></td>" +
+      '<td class="a">' + e(r.v12_action_target) + '<br><span class="mut">answered as</span> <span class="shape">' + e(r.questions[0].shape) + "</span></td>" +
+      '<td class="f">' + art + '</td><td class="q">' + qcell(r) + "</td></tr>";
+  }
+  function render() {
+    var vis = rows.filter(function (r) { return RSI.pass(r, groups, sel); });
+    document.getElementById("rows").innerHTML = vis.map(row).join("") || '<tr><td colspan="4" class="mut">No mode matches the filters.</td></tr>';
+    var nq = vis.reduce(function (a, r) { return a + r.questions.length; }, 0);
+    if (PUB) {
+      document.getElementById("tiles").innerHTML = [[vis.filter(ready).length, "modes with a 3D scene"], [nq, "questions"], [vis.filter(function (r) { return !ready(r); }).length, "waiting for real physics"]].map(function (t) {
+        return '<div class="tile"><b>' + t[0] + "</b><span>" + t[1] + "</span></div>"; }).join("");
+      RSI.panel(document.getElementById("side"), rows, groups, sel, render, [["Asked at K", (C.K_ASK || []).join(", ")]]);
+      return;
+    }
+    document.getElementById("tiles").innerHTML = [[vis.length, "modes shown"], [nq, "questions"],
+      [vis.filter(function (r) { return r.physics !== "none"; }).length, "need GPU physics or effects"],
+      [vis.filter(function (r) { return r.artifact.compiled_on_gpu; }).length, "compiled on the GPU"]].map(function (t) {
+        return '<div class="tile"><b>' + t[0] + "</b><span>" + t[1] + "</span></div>"; }).join("");
+    RSI.panel(document.getElementById("side"), rows, groups, sel, render,
+      [["Built", C.built || "?"], ["Steps", C.steps], ["Asked at K", (C.K_ASK || []).join(", ")]]);
+  }
+  if (PUB) {
+    document.querySelector(".lede").textContent = "One Isaac Sim scene per v12 sub-failure mode, with the same robot action asked after K = 1, 3, 5, 10 and 15 state changes. Open a row's 3D scene to spin it and step through every picture the model sees, next to the Isaac render. Answer keys and the build's design stay private until the paper.";
+    document.querySelector("th.f").textContent = "3D scene";
+  }
+  document.getElementById("foot").textContent = PUB ? "Scenes rendered with Isaac Sim 6.1; physics modes are added once they are simulated." : "Source: bench/isaac50 (core.py, modes1-5.py, usd_write.py, build.py); the v12 text is read verbatim from " +
+    (C.source_note || "the v12 note") + ". Tolerance: " + (C.tolerance || "") + ".";
+  render();
+  if (window.self !== window.top) { document.querySelector("h1").style.display = "none"; document.querySelector(".lede").style.display = "none"; }
+  function postH() { if (window.self !== window.top) parent.postMessage({rsiHeight: Math.ceil(document.querySelector(".wrap").getBoundingClientRect().height) + 8}, "*"); }
+  new ResizeObserver(postH).observe(document.body); postH();
+})();
+</script>
+</body>
+</html>

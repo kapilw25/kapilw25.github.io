@@ -24,8 +24,8 @@ export async function init(opts) {
   S.loader = new GLTFLoader(); S.loader.setMeshoptDecoder(MeshoptDecoder);
   S.R = renderer(opts.main); S.RI = renderer(opts.inset);
   S.scene = new THREE.Scene(); S.scene.background = new THREE.Color(0xdfe3e8);
-  S.scene.add(new THREE.HemisphereLight(0xffffff, 0x50555c, 1.7));
-  const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(10, 20, 6); S.scene.add(sun);
+  S.hemi = new THREE.HemisphereLight(0xffffff, 0x50555c, 1.7); S.scene.add(S.hemi);
+  const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(10, 20, 6); S.scene.add(sun); S.sun = sun;
   const len = S.D.floor_len || 300;
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(len + 60, 40), new THREE.MeshStandardMaterial({color: 0xa7abb0, roughness: 0.9}));
   floor.rotation.x = -Math.PI / 2; floor.position.set(len / 2, 0, -4.5); S.scene.add(floor);
@@ -42,6 +42,7 @@ export async function init(opts) {
   await build();
   S.robot = robotBody(); S.cart = cartBody(); S.robot.add(S.cart); S.scene.add(S.robot);
   S.k = 0; S.anim = null; S.cullAt = null;
+  applyLook();
   jump(0);
   if (opts.still) { fit(); S.status(""); return; }   // render on request only (snap), for the agent-walk harness
   new ResizeObserver(fit).observe(opts.main); new ResizeObserver(fit).observe(opts.inset); fit();
@@ -54,8 +55,31 @@ export async function init(opts) {
 export function snap(k, robot, cam, quality, show) {
   jump(k); shown(show || []);
   S.pose = [...robot]; placeRobot(S.pose); aimRobot(cam.pos, cam.look); cull(robot[0]);
+  aimSun(robot);
   S.RI.render(S.scene, S.rcam);
   return S.RI.domElement.toDataURL("image/jpeg", quality || 0.88);
+}
+
+// Optional realism for the reading tests (S.D.look; absent = the usual drawing): light = a factor on every light,
+// fog = exponential fog density per metre, shadows = a sun that casts shadows, placed at look.sun in the robot's own frame
+// (x forward, y left, z up) and aimed at look.target, so a crane beam's shadow can fall across the cart.
+function applyLook() {
+  const L = S.D.look; if (!L) return;
+  if (L.light != null) { S.hemi.intensity *= L.light; S.sun.intensity *= L.light; }
+  if (L.tint) { S.hemi.color.set(L.tint); S.sun.color.set(L.tint); }   // coloured room light (the shade tests); absent = white light
+  if (L.fog) { const c = new THREE.Color(L.fogColor || "#9aa0a6"); S.scene.fog = new THREE.FogExp2(c, L.fog); S.scene.background = c; }
+  if (L.shadows) {
+    for (const r of [S.R, S.RI]) { r.shadowMap.enabled = true; r.shadowMap.type = THREE.PCFSoftShadowMap; }
+    S.sun.castShadow = true; S.sun.shadow.mapSize.set(2048, 2048); S.sun.shadow.bias = -0.0004;
+    Object.assign(S.sun.shadow.camera, {left: -6, right: 6, top: 6, bottom: -6, near: 0.5, far: 40}); S.sun.shadow.camera.updateProjectionMatrix();
+    S.scene.add(S.sun.target);
+    S.scene.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+  }
+}
+function aimSun(robot) {   // keep the shadow-casting sun over the robot: its shadow map covers only a few metres
+  const L = S.D.look; if (!L || !L.shadows) return;
+  const at = (p) => { const c = Math.cos(robot[2] * D2R), s = Math.sin(robot[2] * D2R); return P([robot[0] + p[0] * c - p[1] * s, robot[1] + p[0] * s + p[1] * c, p[2]]); };
+  S.sun.position.copy(at(L.sun || [2, 1, 10])); S.sun.target.position.copy(at(L.target || [-1.05, 0, 0.7])); S.sun.target.updateMatrixWorld();
 }
 
 function renderer(el) {
@@ -217,19 +241,32 @@ function robotBody() {
 }
 
 function cartBody() {   // towed behind the robot (robot-local metres): deck, wheels, tow bar, the slot map board, six totes
+  // C.yaw or a cart state's yaw (degrees, optional): the cart stands turned about its centre (on a station turntable,
+  // unhitched, so no tow bar);
+  // C.marker (optional colour): a stripe along the cart's front edge, so its turn can be read. Both absent = the towed cart.
   const C = S.D.cart, g = new THREE.Group(), [dl, dw, dh] = C.deck, cx = C.offset;
-  const add = (size, color, at, center) => { const m = shape({size, color, center}); m.position.add(P(at)); g.add(m); return m; };
-  add([dl, dw, 0.06], [70, 72, 78], [cx, 0, dh - 0.06]);
+  const cg = new THREE.Group(); cg.position.copy(P([cx, 0, 0])); g.add(cg); S.cartTurn = cg;
+  const add = (size, color, at, center, to) => { const m = shape({size, color, center}); m.position.add(P(at)); (to || g).add(m); return m; };
+  const addC = (size, color, at) => add(size, color, [at[0] - cx, at[1], at[2]], false, cg);   // on the cart, turned with it
+  addC([dl, dw, 0.06], [70, 72, 78], [cx, 0, dh - 0.06]);
   for (const sx of [-1, 1]) for (const sy of [-1, 1]) {
-    add([0.04, 0.04, dh - 0.12], [120, 124, 130], [cx + sx * (dl / 2 - 0.06), sy * (dw / 2 - 0.06), 0.1]);
-    add([0.12, 0.05, 0.12], [30, 30, 32], [cx + sx * (dl / 2 - 0.06), sy * (dw / 2 - 0.06), 0.0]);
+    addC([0.04, 0.04, dh - 0.12], [120, 124, 130], [cx + sx * (dl / 2 - 0.06), sy * (dw / 2 - 0.06), 0.1]);
+    addC([0.12, 0.05, 0.12], [30, 30, 32], [cx + sx * (dl / 2 - 0.06), sy * (dw / 2 - 0.06), 0.0]);
   }
-  add([Math.abs(cx + dl / 2 - -0.33), 0.05, 0.05], [120, 124, 130], [(cx + dl / 2 + -0.33) / 2, 0, 0.28]);   // tow bar
-  const [z0, z1] = C.board.z;
-  add([0.02, dw, z1 - z0], [240, 238, 228], [C.board.x - 0.01, 0, z0]);
-  for (const sy of [-1, 1]) add([0.03, 0.03, z0 - dh + 0.01], [120, 124, 130], [C.board.x - 0.01, sy * (dw / 2 - 0.03), dh - 0.01]);
-  for (const l of C.labels) {   // the slot numbers face the robot (+x)
-    const m = textPlane(l.text, l.height_m || 0.075); m.position.copy(P(l.at)); m.rotation.y = Math.PI / 2; g.add(m);
+  S.towbar = add([Math.abs(cx + dl / 2 - -0.33), 0.05, 0.05], [120, 124, 130], [(cx + dl / 2 + -0.33) / 2, 0, 0.28]);   // tow bar
+  if (C.marker) addC([0.05, dw, 0.03], C.marker, [cx + dl / 2 - 0.025, 0, dh]);
+  if (C.mesh) {   // a wire safety screen between the robot and the cart (the station's): bars of width bar every gap metres
+    const {bar, gap, x = cx + dl / 2 + 0.08, top = 1.4, half = dw / 2 + 0.15} = C.mesh, col = [150, 154, 160];
+    for (let y = -half; y <= half + 1e-6; y += gap) add([0.01, bar, top], col, [x, y, 0]);
+    for (let z = 0.0; z <= top + 1e-6; z += gap) add([0.01, 2 * half, bar], col, [x, 0, z]);
+  }
+  if (C.board) {
+    const [z0, z1] = C.board.z;
+    addC([0.02, dw, z1 - z0], [240, 238, 228], [C.board.x - 0.01, 0, z0]);
+    for (const sy of [-1, 1]) addC([0.03, 0.03, z0 - dh + 0.01], [120, 124, 130], [C.board.x - 0.01, sy * (dw / 2 - 0.03), dh - 0.01]);
+  }
+  for (const l of C.labels || []) {   // the slot numbers face the robot (+x)
+    const m = textPlane(l.text, l.height_m || 0.075); m.position.copy(P([l.at[0] - cx, l.at[1], l.at[2]])); m.rotation.y = Math.PI / 2; cg.add(m);
   }
   const [hx, hy, hz] = C.held, top = hz + C.tote[2];   // the station arm's hook above a lifted tote
   S.hook = add([0.02, 0.02, 1.25 - top], [60, 64, 70], [hx, hy, top]);
@@ -244,14 +281,23 @@ function cartBody() {   // towed behind the robot (robot-local metres): deck, wh
   return g;
 }
 
-function toteSpots(i) {   // where each tote sits in cart state i (robot-local)
-  const st = S.D.cart_states[i], C = S.D.cart, out = {};
-  st.slots.forEach((t, k) => { if (t) out[t] = [C.slots[k][0], C.slots[k][1], C.deck[2]]; });
+function toteSpots(i) {   // where each tote sits in cart state i (robot-local); a turned cart turns its slots about its centre
+  const st = S.D.cart_states[i], C = S.D.cart, out = {}, a = cartYaw(i) * D2R, ca = Math.cos(a), sa = Math.sin(a);
+  st.slots.forEach((t, k) => {
+    if (!t) return;
+    const dx = C.slots[k][0] - C.offset, dy = C.slots[k][1];
+    out[t] = [C.offset + dx * ca - dy * sa, dx * sa + dy * ca, C.deck[2]];
+  });
   if (st.held) out[st.held] = [...C.held];
+  for (const t in st.at || {}) out[t] = [...st.at[t]];   // boxes caught mid-move (robot-local, absolute height)
   return out;
 }
+const cartYaw = (i) => S.D.cart_states[i].yaw ?? S.D.cart.yaw ?? 0;
 function setTotes(i) {
-  S.cartIdx = i; const sp = toteSpots(i); for (const t in sp) S.tote[t].position.copy(P(sp[t]));
+  S.cartIdx = i; const sp = toteSpots(i), yaw = cartYaw(i);
+  for (const t in S.tote) S.tote[t].visible = t in sp;   // a box no state places is not on the cart (empty-deck tests)
+  for (const t in sp) { S.tote[t].position.copy(P(sp[t])); S.tote[t].rotation.y = (yaw + (sp[t][3] || 0)) * D2R; }   // [3]: a box's own turn (free spots)
+  S.cartTurn.rotation.y = yaw * D2R; S.towbar.visible = !yaw;
   S.hook.visible = !!S.D.cart_states[i].held;
 }
 
