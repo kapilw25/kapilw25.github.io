@@ -1205,17 +1205,17 @@
    "finished": null,
    "done": false,
    "summary": {
-    "calls": 99,
-    "answers": 8,
-    "right": 8,
+    "calls": 153,
+    "answers": 12,
+    "right": 12,
     "by_kind": {
      "room": {
-      "right": 3,
-      "n": 3
+      "right": 5,
+      "n": 5
      },
      "tote": {
-      "right": 2,
-      "n": 2
+      "right": 3,
+      "n": 3
      },
      "fact": {
       "right": 1,
@@ -1224,8 +1224,8 @@
     },
     "by_d": {
      "0": {
-      "right": 6,
-      "n": 6
+      "right": 8,
+      "n": 8
      },
      "1": {
       "right": 1,
@@ -1236,8 +1236,8 @@
       "n": 1
      },
      "4-7": {
-      "right": 0,
-      "n": 0
+      "right": 2,
+      "n": 2
      },
      "8-15": {
       "right": 0,
@@ -1254,7 +1254,7 @@
      "navigation_miss": 1
     },
     "recovered_alone": 0,
-    "moves_per_leg": 9,
+    "moves_per_leg": 9.5,
     "first_slip_room": null,
     "seen_right_then_lost": {
      "n": 0,
@@ -1266,10 +1266,10 @@
      "right_before": 0
     },
     "stopped": null,
-    "squeezes": 1,
+    "squeezes": 2,
     "overflows": 0,
-    "cost_usd": 5.13,
-    "minutes": 17.3
+    "cost_usd": 8.959,
+    "minutes": 32.8
    },
    "baselines": {
     "box": {
@@ -1330,43 +1330,43 @@
    "finished": null,
    "done": false,
    "summary": {
-    "calls": 117,
-    "answers": 9,
-    "right": 9,
+    "calls": 296,
+    "answers": 27,
+    "right": 27,
     "by_kind": {
      "room": {
+      "right": 13,
+      "n": 13
+     },
+     "tote": {
       "right": 4,
       "n": 4
      },
-     "tote": {
-      "right": 1,
-      "n": 1
-     },
      "fact": {
-      "right": 1,
-      "n": 1
+      "right": 3,
+      "n": 3
      }
     },
     "by_d": {
      "0": {
-      "right": 6,
-      "n": 6
+      "right": 17,
+      "n": 17
      },
      "1": {
       "right": 2,
       "n": 2
      },
      "2-3": {
+      "right": 2,
+      "n": 2
+     },
+     "4-7": {
       "right": 1,
       "n": 1
      },
-     "4-7": {
-      "right": 0,
-      "n": 0
-     },
      "8-15": {
-      "right": 0,
-      "n": 0
+      "right": 5,
+      "n": 5
      },
      "16-29": {
       "right": 0,
@@ -1379,11 +1379,11 @@
      "navigation_miss": 1
     },
     "recovered_alone": 0,
-    "moves_per_leg": 9.6,
+    "moves_per_leg": 9.21,
     "first_slip_room": null,
     "seen_right_then_lost": {
      "n": 0,
-     "of": 1
+     "of": 3
     },
     "after_gate": {
      "recovered": 0,
@@ -1393,8 +1393,8 @@
     "stopped": null,
     "squeezes": 0,
     "overflows": 0,
-    "cost_usd": 6.362,
-    "minutes": 17.6
+    "cost_usd": 23.137,
+    "minutes": 32.9
    },
    "baselines": {
     "box": {
