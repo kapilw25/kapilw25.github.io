@@ -1194,6 +1194,256 @@
    "video": "agentwalk/EA_exact_s119/replay_ff.mp4",
    "figures": "figures/agentwalk_EA_exact_s119/quantitative/",
    "viewer": "agentwalk/viewer.html?run=EA_exact_s119&mode=replay&ff=1&nav=EA_exact_s119/episode.json"
+  },
+  {
+   "name": "gD_s408",
+   "seed": 408,
+   "model": "claude-opus-5-5",
+   "effort": "xhigh",
+   "label": "Demo run through the Claude Code CLI: Claude Code adds its own lines to every call (an identity line, the account email, an environment block, the date), so this score is not a benchmark number.",
+   "started": "2026-10-07T09:31:30.990Z",
+   "finished": null,
+   "done": false,
+   "summary": {
+    "calls": 11,
+    "answers": 0,
+    "right": 0,
+    "by_kind": {
+     "room": {
+      "right": 0,
+      "n": 0
+     },
+     "tote": {
+      "right": 0,
+      "n": 0
+     },
+     "fact": {
+      "right": 0,
+      "n": 0
+     }
+    },
+    "by_d": {
+     "0": {
+      "right": 0,
+      "n": 0
+     },
+     "1": {
+      "right": 0,
+      "n": 0
+     },
+     "2-3": {
+      "right": 0,
+      "n": 0
+     },
+     "4-7": {
+      "right": 0,
+      "n": 0
+     },
+     "8-15": {
+      "right": 0,
+      "n": 0
+     },
+     "16-29": {
+      "right": 0,
+      "n": 0
+     }
+    },
+    "tool_use": {
+     "invalid_action": 0,
+     "bad_reply": 0,
+     "navigation_miss": 0
+    },
+    "recovered_alone": 0,
+    "moves_per_leg": 4,
+    "first_slip_room": null,
+    "seen_right_then_lost": {
+     "n": 0,
+     "of": 0
+    },
+    "after_gate": {
+     "recovered": 0,
+     "anchored": 0,
+     "right_before": 0
+    },
+    "stopped": null,
+    "squeezes": 0,
+    "overflows": 0,
+    "cost_usd": 0.451,
+    "minutes": 2.2
+   },
+   "baselines": {
+    "box": {
+     "n": 8,
+     "random_measured": 0.1671,
+     "heuristic": 0.25,
+     "heuristic_rule": "last_drop",
+     "rules": {
+      "random": 0.1667,
+      "start_slot": 0.0,
+      "last_gate": 0.0,
+      "last_drop": 0.25,
+      "rule_out_obvious": 0.175
+     }
+    },
+    "fact": {
+     "n": 7,
+     "random_measured": 0.1641,
+     "heuristic": 0.1667,
+     "heuristic_rule": "random",
+     "rules": {
+      "random": 0.1667,
+      "most_common": 0.0476
+     }
+    },
+    "room": {
+     "n": 29,
+     "random_measured": 0.1609,
+     "heuristic": 0.2296,
+     "heuristic_rule": "most_common",
+     "rules": {
+      "random": 0.1606,
+      "most_common": 0.2296
+     }
+    },
+    "turn": {
+     "n": 16,
+     "random_measured": 0.0671,
+     "heuristic": 0.1875,
+     "heuristic_rule": "typical_turn_x_count",
+     "rules": {
+      "random": 0.0666,
+      "typical_turn_x_count": 0.1875
+     }
+    }
+   },
+   "video": "agentwalk/gD_s408/replay_ff.mp4",
+   "figures": "figures/agentwalk_gD_s408/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=gD_s408&mode=replay&ff=1&nav=gD_s408/episode.json"
+  },
+  {
+   "name": "gD_s410",
+   "seed": 410,
+   "model": "claude-opus-5-5",
+   "effort": "xhigh",
+   "label": "Demo run through the Claude Code CLI: Claude Code adds its own lines to every call (an identity line, the account email, an environment block, the date), so this score is not a benchmark number.",
+   "started": "2026-10-07T09:31:30.989Z",
+   "finished": null,
+   "done": false,
+   "summary": {
+    "calls": 16,
+    "answers": 1,
+    "right": 1,
+    "by_kind": {
+     "room": {
+      "right": 0,
+      "n": 0
+     },
+     "tote": {
+      "right": 1,
+      "n": 1
+     },
+     "fact": {
+      "right": 0,
+      "n": 0
+     }
+    },
+    "by_d": {
+     "0": {
+      "right": 1,
+      "n": 1
+     },
+     "1": {
+      "right": 0,
+      "n": 0
+     },
+     "2-3": {
+      "right": 0,
+      "n": 0
+     },
+     "4-7": {
+      "right": 0,
+      "n": 0
+     },
+     "8-15": {
+      "right": 0,
+      "n": 0
+     },
+     "16-29": {
+      "right": 0,
+      "n": 0
+     }
+    },
+    "tool_use": {
+     "invalid_action": 0,
+     "bad_reply": 0,
+     "navigation_miss": 1
+    },
+    "recovered_alone": 0,
+    "moves_per_leg": 4,
+    "first_slip_room": null,
+    "seen_right_then_lost": {
+     "n": 0,
+     "of": 0
+    },
+    "after_gate": {
+     "recovered": 0,
+     "anchored": 0,
+     "right_before": 0
+    },
+    "stopped": null,
+    "squeezes": 0,
+    "overflows": 0,
+    "cost_usd": 0.536,
+    "minutes": 2.3
+   },
+   "baselines": {
+    "box": {
+     "n": 8,
+     "random_measured": 0.1666,
+     "heuristic": 0.2125,
+     "heuristic_rule": "rule_out_obvious",
+     "rules": {
+      "random": 0.1667,
+      "start_slot": 0.0,
+      "last_gate": 0.0,
+      "last_drop": 0.125,
+      "rule_out_obvious": 0.2125
+     }
+    },
+    "fact": {
+     "n": 7,
+     "random_measured": 0.1677,
+     "heuristic": 0.1667,
+     "heuristic_rule": "random",
+     "rules": {
+      "random": 0.1667,
+      "most_common": 0.0476
+     }
+    },
+    "room": {
+     "n": 29,
+     "random_measured": 0.1606,
+     "heuristic": 0.1614,
+     "heuristic_rule": "random",
+     "rules": {
+      "random": 0.1614,
+      "most_common": 0.1155
+     }
+    },
+    "turn": {
+     "n": 16,
+     "random_measured": 0.0725,
+     "heuristic": 0.1875,
+     "heuristic_rule": "typical_turn_x_count",
+     "rules": {
+      "random": 0.0721,
+      "typical_turn_x_count": 0.1875
+     }
+    }
+   },
+   "video": "agentwalk/gD_s410/replay_ff.mp4",
+   "figures": "figures/agentwalk_gD_s410/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=gD_s410&mode=replay&ff=1&nav=gD_s410/episode.json"
   }
  ]
 }

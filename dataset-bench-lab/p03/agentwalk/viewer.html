@@ -92,6 +92,7 @@ if (Q.get("theme") === "light") document.documentElement.dataset.theme = "light"
 const $ = (id) => document.getElementById(id), NS = "http://www.w3.org/2000/svg";
 const T = Q.get("ff") ? {move: 0.3, watch: 0.35, ask: 1.4, pick: 0.8, result: 1.2}      // fast-forward
                       : {move: 1.2, watch: 1.6, ask: 2.4, pick: 1.4, result: 1.8};
+const pub = () => !!(RUN && RUN.meta && RUN.meta.public);   // public copy (hub_public.py): answers, truths and why-wrong stay private
 let RUN = null, EP = null, BASE = null, ANN = null, TL = [], TOTAL = 0, shown = -1;
 // measured floors per question (baselines.py): the random and heuristic baselines; keyed like the answers
 const NR = () => (RUN && RUN.meta && RUN.meta.rooms) || 30;   // rooms in this walk (a short walk draws only its own rooms)
@@ -194,6 +195,7 @@ function fixCarry(uptoCall, phase) {
   return n;
 }
 function whyTally(uptoCall, phase) {
+  if (pub()) { $("why").innerHTML = "<b>Why the wrong answers were wrong:</b> hidden until the paper"; return; }
   const n = {};
   for (const k in CAUSE) { const call = +k.split("|")[0]; if (call < uptoCall || (call === uptoCall && phase >= 2)) n[CAUSE[k]] = (n[CAUSE[k]] || 0) + 1; }
   const tot = Object.values(n).reduce((a, b) => a + b, 0), mx = Math.max(1, ...Object.values(n)), fc = fixCarry(uptoCall, phase);
@@ -236,7 +238,7 @@ function draw(i, phase, thinkingFor) {      // phase: 0 = question shown, 1 = pi
       ` · memory distance ${q.d}` + (qs.length > 1 ? ` · +${qs.length - 1} more question(s) this call` : "");
     $("qtext").textContent = q.question;
     if (q.format) {                                        // asked without choices (exact-number walk): the agent's own answer against the truth
-      const tr = a ? (a.format === "number" ? `${a.truth} ± ${a.tol}` : a.answer) : "";
+      const tr = pub() ? "hidden until the paper" : a ? (a.format === "number" ? `${a.truth} ± ${a.tol}` : a.answer) : "";
       $("opts").innerHTML = `<div class="opt">asked without choices · ${q.format === "number" ? "a number" : "a few words"}</div>` +
         (a && phase >= 1 ? `<div class="opt pick">agent: ${esc(a.reply == null ? "no answer" : a.reply)}${a.format === "open" && a.parsed ? " → " + esc(a.pick) : ""}</div>` : "") +
         (a && phase >= 2 ? `<div class="opt ${a.right ? "right" : "wrong"}">truth: ${esc(tr)} ${a.right ? "✓" : "✗"}</div>` : "");
@@ -244,13 +246,14 @@ function draw(i, phase, thinkingFor) {      // phase: 0 = question shown, 1 = pi
     $("opts").innerHTML = q.choices.map((ch) => {
       let cls = "opt";
       if (a && phase >= 1 && a.pick === ch) cls += " pick";
-      if (a && phase >= 2) { if (ch === a.answer) cls += " right"; else if (a.pick === ch) cls += " wrong"; }
-      const mark = a && phase >= 2 ? (ch === a.answer ? " ✓" : a.pick === ch ? " ✗" : "") : (a && phase >= 1 && a.pick === ch ? " ← agent" : "");
+      const isAns = pub() ? (a && a.right && a.pick === ch) : (a && ch === a.answer);
+      if (a && phase >= 2) { if (isAns) cls += " right"; else if (a.pick === ch) cls += " wrong"; }
+      const mark = a && phase >= 2 ? (isAns ? " ✓" : a.pick === ch ? " ✗" : "") : (a && phase >= 1 && a.pick === ch ? " ← agent" : "");
       return `<div class="${cls}">${esc(ch)}${mark}</div>`;
     }).join("");
     $("verdict").innerHTML = !a || phase < 2 ? "" : (a.right ? "<span style='color:var(--right)'>✅ right</span>" :
-      `<span style='color:var(--wrong)'>❌ wrong</span> <span style='color:var(--muted)'>(agent: ${esc(a.reply == null ? "no answer" : a.reply)}; answer: ${esc(a.answer)})</span>` +
-      (CAUSE[c.call + "|" + a.key] ? ` <span style='color:${CCOL[CAUSE[c.call + "|" + a.key]]}'>· why: ${CAUSE[c.call + "|" + a.key]}</span>` : "")) +
+      `<span style='color:var(--wrong)'>❌ wrong</span> <span style='color:var(--muted)'>(agent: ${esc(a.reply == null ? "no answer" : a.reply)}${pub() ? "" : "; answer: " + esc(a.answer)})</span>` +
+      (!pub() && CAUSE[c.call + "|" + a.key] ? ` <span style='color:${CCOL[CAUSE[c.call + "|" + a.key]]}'>· why: ${CAUSE[c.call + "|" + a.key]}</span>` : "")) +
       (qs.length > 1 ? " · " + (c.answers || []).slice(1).map((x) => (x.right ? "✅" : "❌") + " " + esc(x.kind === "tote" ? "followed box" : x.kind === "fact" ? "fact from " + x.about : "own")).join(" · ") : "");
   }
   const evs = (RUN.memory_events || []).filter((x) => x.after_call < c.call), last = evs[evs.length - 1];
@@ -366,6 +369,7 @@ function chart4(c) {                        // cumulative cost by room, from eac
   el("text", {x: W - R, y: Tt + 10, "text-anchor": "end", "font-size": 10, fill: "var(--ink)"}, svg, "$" + run.toFixed(2));
 }
 function tote(ans, c) {
+  if (pub()) { $("tote").style.display = "none"; return; }
   const svg = $("s3"); svg.innerHTML = ""; const truth = RUN.meta.x_truth, N = NR(), w = RW / N;
   const kr = +c.room.slice(1), doneUpTo = c.mode === "leg" ? kr - 1 : (c.stage >= 3 ? kr : kr - 1);   // rooms whose swap is done
   const gateRooms = (RUN.meta.gates || [RUN.meta.gate]).filter(Boolean).map((g) => +g.room.slice(1)).filter((g) => g < N);   // a gate after the walk's last room is never passed
