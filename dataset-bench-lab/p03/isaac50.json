@@ -1,5 +1,5 @@
 {
- "built": "2026-10-07 08:57 UTC",
+ "built": "2026-10-07 09:06 UTC",
  "n_modes": 50,
  "K_ASK": [
   1,
@@ -1503,10 +1503,10 @@
    "name": "Crushed Carton Volume Paradox",
    "v12_description": "A cardboard box is compressed to 50% of its size under a heavy steel beam. The VLM incorrectly reports that the box now contains 50% less internal inventory payload.",
    "v12_action_target": "The model must compute the target extraction depth for an internal vacuum probe. The volume paradox outputs an attenuated insertion depth vector that fails to reach the payload depth plane inside the box.",
-   "physics": "deformable",
+   "physics": "rigid",
    "artifact": {
     "usda": "bench/isaac50/scenes/m4_1/m4_1.usda",
-    "bytes": 29364,
+    "bytes": 29796,
     "prims": 26,
     "objects": 4,
     "time_samples": 21,
@@ -1515,10 +1515,42 @@
     "compiled_on_gpu": true,
     "gpu_pictures": 21,
     "sim_keys_agree": true,
-    "web_scene": "isaac50/scene/m4_1/scene.json"
+    "web_scene": "isaac50/scene/m4_1/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 15,
+     "max_abs_diff_vs_mac": 0.0006
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "Every carton was 0.6 m tall before the press and holds one 0.12 m can standing on its floor; each was pressed and carried off. Give the vacuum-probe extraction depth for the carton in the first picture after the start (picture 1): {\"depth\": m}, how far the probe must go down from the pressed carton's top to reach the can's top.",
+     "shape": "{\"depth\": m}"
+    },
+    {
+     "K": 3,
+     "question": "Every carton was 0.6 m tall before the press and holds one 0.12 m can standing on its floor; each was pressed and carried off. Give the vacuum-probe extraction depth for the carton in the first picture after the start (picture 1): {\"depth\": m}, how far the probe must go down from the pressed carton's top to reach the can's top.",
+     "shape": "{\"depth\": m}"
+    },
+    {
+     "K": 5,
+     "question": "Every carton was 0.6 m tall before the press and holds one 0.12 m can standing on its floor; each was pressed and carried off. Give the vacuum-probe extraction depth for the carton in the first picture after the start (picture 1): {\"depth\": m}, how far the probe must go down from the pressed carton's top to reach the can's top.",
+     "shape": "{\"depth\": m}"
+    },
+    {
+     "K": 10,
+     "question": "Every carton was 0.6 m tall before the press and holds one 0.12 m can standing on its floor; each was pressed and carried off. Give the vacuum-probe extraction depth for the carton in the first picture after the start (picture 1): {\"depth\": m}, how far the probe must go down from the pressed carton's top to reach the can's top.",
+     "shape": "{\"depth\": m}"
+    },
+    {
+     "K": 15,
+     "question": "Every carton was 0.6 m tall before the press and holds one 0.12 m can standing on its floor; each was pressed and carried off. Give the vacuum-probe extraction depth for the carton in the first picture after the start (picture 1): {\"depth\": m}, how far the probe must go down from the pressed carton's top to reach the can's top.",
+     "shape": "{\"depth\": m}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1583,10 +1615,10 @@
    "name": "Soft Plastic Jug Deflection Blindness",
    "v12_description": "A robot arm grips a soft plastic jug, causing the sidewalls to severely warp. The VLM misinterprets the deformation as a material fracture or catastrophic structural failure.",
    "v12_action_target": "The model must output a steady continuous clamp pressure value. Deflection blindness causes the VLA policy to rapidly drop grip force to zero under the assumption that a structural break has occurred, dropping the item.",
-   "physics": "deformable",
+   "physics": "rigid",
    "artifact": {
     "usda": "bench/isaac50/scenes/m4_3/m4_3.usda",
-    "bytes": 56385,
+    "bytes": 56490,
     "prims": 42,
     "objects": 8,
     "time_samples": 21,
@@ -1595,10 +1627,42 @@
     "compiled_on_gpu": true,
     "gpu_pictures": 21,
     "sim_keys_agree": true,
-    "web_scene": "isaac50/scene/m4_3/scene.json"
+    "web_scene": "isaac50/scene/m4_3/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 15,
+     "max_abs_diff_vs_mac": 0.0081
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "Each step the gripper squeezed a soft plastic jug (26 cm wide when round), then set it aside. A bent but whole jug must be held steady at the jaw gap it was squeezed to; only a cracked, leaking jug is released. Give the clamp command for the jug in the first picture after the start (picture 1): {\"cmd\": \"hold\" or \"release\", \"gap_m\": m}, the command and the jaw gap it was squeezed to.",
+     "shape": "{\"cmd\": \"hold\" or \"release\", \"gap_m\": m}"
+    },
+    {
+     "K": 3,
+     "question": "Each step the gripper squeezed a soft plastic jug (26 cm wide when round), then set it aside. A bent but whole jug must be held steady at the jaw gap it was squeezed to; only a cracked, leaking jug is released. Give the clamp command for the jug in the first picture after the start (picture 1): {\"cmd\": \"hold\" or \"release\", \"gap_m\": m}, the command and the jaw gap it was squeezed to.",
+     "shape": "{\"cmd\": \"hold\" or \"release\", \"gap_m\": m}"
+    },
+    {
+     "K": 5,
+     "question": "Each step the gripper squeezed a soft plastic jug (26 cm wide when round), then set it aside. A bent but whole jug must be held steady at the jaw gap it was squeezed to; only a cracked, leaking jug is released. Give the clamp command for the jug in the first picture after the start (picture 1): {\"cmd\": \"hold\" or \"release\", \"gap_m\": m}, the command and the jaw gap it was squeezed to.",
+     "shape": "{\"cmd\": \"hold\" or \"release\", \"gap_m\": m}"
+    },
+    {
+     "K": 10,
+     "question": "Each step the gripper squeezed a soft plastic jug (26 cm wide when round), then set it aside. A bent but whole jug must be held steady at the jaw gap it was squeezed to; only a cracked, leaking jug is released. Give the clamp command for the jug in the first picture after the start (picture 1): {\"cmd\": \"hold\" or \"release\", \"gap_m\": m}, the command and the jaw gap it was squeezed to.",
+     "shape": "{\"cmd\": \"hold\" or \"release\", \"gap_m\": m}"
+    },
+    {
+     "K": 15,
+     "question": "Each step the gripper squeezed a soft plastic jug (26 cm wide when round), then set it aside. A bent but whole jug must be held steady at the jaw gap it was squeezed to; only a cracked, leaking jug is released. Give the clamp command for the jug in the first picture after the start (picture 1): {\"cmd\": \"hold\" or \"release\", \"gap_m\": m}, the command and the jaw gap it was squeezed to.",
+     "shape": "{\"cmd\": \"hold\" or \"release\", \"gap_m\": m}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1793,10 +1857,10 @@
    "name": "Pneumatic Suction Deflation",
    "v12_description": "A vacuum gripper picks up a flexible bag of grain. The bag elongates vertically under gravity. The VLM miscalculates the new 3D bounding box boundaries, causing pathing collisions.",
    "v12_action_target": "The model must output clear transit height parameters [z_travel]. Bounding box compression errors generate paths that drag the bottom of the elongated bag directly across rack separators.",
-   "physics": "deformable",
+   "physics": "rigid",
    "artifact": {
     "usda": "bench/isaac50/scenes/m4_8/m4_8.usda",
-    "bytes": 33452,
+    "bytes": 33255,
     "prims": 46,
     "objects": 7,
     "time_samples": 21,
@@ -1805,10 +1869,42 @@
     "compiled_on_gpu": true,
     "gpu_pictures": 21,
     "sim_keys_agree": true,
-    "web_scene": "isaac50/scene/m4_8/scene.json"
+    "web_scene": "isaac50/scene/m4_8/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 15,
+     "max_abs_diff_vs_mac": 0.0005
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "Each step the vacuum cup (at 2.3 m) lifted a grain bag, which stretches as it hangs, then set it down elsewhere. To carry a bag over the rack (top separator at 1.2 m) its bottom must clear the separator by 5 cm. Give the clear transit height for the bag in the first picture after the start (picture 1): {\"z_travel\": m}, the cup height needed above the floor.",
+     "shape": "{\"z_travel\": m}"
+    },
+    {
+     "K": 3,
+     "question": "Each step the vacuum cup (at 2.3 m) lifted a grain bag, which stretches as it hangs, then set it down elsewhere. To carry a bag over the rack (top separator at 1.2 m) its bottom must clear the separator by 5 cm. Give the clear transit height for the bag in the first picture after the start (picture 1): {\"z_travel\": m}, the cup height needed above the floor.",
+     "shape": "{\"z_travel\": m}"
+    },
+    {
+     "K": 5,
+     "question": "Each step the vacuum cup (at 2.3 m) lifted a grain bag, which stretches as it hangs, then set it down elsewhere. To carry a bag over the rack (top separator at 1.2 m) its bottom must clear the separator by 5 cm. Give the clear transit height for the bag in the first picture after the start (picture 1): {\"z_travel\": m}, the cup height needed above the floor.",
+     "shape": "{\"z_travel\": m}"
+    },
+    {
+     "K": 10,
+     "question": "Each step the vacuum cup (at 2.3 m) lifted a grain bag, which stretches as it hangs, then set it down elsewhere. To carry a bag over the rack (top separator at 1.2 m) its bottom must clear the separator by 5 cm. Give the clear transit height for the bag in the first picture after the start (picture 1): {\"z_travel\": m}, the cup height needed above the floor.",
+     "shape": "{\"z_travel\": m}"
+    },
+    {
+     "K": 15,
+     "question": "Each step the vacuum cup (at 2.3 m) lifted a grain bag, which stretches as it hangs, then set it down elsewhere. To carry a bag over the rack (top separator at 1.2 m) its bottom must clear the separator by 5 cm. Give the clear transit height for the bag in the first picture after the start (picture 1): {\"z_travel\": m}, the cup height needed above the floor.",
+     "shape": "{\"z_travel\": m}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
