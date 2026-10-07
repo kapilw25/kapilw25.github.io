@@ -281,12 +281,16 @@ function cartBody() {   // towed behind the robot (robot-local metres): deck, wh
   return g;
 }
 
-function toteSpots(i) {   // where each tote sits in cart state i (robot-local); a turned cart turns its slots about its centre
-  const st = S.D.cart_states[i], C = S.D.cart, out = {}, a = cartYaw(i) * D2R, ca = Math.cos(a), sa = Math.sin(a);
+function cartCentre(i) {   // the deck centre in cart state i (robot-local): it moves when the cart turns about a pivot off its centre
+  const C = S.D.cart, [px, py] = S.D.cart_states[i].pivot || [0, 0], a = cartYaw(i) * D2R, ca = Math.cos(a), sa = Math.sin(a);
+  return [C.offset + px - (px * ca - py * sa), py - (px * sa + py * ca)];
+}
+function toteSpots(i) {   // where each tote sits in cart state i (robot-local); a turned cart turns its slots about its pivot
+  const st = S.D.cart_states[i], C = S.D.cart, out = {}, a = cartYaw(i) * D2R, ca = Math.cos(a), sa = Math.sin(a), [ox, oy] = cartCentre(i);
   st.slots.forEach((t, k) => {
     if (!t) return;
     const dx = C.slots[k][0] - C.offset, dy = C.slots[k][1];
-    out[t] = [C.offset + dx * ca - dy * sa, dx * sa + dy * ca, C.deck[2]];
+    out[t] = [ox + dx * ca - dy * sa, oy + dx * sa + dy * ca, C.deck[2]];
   });
   if (st.held) out[st.held] = [...C.held];
   for (const t in st.at || {}) out[t] = [...st.at[t]];   // boxes caught mid-move (robot-local, absolute height)
@@ -298,6 +302,7 @@ function setTotes(i) {
   for (const t in S.tote) S.tote[t].visible = t in sp;   // a box no state places is not on the cart (empty-deck tests)
   for (const t in sp) { S.tote[t].position.copy(P(sp[t])); S.tote[t].rotation.y = (yaw + (sp[t][3] || 0)) * D2R; }   // [3]: a box's own turn (free spots)
   S.cartTurn.rotation.y = yaw * D2R; S.towbar.visible = !yaw;
+  { const [ox, oy] = cartCentre(i); S.cartTurn.position.copy(P([ox, oy, 0])); }   // pivot off the centre: the deck moves too
   S.hook.visible = !!S.D.cart_states[i].held;
 }
 

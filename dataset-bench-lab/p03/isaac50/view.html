@@ -192,7 +192,8 @@ async function load(code) {
     `<div class="q" data-tc="${S0tc(q.K)}"><b>K=${q.K}</b>${esc(q.question)}` +
     (PUB ? `<div class="key">answer: hidden until the paper</div>` : `<div class="key">answer: ${esc(q.key_text)}</div>`) + "</div>").join("");
   $("banner").innerHTML = !ready(row) ? `<div class="banner">This mode needs real Isaac physics; it appears here once it is simulated.</div>` :
-    (!PUB && row.physics && row.physics !== "none" ? `<div class="banner">Physics here is animated, not simulated yet (real Isaac physics is being added).</div>` : "");
+    (row.artifact && row.artifact.simulated ? `<div class="banner">Physics simulated in Isaac Sim 6.1 (PhysX): the answers come from the solver; the motion you see follows the scene's script.</div>` :
+     !PUB && row.physics && row.physics !== "none" ? `<div class="banner">Physics here is animated, not simulated yet (real Isaac physics is being added).</div>` : "");
   if (!ready(row)) { $("view").style.visibility = "hidden"; return; }
   $("view").style.visibility = "";
   const dir = `scene/${tagOf(row.code)}/`;

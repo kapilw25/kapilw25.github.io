@@ -1077,10 +1077,42 @@
     "compiled_on_gpu": true,
     "gpu_pictures": 21,
     "sim_keys_agree": true,
-    "web_scene": "isaac50/scene/m3_3/scene.json"
+    "web_scene": "isaac50/scene/m3_3/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 1,
+     "max_abs_diff_vs_mac": 0.0162
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "The item slides down the rail, slowing at a steady rate (this picture is black). Give the catchment point: the floor point under the item's centre where it will come to rest, in your frame now, as {\"fwd\": m, \"left\": m}.",
+     "shape": "{\"fwd\": m, \"left\": m}"
+    },
+    {
+     "K": 3,
+     "question": "The item slides down the rail, slowing at a steady rate (this picture is black). Give the catchment point: the floor point under the item's centre where it will come to rest, in your frame now, as {\"fwd\": m, \"left\": m}.",
+     "shape": "{\"fwd\": m, \"left\": m}"
+    },
+    {
+     "K": 5,
+     "question": "The item slides down the rail, slowing at a steady rate (this picture is black). Give the catchment point: the floor point under the item's centre where it will come to rest, in your frame now, as {\"fwd\": m, \"left\": m}.",
+     "shape": "{\"fwd\": m, \"left\": m}"
+    },
+    {
+     "K": 10,
+     "question": "The item slides down the rail, slowing at a steady rate (this picture is black). Give the catchment point: the floor point under the item's centre where it will come to rest, in your frame now, as {\"fwd\": m, \"left\": m}.",
+     "shape": "{\"fwd\": m, \"left\": m}"
+    },
+    {
+     "K": 15,
+     "question": "The item slides down the rail, slowing at a steady rate (this picture is black). Give the catchment point: the floor point under the item's centre where it will come to rest, in your frame now, as {\"fwd\": m, \"left\": m}.",
+     "shape": "{\"fwd\": m, \"left\": m}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1475,10 +1507,42 @@
     "compiled_on_gpu": true,
     "gpu_pictures": 21,
     "sim_keys_agree": true,
-    "web_scene": "isaac50/scene/m4_2/scene.json"
+    "web_scene": "isaac50/scene/m4_2/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 15,
+     "max_abs_diff_vs_mac": 0.64
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "Each step a crate stood on the level tilt deck (the dark band is its heavy block; the crate frame is light; the rubber deck stops sliding), then it was taken away. When the deck's left end lifts, the support brace must deploy before the crate tips. Give the brace command for the crate in the first picture after the start (picture 1): {\"tilt\": degrees}, the deck tilt at which it would start to tip over its edge.",
+     "shape": "{\"tilt\": degrees}"
+    },
+    {
+     "K": 3,
+     "question": "Each step a crate stood on the level tilt deck (the dark band is its heavy block; the crate frame is light; the rubber deck stops sliding), then it was taken away. When the deck's left end lifts, the support brace must deploy before the crate tips. Give the brace command for the crate in the first picture after the start (picture 1): {\"tilt\": degrees}, the deck tilt at which it would start to tip over its edge.",
+     "shape": "{\"tilt\": degrees}"
+    },
+    {
+     "K": 5,
+     "question": "Each step a crate stood on the level tilt deck (the dark band is its heavy block; the crate frame is light; the rubber deck stops sliding), then it was taken away. When the deck's left end lifts, the support brace must deploy before the crate tips. Give the brace command for the crate in the first picture after the start (picture 1): {\"tilt\": degrees}, the deck tilt at which it would start to tip over its edge.",
+     "shape": "{\"tilt\": degrees}"
+    },
+    {
+     "K": 10,
+     "question": "Each step a crate stood on the level tilt deck (the dark band is its heavy block; the crate frame is light; the rubber deck stops sliding), then it was taken away. When the deck's left end lifts, the support brace must deploy before the crate tips. Give the brace command for the crate in the first picture after the start (picture 1): {\"tilt\": degrees}, the deck tilt at which it would start to tip over its edge.",
+     "shape": "{\"tilt\": degrees}"
+    },
+    {
+     "K": 15,
+     "question": "Each step a crate stood on the level tilt deck (the dark band is its heavy block; the crate frame is light; the rubber deck stops sliding), then it was taken away. When the deck's left end lifts, the support brace must deploy before the crate tips. Give the brace command for the crate in the first picture after the start (picture 1): {\"tilt\": degrees}, the deck tilt at which it would start to tip over its edge.",
+     "shape": "{\"tilt\": degrees}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1523,10 +1587,42 @@
     "compiled_on_gpu": true,
     "gpu_pictures": 21,
     "sim_keys_agree": true,
-    "web_scene": "isaac50/scene/m4_4/scene.json"
+    "web_scene": "isaac50/scene/m4_4/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 15,
+     "max_abs_diff_vs_mac": 4.4
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "Each step a crate (its mass printed on it) was set on the incline, then taken off. The incline's top is polished steel (friction 0.25, light grey) or a rubber mat (friction 0.5, dark grey). Give the braking-force command for the crate in the first picture after the start (picture 1): {\"force_n\": N}, the force along the slope needed to hold it still, m x 9.8 x (sin(tilt) - friction x cos(tilt)); a negative number means friction alone holds it.",
+     "shape": "{\"force_n\": N}"
+    },
+    {
+     "K": 3,
+     "question": "Each step a crate (its mass printed on it) was set on the incline, then taken off. The incline's top is polished steel (friction 0.25, light grey) or a rubber mat (friction 0.5, dark grey). Give the braking-force command for the crate in the first picture after the start (picture 1): {\"force_n\": N}, the force along the slope needed to hold it still, m x 9.8 x (sin(tilt) - friction x cos(tilt)); a negative number means friction alone holds it.",
+     "shape": "{\"force_n\": N}"
+    },
+    {
+     "K": 5,
+     "question": "Each step a crate (its mass printed on it) was set on the incline, then taken off. The incline's top is polished steel (friction 0.25, light grey) or a rubber mat (friction 0.5, dark grey). Give the braking-force command for the crate in the first picture after the start (picture 1): {\"force_n\": N}, the force along the slope needed to hold it still, m x 9.8 x (sin(tilt) - friction x cos(tilt)); a negative number means friction alone holds it.",
+     "shape": "{\"force_n\": N}"
+    },
+    {
+     "K": 10,
+     "question": "Each step a crate (its mass printed on it) was set on the incline, then taken off. The incline's top is polished steel (friction 0.25, light grey) or a rubber mat (friction 0.5, dark grey). Give the braking-force command for the crate in the first picture after the start (picture 1): {\"force_n\": N}, the force along the slope needed to hold it still, m x 9.8 x (sin(tilt) - friction x cos(tilt)); a negative number means friction alone holds it.",
+     "shape": "{\"force_n\": N}"
+    },
+    {
+     "K": 15,
+     "question": "Each step a crate (its mass printed on it) was set on the incline, then taken off. The incline's top is polished steel (friction 0.25, light grey) or a rubber mat (friction 0.5, dark grey). Give the braking-force command for the crate in the first picture after the start (picture 1): {\"force_n\": N}, the force along the slope needed to hold it still, m x 9.8 x (sin(tilt) - friction x cos(tilt)); a negative number means friction alone holds it.",
+     "shape": "{\"force_n\": N}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1693,10 +1789,42 @@
     "compiled_on_gpu": true,
     "gpu_pictures": 21,
     "sim_keys_agree": true,
-    "web_scene": "isaac50/scene/m4_10/scene.json"
+    "web_scene": "isaac50/scene/m4_10/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 15,
+     "max_abs_diff_vs_mac": 0
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "Each step the loader set a uniform 1.4 m, 12 kg pipe on the table (its red and white bands are tenths of its length) and still held it, then the pipe was taken away. Give the clamp-down command for the pipe in the first picture after the start (picture 1): {\"torque_nm\": N m}, its weight's torque about the table edge, 12 x 9.8 x (overhang fraction - 0.5) x 1.4; positive means it would tip and the clamp must hold that much.",
+     "shape": "{\"torque_nm\": N m}"
+    },
+    {
+     "K": 3,
+     "question": "Each step the loader set a uniform 1.4 m, 12 kg pipe on the table (its red and white bands are tenths of its length) and still held it, then the pipe was taken away. Give the clamp-down command for the pipe in the first picture after the start (picture 1): {\"torque_nm\": N m}, its weight's torque about the table edge, 12 x 9.8 x (overhang fraction - 0.5) x 1.4; positive means it would tip and the clamp must hold that much.",
+     "shape": "{\"torque_nm\": N m}"
+    },
+    {
+     "K": 5,
+     "question": "Each step the loader set a uniform 1.4 m, 12 kg pipe on the table (its red and white bands are tenths of its length) and still held it, then the pipe was taken away. Give the clamp-down command for the pipe in the first picture after the start (picture 1): {\"torque_nm\": N m}, its weight's torque about the table edge, 12 x 9.8 x (overhang fraction - 0.5) x 1.4; positive means it would tip and the clamp must hold that much.",
+     "shape": "{\"torque_nm\": N m}"
+    },
+    {
+     "K": 10,
+     "question": "Each step the loader set a uniform 1.4 m, 12 kg pipe on the table (its red and white bands are tenths of its length) and still held it, then the pipe was taken away. Give the clamp-down command for the pipe in the first picture after the start (picture 1): {\"torque_nm\": N m}, its weight's torque about the table edge, 12 x 9.8 x (overhang fraction - 0.5) x 1.4; positive means it would tip and the clamp must hold that much.",
+     "shape": "{\"torque_nm\": N m}"
+    },
+    {
+     "K": 15,
+     "question": "Each step the loader set a uniform 1.4 m, 12 kg pipe on the table (its red and white bands are tenths of its length) and still held it, then the pipe was taken away. Give the clamp-down command for the pipe in the first picture after the start (picture 1): {\"torque_nm\": N m}, its weight's torque about the table edge, 12 x 9.8 x (overhang fraction - 0.5) x 1.4; positive means it would tip and the clamp must hold that much.",
+     "shape": "{\"torque_nm\": N m}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
