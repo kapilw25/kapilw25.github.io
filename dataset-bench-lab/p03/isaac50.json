@@ -1,5 +1,5 @@
 {
- "built": "2026-10-07 09:06 UTC",
+ "built": "2026-10-07 09:16 UTC",
  "n_modes": 50,
  "K_ASK": [
   1,
@@ -1780,7 +1780,7 @@
    "physics": "particles",
    "artifact": {
     "usda": "bench/isaac50/scenes/m4_6/m4_6.usda",
-    "bytes": 37435,
+    "bytes": 37420,
     "prims": 26,
     "objects": 4,
     "time_samples": 21,
@@ -1789,10 +1789,43 @@
     "compiled_on_gpu": true,
     "gpu_pictures": 21,
     "sim_keys_agree": true,
-    "web_scene": "isaac50/scene/m4_6/scene.json"
+    "web_scene": "isaac50/scene/m4_6/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 15,
+     "max_tilt_diff_deg": 0.42,
+     "particles_lost": 10
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "The tank on the 200 kg AGV is 0.8 m long and 0.625 m wide inside and holds oil (0.9 kg per litre); it is jacketed in this picture. Sloshing tilts the surface but does not change the amount; only a real leak (at rest, the level drops and stays down) does. Give the balancing torque for each of the 4 wheels: {\"torque_nm\": N m}, (200 kg + the oil's mass now) x 9.8 x 0.05 m / 4.",
+     "shape": "{\"torque_nm\": N m}"
+    },
+    {
+     "K": 3,
+     "question": "The tank on the 200 kg AGV is 0.8 m long and 0.625 m wide inside and holds oil (0.9 kg per litre); it is jacketed in this picture. Sloshing tilts the surface but does not change the amount; only a real leak (at rest, the level drops and stays down) does. Give the balancing torque for each of the 4 wheels: {\"torque_nm\": N m}, (200 kg + the oil's mass now) x 9.8 x 0.05 m / 4.",
+     "shape": "{\"torque_nm\": N m}"
+    },
+    {
+     "K": 5,
+     "question": "The tank on the 200 kg AGV is 0.8 m long and 0.625 m wide inside and holds oil (0.9 kg per litre); it is jacketed in this picture. Sloshing tilts the surface but does not change the amount; only a real leak (at rest, the level drops and stays down) does. Give the balancing torque for each of the 4 wheels: {\"torque_nm\": N m}, (200 kg + the oil's mass now) x 9.8 x 0.05 m / 4.",
+     "shape": "{\"torque_nm\": N m}"
+    },
+    {
+     "K": 10,
+     "question": "The tank on the 200 kg AGV is 0.8 m long and 0.625 m wide inside and holds oil (0.9 kg per litre); it is jacketed in this picture. Sloshing tilts the surface but does not change the amount; only a real leak (at rest, the level drops and stays down) does. Give the balancing torque for each of the 4 wheels: {\"torque_nm\": N m}, (200 kg + the oil's mass now) x 9.8 x 0.05 m / 4.",
+     "shape": "{\"torque_nm\": N m}"
+    },
+    {
+     "K": 15,
+     "question": "The tank on the 200 kg AGV is 0.8 m long and 0.625 m wide inside and holds oil (0.9 kg per litre); it is jacketed in this picture. Sloshing tilts the surface but does not change the amount; only a real leak (at rest, the level drops and stays down) does. Give the balancing torque for each of the 4 wheels: {\"torque_nm\": N m}, (200 kg + the oil's mass now) x 9.8 x 0.05 m / 4.",
+     "shape": "{\"torque_nm\": N m}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
