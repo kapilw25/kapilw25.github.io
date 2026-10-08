@@ -27,7 +27,10 @@
     "time_samples": 37,
     "textures": 8,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m1_1/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -79,7 +82,10 @@
     "time_samples": 37,
     "textures": 13,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m1_2/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -131,7 +137,10 @@
     "time_samples": 37,
     "textures": 14,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m1_3/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -183,7 +192,10 @@
     "time_samples": 37,
     "textures": 18,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m1_4/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -235,7 +247,10 @@
     "time_samples": 37,
     "textures": 9,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m1_5/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -287,7 +302,10 @@
     "time_samples": 37,
     "textures": 3,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m1_6/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -339,7 +357,10 @@
     "time_samples": 37,
     "textures": 12,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m1_7/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -391,7 +412,10 @@
     "time_samples": 37,
     "textures": 16,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m1_8/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -443,7 +467,10 @@
     "time_samples": 37,
     "textures": 20,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m1_9/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -495,7 +522,10 @@
     "time_samples": 37,
     "textures": 15,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m1_10/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -547,7 +577,10 @@
     "time_samples": 37,
     "textures": 0,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m2_1/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -599,7 +632,10 @@
     "time_samples": 37,
     "textures": 9,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m2_2/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -651,7 +687,10 @@
     "time_samples": 37,
     "textures": 0,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m2_3/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -703,7 +742,10 @@
     "time_samples": 37,
     "textures": 9,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m2_4/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -755,7 +797,10 @@
     "time_samples": 37,
     "textures": 0,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m2_5/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -807,7 +852,10 @@
     "time_samples": 37,
     "textures": 0,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m2_6/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -859,7 +907,10 @@
     "time_samples": 37,
     "textures": 0,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m2_7/scene.json"
    },
    "public_3d": false,
    "questions": [],
@@ -880,10 +931,50 @@
     "time_samples": 37,
     "textures": 3,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m2_8/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 31,
+     "max_abs_diff_vs_mac": 0
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "A three-joint arm stands on a dark column 2.8 m ahead of you (column 0.6 m tall, upper arm 0.7 m, forearm 0.6 m, a round knob at the elbow, a flat blue pointer on the turret at the column's top). The angles: base = the pointer's direction, 0 = pointing straight away from you, positive = turned to your left; the base has no stop, so count every degree it turns (a full turn is 360). Shoulder = the upper arm's lean from straight up, positive = toward the pointer, negative = away from it (limits -70 to 70). Elbow = the forearm's further bend, positive = toward the pointer (limits -120 to 120). Picture 0 shows the start pose, every start angle a multiple of 10 degrees. In picture 1 the arm had swung, unannounced, to a taught pose (whole degrees; base -170 to 170, shoulder -20 to 20, elbow -40 to 40). From change 2 on it moved under a hood: at every change all three joints moved, and three dials on the hood (BASE, SHOULDER, ELBOW, from your left to your right) show by how much in that change's picture: a red needle's angle from straight up is that joint's move in degrees, tilted to your left = positive (ticks every 10 degrees; BASE is a full circle, -180 to 180; SHOULDER and ELBOW run -90 on the right to +90 on the left); the question picture shows no needles. Give the joint changes that bring it back to the start pose now: {\"dtheta\": [base, shoulder, elbow]} in degrees (start angle minus angle now, the base counted through every turn).",
+     "shape": "{\"dtheta\": [base, shoulder, elbow]}"
+    },
+    {
+     "K": 3,
+     "question": "A three-joint arm stands on a dark column 2.8 m ahead of you (column 0.6 m tall, upper arm 0.7 m, forearm 0.6 m, a round knob at the elbow, a flat blue pointer on the turret at the column's top). The angles: base = the pointer's direction, 0 = pointing straight away from you, positive = turned to your left; the base has no stop, so count every degree it turns (a full turn is 360). Shoulder = the upper arm's lean from straight up, positive = toward the pointer, negative = away from it (limits -70 to 70). Elbow = the forearm's further bend, positive = toward the pointer (limits -120 to 120). Picture 0 shows the start pose, every start angle a multiple of 10 degrees. In picture 1 the arm had swung, unannounced, to a taught pose (whole degrees; base -170 to 170, shoulder -20 to 20, elbow -40 to 40). From change 2 on it moved under a hood: at every change all three joints moved, and three dials on the hood (BASE, SHOULDER, ELBOW, from your left to your right) show by how much in that change's picture: a red needle's angle from straight up is that joint's move in degrees, tilted to your left = positive (ticks every 10 degrees; BASE is a full circle, -180 to 180; SHOULDER and ELBOW run -90 on the right to +90 on the left); the question picture shows no needles. Give the joint changes that bring it back to the start pose now: {\"dtheta\": [base, shoulder, elbow]} in degrees (start angle minus angle now, the base counted through every turn).",
+     "shape": "{\"dtheta\": [base, shoulder, elbow]}"
+    },
+    {
+     "K": 5,
+     "question": "A three-joint arm stands on a dark column 2.8 m ahead of you (column 0.6 m tall, upper arm 0.7 m, forearm 0.6 m, a round knob at the elbow, a flat blue pointer on the turret at the column's top). The angles: base = the pointer's direction, 0 = pointing straight away from you, positive = turned to your left; the base has no stop, so count every degree it turns (a full turn is 360). Shoulder = the upper arm's lean from straight up, positive = toward the pointer, negative = away from it (limits -70 to 70). Elbow = the forearm's further bend, positive = toward the pointer (limits -120 to 120). Picture 0 shows the start pose, every start angle a multiple of 10 degrees. In picture 1 the arm had swung, unannounced, to a taught pose (whole degrees; base -170 to 170, shoulder -20 to 20, elbow -40 to 40). From change 2 on it moved under a hood: at every change all three joints moved, and three dials on the hood (BASE, SHOULDER, ELBOW, from your left to your right) show by how much in that change's picture: a red needle's angle from straight up is that joint's move in degrees, tilted to your left = positive (ticks every 10 degrees; BASE is a full circle, -180 to 180; SHOULDER and ELBOW run -90 on the right to +90 on the left); the question picture shows no needles. Give the joint changes that bring it back to the start pose now: {\"dtheta\": [base, shoulder, elbow]} in degrees (start angle minus angle now, the base counted through every turn).",
+     "shape": "{\"dtheta\": [base, shoulder, elbow]}"
+    },
+    {
+     "K": 10,
+     "question": "A three-joint arm stands on a dark column 2.8 m ahead of you (column 0.6 m tall, upper arm 0.7 m, forearm 0.6 m, a round knob at the elbow, a flat blue pointer on the turret at the column's top). The angles: base = the pointer's direction, 0 = pointing straight away from you, positive = turned to your left; the base has no stop, so count every degree it turns (a full turn is 360). Shoulder = the upper arm's lean from straight up, positive = toward the pointer, negative = away from it (limits -70 to 70). Elbow = the forearm's further bend, positive = toward the pointer (limits -120 to 120). Picture 0 shows the start pose, every start angle a multiple of 10 degrees. In picture 1 the arm had swung, unannounced, to a taught pose (whole degrees; base -170 to 170, shoulder -20 to 20, elbow -40 to 40). From change 2 on it moved under a hood: at every change all three joints moved, and three dials on the hood (BASE, SHOULDER, ELBOW, from your left to your right) show by how much in that change's picture: a red needle's angle from straight up is that joint's move in degrees, tilted to your left = positive (ticks every 10 degrees; BASE is a full circle, -180 to 180; SHOULDER and ELBOW run -90 on the right to +90 on the left); the question picture shows no needles. Give the joint changes that bring it back to the start pose now: {\"dtheta\": [base, shoulder, elbow]} in degrees (start angle minus angle now, the base counted through every turn).",
+     "shape": "{\"dtheta\": [base, shoulder, elbow]}"
+    },
+    {
+     "K": 15,
+     "question": "A three-joint arm stands on a dark column 2.8 m ahead of you (column 0.6 m tall, upper arm 0.7 m, forearm 0.6 m, a round knob at the elbow, a flat blue pointer on the turret at the column's top). The angles: base = the pointer's direction, 0 = pointing straight away from you, positive = turned to your left; the base has no stop, so count every degree it turns (a full turn is 360). Shoulder = the upper arm's lean from straight up, positive = toward the pointer, negative = away from it (limits -70 to 70). Elbow = the forearm's further bend, positive = toward the pointer (limits -120 to 120). Picture 0 shows the start pose, every start angle a multiple of 10 degrees. In picture 1 the arm had swung, unannounced, to a taught pose (whole degrees; base -170 to 170, shoulder -20 to 20, elbow -40 to 40). From change 2 on it moved under a hood: at every change all three joints moved, and three dials on the hood (BASE, SHOULDER, ELBOW, from your left to your right) show by how much in that change's picture: a red needle's angle from straight up is that joint's move in degrees, tilted to your left = positive (ticks every 10 degrees; BASE is a full circle, -180 to 180; SHOULDER and ELBOW run -90 on the right to +90 on the left); the question picture shows no needles. Give the joint changes that bring it back to the start pose now: {\"dtheta\": [base, shoulder, elbow]} in degrees (start angle minus angle now, the base counted through every turn).",
+     "shape": "{\"dtheta\": [base, shoulder, elbow]}"
+    },
+    {
+     "K": 30,
+     "question": "A three-joint arm stands on a dark column 2.8 m ahead of you (column 0.6 m tall, upper arm 0.7 m, forearm 0.6 m, a round knob at the elbow, a flat blue pointer on the turret at the column's top). The angles: base = the pointer's direction, 0 = pointing straight away from you, positive = turned to your left; the base has no stop, so count every degree it turns (a full turn is 360). Shoulder = the upper arm's lean from straight up, positive = toward the pointer, negative = away from it (limits -70 to 70). Elbow = the forearm's further bend, positive = toward the pointer (limits -120 to 120). Picture 0 shows the start pose, every start angle a multiple of 10 degrees. In picture 1 the arm had swung, unannounced, to a taught pose (whole degrees; base -170 to 170, shoulder -20 to 20, elbow -40 to 40). From change 2 on it moved under a hood: at every change all three joints moved, and three dials on the hood (BASE, SHOULDER, ELBOW, from your left to your right) show by how much in that change's picture: a red needle's angle from straight up is that joint's move in degrees, tilted to your left = positive (ticks every 10 degrees; BASE is a full circle, -180 to 180; SHOULDER and ELBOW run -90 on the right to +90 on the left); the question picture shows no needles. Give the joint changes that bring it back to the start pose now: {\"dtheta\": [base, shoulder, elbow]} in degrees (start angle minus angle now, the base counted through every turn).",
+     "shape": "{\"dtheta\": [base, shoulder, elbow]}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -901,7 +992,10 @@
     "time_samples": 37,
     "textures": 6,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m2_9/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -953,7 +1047,10 @@
     "time_samples": 37,
     "textures": 9,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m2_10/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1005,7 +1102,10 @@
     "time_samples": 37,
     "textures": 18,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m3_1/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1057,7 +1157,10 @@
     "time_samples": 37,
     "textures": 16,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m3_2/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1109,10 +1212,51 @@
     "time_samples": 37,
     "textures": 22,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m3_3/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 1,
+     "max_abs_diff_vs_scene": 0.0276,
+     "agreement_bar": "0.05 m per case"
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "Six pucks slide on six straight rails across your view: orange on the rail 2.8 m ahead of you, blue 3.5 m, green 4.2 m, purple 4.9 m, red 5.6 m and black 6.35 m ahead; the rails brake every slide at a steady 2.0 m/s^2; dark stripes across each rail's top mark every 0.5 m, and the numbers on its front give metres left (L) or right (R) of straight ahead. Picture 0 shows all six at rest. Then, again and again, all six are struck at the same moment (each to its left or right at its own speed) and the picture is taken 0.4 s after the strikes, while they still slide; they come to rest unseen (often past the picture's edge), and the next strikes start from where they rest. This question picture was lost (dark, no puck shown). Give the catchment points: the floor point under each puck where it comes to rest after the last strikes, in your frame: {\"orange\": {\"fwd\": m, \"left\": m}, \"blue\": {...}, \"green\": {...}, \"purple\": {...}, \"red\": {...}, \"black\": {...}}.",
+     "shape": "{\"orange\": {\"fwd\": m, \"left\": m}, \"blue\": {\"fwd\": m, \"left\": m}, \"green\": {\"fwd\": m, \"left\": m}, \"purple\": {\"fwd\": m, \"left\": m}, \"red\": {\"fwd\": m, \"left\": m}, \"black\": {\"fwd\": m, \"left\": m}}"
+    },
+    {
+     "K": 3,
+     "question": "Six pucks slide on six straight rails across your view: orange on the rail 2.8 m ahead of you, blue 3.5 m, green 4.2 m, purple 4.9 m, red 5.6 m and black 6.35 m ahead; the rails brake every slide at a steady 2.0 m/s^2; dark stripes across each rail's top mark every 0.5 m, and the numbers on its front give metres left (L) or right (R) of straight ahead. Picture 0 shows all six at rest. Then, again and again, all six are struck at the same moment (each to its left or right at its own speed) and the picture is taken 0.4 s after the strikes, while they still slide; they come to rest unseen (often past the picture's edge), and the next strikes start from where they rest. This question picture was lost (dark, no puck shown). Give the catchment points: the floor point under each puck where it comes to rest after the last strikes, in your frame: {\"orange\": {\"fwd\": m, \"left\": m}, \"blue\": {...}, \"green\": {...}, \"purple\": {...}, \"red\": {...}, \"black\": {...}}.",
+     "shape": "{\"orange\": {\"fwd\": m, \"left\": m}, \"blue\": {\"fwd\": m, \"left\": m}, \"green\": {\"fwd\": m, \"left\": m}, \"purple\": {\"fwd\": m, \"left\": m}, \"red\": {\"fwd\": m, \"left\": m}, \"black\": {\"fwd\": m, \"left\": m}}"
+    },
+    {
+     "K": 5,
+     "question": "Six pucks slide on six straight rails across your view: orange on the rail 2.8 m ahead of you, blue 3.5 m, green 4.2 m, purple 4.9 m, red 5.6 m and black 6.35 m ahead; the rails brake every slide at a steady 2.0 m/s^2; dark stripes across each rail's top mark every 0.5 m, and the numbers on its front give metres left (L) or right (R) of straight ahead. Picture 0 shows all six at rest. Then, again and again, all six are struck at the same moment (each to its left or right at its own speed) and the picture is taken 0.4 s after the strikes, while they still slide; they come to rest unseen (often past the picture's edge), and the next strikes start from where they rest. This question picture was lost (dark, no puck shown). Give the catchment points: the floor point under each puck where it comes to rest after the last strikes, in your frame: {\"orange\": {\"fwd\": m, \"left\": m}, \"blue\": {...}, \"green\": {...}, \"purple\": {...}, \"red\": {...}, \"black\": {...}}.",
+     "shape": "{\"orange\": {\"fwd\": m, \"left\": m}, \"blue\": {\"fwd\": m, \"left\": m}, \"green\": {\"fwd\": m, \"left\": m}, \"purple\": {\"fwd\": m, \"left\": m}, \"red\": {\"fwd\": m, \"left\": m}, \"black\": {\"fwd\": m, \"left\": m}}"
+    },
+    {
+     "K": 10,
+     "question": "Six pucks slide on six straight rails across your view: orange on the rail 2.8 m ahead of you, blue 3.5 m, green 4.2 m, purple 4.9 m, red 5.6 m and black 6.35 m ahead; the rails brake every slide at a steady 2.0 m/s^2; dark stripes across each rail's top mark every 0.5 m, and the numbers on its front give metres left (L) or right (R) of straight ahead. Picture 0 shows all six at rest. Then, again and again, all six are struck at the same moment (each to its left or right at its own speed) and the picture is taken 0.4 s after the strikes, while they still slide; they come to rest unseen (often past the picture's edge), and the next strikes start from where they rest. This question picture was lost (dark, no puck shown). Give the catchment points: the floor point under each puck where it comes to rest after the last strikes, in your frame: {\"orange\": {\"fwd\": m, \"left\": m}, \"blue\": {...}, \"green\": {...}, \"purple\": {...}, \"red\": {...}, \"black\": {...}}.",
+     "shape": "{\"orange\": {\"fwd\": m, \"left\": m}, \"blue\": {\"fwd\": m, \"left\": m}, \"green\": {\"fwd\": m, \"left\": m}, \"purple\": {\"fwd\": m, \"left\": m}, \"red\": {\"fwd\": m, \"left\": m}, \"black\": {\"fwd\": m, \"left\": m}}"
+    },
+    {
+     "K": 15,
+     "question": "Six pucks slide on six straight rails across your view: orange on the rail 2.8 m ahead of you, blue 3.5 m, green 4.2 m, purple 4.9 m, red 5.6 m and black 6.35 m ahead; the rails brake every slide at a steady 2.0 m/s^2; dark stripes across each rail's top mark every 0.5 m, and the numbers on its front give metres left (L) or right (R) of straight ahead. Picture 0 shows all six at rest. Then, again and again, all six are struck at the same moment (each to its left or right at its own speed) and the picture is taken 0.4 s after the strikes, while they still slide; they come to rest unseen (often past the picture's edge), and the next strikes start from where they rest. This question picture was lost (dark, no puck shown). Give the catchment points: the floor point under each puck where it comes to rest after the last strikes, in your frame: {\"orange\": {\"fwd\": m, \"left\": m}, \"blue\": {...}, \"green\": {...}, \"purple\": {...}, \"red\": {...}, \"black\": {...}}.",
+     "shape": "{\"orange\": {\"fwd\": m, \"left\": m}, \"blue\": {\"fwd\": m, \"left\": m}, \"green\": {\"fwd\": m, \"left\": m}, \"purple\": {\"fwd\": m, \"left\": m}, \"red\": {\"fwd\": m, \"left\": m}, \"black\": {\"fwd\": m, \"left\": m}}"
+    },
+    {
+     "K": 30,
+     "question": "Six pucks slide on six straight rails across your view: orange on the rail 2.8 m ahead of you, blue 3.5 m, green 4.2 m, purple 4.9 m, red 5.6 m and black 6.35 m ahead; the rails brake every slide at a steady 2.0 m/s^2; dark stripes across each rail's top mark every 0.5 m, and the numbers on its front give metres left (L) or right (R) of straight ahead. Picture 0 shows all six at rest. Then, again and again, all six are struck at the same moment (each to its left or right at its own speed) and the picture is taken 0.4 s after the strikes, while they still slide; they come to rest unseen (often past the picture's edge), and the next strikes start from where they rest. This question picture was lost (dark, no puck shown). Give the catchment points: the floor point under each puck where it comes to rest after the last strikes, in your frame: {\"orange\": {\"fwd\": m, \"left\": m}, \"blue\": {...}, \"green\": {...}, \"purple\": {...}, \"red\": {...}, \"black\": {...}}.",
+     "shape": "{\"orange\": {\"fwd\": m, \"left\": m}, \"blue\": {\"fwd\": m, \"left\": m}, \"green\": {\"fwd\": m, \"left\": m}, \"purple\": {\"fwd\": m, \"left\": m}, \"red\": {\"fwd\": m, \"left\": m}, \"black\": {\"fwd\": m, \"left\": m}}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1130,7 +1274,10 @@
     "time_samples": 37,
     "textures": 18,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m3_4/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1182,7 +1329,10 @@
     "time_samples": 37,
     "textures": 6,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m3_5/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1234,7 +1384,10 @@
     "time_samples": 37,
     "textures": 11,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m3_6/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1286,7 +1439,10 @@
     "time_samples": 37,
     "textures": 26,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m3_7/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1338,7 +1494,10 @@
     "time_samples": 37,
     "textures": 12,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m3_8/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1390,7 +1549,10 @@
     "time_samples": 37,
     "textures": 17,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m3_9/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1442,7 +1604,10 @@
     "time_samples": 37,
     "textures": 8,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m3_10/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1494,10 +1659,51 @@
     "time_samples": 37,
     "textures": 37,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m4_1/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 30,
+     "max_abs_diff_vs_scene": 0.0007,
+     "agreement_bar": "0.005 m per case"
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "Picture 0 shows pallets A, B and C (letters on top) in front of the press with the cartons they start with, bottom first, each carton's mass printed on it; the decks are at floor level. They are then wheeled under the vacuum gantry, out of view. Each step the press plate flattened one carton (0.6 m tall before pressing; each holds one 0.12 m can standing on its floor, and the can keeps its size however flat the carton is pressed). The two cards in front of the pressed carton show its mass and the pallet it goes to; after its picture it is set on top of that pallet's stack. Cartons are never taken off. The yellow and black poles are marked every 0.1 m from the floor (cards at 0.2, 0.4, 0.6 and 0.8 m). The vacuum probe rests on the gantry, 5.0 m above the floor. Give the probe command now: {\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}: for each pallet, how far the probe must go down from 5.0 m to reach the top of the can in that pallet's top carton, and the total mass of all the cartons on the three pallets.",
+     "shape": "{\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}"
+    },
+    {
+     "K": 3,
+     "question": "Picture 0 shows pallets A, B and C (letters on top) in front of the press with the cartons they start with, bottom first, each carton's mass printed on it; the decks are at floor level. They are then wheeled under the vacuum gantry, out of view. Each step the press plate flattened one carton (0.6 m tall before pressing; each holds one 0.12 m can standing on its floor, and the can keeps its size however flat the carton is pressed). The two cards in front of the pressed carton show its mass and the pallet it goes to; after its picture it is set on top of that pallet's stack. Cartons are never taken off. The yellow and black poles are marked every 0.1 m from the floor (cards at 0.2, 0.4, 0.6 and 0.8 m). The vacuum probe rests on the gantry, 5.0 m above the floor. Give the probe command now: {\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}: for each pallet, how far the probe must go down from 5.0 m to reach the top of the can in that pallet's top carton, and the total mass of all the cartons on the three pallets.",
+     "shape": "{\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}"
+    },
+    {
+     "K": 5,
+     "question": "Picture 0 shows pallets A, B and C (letters on top) in front of the press with the cartons they start with, bottom first, each carton's mass printed on it; the decks are at floor level. They are then wheeled under the vacuum gantry, out of view. Each step the press plate flattened one carton (0.6 m tall before pressing; each holds one 0.12 m can standing on its floor, and the can keeps its size however flat the carton is pressed). The two cards in front of the pressed carton show its mass and the pallet it goes to; after its picture it is set on top of that pallet's stack. Cartons are never taken off. The yellow and black poles are marked every 0.1 m from the floor (cards at 0.2, 0.4, 0.6 and 0.8 m). The vacuum probe rests on the gantry, 5.0 m above the floor. Give the probe command now: {\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}: for each pallet, how far the probe must go down from 5.0 m to reach the top of the can in that pallet's top carton, and the total mass of all the cartons on the three pallets.",
+     "shape": "{\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}"
+    },
+    {
+     "K": 10,
+     "question": "Picture 0 shows pallets A, B and C (letters on top) in front of the press with the cartons they start with, bottom first, each carton's mass printed on it; the decks are at floor level. They are then wheeled under the vacuum gantry, out of view. Each step the press plate flattened one carton (0.6 m tall before pressing; each holds one 0.12 m can standing on its floor, and the can keeps its size however flat the carton is pressed). The two cards in front of the pressed carton show its mass and the pallet it goes to; after its picture it is set on top of that pallet's stack. Cartons are never taken off. The yellow and black poles are marked every 0.1 m from the floor (cards at 0.2, 0.4, 0.6 and 0.8 m). The vacuum probe rests on the gantry, 5.0 m above the floor. Give the probe command now: {\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}: for each pallet, how far the probe must go down from 5.0 m to reach the top of the can in that pallet's top carton, and the total mass of all the cartons on the three pallets.",
+     "shape": "{\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}"
+    },
+    {
+     "K": 15,
+     "question": "Picture 0 shows pallets A, B and C (letters on top) in front of the press with the cartons they start with, bottom first, each carton's mass printed on it; the decks are at floor level. They are then wheeled under the vacuum gantry, out of view. Each step the press plate flattened one carton (0.6 m tall before pressing; each holds one 0.12 m can standing on its floor, and the can keeps its size however flat the carton is pressed). The two cards in front of the pressed carton show its mass and the pallet it goes to; after its picture it is set on top of that pallet's stack. Cartons are never taken off. The yellow and black poles are marked every 0.1 m from the floor (cards at 0.2, 0.4, 0.6 and 0.8 m). The vacuum probe rests on the gantry, 5.0 m above the floor. Give the probe command now: {\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}: for each pallet, how far the probe must go down from 5.0 m to reach the top of the can in that pallet's top carton, and the total mass of all the cartons on the three pallets.",
+     "shape": "{\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}"
+    },
+    {
+     "K": 30,
+     "question": "Picture 0 shows pallets A, B and C (letters on top) in front of the press with the cartons they start with, bottom first, each carton's mass printed on it; the decks are at floor level. They are then wheeled under the vacuum gantry, out of view. Each step the press plate flattened one carton (0.6 m tall before pressing; each holds one 0.12 m can standing on its floor, and the can keeps its size however flat the carton is pressed). The two cards in front of the pressed carton show its mass and the pallet it goes to; after its picture it is set on top of that pallet's stack. Cartons are never taken off. The yellow and black poles are marked every 0.1 m from the floor (cards at 0.2, 0.4, 0.6 and 0.8 m). The vacuum probe rests on the gantry, 5.0 m above the floor. Give the probe command now: {\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}: for each pallet, how far the probe must go down from 5.0 m to reach the top of the can in that pallet's top carton, and the total mass of all the cartons on the three pallets.",
+     "shape": "{\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1515,10 +1721,51 @@
     "time_samples": 37,
     "textures": 43,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m4_2/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 30,
+     "max_abs_diff_vs_scene": 0.2,
+     "agreement_bar": "0.5 deg per case"
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "The crate on the level tilt deck is 0.51 m square and 1.78 m tall; its light frame weighs 20 kg with its own centre of mass at half its height. It holds heavy blocks centred on its centre line, each on one of its shelf levels (the lowest 0.3 m above the crate's floor, then every 0.12 m). Picture 0 shows the blocks it starts with: a black band around the crate at each block's centre height, its mass printed on it (they count as put in from the bottom up). Each step one block was put in, seen only in that step's picture (its band and mass); when the crate already held seven blocks, the block that had been in it longest was taken out first (you hear it; nothing shows). The yellow and black pole standing on the deck in the plane of the crate's front is marked every 0.1 m from the deck's top (cards at 0.5, 1.0 and 1.5 m). The rubber deck stops sliding. When one end of the deck lifts, the support brace must deploy before the crate tips. Give the brace command now: {\"tilt\": degrees, \"kg\": kg}: the deck tilt at which the loaded crate would start to tip over its lower edge, and the crate's total mass (frame and blocks).",
+     "shape": "{\"tilt\": degrees, \"kg\": kg}"
+    },
+    {
+     "K": 3,
+     "question": "The crate on the level tilt deck is 0.51 m square and 1.78 m tall; its light frame weighs 20 kg with its own centre of mass at half its height. It holds heavy blocks centred on its centre line, each on one of its shelf levels (the lowest 0.3 m above the crate's floor, then every 0.12 m). Picture 0 shows the blocks it starts with: a black band around the crate at each block's centre height, its mass printed on it (they count as put in from the bottom up). Each step one block was put in, seen only in that step's picture (its band and mass); when the crate already held seven blocks, the block that had been in it longest was taken out first (you hear it; nothing shows). The yellow and black pole standing on the deck in the plane of the crate's front is marked every 0.1 m from the deck's top (cards at 0.5, 1.0 and 1.5 m). The rubber deck stops sliding. When one end of the deck lifts, the support brace must deploy before the crate tips. Give the brace command now: {\"tilt\": degrees, \"kg\": kg}: the deck tilt at which the loaded crate would start to tip over its lower edge, and the crate's total mass (frame and blocks).",
+     "shape": "{\"tilt\": degrees, \"kg\": kg}"
+    },
+    {
+     "K": 5,
+     "question": "The crate on the level tilt deck is 0.51 m square and 1.78 m tall; its light frame weighs 20 kg with its own centre of mass at half its height. It holds heavy blocks centred on its centre line, each on one of its shelf levels (the lowest 0.3 m above the crate's floor, then every 0.12 m). Picture 0 shows the blocks it starts with: a black band around the crate at each block's centre height, its mass printed on it (they count as put in from the bottom up). Each step one block was put in, seen only in that step's picture (its band and mass); when the crate already held seven blocks, the block that had been in it longest was taken out first (you hear it; nothing shows). The yellow and black pole standing on the deck in the plane of the crate's front is marked every 0.1 m from the deck's top (cards at 0.5, 1.0 and 1.5 m). The rubber deck stops sliding. When one end of the deck lifts, the support brace must deploy before the crate tips. Give the brace command now: {\"tilt\": degrees, \"kg\": kg}: the deck tilt at which the loaded crate would start to tip over its lower edge, and the crate's total mass (frame and blocks).",
+     "shape": "{\"tilt\": degrees, \"kg\": kg}"
+    },
+    {
+     "K": 10,
+     "question": "The crate on the level tilt deck is 0.51 m square and 1.78 m tall; its light frame weighs 20 kg with its own centre of mass at half its height. It holds heavy blocks centred on its centre line, each on one of its shelf levels (the lowest 0.3 m above the crate's floor, then every 0.12 m). Picture 0 shows the blocks it starts with: a black band around the crate at each block's centre height, its mass printed on it (they count as put in from the bottom up). Each step one block was put in, seen only in that step's picture (its band and mass); when the crate already held seven blocks, the block that had been in it longest was taken out first (you hear it; nothing shows). The yellow and black pole standing on the deck in the plane of the crate's front is marked every 0.1 m from the deck's top (cards at 0.5, 1.0 and 1.5 m). The rubber deck stops sliding. When one end of the deck lifts, the support brace must deploy before the crate tips. Give the brace command now: {\"tilt\": degrees, \"kg\": kg}: the deck tilt at which the loaded crate would start to tip over its lower edge, and the crate's total mass (frame and blocks).",
+     "shape": "{\"tilt\": degrees, \"kg\": kg}"
+    },
+    {
+     "K": 15,
+     "question": "The crate on the level tilt deck is 0.51 m square and 1.78 m tall; its light frame weighs 20 kg with its own centre of mass at half its height. It holds heavy blocks centred on its centre line, each on one of its shelf levels (the lowest 0.3 m above the crate's floor, then every 0.12 m). Picture 0 shows the blocks it starts with: a black band around the crate at each block's centre height, its mass printed on it (they count as put in from the bottom up). Each step one block was put in, seen only in that step's picture (its band and mass); when the crate already held seven blocks, the block that had been in it longest was taken out first (you hear it; nothing shows). The yellow and black pole standing on the deck in the plane of the crate's front is marked every 0.1 m from the deck's top (cards at 0.5, 1.0 and 1.5 m). The rubber deck stops sliding. When one end of the deck lifts, the support brace must deploy before the crate tips. Give the brace command now: {\"tilt\": degrees, \"kg\": kg}: the deck tilt at which the loaded crate would start to tip over its lower edge, and the crate's total mass (frame and blocks).",
+     "shape": "{\"tilt\": degrees, \"kg\": kg}"
+    },
+    {
+     "K": 30,
+     "question": "The crate on the level tilt deck is 0.51 m square and 1.78 m tall; its light frame weighs 20 kg with its own centre of mass at half its height. It holds heavy blocks centred on its centre line, each on one of its shelf levels (the lowest 0.3 m above the crate's floor, then every 0.12 m). Picture 0 shows the blocks it starts with: a black band around the crate at each block's centre height, its mass printed on it (they count as put in from the bottom up). Each step one block was put in, seen only in that step's picture (its band and mass); when the crate already held seven blocks, the block that had been in it longest was taken out first (you hear it; nothing shows). The yellow and black pole standing on the deck in the plane of the crate's front is marked every 0.1 m from the deck's top (cards at 0.5, 1.0 and 1.5 m). The rubber deck stops sliding. When one end of the deck lifts, the support brace must deploy before the crate tips. Give the brace command now: {\"tilt\": degrees, \"kg\": kg}: the deck tilt at which the loaded crate would start to tip over its lower edge, and the crate's total mass (frame and blocks).",
+     "shape": "{\"tilt\": degrees, \"kg\": kg}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1536,10 +1783,51 @@
     "time_samples": 37,
     "textures": 35,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m4_3/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 30,
+     "max_abs_diff_vs_scene": 0.0001,
+     "agreement_bar": "0.002 m per case"
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "Each step the gripper squeezed a soft plastic jug between its two dark jaws. Every jug is 26 cm wide when round, like the spare round jug standing to the left of the gripper; the jaws hang from a rail just above them whose scale is in 2 cm segments (yellow and black, the two red ones in the middle), in the jaws' own plane. A squeezed jug's walls fold (a grey crease), but only a cracked jug leaks (a black split, a yellow puddle on the table and drips off its front edge). The two tags on the table at the right of the jug show the clamp of the twelve-clamp carousel (C1 to C12, behind you, out of view) it goes into right after its picture, and its mass. A bent but whole jug is held steady at the force that squeezed it; a cracked, leaking jug is only cradled, at zero force (squeezing it would pump out what is left). The jug walls act as a spring: a jug squeezed to a jaw gap of g m (between the jaws' inner faces) was squeezed with 2145 x (0.26 - g) N. The board in picture 0 lists the jugs the carousel starts with (clamp, steady force, mass; the jug held longest first). When the carousel already holds seven jugs, the jug held longest is unloaded before the new one goes in (you hear it). Give the clamp-pressure command now: {\"total_n\": N, \"clamps\": [\"C...\", ...], \"kg\": kg}: the total steady clamp force over the carousel (a cradled cracked jug adds 0 N), which clamps hold a jug (cracked or not), and the total mass of the jugs on the carousel.",
+     "shape": "{\"total_n\": N, \"clamps\": [\"C...\", ...], \"kg\": kg}"
+    },
+    {
+     "K": 3,
+     "question": "Each step the gripper squeezed a soft plastic jug between its two dark jaws. Every jug is 26 cm wide when round, like the spare round jug standing to the left of the gripper; the jaws hang from a rail just above them whose scale is in 2 cm segments (yellow and black, the two red ones in the middle), in the jaws' own plane. A squeezed jug's walls fold (a grey crease), but only a cracked jug leaks (a black split, a yellow puddle on the table and drips off its front edge). The two tags on the table at the right of the jug show the clamp of the twelve-clamp carousel (C1 to C12, behind you, out of view) it goes into right after its picture, and its mass. A bent but whole jug is held steady at the force that squeezed it; a cracked, leaking jug is only cradled, at zero force (squeezing it would pump out what is left). The jug walls act as a spring: a jug squeezed to a jaw gap of g m (between the jaws' inner faces) was squeezed with 2145 x (0.26 - g) N. The board in picture 0 lists the jugs the carousel starts with (clamp, steady force, mass; the jug held longest first). When the carousel already holds seven jugs, the jug held longest is unloaded before the new one goes in (you hear it). Give the clamp-pressure command now: {\"total_n\": N, \"clamps\": [\"C...\", ...], \"kg\": kg}: the total steady clamp force over the carousel (a cradled cracked jug adds 0 N), which clamps hold a jug (cracked or not), and the total mass of the jugs on the carousel.",
+     "shape": "{\"total_n\": N, \"clamps\": [\"C...\", ...], \"kg\": kg}"
+    },
+    {
+     "K": 5,
+     "question": "Each step the gripper squeezed a soft plastic jug between its two dark jaws. Every jug is 26 cm wide when round, like the spare round jug standing to the left of the gripper; the jaws hang from a rail just above them whose scale is in 2 cm segments (yellow and black, the two red ones in the middle), in the jaws' own plane. A squeezed jug's walls fold (a grey crease), but only a cracked jug leaks (a black split, a yellow puddle on the table and drips off its front edge). The two tags on the table at the right of the jug show the clamp of the twelve-clamp carousel (C1 to C12, behind you, out of view) it goes into right after its picture, and its mass. A bent but whole jug is held steady at the force that squeezed it; a cracked, leaking jug is only cradled, at zero force (squeezing it would pump out what is left). The jug walls act as a spring: a jug squeezed to a jaw gap of g m (between the jaws' inner faces) was squeezed with 2145 x (0.26 - g) N. The board in picture 0 lists the jugs the carousel starts with (clamp, steady force, mass; the jug held longest first). When the carousel already holds seven jugs, the jug held longest is unloaded before the new one goes in (you hear it). Give the clamp-pressure command now: {\"total_n\": N, \"clamps\": [\"C...\", ...], \"kg\": kg}: the total steady clamp force over the carousel (a cradled cracked jug adds 0 N), which clamps hold a jug (cracked or not), and the total mass of the jugs on the carousel.",
+     "shape": "{\"total_n\": N, \"clamps\": [\"C...\", ...], \"kg\": kg}"
+    },
+    {
+     "K": 10,
+     "question": "Each step the gripper squeezed a soft plastic jug between its two dark jaws. Every jug is 26 cm wide when round, like the spare round jug standing to the left of the gripper; the jaws hang from a rail just above them whose scale is in 2 cm segments (yellow and black, the two red ones in the middle), in the jaws' own plane. A squeezed jug's walls fold (a grey crease), but only a cracked jug leaks (a black split, a yellow puddle on the table and drips off its front edge). The two tags on the table at the right of the jug show the clamp of the twelve-clamp carousel (C1 to C12, behind you, out of view) it goes into right after its picture, and its mass. A bent but whole jug is held steady at the force that squeezed it; a cracked, leaking jug is only cradled, at zero force (squeezing it would pump out what is left). The jug walls act as a spring: a jug squeezed to a jaw gap of g m (between the jaws' inner faces) was squeezed with 2145 x (0.26 - g) N. The board in picture 0 lists the jugs the carousel starts with (clamp, steady force, mass; the jug held longest first). When the carousel already holds seven jugs, the jug held longest is unloaded before the new one goes in (you hear it). Give the clamp-pressure command now: {\"total_n\": N, \"clamps\": [\"C...\", ...], \"kg\": kg}: the total steady clamp force over the carousel (a cradled cracked jug adds 0 N), which clamps hold a jug (cracked or not), and the total mass of the jugs on the carousel.",
+     "shape": "{\"total_n\": N, \"clamps\": [\"C...\", ...], \"kg\": kg}"
+    },
+    {
+     "K": 15,
+     "question": "Each step the gripper squeezed a soft plastic jug between its two dark jaws. Every jug is 26 cm wide when round, like the spare round jug standing to the left of the gripper; the jaws hang from a rail just above them whose scale is in 2 cm segments (yellow and black, the two red ones in the middle), in the jaws' own plane. A squeezed jug's walls fold (a grey crease), but only a cracked jug leaks (a black split, a yellow puddle on the table and drips off its front edge). The two tags on the table at the right of the jug show the clamp of the twelve-clamp carousel (C1 to C12, behind you, out of view) it goes into right after its picture, and its mass. A bent but whole jug is held steady at the force that squeezed it; a cracked, leaking jug is only cradled, at zero force (squeezing it would pump out what is left). The jug walls act as a spring: a jug squeezed to a jaw gap of g m (between the jaws' inner faces) was squeezed with 2145 x (0.26 - g) N. The board in picture 0 lists the jugs the carousel starts with (clamp, steady force, mass; the jug held longest first). When the carousel already holds seven jugs, the jug held longest is unloaded before the new one goes in (you hear it). Give the clamp-pressure command now: {\"total_n\": N, \"clamps\": [\"C...\", ...], \"kg\": kg}: the total steady clamp force over the carousel (a cradled cracked jug adds 0 N), which clamps hold a jug (cracked or not), and the total mass of the jugs on the carousel.",
+     "shape": "{\"total_n\": N, \"clamps\": [\"C...\", ...], \"kg\": kg}"
+    },
+    {
+     "K": 30,
+     "question": "Each step the gripper squeezed a soft plastic jug between its two dark jaws. Every jug is 26 cm wide when round, like the spare round jug standing to the left of the gripper; the jaws hang from a rail just above them whose scale is in 2 cm segments (yellow and black, the two red ones in the middle), in the jaws' own plane. A squeezed jug's walls fold (a grey crease), but only a cracked jug leaks (a black split, a yellow puddle on the table and drips off its front edge). The two tags on the table at the right of the jug show the clamp of the twelve-clamp carousel (C1 to C12, behind you, out of view) it goes into right after its picture, and its mass. A bent but whole jug is held steady at the force that squeezed it; a cracked, leaking jug is only cradled, at zero force (squeezing it would pump out what is left). The jug walls act as a spring: a jug squeezed to a jaw gap of g m (between the jaws' inner faces) was squeezed with 2145 x (0.26 - g) N. The board in picture 0 lists the jugs the carousel starts with (clamp, steady force, mass; the jug held longest first). When the carousel already holds seven jugs, the jug held longest is unloaded before the new one goes in (you hear it). Give the clamp-pressure command now: {\"total_n\": N, \"clamps\": [\"C...\", ...], \"kg\": kg}: the total steady clamp force over the carousel (a cradled cracked jug adds 0 N), which clamps hold a jug (cracked or not), and the total mass of the jugs on the carousel.",
+     "shape": "{\"total_n\": N, \"clamps\": [\"C...\", ...], \"kg\": kg}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1557,10 +1845,51 @@
     "time_samples": 37,
     "textures": 56,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m4_4/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 30,
+     "max_abs_diff_vs_scene": 9.5,
+     "agreement_bar": "15.0 N per case"
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "You stand beside the test incline and see it from its side. Picture 0 shows the pallet's starting crates on the cart in front of the incline (oldest at the left), each with its mass printed. Each step a crate (its mass printed on it) was set on the incline at that step's tilt, then stacked on that loaded pallet, which stands on the upper part of the same incline (out of view: always the same tilt and the same top as the part you see); the pallet and its crates slide or hold as one load (the pallet's own mass is negligible). When the pallet already holds seven crates, its oldest crate is unloaded before the new one goes on, and more when the load would pass 1000 kg (you hear how many). The incline's top is either bare polished steel (friction 0.25: a light grey deck) or a black rubber mat (friction 0.5). A tilt scale on an arc beyond the deck's raised end, in the plane of the deck's near side, has a tick every 5 degrees (numbers every 10): the deck's top edge, extended, points at its tilt. Give the braking-force command for the loaded pallet now, on the incline as it is in the question picture: {\"force_n\": N, \"kg\": kg}: the force along the slope that holds it still, (total crate mass) x 9.8 x (sin(tilt) - friction x cos(tilt)), negative when friction alone holds it, and the total crate mass on the pallet (whole kilograms: the printed masses add up exactly).",
+     "shape": "{\"force_n\": N, \"kg\": kg}"
+    },
+    {
+     "K": 3,
+     "question": "You stand beside the test incline and see it from its side. Picture 0 shows the pallet's starting crates on the cart in front of the incline (oldest at the left), each with its mass printed. Each step a crate (its mass printed on it) was set on the incline at that step's tilt, then stacked on that loaded pallet, which stands on the upper part of the same incline (out of view: always the same tilt and the same top as the part you see); the pallet and its crates slide or hold as one load (the pallet's own mass is negligible). When the pallet already holds seven crates, its oldest crate is unloaded before the new one goes on, and more when the load would pass 1000 kg (you hear how many). The incline's top is either bare polished steel (friction 0.25: a light grey deck) or a black rubber mat (friction 0.5). A tilt scale on an arc beyond the deck's raised end, in the plane of the deck's near side, has a tick every 5 degrees (numbers every 10): the deck's top edge, extended, points at its tilt. Give the braking-force command for the loaded pallet now, on the incline as it is in the question picture: {\"force_n\": N, \"kg\": kg}: the force along the slope that holds it still, (total crate mass) x 9.8 x (sin(tilt) - friction x cos(tilt)), negative when friction alone holds it, and the total crate mass on the pallet (whole kilograms: the printed masses add up exactly).",
+     "shape": "{\"force_n\": N, \"kg\": kg}"
+    },
+    {
+     "K": 5,
+     "question": "You stand beside the test incline and see it from its side. Picture 0 shows the pallet's starting crates on the cart in front of the incline (oldest at the left), each with its mass printed. Each step a crate (its mass printed on it) was set on the incline at that step's tilt, then stacked on that loaded pallet, which stands on the upper part of the same incline (out of view: always the same tilt and the same top as the part you see); the pallet and its crates slide or hold as one load (the pallet's own mass is negligible). When the pallet already holds seven crates, its oldest crate is unloaded before the new one goes on, and more when the load would pass 1000 kg (you hear how many). The incline's top is either bare polished steel (friction 0.25: a light grey deck) or a black rubber mat (friction 0.5). A tilt scale on an arc beyond the deck's raised end, in the plane of the deck's near side, has a tick every 5 degrees (numbers every 10): the deck's top edge, extended, points at its tilt. Give the braking-force command for the loaded pallet now, on the incline as it is in the question picture: {\"force_n\": N, \"kg\": kg}: the force along the slope that holds it still, (total crate mass) x 9.8 x (sin(tilt) - friction x cos(tilt)), negative when friction alone holds it, and the total crate mass on the pallet (whole kilograms: the printed masses add up exactly).",
+     "shape": "{\"force_n\": N, \"kg\": kg}"
+    },
+    {
+     "K": 10,
+     "question": "You stand beside the test incline and see it from its side. Picture 0 shows the pallet's starting crates on the cart in front of the incline (oldest at the left), each with its mass printed. Each step a crate (its mass printed on it) was set on the incline at that step's tilt, then stacked on that loaded pallet, which stands on the upper part of the same incline (out of view: always the same tilt and the same top as the part you see); the pallet and its crates slide or hold as one load (the pallet's own mass is negligible). When the pallet already holds seven crates, its oldest crate is unloaded before the new one goes on, and more when the load would pass 1000 kg (you hear how many). The incline's top is either bare polished steel (friction 0.25: a light grey deck) or a black rubber mat (friction 0.5). A tilt scale on an arc beyond the deck's raised end, in the plane of the deck's near side, has a tick every 5 degrees (numbers every 10): the deck's top edge, extended, points at its tilt. Give the braking-force command for the loaded pallet now, on the incline as it is in the question picture: {\"force_n\": N, \"kg\": kg}: the force along the slope that holds it still, (total crate mass) x 9.8 x (sin(tilt) - friction x cos(tilt)), negative when friction alone holds it, and the total crate mass on the pallet (whole kilograms: the printed masses add up exactly).",
+     "shape": "{\"force_n\": N, \"kg\": kg}"
+    },
+    {
+     "K": 15,
+     "question": "You stand beside the test incline and see it from its side. Picture 0 shows the pallet's starting crates on the cart in front of the incline (oldest at the left), each with its mass printed. Each step a crate (its mass printed on it) was set on the incline at that step's tilt, then stacked on that loaded pallet, which stands on the upper part of the same incline (out of view: always the same tilt and the same top as the part you see); the pallet and its crates slide or hold as one load (the pallet's own mass is negligible). When the pallet already holds seven crates, its oldest crate is unloaded before the new one goes on, and more when the load would pass 1000 kg (you hear how many). The incline's top is either bare polished steel (friction 0.25: a light grey deck) or a black rubber mat (friction 0.5). A tilt scale on an arc beyond the deck's raised end, in the plane of the deck's near side, has a tick every 5 degrees (numbers every 10): the deck's top edge, extended, points at its tilt. Give the braking-force command for the loaded pallet now, on the incline as it is in the question picture: {\"force_n\": N, \"kg\": kg}: the force along the slope that holds it still, (total crate mass) x 9.8 x (sin(tilt) - friction x cos(tilt)), negative when friction alone holds it, and the total crate mass on the pallet (whole kilograms: the printed masses add up exactly).",
+     "shape": "{\"force_n\": N, \"kg\": kg}"
+    },
+    {
+     "K": 30,
+     "question": "You stand beside the test incline and see it from its side. Picture 0 shows the pallet's starting crates on the cart in front of the incline (oldest at the left), each with its mass printed. Each step a crate (its mass printed on it) was set on the incline at that step's tilt, then stacked on that loaded pallet, which stands on the upper part of the same incline (out of view: always the same tilt and the same top as the part you see); the pallet and its crates slide or hold as one load (the pallet's own mass is negligible). When the pallet already holds seven crates, its oldest crate is unloaded before the new one goes on, and more when the load would pass 1000 kg (you hear how many). The incline's top is either bare polished steel (friction 0.25: a light grey deck) or a black rubber mat (friction 0.5). A tilt scale on an arc beyond the deck's raised end, in the plane of the deck's near side, has a tick every 5 degrees (numbers every 10): the deck's top edge, extended, points at its tilt. Give the braking-force command for the loaded pallet now, on the incline as it is in the question picture: {\"force_n\": N, \"kg\": kg}: the force along the slope that holds it still, (total crate mass) x 9.8 x (sin(tilt) - friction x cos(tilt)), negative when friction alone holds it, and the total crate mass on the pallet (whole kilograms: the printed masses add up exactly).",
+     "shape": "{\"force_n\": N, \"kg\": kg}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1578,7 +1907,10 @@
     "time_samples": 37,
     "textures": 10,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m4_5/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1630,10 +1962,51 @@
     "time_samples": 37,
     "textures": 40,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m4_6/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 30,
+     "max_tilt_diff_deg": 0.75,
+     "particles_lost": 22
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "The AGV (200 kg without oil, half on each side) carries two oil tanks side by side: the left tank is 0.8 m long and the right tank 0.6 m long, both 0.6 m wide inside; oil weighs 0.9 kg per litre. Each tank's sight gauge on its back wall (facing you; marks every 0.1 m above the tank's floor) shows the oil height at that wall. The pump panel on the AGV between the tanks shows, in picture 0, the litres in each tank and, in each later picture, the litres the pump moved into (+) or out of (-) each tank in that step. Each step the AGV either starts or stops hard, or stands still. A hard start or stop sloshes the oil wildly and each picture catches each tank at its own moment of the slosh, so a gauge may read far above or below that tank's true level (sloshing does not change the amounts). When the AGV stands still the gauge covers are closed; oil only leaks then, into the clear catch pot behind the leaking tank (marks every 5 litres, long marks with numbers every 10), which shows the litres lost and is emptied before the AGV moves on. The covers are closed in this picture. Give the balancing wheel torques now: {\"left_nm\": N m, \"right_nm\": N m}: for each side, (100 kg + the oil in that side's tank) x 9.8 x 0.05 m / 2.",
+     "shape": "{\"left_nm\": N m, \"right_nm\": N m}"
+    },
+    {
+     "K": 3,
+     "question": "The AGV (200 kg without oil, half on each side) carries two oil tanks side by side: the left tank is 0.8 m long and the right tank 0.6 m long, both 0.6 m wide inside; oil weighs 0.9 kg per litre. Each tank's sight gauge on its back wall (facing you; marks every 0.1 m above the tank's floor) shows the oil height at that wall. The pump panel on the AGV between the tanks shows, in picture 0, the litres in each tank and, in each later picture, the litres the pump moved into (+) or out of (-) each tank in that step. Each step the AGV either starts or stops hard, or stands still. A hard start or stop sloshes the oil wildly and each picture catches each tank at its own moment of the slosh, so a gauge may read far above or below that tank's true level (sloshing does not change the amounts). When the AGV stands still the gauge covers are closed; oil only leaks then, into the clear catch pot behind the leaking tank (marks every 5 litres, long marks with numbers every 10), which shows the litres lost and is emptied before the AGV moves on. The covers are closed in this picture. Give the balancing wheel torques now: {\"left_nm\": N m, \"right_nm\": N m}: for each side, (100 kg + the oil in that side's tank) x 9.8 x 0.05 m / 2.",
+     "shape": "{\"left_nm\": N m, \"right_nm\": N m}"
+    },
+    {
+     "K": 5,
+     "question": "The AGV (200 kg without oil, half on each side) carries two oil tanks side by side: the left tank is 0.8 m long and the right tank 0.6 m long, both 0.6 m wide inside; oil weighs 0.9 kg per litre. Each tank's sight gauge on its back wall (facing you; marks every 0.1 m above the tank's floor) shows the oil height at that wall. The pump panel on the AGV between the tanks shows, in picture 0, the litres in each tank and, in each later picture, the litres the pump moved into (+) or out of (-) each tank in that step. Each step the AGV either starts or stops hard, or stands still. A hard start or stop sloshes the oil wildly and each picture catches each tank at its own moment of the slosh, so a gauge may read far above or below that tank's true level (sloshing does not change the amounts). When the AGV stands still the gauge covers are closed; oil only leaks then, into the clear catch pot behind the leaking tank (marks every 5 litres, long marks with numbers every 10), which shows the litres lost and is emptied before the AGV moves on. The covers are closed in this picture. Give the balancing wheel torques now: {\"left_nm\": N m, \"right_nm\": N m}: for each side, (100 kg + the oil in that side's tank) x 9.8 x 0.05 m / 2.",
+     "shape": "{\"left_nm\": N m, \"right_nm\": N m}"
+    },
+    {
+     "K": 10,
+     "question": "The AGV (200 kg without oil, half on each side) carries two oil tanks side by side: the left tank is 0.8 m long and the right tank 0.6 m long, both 0.6 m wide inside; oil weighs 0.9 kg per litre. Each tank's sight gauge on its back wall (facing you; marks every 0.1 m above the tank's floor) shows the oil height at that wall. The pump panel on the AGV between the tanks shows, in picture 0, the litres in each tank and, in each later picture, the litres the pump moved into (+) or out of (-) each tank in that step. Each step the AGV either starts or stops hard, or stands still. A hard start or stop sloshes the oil wildly and each picture catches each tank at its own moment of the slosh, so a gauge may read far above or below that tank's true level (sloshing does not change the amounts). When the AGV stands still the gauge covers are closed; oil only leaks then, into the clear catch pot behind the leaking tank (marks every 5 litres, long marks with numbers every 10), which shows the litres lost and is emptied before the AGV moves on. The covers are closed in this picture. Give the balancing wheel torques now: {\"left_nm\": N m, \"right_nm\": N m}: for each side, (100 kg + the oil in that side's tank) x 9.8 x 0.05 m / 2.",
+     "shape": "{\"left_nm\": N m, \"right_nm\": N m}"
+    },
+    {
+     "K": 15,
+     "question": "The AGV (200 kg without oil, half on each side) carries two oil tanks side by side: the left tank is 0.8 m long and the right tank 0.6 m long, both 0.6 m wide inside; oil weighs 0.9 kg per litre. Each tank's sight gauge on its back wall (facing you; marks every 0.1 m above the tank's floor) shows the oil height at that wall. The pump panel on the AGV between the tanks shows, in picture 0, the litres in each tank and, in each later picture, the litres the pump moved into (+) or out of (-) each tank in that step. Each step the AGV either starts or stops hard, or stands still. A hard start or stop sloshes the oil wildly and each picture catches each tank at its own moment of the slosh, so a gauge may read far above or below that tank's true level (sloshing does not change the amounts). When the AGV stands still the gauge covers are closed; oil only leaks then, into the clear catch pot behind the leaking tank (marks every 5 litres, long marks with numbers every 10), which shows the litres lost and is emptied before the AGV moves on. The covers are closed in this picture. Give the balancing wheel torques now: {\"left_nm\": N m, \"right_nm\": N m}: for each side, (100 kg + the oil in that side's tank) x 9.8 x 0.05 m / 2.",
+     "shape": "{\"left_nm\": N m, \"right_nm\": N m}"
+    },
+    {
+     "K": 30,
+     "question": "The AGV (200 kg without oil, half on each side) carries two oil tanks side by side: the left tank is 0.8 m long and the right tank 0.6 m long, both 0.6 m wide inside; oil weighs 0.9 kg per litre. Each tank's sight gauge on its back wall (facing you; marks every 0.1 m above the tank's floor) shows the oil height at that wall. The pump panel on the AGV between the tanks shows, in picture 0, the litres in each tank and, in each later picture, the litres the pump moved into (+) or out of (-) each tank in that step. Each step the AGV either starts or stops hard, or stands still. A hard start or stop sloshes the oil wildly and each picture catches each tank at its own moment of the slosh, so a gauge may read far above or below that tank's true level (sloshing does not change the amounts). When the AGV stands still the gauge covers are closed; oil only leaks then, into the clear catch pot behind the leaking tank (marks every 5 litres, long marks with numbers every 10), which shows the litres lost and is emptied before the AGV moves on. The covers are closed in this picture. Give the balancing wheel torques now: {\"left_nm\": N m, \"right_nm\": N m}: for each side, (100 kg + the oil in that side's tank) x 9.8 x 0.05 m / 2.",
+     "shape": "{\"left_nm\": N m, \"right_nm\": N m}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1651,10 +2024,51 @@
     "time_samples": 37,
     "textures": 27,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m4_7/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 30,
+     "max_abs_diff_vs_scene": 0.0008,
+     "agreement_bar": "0.005 m per case"
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "You stand beside the conveyor and see it from its side. A rubber belt spans the two rollers at 0.8 m; under load it bows down between them (it does not break). A tote (0.4 m square, 0.8 m tall, its floor 3 cm thick) stands on the belt mid-span with castings stacked flat inside it. Picture 0 shows the castings it starts with, stacked in the same order (bottom first) on the stand in front of the belt, each with its mass printed. Each step one casting was lowered in on top, seen only in that step's picture: hanging from the hoist in front of the belt with its bottom at 1.5 m, its mass printed on it, beside a scale of 2 cm segments (yellow and black, red at every tenth of a metre: 0.88-0.90, 0.98-1.00, ..., 1.68-1.70 m). When the tote already holds eight castings, its bottom casting is first let out through the tote's floor gate, and more when the new one would not fit (you hear how many; nothing shows). The belt and the tote sink as the load grows. The two poles left and right of the belt are marked every 0.1 m from the floor (cards at 0.5 and 1.0 m) in the plane of the tote's front. Give the downstream pickup command now: {\"z\": m, \"picks\": [m, ...], \"kgs\": [kg, ...]}: the height above the floor of the top of the pile in the tote (where the gripper must close), and for every pick from the top down the jaw opening (each casting's thickness, top first) and the load (each casting's mass, top first).",
+     "shape": "{\"z\": m, \"picks\": [m, ...], \"kgs\": [kg, ...]}"
+    },
+    {
+     "K": 3,
+     "question": "You stand beside the conveyor and see it from its side. A rubber belt spans the two rollers at 0.8 m; under load it bows down between them (it does not break). A tote (0.4 m square, 0.8 m tall, its floor 3 cm thick) stands on the belt mid-span with castings stacked flat inside it. Picture 0 shows the castings it starts with, stacked in the same order (bottom first) on the stand in front of the belt, each with its mass printed. Each step one casting was lowered in on top, seen only in that step's picture: hanging from the hoist in front of the belt with its bottom at 1.5 m, its mass printed on it, beside a scale of 2 cm segments (yellow and black, red at every tenth of a metre: 0.88-0.90, 0.98-1.00, ..., 1.68-1.70 m). When the tote already holds eight castings, its bottom casting is first let out through the tote's floor gate, and more when the new one would not fit (you hear how many; nothing shows). The belt and the tote sink as the load grows. The two poles left and right of the belt are marked every 0.1 m from the floor (cards at 0.5 and 1.0 m) in the plane of the tote's front. Give the downstream pickup command now: {\"z\": m, \"picks\": [m, ...], \"kgs\": [kg, ...]}: the height above the floor of the top of the pile in the tote (where the gripper must close), and for every pick from the top down the jaw opening (each casting's thickness, top first) and the load (each casting's mass, top first).",
+     "shape": "{\"z\": m, \"picks\": [m, ...], \"kgs\": [kg, ...]}"
+    },
+    {
+     "K": 5,
+     "question": "You stand beside the conveyor and see it from its side. A rubber belt spans the two rollers at 0.8 m; under load it bows down between them (it does not break). A tote (0.4 m square, 0.8 m tall, its floor 3 cm thick) stands on the belt mid-span with castings stacked flat inside it. Picture 0 shows the castings it starts with, stacked in the same order (bottom first) on the stand in front of the belt, each with its mass printed. Each step one casting was lowered in on top, seen only in that step's picture: hanging from the hoist in front of the belt with its bottom at 1.5 m, its mass printed on it, beside a scale of 2 cm segments (yellow and black, red at every tenth of a metre: 0.88-0.90, 0.98-1.00, ..., 1.68-1.70 m). When the tote already holds eight castings, its bottom casting is first let out through the tote's floor gate, and more when the new one would not fit (you hear how many; nothing shows). The belt and the tote sink as the load grows. The two poles left and right of the belt are marked every 0.1 m from the floor (cards at 0.5 and 1.0 m) in the plane of the tote's front. Give the downstream pickup command now: {\"z\": m, \"picks\": [m, ...], \"kgs\": [kg, ...]}: the height above the floor of the top of the pile in the tote (where the gripper must close), and for every pick from the top down the jaw opening (each casting's thickness, top first) and the load (each casting's mass, top first).",
+     "shape": "{\"z\": m, \"picks\": [m, ...], \"kgs\": [kg, ...]}"
+    },
+    {
+     "K": 10,
+     "question": "You stand beside the conveyor and see it from its side. A rubber belt spans the two rollers at 0.8 m; under load it bows down between them (it does not break). A tote (0.4 m square, 0.8 m tall, its floor 3 cm thick) stands on the belt mid-span with castings stacked flat inside it. Picture 0 shows the castings it starts with, stacked in the same order (bottom first) on the stand in front of the belt, each with its mass printed. Each step one casting was lowered in on top, seen only in that step's picture: hanging from the hoist in front of the belt with its bottom at 1.5 m, its mass printed on it, beside a scale of 2 cm segments (yellow and black, red at every tenth of a metre: 0.88-0.90, 0.98-1.00, ..., 1.68-1.70 m). When the tote already holds eight castings, its bottom casting is first let out through the tote's floor gate, and more when the new one would not fit (you hear how many; nothing shows). The belt and the tote sink as the load grows. The two poles left and right of the belt are marked every 0.1 m from the floor (cards at 0.5 and 1.0 m) in the plane of the tote's front. Give the downstream pickup command now: {\"z\": m, \"picks\": [m, ...], \"kgs\": [kg, ...]}: the height above the floor of the top of the pile in the tote (where the gripper must close), and for every pick from the top down the jaw opening (each casting's thickness, top first) and the load (each casting's mass, top first).",
+     "shape": "{\"z\": m, \"picks\": [m, ...], \"kgs\": [kg, ...]}"
+    },
+    {
+     "K": 15,
+     "question": "You stand beside the conveyor and see it from its side. A rubber belt spans the two rollers at 0.8 m; under load it bows down between them (it does not break). A tote (0.4 m square, 0.8 m tall, its floor 3 cm thick) stands on the belt mid-span with castings stacked flat inside it. Picture 0 shows the castings it starts with, stacked in the same order (bottom first) on the stand in front of the belt, each with its mass printed. Each step one casting was lowered in on top, seen only in that step's picture: hanging from the hoist in front of the belt with its bottom at 1.5 m, its mass printed on it, beside a scale of 2 cm segments (yellow and black, red at every tenth of a metre: 0.88-0.90, 0.98-1.00, ..., 1.68-1.70 m). When the tote already holds eight castings, its bottom casting is first let out through the tote's floor gate, and more when the new one would not fit (you hear how many; nothing shows). The belt and the tote sink as the load grows. The two poles left and right of the belt are marked every 0.1 m from the floor (cards at 0.5 and 1.0 m) in the plane of the tote's front. Give the downstream pickup command now: {\"z\": m, \"picks\": [m, ...], \"kgs\": [kg, ...]}: the height above the floor of the top of the pile in the tote (where the gripper must close), and for every pick from the top down the jaw opening (each casting's thickness, top first) and the load (each casting's mass, top first).",
+     "shape": "{\"z\": m, \"picks\": [m, ...], \"kgs\": [kg, ...]}"
+    },
+    {
+     "K": 30,
+     "question": "You stand beside the conveyor and see it from its side. A rubber belt spans the two rollers at 0.8 m; under load it bows down between them (it does not break). A tote (0.4 m square, 0.8 m tall, its floor 3 cm thick) stands on the belt mid-span with castings stacked flat inside it. Picture 0 shows the castings it starts with, stacked in the same order (bottom first) on the stand in front of the belt, each with its mass printed. Each step one casting was lowered in on top, seen only in that step's picture: hanging from the hoist in front of the belt with its bottom at 1.5 m, its mass printed on it, beside a scale of 2 cm segments (yellow and black, red at every tenth of a metre: 0.88-0.90, 0.98-1.00, ..., 1.68-1.70 m). When the tote already holds eight castings, its bottom casting is first let out through the tote's floor gate, and more when the new one would not fit (you hear how many; nothing shows). The belt and the tote sink as the load grows. The two poles left and right of the belt are marked every 0.1 m from the floor (cards at 0.5 and 1.0 m) in the plane of the tote's front. Give the downstream pickup command now: {\"z\": m, \"picks\": [m, ...], \"kgs\": [kg, ...]}: the height above the floor of the top of the pile in the tote (where the gripper must close), and for every pick from the top down the jaw opening (each casting's thickness, top first) and the load (each casting's mass, top first).",
+     "shape": "{\"z\": m, \"picks\": [m, ...], \"kgs\": [kg, ...]}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1672,10 +2086,51 @@
     "time_samples": 37,
     "textures": 50,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m4_8/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 30,
+     "max_abs_diff_vs_scene": 0.0004,
+     "agreement_bar": "0.005 m per case"
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "Each step the vacuum cup (its face 2.3 m above the floor) lifted a grain bag, which stretches as it hangs (seen in that step's picture, its grain mass printed on it); in the next step that bag was carried away and laid flat on stack A, B or C (out of view; you hear which) as the next bag was lifted. A bag laid flat is 0.06 m + 3 mm per kg of its grain thick; the stacks stand on pallets 0.15 m high, and bags are never taken off them. Picture 0 shows the three stacks with the bags they start with (letters on top, each bag's grain mass printed, bottom first) and the first bag already on the cup; then the stacks are moved out of view. The yellow and black pole beside the hanging bag is marked every 0.1 m from the floor (cards every 0.5 m). To carry a hanging bag over a stack, its bottom must clear the stack's top by 5 cm. Give the clear transit command now: {\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}: the cup height above the floor needed to carry the bag now on the cup over stack A, over stack B and over stack C, and the total grain mass the station holds (the three stacks and the bag on the cup: the gantry's load check).",
+     "shape": "{\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}"
+    },
+    {
+     "K": 3,
+     "question": "Each step the vacuum cup (its face 2.3 m above the floor) lifted a grain bag, which stretches as it hangs (seen in that step's picture, its grain mass printed on it); in the next step that bag was carried away and laid flat on stack A, B or C (out of view; you hear which) as the next bag was lifted. A bag laid flat is 0.06 m + 3 mm per kg of its grain thick; the stacks stand on pallets 0.15 m high, and bags are never taken off them. Picture 0 shows the three stacks with the bags they start with (letters on top, each bag's grain mass printed, bottom first) and the first bag already on the cup; then the stacks are moved out of view. The yellow and black pole beside the hanging bag is marked every 0.1 m from the floor (cards every 0.5 m). To carry a hanging bag over a stack, its bottom must clear the stack's top by 5 cm. Give the clear transit command now: {\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}: the cup height above the floor needed to carry the bag now on the cup over stack A, over stack B and over stack C, and the total grain mass the station holds (the three stacks and the bag on the cup: the gantry's load check).",
+     "shape": "{\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}"
+    },
+    {
+     "K": 5,
+     "question": "Each step the vacuum cup (its face 2.3 m above the floor) lifted a grain bag, which stretches as it hangs (seen in that step's picture, its grain mass printed on it); in the next step that bag was carried away and laid flat on stack A, B or C (out of view; you hear which) as the next bag was lifted. A bag laid flat is 0.06 m + 3 mm per kg of its grain thick; the stacks stand on pallets 0.15 m high, and bags are never taken off them. Picture 0 shows the three stacks with the bags they start with (letters on top, each bag's grain mass printed, bottom first) and the first bag already on the cup; then the stacks are moved out of view. The yellow and black pole beside the hanging bag is marked every 0.1 m from the floor (cards every 0.5 m). To carry a hanging bag over a stack, its bottom must clear the stack's top by 5 cm. Give the clear transit command now: {\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}: the cup height above the floor needed to carry the bag now on the cup over stack A, over stack B and over stack C, and the total grain mass the station holds (the three stacks and the bag on the cup: the gantry's load check).",
+     "shape": "{\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}"
+    },
+    {
+     "K": 10,
+     "question": "Each step the vacuum cup (its face 2.3 m above the floor) lifted a grain bag, which stretches as it hangs (seen in that step's picture, its grain mass printed on it); in the next step that bag was carried away and laid flat on stack A, B or C (out of view; you hear which) as the next bag was lifted. A bag laid flat is 0.06 m + 3 mm per kg of its grain thick; the stacks stand on pallets 0.15 m high, and bags are never taken off them. Picture 0 shows the three stacks with the bags they start with (letters on top, each bag's grain mass printed, bottom first) and the first bag already on the cup; then the stacks are moved out of view. The yellow and black pole beside the hanging bag is marked every 0.1 m from the floor (cards every 0.5 m). To carry a hanging bag over a stack, its bottom must clear the stack's top by 5 cm. Give the clear transit command now: {\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}: the cup height above the floor needed to carry the bag now on the cup over stack A, over stack B and over stack C, and the total grain mass the station holds (the three stacks and the bag on the cup: the gantry's load check).",
+     "shape": "{\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}"
+    },
+    {
+     "K": 15,
+     "question": "Each step the vacuum cup (its face 2.3 m above the floor) lifted a grain bag, which stretches as it hangs (seen in that step's picture, its grain mass printed on it); in the next step that bag was carried away and laid flat on stack A, B or C (out of view; you hear which) as the next bag was lifted. A bag laid flat is 0.06 m + 3 mm per kg of its grain thick; the stacks stand on pallets 0.15 m high, and bags are never taken off them. Picture 0 shows the three stacks with the bags they start with (letters on top, each bag's grain mass printed, bottom first) and the first bag already on the cup; then the stacks are moved out of view. The yellow and black pole beside the hanging bag is marked every 0.1 m from the floor (cards every 0.5 m). To carry a hanging bag over a stack, its bottom must clear the stack's top by 5 cm. Give the clear transit command now: {\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}: the cup height above the floor needed to carry the bag now on the cup over stack A, over stack B and over stack C, and the total grain mass the station holds (the three stacks and the bag on the cup: the gantry's load check).",
+     "shape": "{\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}"
+    },
+    {
+     "K": 30,
+     "question": "Each step the vacuum cup (its face 2.3 m above the floor) lifted a grain bag, which stretches as it hangs (seen in that step's picture, its grain mass printed on it); in the next step that bag was carried away and laid flat on stack A, B or C (out of view; you hear which) as the next bag was lifted. A bag laid flat is 0.06 m + 3 mm per kg of its grain thick; the stacks stand on pallets 0.15 m high, and bags are never taken off them. Picture 0 shows the three stacks with the bags they start with (letters on top, each bag's grain mass printed, bottom first) and the first bag already on the cup; then the stacks are moved out of view. The yellow and black pole beside the hanging bag is marked every 0.1 m from the floor (cards every 0.5 m). To carry a hanging bag over a stack, its bottom must clear the stack's top by 5 cm. Give the clear transit command now: {\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}: the cup height above the floor needed to carry the bag now on the cup over stack A, over stack B and over stack C, and the total grain mass the station holds (the three stacks and the bag on the cup: the gantry's load check).",
+     "shape": "{\"A\": m, \"B\": m, \"C\": m, \"kg\": kg}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1693,10 +2148,50 @@
     "time_samples": 37,
     "textures": 34,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m4_9/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 30,
+     "max_bow_diff_deg": 0.0222
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "The rack has three bays (B1, B2, B3: tags under the bottom beam) of three tiers. Each bay's uprights are rated 1100 kg; a bay loaded over 1100 kg is overloaded (its uprights bow a little before they buckle). A pallet's weight is printed on its front: picture 0 shows the five stored pallets' weights (they were stored bottom tier first, B1 to B3), and a new pallet shows its weight in the picture in which it is put in; from the next picture on every stored pallet is shrink-wrapped grey and its weight is hidden. Each step one new pallet is put into a free cell; before that, when the rack already holds seven pallets, the pallet stored longest is taken out, and now and then the lift moves a wrapped pallet to a free cell in another bay (a wrapped pallet keeps its weight). The rack is curtained in this picture. Give the routing table now: {\"B1\": kg, \"B2\": kg, \"B3\": kg}: each bay's spare capacity, 1100 kg minus its load (negative when the bay is overloaded: route no more pallets there).",
+     "shape": "{\"B1\": kg, \"B2\": kg, \"B3\": kg}"
+    },
+    {
+     "K": 3,
+     "question": "The rack has three bays (B1, B2, B3: tags under the bottom beam) of three tiers. Each bay's uprights are rated 1100 kg; a bay loaded over 1100 kg is overloaded (its uprights bow a little before they buckle). A pallet's weight is printed on its front: picture 0 shows the five stored pallets' weights (they were stored bottom tier first, B1 to B3), and a new pallet shows its weight in the picture in which it is put in; from the next picture on every stored pallet is shrink-wrapped grey and its weight is hidden. Each step one new pallet is put into a free cell; before that, when the rack already holds seven pallets, the pallet stored longest is taken out, and now and then the lift moves a wrapped pallet to a free cell in another bay (a wrapped pallet keeps its weight). The rack is curtained in this picture. Give the routing table now: {\"B1\": kg, \"B2\": kg, \"B3\": kg}: each bay's spare capacity, 1100 kg minus its load (negative when the bay is overloaded: route no more pallets there).",
+     "shape": "{\"B1\": kg, \"B2\": kg, \"B3\": kg}"
+    },
+    {
+     "K": 5,
+     "question": "The rack has three bays (B1, B2, B3: tags under the bottom beam) of three tiers. Each bay's uprights are rated 1100 kg; a bay loaded over 1100 kg is overloaded (its uprights bow a little before they buckle). A pallet's weight is printed on its front: picture 0 shows the five stored pallets' weights (they were stored bottom tier first, B1 to B3), and a new pallet shows its weight in the picture in which it is put in; from the next picture on every stored pallet is shrink-wrapped grey and its weight is hidden. Each step one new pallet is put into a free cell; before that, when the rack already holds seven pallets, the pallet stored longest is taken out, and now and then the lift moves a wrapped pallet to a free cell in another bay (a wrapped pallet keeps its weight). The rack is curtained in this picture. Give the routing table now: {\"B1\": kg, \"B2\": kg, \"B3\": kg}: each bay's spare capacity, 1100 kg minus its load (negative when the bay is overloaded: route no more pallets there).",
+     "shape": "{\"B1\": kg, \"B2\": kg, \"B3\": kg}"
+    },
+    {
+     "K": 10,
+     "question": "The rack has three bays (B1, B2, B3: tags under the bottom beam) of three tiers. Each bay's uprights are rated 1100 kg; a bay loaded over 1100 kg is overloaded (its uprights bow a little before they buckle). A pallet's weight is printed on its front: picture 0 shows the five stored pallets' weights (they were stored bottom tier first, B1 to B3), and a new pallet shows its weight in the picture in which it is put in; from the next picture on every stored pallet is shrink-wrapped grey and its weight is hidden. Each step one new pallet is put into a free cell; before that, when the rack already holds seven pallets, the pallet stored longest is taken out, and now and then the lift moves a wrapped pallet to a free cell in another bay (a wrapped pallet keeps its weight). The rack is curtained in this picture. Give the routing table now: {\"B1\": kg, \"B2\": kg, \"B3\": kg}: each bay's spare capacity, 1100 kg minus its load (negative when the bay is overloaded: route no more pallets there).",
+     "shape": "{\"B1\": kg, \"B2\": kg, \"B3\": kg}"
+    },
+    {
+     "K": 15,
+     "question": "The rack has three bays (B1, B2, B3: tags under the bottom beam) of three tiers. Each bay's uprights are rated 1100 kg; a bay loaded over 1100 kg is overloaded (its uprights bow a little before they buckle). A pallet's weight is printed on its front: picture 0 shows the five stored pallets' weights (they were stored bottom tier first, B1 to B3), and a new pallet shows its weight in the picture in which it is put in; from the next picture on every stored pallet is shrink-wrapped grey and its weight is hidden. Each step one new pallet is put into a free cell; before that, when the rack already holds seven pallets, the pallet stored longest is taken out, and now and then the lift moves a wrapped pallet to a free cell in another bay (a wrapped pallet keeps its weight). The rack is curtained in this picture. Give the routing table now: {\"B1\": kg, \"B2\": kg, \"B3\": kg}: each bay's spare capacity, 1100 kg minus its load (negative when the bay is overloaded: route no more pallets there).",
+     "shape": "{\"B1\": kg, \"B2\": kg, \"B3\": kg}"
+    },
+    {
+     "K": 30,
+     "question": "The rack has three bays (B1, B2, B3: tags under the bottom beam) of three tiers. Each bay's uprights are rated 1100 kg; a bay loaded over 1100 kg is overloaded (its uprights bow a little before they buckle). A pallet's weight is printed on its front: picture 0 shows the five stored pallets' weights (they were stored bottom tier first, B1 to B3), and a new pallet shows its weight in the picture in which it is put in; from the next picture on every stored pallet is shrink-wrapped grey and its weight is hidden. Each step one new pallet is put into a free cell; before that, when the rack already holds seven pallets, the pallet stored longest is taken out, and now and then the lift moves a wrapped pallet to a free cell in another bay (a wrapped pallet keeps its weight). The rack is curtained in this picture. Give the routing table now: {\"B1\": kg, \"B2\": kg, \"B3\": kg}: each bay's spare capacity, 1100 kg minus its load (negative when the bay is overloaded: route no more pallets there).",
+     "shape": "{\"B1\": kg, \"B2\": kg, \"B3\": kg}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1714,10 +2209,51 @@
     "time_samples": 37,
     "textures": 19,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m4_10/scene.json",
+    "simulated": true,
+    "physics_sim": {
+     "solver": "PhysX in Isaac Sim 6.1, dt 1/240 s",
+     "cases": 30,
+     "max_abs_diff_vs_scene": 0.0,
+     "agreement_bar": "sign only"
+    }
    },
-   "public_3d": false,
-   "questions": [],
+   "public_3d": true,
+   "questions": [
+    {
+     "K": 1,
+     "question": "You stand beside two station tables and see the pipes from their side: station A is the near one, station B the one behind it. Each step the loader set one uniform 1.4 m pipe (its mass printed on the tag clipped on top of its middle) across the right-hand edge of each station and still held it; each pipe is banded in twentieths of its length (red bands on A's pipe, blue on B's, white between them), and the loader always sets a band boundary on the edge, so the overhang is a whole number of twentieths. Then each pipe was slid, with the same overhang, onto the same kind of edge on its own bench (A's pipe to bench A, B's to bench B; both out of view) and clamped into that bench's bundle. When a bench already holds seven pipes, its oldest pipe is taken off before the new one goes in (you hear it). The board in picture 0 lists each bench's starting pipes (overhang fraction and mass), oldest first. Give the clamp-down command for each bench now: {\"A\": N m, \"B\": N m}: the bundle's weight torque about the bench edge, the sum over its pipes of (pipe mass) x 9.8 x (overhang fraction - 0.5) x 1.4; positive means the bundle would tip and the clamp must hold that much.",
+     "shape": "{\"A\": N m, \"B\": N m}"
+    },
+    {
+     "K": 3,
+     "question": "You stand beside two station tables and see the pipes from their side: station A is the near one, station B the one behind it. Each step the loader set one uniform 1.4 m pipe (its mass printed on the tag clipped on top of its middle) across the right-hand edge of each station and still held it; each pipe is banded in twentieths of its length (red bands on A's pipe, blue on B's, white between them), and the loader always sets a band boundary on the edge, so the overhang is a whole number of twentieths. Then each pipe was slid, with the same overhang, onto the same kind of edge on its own bench (A's pipe to bench A, B's to bench B; both out of view) and clamped into that bench's bundle. When a bench already holds seven pipes, its oldest pipe is taken off before the new one goes in (you hear it). The board in picture 0 lists each bench's starting pipes (overhang fraction and mass), oldest first. Give the clamp-down command for each bench now: {\"A\": N m, \"B\": N m}: the bundle's weight torque about the bench edge, the sum over its pipes of (pipe mass) x 9.8 x (overhang fraction - 0.5) x 1.4; positive means the bundle would tip and the clamp must hold that much.",
+     "shape": "{\"A\": N m, \"B\": N m}"
+    },
+    {
+     "K": 5,
+     "question": "You stand beside two station tables and see the pipes from their side: station A is the near one, station B the one behind it. Each step the loader set one uniform 1.4 m pipe (its mass printed on the tag clipped on top of its middle) across the right-hand edge of each station and still held it; each pipe is banded in twentieths of its length (red bands on A's pipe, blue on B's, white between them), and the loader always sets a band boundary on the edge, so the overhang is a whole number of twentieths. Then each pipe was slid, with the same overhang, onto the same kind of edge on its own bench (A's pipe to bench A, B's to bench B; both out of view) and clamped into that bench's bundle. When a bench already holds seven pipes, its oldest pipe is taken off before the new one goes in (you hear it). The board in picture 0 lists each bench's starting pipes (overhang fraction and mass), oldest first. Give the clamp-down command for each bench now: {\"A\": N m, \"B\": N m}: the bundle's weight torque about the bench edge, the sum over its pipes of (pipe mass) x 9.8 x (overhang fraction - 0.5) x 1.4; positive means the bundle would tip and the clamp must hold that much.",
+     "shape": "{\"A\": N m, \"B\": N m}"
+    },
+    {
+     "K": 10,
+     "question": "You stand beside two station tables and see the pipes from their side: station A is the near one, station B the one behind it. Each step the loader set one uniform 1.4 m pipe (its mass printed on the tag clipped on top of its middle) across the right-hand edge of each station and still held it; each pipe is banded in twentieths of its length (red bands on A's pipe, blue on B's, white between them), and the loader always sets a band boundary on the edge, so the overhang is a whole number of twentieths. Then each pipe was slid, with the same overhang, onto the same kind of edge on its own bench (A's pipe to bench A, B's to bench B; both out of view) and clamped into that bench's bundle. When a bench already holds seven pipes, its oldest pipe is taken off before the new one goes in (you hear it). The board in picture 0 lists each bench's starting pipes (overhang fraction and mass), oldest first. Give the clamp-down command for each bench now: {\"A\": N m, \"B\": N m}: the bundle's weight torque about the bench edge, the sum over its pipes of (pipe mass) x 9.8 x (overhang fraction - 0.5) x 1.4; positive means the bundle would tip and the clamp must hold that much.",
+     "shape": "{\"A\": N m, \"B\": N m}"
+    },
+    {
+     "K": 15,
+     "question": "You stand beside two station tables and see the pipes from their side: station A is the near one, station B the one behind it. Each step the loader set one uniform 1.4 m pipe (its mass printed on the tag clipped on top of its middle) across the right-hand edge of each station and still held it; each pipe is banded in twentieths of its length (red bands on A's pipe, blue on B's, white between them), and the loader always sets a band boundary on the edge, so the overhang is a whole number of twentieths. Then each pipe was slid, with the same overhang, onto the same kind of edge on its own bench (A's pipe to bench A, B's to bench B; both out of view) and clamped into that bench's bundle. When a bench already holds seven pipes, its oldest pipe is taken off before the new one goes in (you hear it). The board in picture 0 lists each bench's starting pipes (overhang fraction and mass), oldest first. Give the clamp-down command for each bench now: {\"A\": N m, \"B\": N m}: the bundle's weight torque about the bench edge, the sum over its pipes of (pipe mass) x 9.8 x (overhang fraction - 0.5) x 1.4; positive means the bundle would tip and the clamp must hold that much.",
+     "shape": "{\"A\": N m, \"B\": N m}"
+    },
+    {
+     "K": 30,
+     "question": "You stand beside two station tables and see the pipes from their side: station A is the near one, station B the one behind it. Each step the loader set one uniform 1.4 m pipe (its mass printed on the tag clipped on top of its middle) across the right-hand edge of each station and still held it; each pipe is banded in twentieths of its length (red bands on A's pipe, blue on B's, white between them), and the loader always sets a band boundary on the edge, so the overhang is a whole number of twentieths. Then each pipe was slid, with the same overhang, onto the same kind of edge on its own bench (A's pipe to bench A, B's to bench B; both out of view) and clamped into that bench's bundle. When a bench already holds seven pipes, its oldest pipe is taken off before the new one goes in (you hear it). The board in picture 0 lists each bench's starting pipes (overhang fraction and mass), oldest first. Give the clamp-down command for each bench now: {\"A\": N m, \"B\": N m}: the bundle's weight torque about the bench edge, the sum over its pipes of (pipe mass) x 9.8 x (overhang fraction - 0.5) x 1.4; positive means the bundle would tip and the clamp must hold that much.",
+     "shape": "{\"A\": N m, \"B\": N m}"
+    }
+   ],
    "hidden": "answer keys, tolerances, guess floors and the build's design stay private until the paper"
   },
   {
@@ -1735,7 +2271,10 @@
     "time_samples": 37,
     "textures": 30,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m5_1/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1787,7 +2326,10 @@
     "time_samples": 37,
     "textures": 1,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m5_2/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1839,7 +2381,10 @@
     "time_samples": 37,
     "textures": 4,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m5_3/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1891,7 +2436,10 @@
     "time_samples": 37,
     "textures": 22,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m5_4/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1943,7 +2491,10 @@
     "time_samples": 37,
     "textures": 16,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m5_5/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -1995,7 +2546,10 @@
     "time_samples": 37,
     "textures": 59,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m5_6/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -2047,7 +2601,10 @@
     "time_samples": 37,
     "textures": 16,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m5_7/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -2099,7 +2656,10 @@
     "time_samples": 37,
     "textures": 5,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m5_8/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -2151,7 +2711,10 @@
     "time_samples": 37,
     "textures": 1,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m5_9/scene.json"
    },
    "public_3d": true,
    "questions": [
@@ -2203,7 +2766,10 @@
     "time_samples": 37,
     "textures": 20,
     "opened_ok": true,
-    "compiled_on_gpu": false
+    "compiled_on_gpu": true,
+    "gpu_pictures": 37,
+    "sim_keys_agree": true,
+    "web_scene": "isaac50/scene/m5_10/scene.json"
    },
    "public_3d": true,
    "questions": [
