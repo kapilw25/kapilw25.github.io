@@ -69,12 +69,9 @@ svg text{fill:var(--muted);font:11px ui-monospace,SFMono-Regular,Menlo,monospace
   <div class="sd-wrap"><aside class="side" id="side" aria-label="Filters"></aside><div>
   <div class="meta" id="meta"></div>
   <div class="card">
-    <svg id="chart" viewBox="0 0 1080 340" role="img" aria-label="Cliff depth per round"></svg>
+    <svg id="chart" viewBox="0 0 1080 340" role="img" aria-label="Accuracy at the longest question per round"></svg>
     <div class="legend" id="legend"></div>
-    <p class="capt"><b>Cliff depth per round</b> = accuracy at 1-2 rooms minus accuracy at the longest distances, in points. Line: the deepest
-      cliff measured by a walk so far. Shading: the noise band (10 points, about one wrong answer in ten long questions). Filled markers are
-      measured in walks; hollow ones are predicted by single-step tests. Dashed purple: the target, 47 points (80% to 33%). Bottom lane:
-      rounds never scored. <span class="live" id="live"></span></p>
+    <p class="capt"><b>One dot per measured walk or run</b>: its accuracy on the longest questions it asked. Lower is a deeper cliff; the goal is near 0% while no guesser scores above 2%. The line steps down through each round that went lower than every round before it. Rounds never measured end to end (builds, single-step tests, stopped runs) are only in the list. <span class="live" id="live"></span></p>
   </div>
   <div class="two">
     <div class="card list" id="list"></div>
@@ -115,9 +112,9 @@ function kindOf(r) {
   return "flat";
 }
 function headerMeta() { var R = D.rounds, walks = R.filter(function (r) { return r.d.eval === "walk"; }).length, tests = R.filter(function (r) { return r.d.eval === "test"; }).length;
-  $("meta").innerHTML = "<b>evolve set</b> 30-room warehouse walks and single-step tests &nbsp; <b>policy</b> Claude Opus 5.5, thinking xhigh, Claude Code CLI (frozen)<br>" +
+  $("meta").innerHTML = "<b>evolve set</b> 30-room warehouse walks, Isaac runs and single-step tests &nbsp; <b>policy</b> Claude Opus 5.5, thinking xhigh, Claude Code CLI (frozen)<br>" +
     "<b>proposer / critic</b> this Claude Code session (Opus 5.5) &nbsp; <b>base</b> walk 1: 30 rooms, seed 7<br><b>rounds</b> " + R.length + " · " + walks + " walks, " + tests +
-    " tests &nbsp; <b>noise band δ</b> " + RSI.DELTA + " pts &nbsp; <b>target</b> " + RSI.TARGET + " pts"; }
+    " tests &nbsp; <b>goal</b> near 0% at the longest question, no guesser above 2%"; }
 function tabs() {
   $("tabs").innerHTML = TABS.map(function (t) { return '<button data-t="' + t[0] + '" aria-selected="' + (t[0] === TAB) + '">' + t[1] + "</button>"; }).join("");
 }
@@ -125,77 +122,65 @@ function header() { if (!$("tiles")) { headerMeta(); return; }
   var R = D.rounds, walks = R.filter(function (r) { return r.d.eval === "walk"; }).length, tests = R.filter(function (r) { return r.d.eval === "test"; }).length;
   $("meta").innerHTML = "<b>evolve set</b> 30-room warehouse walks (seeds 7, 104, 108, 109, 111, 113) and single-step tests &nbsp; <b>policy</b> Claude Opus 5.5, thinking xhigh, Claude Code CLI (frozen)<br>" +
     "<b>proposer / critic</b> this Claude Code session (Opus 5.5) &nbsp; <b>base</b> walk 1: 30 rooms, seed 7, followed box + facts<br>" +
-    "<b>rounds</b> " + R.length + " · " + walks + " walks, " + tests + " tests &nbsp; <b>noise band δ</b> " + RSI.DELTA + " pts &nbsp; <b>target</b> " + RSI.TARGET + " pts";
+    "<b>rounds</b> " + R.length + " · " + walks + " walks, " + tests + " tests &nbsp; <b>goal</b> near 0% at the longest question, no guesser above 2%";
   var b = D.blocked, h0 = R.length ? R[0].d.depth : null;
   var tiles = [[(h0 == null ? "–" : h0) + " pts", "H₀ cliff depth (walk 1)", ""], [(D.best == null ? "–" : D.best) + " pts", "deepest cliff measured so far", "acc"],
                [D.accepted + "", "rounds that deepened the cliff over " + R.length, "acc"],
                [(b.critic + b.screen + b.no_gain + b.void) + "", "dropped: " + b.critic + " leak · " + b.screen + " test · " + b.no_gain + " flat walk · " + b.void + " void", ""]];
   $("tiles").innerHTML = tiles.map(function (t) { return '<div class="tile"><div class="v ' + t[2] + '">' + esc(t[0]) + '</div><div class="l">' + esc(t[1]) + "</div></div>"; }).join("");
 }
+function endOf(r) {                    // accuracy on a round's longest questions, measured by a walk or a run (null: not drawn)
+  if (r.d.depth_kind !== "measured" || !(r.d.eval === "walk" || r.d.eval === "run")) return null;
+  if (r.d.long != null) return r.d.long;
+  return r.d.gate === "base" ? 1 : null;  // walk 1, the base: no fall (facts 7/7 at 28 rooms)
+}
+function progress() {                  // Karpathy-style (autoresearch progress.png): a round is deeper when its end accuracy is
+  var best = null, out = {};           // lower than every measured round before it; the line steps through those rounds only
+  D.rounds.forEach(function (r) {
+    var v = endOf(r); if (v == null) return;
+    var deeper = best == null || v < best; if (deeper) best = v;
+    out[r.i] = {v: v, deeper: deeper, best: best};
+  });
+  return out;
+}
+function bestAt(i) { var P = progress(), b = null; Object.keys(P).forEach(function (k) { if (+k <= i) b = P[k].best; }); return b; }
 function chart() {
   var s = $("chart"); s.innerHTML = "";
-  var R = D.rounds, W = 1080, H = 340, L = 54, Rm = 16, T = 18, B = 70, lane = H - 46;
-  var ymax = 80, n = Math.max(R.length, 1);
-  var x = function (i) { return L + (W - L - Rm) * (i - 0.5) / n; }, y = function (v) { return T + (lane - 26 - T) * (1 - v / ymax); };
+  var R = D.rounds, P = progress(), W = 1080, H = 340, L = 58, Rm = 16, T = 18, B = 44, n = Math.max(R.length, 1);
+  var x = function (i) { return L + (W - L - Rm) * (i - 0.5) / n; }, y = function (v) { return T + (H - B - T) * (1 - v); };
   var g = el("g", {class: "grid"}, s);
-  [0, 20, 40, 60, 80].forEach(function (v) { el("line", {x1: L, x2: W - Rm, y1: y(v), y2: y(v)}, g); el("text", {x: L - 8, y: y(v) + 4, "text-anchor": "end"}, s, v); });
-  el("text", {x: 14, y: (T + lane) / 2, transform: "rotate(-90 14 " + (T + lane) / 2 + ")", "text-anchor": "middle"}, s, "cliff depth (pts)");
-  el("line", {x1: L, x2: W - Rm, y1: y(RSI.TARGET), y2: y(RSI.TARGET), stroke: "var(--target)", "stroke-dasharray": "6 5", "stroke-width": 1.5}, s);
-  el("text", {x: W - Rm - 4, y: y(RSI.TARGET) - 6, "text-anchor": "end", fill: "var(--target)"}, s, "target 47 (80% → 33%)");
-  el("rect", {x: L, y: lane - 14, width: W - L - Rm, height: 26, fill: "var(--soft)"}, s);
-  el("text", {x: W - Rm - 6, y: lane + 4, "text-anchor": "end"}, s, "not scored");
-  var band = "", line = "", prev = null;
-  R.forEach(function (r) {
-    var b = r.best == null ? 0 : r.best, x0 = L + (W - L - Rm) * (r.i - 1) / n, x1 = L + (W - L - Rm) * r.i / n;
-    band += (band ? " L" : "M") + x0 + "," + y(b) + " L" + x1 + "," + y(b);
-    line += (line ? " L" : "M") + x0 + "," + y(b) + " L" + x1 + "," + y(b);
-    prev = b;
+  [0, 0.25, 0.5, 0.75, 1].forEach(function (v) { el("line", {x1: L, x2: W - Rm, y1: y(v), y2: y(v)}, g); el("text", {x: L - 8, y: y(v) + 4, "text-anchor": "end"}, s, Math.round(v * 100) + "%"); });
+  el("text", {x: 14, y: (T + H - B) / 2, transform: "rotate(-90 14 " + (T + H - B) / 2 + ")", "text-anchor": "middle"}, s, "accuracy at the longest question");
+  var keys = Object.keys(P).map(Number).sort(function (a, b) { return a - b; }), deep = keys.filter(function (i) { return P[i].deeper; }), line = "";
+  deep.forEach(function (i, j) {
+    if (!j) line = "M" + x(i) + "," + y(P[i].v);
+    else line += " L" + x(i) + "," + y(P[deep[j - 1]].v) + " L" + x(i) + "," + y(P[i].v);
   });
-  var lower = R.slice().reverse().map(function (r) { var b = r.best == null ? 0 : r.best; return [L + (W - L - Rm) * r.i / n, L + (W - L - Rm) * (r.i - 1) / n, y(Math.max(0, b - RSI.DELTA))]; });
-  var bp = band + lower.map(function (q) { return " L" + q[0] + "," + q[2] + " L" + q[1] + "," + q[2]; }).join("") + " Z";
-  el("path", {d: bp, fill: "var(--band)"}, s);
+  if (deep.length) line += " L" + (W - Rm) + "," + y(P[deep[deep.length - 1]].v);
   el("path", {d: line, fill: "none", stroke: "var(--accent)", "stroke-width": 2.5}, s);
-  R.forEach(function (r) {
-    if (!inTab(r)) return;
-    var k = kindOf(r), cx = x(r.i), sel = SEL_I === r.i ? " sel" : "", m;
-    if (k === "lane" || k === "critic") {
-      var ly = lane;
-      if (k === "critic") { m = el("path", {d: "M" + (cx - 6) + "," + (ly - 6) + " L" + (cx + 6) + "," + (ly + 6) + " M" + (cx + 6) + "," + (ly - 6) + " L" + (cx - 6) + "," + (ly + 6), stroke: "var(--bad)", "stroke-width": 2.5, class: "mk" + sel}, s); }
-      else m = el("line", {x1: cx - 7, x2: cx + 7, y1: ly, y2: ly, stroke: "var(--grey)", "stroke-width": 2.5, "stroke-dasharray": "3 2", class: "mk" + sel}, s);
-    } else {
-      var cy = y(Math.min(ymax, Math.max(0, r.d.depth)));
-      if (k === "acc") m = el("circle", {cx: cx, cy: cy, r: 7, fill: "var(--accent)", class: "mk" + sel}, s);
-      else if (k === "unconf") m = el("circle", {cx: cx, cy: cy, r: 7, fill: "var(--warn)", class: "mk" + sel}, s);
-      else if (k === "flat") m = el("circle", {cx: cx, cy: cy, r: 6.5, fill: "var(--panel)", stroke: "var(--grey)", "stroke-width": 2, class: "mk" + sel}, s);
-      else if (k === "pass") m = el("path", {d: "M" + cx + "," + (cy - 8) + " L" + (cx + 8) + "," + cy + " L" + cx + "," + (cy + 8) + " L" + (cx - 8) + "," + cy + " Z", fill: "var(--panel)", stroke: "var(--accent)", "stroke-width": 2, class: "mk" + sel}, s);
-      else m = el("path", {d: "M" + cx + "," + (cy - 8) + " L" + (cx + 8) + "," + (cy + 6) + " L" + (cx - 8) + "," + (cy + 6) + " Z", fill: "var(--panel)", stroke: "var(--warn)", "stroke-width": 2, class: "mk" + sel}, s);
-    }
-    m.setAttribute("data-i", r.i);
-    el("title", {}, m, r.id + " · " + r.kind + " · " + (r.d.depth == null ? "not scored" : r.d.depth + " pts " + (r.d.depth_kind || "")) + " · " + (RSI.GATE[r.d.gate] || r.d.gate));
+  var nd = 0, ng = 0;
+  keys.forEach(function (i) {
+    var r = R[i - 1]; if (!inTab(r)) return;
+    var p = P[i], sel = SEL_I === i ? " sel" : "", m;
+    if (p.deeper) { nd++; m = el("circle", {cx: x(i), cy: y(p.v), r: 7, fill: "var(--accent)", class: "mk" + sel}, s); }
+    else { ng++; m = el("circle", {cx: x(i), cy: y(p.v), r: 5, fill: "var(--grey)", "fill-opacity": 0.8, class: "mk" + sel}, s); }
+    m.setAttribute("data-i", i);
+    el("title", {}, m, r.id + " · " + r.kind + " · " + pct(r.d.short) + " at the shortest → " + pct(p.v) + " at the longest · " + (p.deeper ? "deeper than every round before" : "not deeper"));
   });
   var ticks = n <= 30 ? R.map(function (r) { return r.i; }) : R.filter(function (r) { return r.i % 5 === 0; }).map(function (r) { return r.i; });
-  ticks.forEach(function (i) { el("text", {x: x(i), y: H - 16, "text-anchor": "middle"}, s, i === 1 ? "H₀" : i); });
-  el("text", {x: (L + W - Rm) / 2, y: H - 2, "text-anchor": "middle"}, s, "round (log order)");
-  var cnt = {acc: 0, unconf: 0, flat: 0, pass: 0, screen: 0, critic: 0, lane: 0};
-  R.forEach(function (r) { if (inTab(r)) cnt[kindOf(r)]++; });
+  ticks.forEach(function (i) { el("text", {x: x(i), y: H - 16, "text-anchor": "middle"}, s, i); });
+  el("text", {x: (L + W - Rm) / 2, y: H - 2, "text-anchor": "middle"}, s, "round");
   var sw = function (svg) { return '<svg width="18" height="18" viewBox="-9 -9 18 18" style="display:inline">' + svg + "</svg>"; };
   $("legend").innerHTML = [
-    ['<line x1="-8" x2="8" y1="0" y2="0" stroke="var(--accent)" stroke-width="2.5"/>', "deepest cliff so far"],
-    ['<rect x="-8" y="-5" width="16" height="10" fill="var(--band)"/>', "noise band"],
-    ['<circle r="6" fill="var(--accent)"/>', "base or a deeper cliff (" + cnt.acc + ")"],
-    ['<circle r="6" fill="var(--warn)"/>', "fall measured, not admitted yet: 1 seed or a failed-audit question (" + cnt.unconf + ")"],
-    ['<circle r="5.5" fill="none" stroke="var(--grey)" stroke-width="2"/>', "walk, no fall (" + cnt.flat + ")"],
-    ['<path d="M0,-7 L7,0 L0,7 L-7,0 Z" fill="none" stroke="var(--accent)" stroke-width="2"/>', "test passed, sent to a walk (" + cnt.pass + ")"],
-    ['<path d="M0,-7 L7,5 L-7,5 Z" fill="none" stroke="var(--warn)" stroke-width="2"/>', "killed at the test (" + cnt.screen + ")"],
-    ['<path d="M-5,-5 L5,5 M5,-5 L-5,5" stroke="var(--bad)" stroke-width="2.5"/>', "stopped by the leak check (" + cnt.critic + ")"],
-    ['<line x1="-7" x2="7" y1="0" y2="0" stroke="var(--grey)" stroke-width="2.5" stroke-dasharray="3 2"/>', "void or measurement (" + cnt.lane + ")"]
+    ['<line x1="-8" x2="8" y1="0" y2="0" stroke="var(--accent)" stroke-width="2.5"/><circle r="5" fill="var(--accent)"/>', "deepest cliff so far (" + nd + ")"],
+    ['<circle r="4.5" fill="var(--grey)"/>', "not deeper (" + ng + ")"]
   ].map(function (z) { return "<span>" + sw(z[0]) + esc(z[1]) + "</span>"; }).join("");
 }
 function list() {
   var R = D.rounds.filter(inTab), h = "", day = null;
   R.slice().reverse().forEach(function (r) {
     var dd = (r.when || "").split(" ")[0];
-    if (dd !== day) { day = dd; h += '<div class="grp">' + esc(dd) + " · deepest so far " + (r.best == null ? "–" : r.best + " pts") + "</div>"; }
+    if (dd !== day) { day = dd; var bb = bestAt(r.i); h += '<div class="grp">' + esc(dd) + " · deepest so far: " + (bb == null ? "–" : pct(bb)) + " at the longest question</div>"; }
     h += '<div class="row' + (SEL_I === r.i ? " sel" : "") + '" data-i="' + r.i + '"><span class="pillg g-' + r.d.gate + '">' + esc(r.d.gate.replace("_", " ")) + "</span><b>" + esc(r.id) +
       "</b> <small>" + esc((r.when || "").split(" ")[1] || "") + "</small><br><small>" + esc(r.kind) + "</small></div>";
   });
@@ -225,8 +210,9 @@ function detail() {
 function postH() { if (window.self !== window.top) parent.postMessage({rsiHeight: Math.ceil(document.querySelector(".wrap").getBoundingClientRect().height) + 8}, "*"); }
 function render() {
   var b = D.blocked, h0 = D.rounds.length ? D.rounds[0].d.depth : null, vis = D.rounds.filter(inTab).length;
-  RSI.panel($("side"), D.rounds, groups(), SEL, render, [[vis + " of " + D.rounds.length, "rounds shown"], [(h0 == null ? "–" : h0) + " pts", "H₀ cliff depth"],
-    [(D.best == null ? "–" : D.best) + " pts", "deepest measured"], ["$" + D.spent.toFixed(0), "spent"]]);
+  var low = bestAt(D.rounds.length);
+  RSI.panel($("side"), D.rounds, groups(), SEL, render, [[vis + " of " + D.rounds.length, "rounds shown"], [pct(low), "deepest: lowest at the longest question"],
+    ["$" + D.spent.toFixed(0), "spent"]]);
   if (SEL && D.rounds.filter(inTab).map(function (r) { return r.i; }).indexOf(SEL_I) < 0) { var f = D.rounds.filter(inTab); SEL_I = f.length ? f[f.length - 1].i : null; }
   header(); chart(); list(); detail(); postH(); }
 if (window.self !== window.top) { document.querySelector("h1").hidden = true; document.querySelector(".lede").hidden = true; }   // the dashboard tab shows them

@@ -1,7 +1,7 @@
 {
  "runs": [
   {
-   "name": "run2",
+   "name": "day08_run2",
    "seed": 7,
    "model": "claude-opus-5-5",
    "effort": "high",
@@ -106,12 +106,12 @@
      }
     }
    },
-   "video": "agentwalk/run2/replay_ff.mp4",
-   "figures": "figures/agentwalk_run2/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=run2&mode=replay&ff=1&nav=run2/episode.json"
+   "video": "agentwalk/day08_run2/replay_ff.mp4",
+   "figures": "figures/day08_agentwalk_run2/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day08_run2&mode=replay&ff=1&nav=day08_run2/episode.json"
   },
   {
-   "name": "G108_light_10",
+   "name": "day09_G108_light_10",
    "seed": 108,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -221,12 +221,12 @@
      }
     }
    },
-   "video": "agentwalk/G108_light_10/replay_ff.mp4",
-   "figures": "figures/agentwalk_G108_light_10/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=G108_light_10&mode=replay&ff=1&nav=G108_light_10/episode.json"
+   "video": "agentwalk/day09_G108_light_10/replay_ff.mp4",
+   "figures": "figures/day09_agentwalk_G108_light_10/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day09_G108_light_10&mode=replay&ff=1&nav=day09_G108_light_10/episode.json"
   },
   {
-   "name": "G108_heavy_10",
+   "name": "day09_G108_heavy_10",
    "seed": 108,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -336,12 +336,12 @@
      }
     }
    },
-   "video": "agentwalk/G108_heavy_10/replay_ff.mp4",
-   "figures": "figures/agentwalk_G108_heavy_10/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=G108_heavy_10&mode=replay&ff=1&nav=G108_heavy_10/episode.json"
+   "video": "agentwalk/day09_G108_heavy_10/replay_ff.mp4",
+   "figures": "figures/day09_agentwalk_G108_heavy_10/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day09_G108_heavy_10&mode=replay&ff=1&nav=day09_G108_heavy_10/episode.json"
   },
   {
-   "name": "G108_light_20",
+   "name": "day09_G108_light_20",
    "seed": 108,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -451,12 +451,12 @@
      }
     }
    },
-   "video": "agentwalk/G108_light_20/replay_ff.mp4",
-   "figures": "figures/agentwalk_G108_light_20/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=G108_light_20&mode=replay&ff=1&nav=G108_light_20/episode.json"
+   "video": "agentwalk/day09_G108_light_20/replay_ff.mp4",
+   "figures": "figures/day09_agentwalk_G108_light_20/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day09_G108_light_20&mode=replay&ff=1&nav=day09_G108_light_20/episode.json"
   },
   {
-   "name": "G108_heavy_20",
+   "name": "day09_G108_heavy_20",
    "seed": 108,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -566,12 +566,12 @@
      }
     }
    },
-   "video": "agentwalk/G108_heavy_20/replay_ff.mp4",
-   "figures": "figures/agentwalk_G108_heavy_20/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=G108_heavy_20&mode=replay&ff=1&nav=G108_heavy_20/episode.json"
+   "video": "agentwalk/day09_G108_heavy_20/replay_ff.mp4",
+   "figures": "figures/day09_agentwalk_G108_heavy_20/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day09_G108_heavy_20&mode=replay&ff=1&nav=day09_G108_heavy_20/episode.json"
   },
   {
-   "name": "E1_pipes_s109",
+   "name": "day09_E1_pipes_s109",
    "seed": 109,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -691,12 +691,12 @@
      }
     }
    },
-   "video": "agentwalk/E1_pipes_s109/replay_ff.mp4",
-   "figures": "figures/agentwalk_E1_pipes_s109/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=E1_pipes_s109&mode=replay&ff=1&nav=E1_pipes_s109/episode.json"
+   "video": "agentwalk/day09_E1_pipes_s109/replay_ff.mp4",
+   "figures": "figures/day09_agentwalk_E1_pipes_s109/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day09_E1_pipes_s109&mode=replay&ff=1&nav=day09_E1_pipes_s109/episode.json"
   },
   {
-   "name": "E3b_turn_s113",
+   "name": "day09_E3b_turn_s113",
    "seed": 113,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -816,12 +816,12 @@
      }
     }
    },
-   "video": "agentwalk/E3b_turn_s113/replay_ff.mp4",
-   "figures": "figures/agentwalk_E3b_turn_s113/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=E3b_turn_s113&mode=replay&ff=1&nav=E3b_turn_s113/episode.json"
+   "video": "agentwalk/day09_E3b_turn_s113/replay_ff.mp4",
+   "figures": "figures/day09_agentwalk_E3b_turn_s113/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day09_E3b_turn_s113&mode=replay&ff=1&nav=day09_E3b_turn_s113/episode.json"
   },
   {
-   "name": "E3c_turn_wobble_s119",
+   "name": "day09_E3c_turn_wobble_s119",
    "seed": 119,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -941,12 +941,12 @@
      }
     }
    },
-   "video": "agentwalk/E3c_turn_wobble_s119/replay_ff.mp4",
-   "figures": "figures/agentwalk_E3c_turn_wobble_s119/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=E3c_turn_wobble_s119&mode=replay&ff=1&nav=E3c_turn_wobble_s119/episode.json"
+   "video": "agentwalk/day09_E3c_turn_wobble_s119/replay_ff.mp4",
+   "figures": "figures/day09_agentwalk_E3c_turn_wobble_s119/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day09_E3c_turn_wobble_s119&mode=replay&ff=1&nav=day09_E3c_turn_wobble_s119/episode.json"
   },
   {
-   "name": "E3d_turn_once_wobble_s119",
+   "name": "day09_E3d_turn_once_wobble_s119",
    "seed": 119,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -1066,12 +1066,12 @@
      }
     }
    },
-   "video": "agentwalk/E3d_turn_once_wobble_s119/replay_ff.mp4",
-   "figures": "figures/agentwalk_E3d_turn_once_wobble_s119/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=E3d_turn_once_wobble_s119&mode=replay&ff=1&nav=E3d_turn_once_wobble_s119/episode.json"
+   "video": "agentwalk/day09_E3d_turn_once_wobble_s119/replay_ff.mp4",
+   "figures": "figures/day09_agentwalk_E3d_turn_once_wobble_s119/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day09_E3d_turn_once_wobble_s119&mode=replay&ff=1&nav=day09_E3d_turn_once_wobble_s119/episode.json"
   },
   {
-   "name": "EA_exact_s119",
+   "name": "day09_EA_exact_s119",
    "seed": 119,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -1191,12 +1191,12 @@
      }
     }
    },
-   "video": "agentwalk/EA_exact_s119/replay_ff.mp4",
-   "figures": "figures/agentwalk_EA_exact_s119/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=EA_exact_s119&mode=replay&ff=1&nav=EA_exact_s119/episode.json"
+   "video": "agentwalk/day09_EA_exact_s119/replay_ff.mp4",
+   "figures": "figures/day09_agentwalk_EA_exact_s119/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day09_EA_exact_s119&mode=replay&ff=1&nav=day09_EA_exact_s119/episode.json"
   },
   {
-   "name": "gD_s410",
+   "name": "day10_gD_s410",
    "seed": 410,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -1316,12 +1316,12 @@
      }
     }
    },
-   "video": "agentwalk/gD_s410/replay_ff.mp4",
-   "figures": "figures/agentwalk_gD_s410/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=gD_s410&mode=replay&ff=1&nav=gD_s410/episode.json"
+   "video": "agentwalk/day10_gD_s410/replay_ff.mp4",
+   "figures": "figures/day10_agentwalk_gD_s410/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day10_gD_s410&mode=replay&ff=1&nav=day10_gD_s410/episode.json"
   },
   {
-   "name": "gD_s421",
+   "name": "day10_gD_s421",
    "seed": 421,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -1441,12 +1441,12 @@
      }
     }
    },
-   "video": "agentwalk/gD_s421/replay_ff.mp4",
-   "figures": "figures/agentwalk_gD_s421/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=gD_s421&mode=replay&ff=1&nav=gD_s421/episode.json"
+   "video": "agentwalk/day10_gD_s421/replay_ff.mp4",
+   "figures": "figures/day10_agentwalk_gD_s421/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day10_gD_s421&mode=replay&ff=1&nav=day10_gD_s421/episode.json"
   },
   {
-   "name": "gD_s454",
+   "name": "day10_gD_s454",
    "seed": 454,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -1566,12 +1566,12 @@
      }
     }
    },
-   "video": "agentwalk/gD_s454/replay_ff.mp4",
-   "figures": "figures/agentwalk_gD_s454/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=gD_s454&mode=replay&ff=1&nav=gD_s454/episode.json"
+   "video": "agentwalk/day10_gD_s454/replay_ff.mp4",
+   "figures": "figures/day10_agentwalk_gD_s454/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day10_gD_s454&mode=replay&ff=1&nav=day10_gD_s454/episode.json"
   },
   {
-   "name": "gD_s411",
+   "name": "day10_gD_s411",
    "seed": 411,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -1691,12 +1691,12 @@
      }
     }
    },
-   "video": "agentwalk/gD_s411/replay_ff.mp4",
-   "figures": "figures/agentwalk_gD_s411/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=gD_s411&mode=replay&ff=1&nav=gD_s411/episode.json"
+   "video": "agentwalk/day10_gD_s411/replay_ff.mp4",
+   "figures": "figures/day10_agentwalk_gD_s411/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day10_gD_s411&mode=replay&ff=1&nav=day10_gD_s411/episode.json"
   },
   {
-   "name": "gD_s408",
+   "name": "day10_gD_s408",
    "seed": 408,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -1816,12 +1816,12 @@
      }
     }
    },
-   "video": "agentwalk/gD_s408/replay_ff.mp4",
-   "figures": "figures/agentwalk_gD_s408/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=gD_s408&mode=replay&ff=1&nav=gD_s408/episode.json"
+   "video": "agentwalk/day10_gD_s408/replay_ff.mp4",
+   "figures": "figures/day10_agentwalk_gD_s408/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day10_gD_s408&mode=replay&ff=1&nav=day10_gD_s408/episode.json"
   },
   {
-   "name": "gD_s455",
+   "name": "day10_gD_s455",
    "seed": 455,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -1941,12 +1941,12 @@
      }
     }
    },
-   "video": "agentwalk/gD_s455/replay_ff.mp4",
-   "figures": "figures/agentwalk_gD_s455/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=gD_s455&mode=replay&ff=1&nav=gD_s455/episode.json"
+   "video": "agentwalk/day10_gD_s455/replay_ff.mp4",
+   "figures": "figures/day10_agentwalk_gD_s455/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day10_gD_s455&mode=replay&ff=1&nav=day10_gD_s455/episode.json"
   },
   {
-   "name": "gN_s511",
+   "name": "day10_gN_s511",
    "seed": 511,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -2066,12 +2066,12 @@
      }
     }
    },
-   "video": "agentwalk/gN_s511/replay_ff.mp4",
-   "figures": "figures/agentwalk_gN_s511/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=gN_s511&mode=replay&ff=1&nav=gN_s511/episode.json"
+   "video": "agentwalk/day10_gN_s511/replay_ff.mp4",
+   "figures": "figures/day10_agentwalk_gN_s511/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day10_gN_s511&mode=replay&ff=1&nav=day10_gN_s511/episode.json"
   },
   {
-   "name": "gN_s532",
+   "name": "day10_gN_s532",
    "seed": 532,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -2191,12 +2191,12 @@
      }
     }
    },
-   "video": "agentwalk/gN_s532/replay_ff.mp4",
-   "figures": "figures/agentwalk_gN_s532/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=gN_s532&mode=replay&ff=1&nav=gN_s532/episode.json"
+   "video": "agentwalk/day10_gN_s532/replay_ff.mp4",
+   "figures": "figures/day10_agentwalk_gN_s532/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day10_gN_s532&mode=replay&ff=1&nav=day10_gN_s532/episode.json"
   },
   {
-   "name": "gN_s540",
+   "name": "day10_gN_s540",
    "seed": 540,
    "model": "claude-opus-5-5",
    "effort": "xhigh",
@@ -2316,9 +2316,9 @@
      }
     }
    },
-   "video": "agentwalk/gN_s540/replay_ff.mp4",
-   "figures": "figures/agentwalk_gN_s540/quantitative/",
-   "viewer": "agentwalk/viewer.html?run=gN_s540&mode=replay&ff=1&nav=gN_s540/episode.json"
+   "video": "agentwalk/day10_gN_s540/replay_ff.mp4",
+   "figures": "figures/day10_agentwalk_gN_s540/quantitative/",
+   "viewer": "agentwalk/viewer.html?run=day10_gN_s540&mode=replay&ff=1&nav=day10_gN_s540/episode.json"
   }
  ]
 }

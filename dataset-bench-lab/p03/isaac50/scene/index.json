@@ -2,351 +2,351 @@
  {
   "tag": "m1_1",
   "code": "1.1",
-  "shapes": 13,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 32,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m1_10",
   "code": "1.10",
-  "shapes": 31,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 37,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m1_2",
   "code": "1.2",
-  "shapes": 9,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 30,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m1_3",
   "code": "1.3",
-  "shapes": 14,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 34,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m1_4",
   "code": "1.4",
-  "shapes": 13,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 38,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m1_5",
   "code": "1.5",
-  "shapes": 21,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 40,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m1_6",
   "code": "1.6",
-  "shapes": 19,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 142,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m1_7",
   "code": "1.7",
-  "shapes": 12,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 14,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m1_8",
   "code": "1.8",
-  "shapes": 14,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 33,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m1_9",
   "code": "1.9",
-  "shapes": 18,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 41,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m2_1",
   "code": "2.1",
-  "shapes": 33,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 55,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m2_10",
   "code": "2.10",
-  "shapes": 7,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 33,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m2_2",
   "code": "2.2",
-  "shapes": 36,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 58,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m2_3",
   "code": "2.3",
-  "shapes": 5,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 26,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m2_4",
   "code": "2.4",
-  "shapes": 9,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 28,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m2_5",
   "code": "2.5",
-  "shapes": 5,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 66,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m2_6",
   "code": "2.6",
-  "shapes": 23,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 46,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m2_7",
   "code": "2.7",
-  "shapes": 8,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 21,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m2_8",
   "code": "2.8",
-  "shapes": 5,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 82,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m2_9",
   "code": "2.9",
-  "shapes": 10,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 129,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m3_1",
   "code": "3.1",
-  "shapes": 6,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 32,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m3_10",
   "code": "3.10",
-  "shapes": 17,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 60,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m3_2",
   "code": "3.2",
-  "shapes": 14,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 37,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m3_3",
   "code": "3.3",
-  "shapes": 3,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 109,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m3_4",
   "code": "3.4",
-  "shapes": 21,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 53,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m3_5",
   "code": "3.5",
-  "shapes": 15,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 28,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m3_6",
   "code": "3.6",
-  "shapes": 9,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 39,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m3_7",
   "code": "3.7",
-  "shapes": 12,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 38,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m3_8",
   "code": "3.8",
   "shapes": 29,
-  "frames": 21,
-  "pictures": 21
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m3_9",
   "code": "3.9",
-  "shapes": 11,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 21,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m4_1",
   "code": "4.1",
-  "shapes": 5,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 15,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m4_10",
   "code": "4.10",
   "shapes": 9,
-  "frames": 21,
-  "pictures": 21
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m4_2",
   "code": "4.2",
-  "shapes": 5,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 51,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m4_3",
   "code": "4.3",
-  "shapes": 9,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 34,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m4_4",
   "code": "4.4",
-  "shapes": 17,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 58,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m4_5",
   "code": "4.5",
-  "shapes": 13,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 23,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m4_6",
   "code": "4.6",
-  "shapes": 5,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 75,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m4_7",
   "code": "4.7",
-  "shapes": 8,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 57,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m4_8",
   "code": "4.8",
-  "shapes": 8,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 52,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m4_9",
   "code": "4.9",
-  "shapes": 38,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 62,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m5_1",
   "code": "5.1",
-  "shapes": 18,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 108,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m5_10",
   "code": "5.10",
-  "shapes": 20,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 27,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m5_2",
   "code": "5.2",
-  "shapes": 29,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 246,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m5_3",
   "code": "5.3",
-  "shapes": 6,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 13,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m5_4",
   "code": "5.4",
-  "shapes": 16,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 34,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m5_5",
   "code": "5.5",
-  "shapes": 12,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 38,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m5_6",
   "code": "5.6",
-  "shapes": 19,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 22,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m5_7",
   "code": "5.7",
-  "shapes": 30,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 28,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m5_8",
   "code": "5.8",
-  "shapes": 5,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 19,
+  "frames": 37,
+  "pictures": 37
  },
  {
   "tag": "m5_9",
   "code": "5.9",
-  "shapes": 27,
-  "frames": 21,
-  "pictures": 21
+  "shapes": 7,
+  "frames": 37,
+  "pictures": 37
  }
 ]

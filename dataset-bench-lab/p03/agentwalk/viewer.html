@@ -87,7 +87,14 @@ body.video.end #goal,body.video.end #qmeta,body.video.end #qtext,body.video.end 
   <div class="box" id="map"><div class="ttl">Where the robot is (top view, north up)</div><svg id="s4" width="528" height="104"></svg></div>
 </div>
 <script>
-const Q = new URLSearchParams(location.search), RUNDIR = (Q.get("run") || "../runs/agentwalk/run1").replace(/\/$/, ""), MODE = Q.get("mode") || "replay";
+// Walk folders got a day prefix on 2026-10-08 (docs/agentwalk/renamed.json): an old link (?run=gD_s408, ?run=../runs/agentwalk/gD_s408,
+// nav=gD_s408/episode.json) is rewritten to the new folder before anything loads; the map is inline so it works offline.
+const RENAMED = {"run2":"day08_run2","E1_pipes_s109":"day09_E1_pipes_s109","E3b_turn_s113":"day09_E3b_turn_s113","E3c_turn_wobble_s119":"day09_E3c_turn_wobble_s119","E3d_turn_once_wobble_s119":"day09_E3d_turn_once_wobble_s119","EA_exact_s119":"day09_EA_exact_s119","G108_heavy_10":"day09_G108_heavy_10","G108_heavy_20":"day09_G108_heavy_20","G108_light_10":"day09_G108_light_10","G108_light_20":"day09_G108_light_20","gD_s408":"day10_gD_s408","gD_s410":"day10_gD_s410","gD_s411":"day10_gD_s411","gD_s421":"day10_gD_s421","gD_s454":"day10_gD_s454","gD_s455":"day10_gD_s455","gN_s511":"day10_gN_s511","gN_s532":"day10_gN_s532","gN_s540":"day10_gN_s540","gpu_harness_test":"day10_gpu_harness_test"};
+const Q = new URLSearchParams(location.search);
+(() => { const fix = (v) => v && v.split("/").map((s) => RENAMED[s] || s).join("/"); let moved = false;
+  for (const k of ["run", "nav"]) { const v = Q.get(k), w = fix(v); if (w !== v) { Q.set(k, w); moved = true; } }
+  if (moved) try { history.replaceState(null, "", location.pathname + "?" + Q.toString() + location.hash); } catch (e) {} })();
+const RUNDIR = (Q.get("run") || "../runs/agentwalk/run1").replace(/\/$/, ""), MODE = Q.get("mode") || "replay";
 if (Q.get("theme") === "light") document.documentElement.dataset.theme = "light";
 const $ = (id) => document.getElementById(id), NS = "http://www.w3.org/2000/svg";
 const T = Q.get("ff") ? {move: 0.3, watch: 0.35, ask: 1.4, pick: 0.8, result: 1.2}      // fast-forward
